@@ -1,0 +1,62 @@
+class TutorialServiceTest extends TestBase {
+
+  constructor(){
+    super();
+    this.activeSpSh = mockSpSh(SPSH.ACTIVE, this);
+    this.tutorialSpr = mockSpr(SPR.TUTORIAL, this);
+    this.tutorialStepRng = mockRng(RNG.TUTORIAL_STEP, this);
+    this.tutorialNextPosRng = mockRng(RNG.TUTORIAL_NEXT_POS, this);
+    this.tutorialResetPosRng = mockRng(RNG.TUTORIAL_RESET_POS, this);
+
+    this.tutorialService = new TutorialService();
+  }
+
+  shouldTutorialTestButton(){
+    // WHEN
+    this.tutorialService.tutorialTestButton();
+    // THEN
+    verify(this.activeSpSh).rename('Calorie Calculator Sheet v1.5').calledOnce();
+  }
+
+  shouldTutorialNextSetTutorialPageToTheNextSectionIfCurrentStepLessThenTen(){
+    // GIVEN
+    when(this.tutorialStepRng).getValue().thenReturn(2);
+    when(this.tutorialNextPosRng).getRowAsArray().thenReturn([25,75]);
+    // WHEN
+    this.tutorialService.tutorialNext();
+    // THEN
+    verify(this.tutorialSpr).hideRows(2,24).calledOnce();
+    verify(this.tutorialSpr).showRows(25,50).calledOnce();
+    verify(this.tutorialStepRng).setValue(3).calledOnce();
+    verify(this.tutorialSpr).setActiveSelectionRng(this.tutorialStepRng).calledOnce();
+  }
+
+  shouldTutorialNextResetTutorialPageIfCurrentStepIsTen(){
+    // GIVEN
+    when(this.tutorialStepRng).getValue().thenReturn(10);
+    when(this.tutorialResetPosRng).getRowAsArray().thenReturn([1, 10, 100]);
+    // WHEN
+    this.tutorialService.tutorialNext();
+    // THEN
+    verify(this.tutorialSpr).setActiveSelectionRng(this.tutorialStepRng).calledOnce();
+    verify(this.tutorialSpr).hideSheet().calledOnce();
+    verify(this.tutorialSpr).showRows(1,9).calledOnce();
+    verify(this.tutorialSpr).hideRows(11,89).calledOnce();
+    verify(this.tutorialStepRng).setValue(0).calledOnce();
+  }
+
+  shouldResetTutorialHideAndResetTutorialPage(){
+    // GIVEN
+    when(this.tutorialResetPosRng).getRowAsArray().thenReturn([1, 10, 100]);
+    // WHEN
+    this.tutorialService.resetTutorial();
+    // THEN
+    verify(this.tutorialSpr).setActiveSelectionRng(this.tutorialStepRng).calledOnce();
+    verify(this.tutorialSpr).hideSheet().calledOnce();
+    verify(this.tutorialSpr).showRows(1,9).calledOnce();
+    verify(this.tutorialSpr).hideRows(11,89).calledOnce();
+    verify(this.tutorialStepRng).setValue(0).calledOnce();
+  }
+}
+
+var runTutorialServiceTests = () => new TutorialServiceTest().runAllTests();
