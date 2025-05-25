@@ -35,6 +35,7 @@ class TestUtils {
   // TEST DAYS 
 
   addTestDays(){
+    let spr = getSpr(SPR.DAYS);
     this.clearDays();
     var testData = [// Breakfast    Snack           Lunch         Snack          Dinner         Supper
                     // Default
@@ -86,7 +87,7 @@ class TestUtils {
                     ['All 1', 14,   'All 1', 29,    'All 1', 44,  'All 1', 59,  'All 1', 74,   'All 1', 89],
                     ['All 1', 15,   'All 1', 30,    'All 1', 45,  'All 1', 60,  'All 1', 75,   'All 1', 90],
                     // Today
-                    ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
+                    ['All 1', 100,  '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
@@ -101,7 +102,7 @@ class TestUtils {
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     // 1 Day Later
-                    ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
+                    ['All 1', 200,  '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
@@ -116,7 +117,7 @@ class TestUtils {
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     // 2 Day Later
-                    ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
+                    ['All 1', 300,  '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
@@ -131,7 +132,14 @@ class TestUtils {
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', ''],
                     ['', '',        '', '',         '', '',       '', '',       '', '',         '', '']
     ];
-    getSpr(SPR.DAYS).setAreaValueAtPos(4, 2, testData);
+    spr.setAreaValueAtPos(4, 2, testData);
+    let date = getToday(); 
+    date.setDate(date.getDate() - 2)
+    spr.setValue('A4', 'Default');
+    for(let i = 0; i < 5; i++){
+      spr.setValue(`A${19+(i*15)}`, new Date(date));
+      date.setDate(date.getDate() + 1);
+    }
   }
 
   clearDays(){
@@ -176,6 +184,7 @@ class TestUtils {
       [0, 10]           // Salt / Sodium 
     ]
     rng.setValuesWithResize(profile);
+    getRng(RNG.COPY_CALORIES_SELECTED_PROFILE).setValue('Default');
   }
 
   // MEALS
@@ -275,6 +284,11 @@ class TestUtils {
     calRng.setValue('Sedentary', 5);
     calRng.setValue(80, 6);
     calRng.setValue('Weight maintain', 10);
+  }
+
+  // SETTINGS
+  resetSettings(){
+    
   }
 
   // HISTORY

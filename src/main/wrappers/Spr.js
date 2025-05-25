@@ -139,6 +139,14 @@ class Spr{
     this.spr.hideRows(pos, size);
   }
 
+  isColHidden(col){
+    return this.spr.isColumnHiddenByUser(col);
+  }
+
+  isRowHidden(row){
+    return this.spr.isRowHiddenByUser(row);
+  }
+
   hideSheet(){
     this.spr.hideSheet();
   }

@@ -9,7 +9,7 @@ class SettingsService{
     this.historySpr = getSpr(SPR.HISTORY);
   }
 
-  apply(){
+  applySettings(){
     var nutritionFields = getRng(RNG.NUTRITION_FIELDS).getColAsArray();
     var generalSettings = getRng(RNG.GENERAL_SETTINGS).getColAsArray()
     var meals = getRng(RNG.MEALS).getValues();
@@ -75,10 +75,10 @@ class SettingsService{
         if(colHide > 0) {
           this.daySpr.hideRows(startPos + colShow, colHide);
         }
-        this.daySpr.setPosValue(startPos, 1, meal[0]);
       }else{
         this.daySpr.hideRows(startPos, ROWS_PER_MEAL);
       }
+      this.daySpr.setPosValue(startPos, 1, meal[0]);
       this.daySpr.setPosValue(4 + i, 7, meal[0]);
     })
   }
