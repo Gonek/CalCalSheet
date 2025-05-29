@@ -88,6 +88,7 @@ const RNG = {
   MEAL4 : 'Meal4',
   MEAL5 : 'Meal5',
   MEAL6 : 'Meal6',
+  ADDITIONAL_DATA: 'AdditionalData',
   // NEW ITEM
   NEW_ITEM_FIELDS : 'NewItemFields',
   NEW_ITEM_FIELDS_TO_SAVE : 'NewItemFieldsToSave',

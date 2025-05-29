@@ -34,7 +34,7 @@ class Spr{
   }
 
   getAreaValue(row, col, numRows, numCols){
-    return this.spr.getRange(row, col, numRows, numCols).getValue();
+    return this.spr.getRange(row, col, numRows, numCols).getValues();
   }
 
   getDisplayValue(range) {

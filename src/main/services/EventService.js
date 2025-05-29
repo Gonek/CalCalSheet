@@ -2,7 +2,7 @@
 
 var onEdit = (e) => getObj(EventService).onEdit(e);
 var onOpen = (e) => getObj(EventService).onOpen(e);
-var testButton = () => getObj(EventService).testButton(NEW_ITEM, BTN.SAVE_ITEM);
+var testButton = () => getObj(EventService).testButton(SPR.DAY, CBOX.DAY_NAME);
 
 // SCHEDULED FUNCTIONS
 var finishDay = () => getObj(DayService).finishDay();

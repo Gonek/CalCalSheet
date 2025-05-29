@@ -146,6 +146,14 @@ class TestBase{
     }
   }
 
+  assertEqualsArray(result, expected){
+    if(arraysEqual(result, expected)) {
+      this.succeded(`result is equal to expected`);
+    }else{
+      this.failed(`"${JSON.stringify(result)}" expected to be "${JSON.stringify(expected)}"`);
+    }
+  }
+
   assertNull(result){
     if(result === undefined || result === null){
       this.succeded(`Result is null!`);

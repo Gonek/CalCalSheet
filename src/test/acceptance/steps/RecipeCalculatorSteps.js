@@ -80,7 +80,7 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
 
     recipe_have_items(items){
         let filtered = getSpr(SPR.RECIPES).getValues('B4:D').filter(i => i[0] === this.name);
-        this.test.assertTrue(arraysEqual(filtered, items.map(i => [this.name, i[0], i[1]])));
+        this.test.assertEqualsArray(filtered, items.map(i => [this.name, i[0], i[1]]));
     }
 
     form_have_recipe_name_loaded(name){
@@ -94,8 +94,8 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
 
     form_is_clear(){
         this.test.assertEmpty(getRng(RNG.RECIPE_NAME).getValue());
-        this.test.assertArrayEmpty(getRng(RNG.RECIPE_ITEMS).getValues());
-        this.test.assertArrayEmpty(getRng(RNG.RECIPE_SERVING).getValues());
+        this.test.assertEqualsArray(getRng(RNG.RECIPE_ITEMS).getValues());
+        this.test.assertEqualsArray(getRng(RNG.RECIPE_SERVING).getValues());
         this.test.assertEquals(getRng(RNG.RECIPE_NOOM_CATEGORY).getValue(), 'Solid');
         this.test.assertEquals(getRng(RNG.RECIPE_SAVE_AS_RECIPE).getValue(), true);
     }

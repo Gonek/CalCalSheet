@@ -7,6 +7,7 @@ class DayRepository{
   save(day){
     let prevDayIndex = getRng(RNG.DAY_PREV_DAY_INDEX).getValue();
     this.spr.setAreaValueAtPos(prevDayIndex + 3, 2, this.rearrangeItems(day));
+    this.spr.setAreaValueAtPos(prevDayIndex + 3, 14, [[day.outputCalories], [day.macroProfile]]);
     return prevDayIndex > 1;
   }
 
@@ -31,7 +32,7 @@ class DayRepository{
     let createDays = getRng(RNG.CREATE_DAYS).getValue();
     let newDayRow = getRng(RNG.FIRST_EMPTY_DAY_INDEX).getValue();
     for(let i = 0; i < createDays; i++){
-      let newDayA1 = `A${newDayRow + 15 * i}:M${newDayRow + ((i + 1) * 15)}`;
+      let newDayA1 = `A${newDayRow + 15 * i}:N${newDayRow + ((i + 1) * 15)}`;
       defaultDayRng.copyTo(this.spr.getRng(newDayA1));
       this.spr.setPosValue(newDayRow + 15 * i, 1, new Date(createDaysFrom));
       createDaysFrom.setDate(createDaysFrom.getDate() + 1);

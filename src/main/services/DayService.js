@@ -80,14 +80,19 @@ class DayService{
     let dayItems = getRng(RNG.SELECTED_DAY_ITEMS)
                         .getValues()
                         .map(row => [row[0], '', row[1]]);
+    let additionalData = getRng(RNG.ADDITIONAL_DATA).getColAsArray();
     getRng(RNG.DAY_ITEMS).setValues(dayItems);
     preDayIndexRng.setValue(dayIndexRng.getValue());
+    getRng(RNG.CALORIE_OUTPUT).setValue(additionalData[0]);
+    getRng(RNG.SELECTED_PROFILE).setValue(additionalData[1]);
     getRng(RNG.MEAL_NAMES).clear();
   }
 
   saveDay(){
     let dayItems = getRng(RNG.DAY_ITEMS).getValues();
-    if(this.dayRepository.save(new Day(dayItems))){
+    let calorieOutput = getRng(RNG.CALORIE_OUTPUT).getValue();
+    let profile = getRng(RNG.SELECTED_PROFILE).getValue();
+    if(this.dayRepository.save(new Day(dayItems, calorieOutput, profile))){
       this.saveToHistory();
     }
   }

@@ -4,6 +4,13 @@ var getToday = () => {
   return date;
 }
 
+var getYesterday = () => {
+  var date = new Date();
+  date.setHours(0,0,0,0);
+  date.setDate(date.getDate() - 1);
+  return date;
+}
+
 var resizeMatrix =(arr, width, height, val = null) => {
   const newRow = row => Array.from({ length: width }, (_, i) => {
     return i < row.length ? row[i] : val
