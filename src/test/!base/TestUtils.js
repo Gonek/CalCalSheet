@@ -34,7 +34,7 @@ class TestUtils {
 
   // TEST DAYS 
 
-  addTestDays(){
+  addTestDays(generateFrom = -2){
     let spr = getSpr(SPR.DAYS);
     this.clearDays();
     var testData = [// Breakfast      Snack             Lunch            Snack          Dinner            Supper          Additional data
@@ -137,7 +137,7 @@ class TestUtils {
     ];
     spr.setAreaValueAtPos(4, 2, testData);
     let date = getToday(); 
-    date.setDate(date.getDate() - 2)
+    date.setDate(date.getDate() + generateFrom)
     spr.setValue('A4', 'Default');
     let i;
     for(i = 0; i < 5; i++){

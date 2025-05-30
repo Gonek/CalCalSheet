@@ -14,6 +14,7 @@ class DayService{
       this.dayRepository.deletePastDays();
       this.dayRepository.copyDefaultForFutureDays();
       lastFinishedDayRng.setValue(today);
+      this.app.flush();
       getRng(CBOX.DAY_NAME).setValueAndFlush("🚩 " + today);
       var preDayIndexRng = getRng(RNG.DAY_PREV_DAY_INDEX);
       var dayIndexRng = getRng(RNG.DAY_INDEX);
@@ -107,22 +108,5 @@ class DayService{
     let history = new History(date, summary, calorieOutput, calDensity, checklist);
 
     getObj(HistoryRepository).addOrUpdate(history);
-  }
-
-// TODO FIX THIS
-  profileAutoCycle(){
-    if(getRng(RNG.GENERAL_SETTINGS).getValue(4)){
-      let numberOfProfiles = getRng(RNG.NUMBER_OF_PROFILES).getValue();
-      if(numberOfProfiles > 1){
-        let profileIndex = getRng(`${YESTERDAY}!${RNG.SELECTED_PROFILE_INDEX}`).getValue();
-        if(profileIndex > numberOfProfiles){
-          profileIndex = 1;
-        } else {
-          profileIndex = profileIndex + 2;
-        }
-        let nextProfile = getRng(RNG.MACRO_PROFILES).getValue(1, profileIndex);
-        getRng(`${TODAY}!${RNG.SELECTED_PROFILE}`).setValue(nextProfile);
-      }
-    }
   }
 }

@@ -5,9 +5,13 @@ var getToday = () => {
 }
 
 var getYesterday = () => {
+  return getRelativeDay(-1);
+}
+
+var getRelativeDay = (offset) => {
   var date = new Date();
   date.setHours(0,0,0,0);
-  date.setDate(date.getDate() - 1);
+  date.setDate(date.getDate() + offset);
   return date;
 }
 

@@ -41,4 +41,11 @@ class Steps{
         r.setValue(values[to]);
         getObj(EventService).testButton(spr, rng);
     }
+
+    /**
+     * Simulate an onOpen Event
+     */
+    onOpen(){
+        getObj(EventService).onOpen();
+    }
 }
