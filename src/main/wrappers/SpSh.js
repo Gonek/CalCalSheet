@@ -1,7 +1,7 @@
 class SpSh{
     constructor(id){
         this.id = id;
-        if(id = SPSH.ACTIVE){
+        if(id == SPSH.ACTIVE){
             this.spsh = getObj(App).getActiveSpSh();
         }else{
             this.spsh = getObj(App).openById(id);

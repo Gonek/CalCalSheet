@@ -14,7 +14,7 @@ class FinishDayGivenSteps extends BaseDayGivenSteps{
 }
 
 class FinishDayWhenSteps extends Steps{
-    on_open_sheet(){
+    sheet_opened(){
         this.onOpen();
     }  
 }

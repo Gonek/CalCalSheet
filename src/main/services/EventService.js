@@ -7,6 +7,9 @@ var testButton = () => getObj(EventService).testButton(SPR.DAY, CBOX.DAY_NAME);
 // SCHEDULED FUNCTIONS
 var finishDay = () => getObj(DayService).finishDay();
 
+// OTHER FUNCTIONS
+var startImport = () => getObj(ImportService).startImport();
+
 // CLASS
 
 class EventService {

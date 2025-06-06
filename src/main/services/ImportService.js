@@ -4,7 +4,7 @@ class ImportService{
     this.importRng = getRng(RNG.IMPORT);
   }
 
-  apply(){
+  startImport(){
     this.importId = this.importRng.getValue(1, 2);
     this.validateImport();
     for (var i = 2; i <= 8; i++) {
@@ -18,8 +18,8 @@ class ImportService{
       throw new Error("Loading import sheet failed! Please check the sheet Id");
     } 
     this.baseVersion = getSpr(`${this.importId}.${SPR.SUPPORT}`).getValue(VERSION_POSITION);
-    if (!(this.baseVersion === V1_4 || this.baseVersion === V1_5)){
-      throw new Error("Sorry, you can only import version 1.4 and 1.5 sheets");
+    if (this.baseVersion !== V1_4 && this.baseVersion !== V1_5 && this.baseVersion !== V1_6){
+      throw new Error("Sorry, you can only import version 1.4, 1.5, 1.6 sheets");
     } 
   }
 
@@ -69,14 +69,14 @@ class ImportService{
   importProfile(fromSpr, toSpr){
     var fromWeightHistory = fromSpr.getValues('I16:L112');
     var fromDetails;
-    var fromMacro = fromSpr.getValues('C3:P12');
+    var fromMacro = fromSpr.getValues('C3:P13');
     var toWeightHistoryRng = toSpr.getRng('I16:L112');
     var toDetailsRng = toSpr.getRng('D16:D21');
-    var toMacroRng = toSpr.getRng('C3:P12');
-    if(this.baseVersion == V1_5){
-      fromDetails = fromSpr.getValues('D16:D21');
+    var toMacroRng = toSpr.getRng('C3:P13');
+    if(this.baseVersion == V1_4){
+      fromDetails = fromSpr.getValues('D19:D24'); 
     } else {
-      fromDetails = fromSpr.getValues('D19:D24');
+      fromDetails = fromSpr.getValues('D16:D21');
     }
     toWeightHistoryRng.clearAndSetValues(fromWeightHistory);
     toDetailsRng.clearAndSetValues(fromDetails);
@@ -88,16 +88,16 @@ class ImportService{
     var fromNutrition;
     var fromMeals;
     var toGeneralRng;
-    if(this.baseVersion == V1_5){
-      fromGeneral = fromSpr.getValues('E4:G10');
-      fromNutrition = fromSpr.getValues('D12:D20');
-      fromMeals = fromSpr.getValues('F13:G18');
-      toGeneralRng = toSpr.getRng('E4:G10');
-    } else {
+    if(this.baseVersion == V1_4){
       fromGeneral = fromSpr.getValues('E4:G8');
       fromNutrition = fromSpr.getValues('D10:D18');
       fromMeals = fromSpr.getValues('F11:G16');
       toGeneralRng = toSpr.getRng('E6:G10');
+    } else {
+      fromGeneral = fromSpr.getValues('E4:G10');
+      fromNutrition = fromSpr.getValues('D12:D20');
+      fromMeals = fromSpr.getValues('F13:G18');
+      toGeneralRng = toSpr.getRng('E4:G10');
     } 
     var toNutritionRng = toSpr.getRng('D12:D20');
     var toMealsRng = toSpr.getRng('F13:G18');
@@ -105,7 +105,7 @@ class ImportService{
     toNutritionRng.clearAndSetValues(fromNutrition);
     toMealsRng.clearAndSetValues(fromMeals);
 
-    getObj(SettingsService).apply();
+    getObj(SettingsService).applySettings();
   }
 
   importHistory(fromSpr, toSpr){
@@ -116,9 +116,17 @@ class ImportService{
   }
 
   importDays(fromSpr, toSpr){
-    var fromDays = fromSpr.getRng('A4:M');
-    var toDays = toSpr.getRng('A4:M');
-    toDays.clear();
-    fromDays.copyTo(toDays);
+    var fromDays = fromSpr.getRng('A4:N');
+    var toDays = toSpr.getRng('A4:N');
+    toDays.setValuesWithResize(fromDays.getValues());
+    if(this.baseVersion == V1_5){
+      let numberOfDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
+      let defaultCalorieOutput = getRng(RNG.DEFAULT_CALORIE_OUTPUT).getValue();
+      let nextProfile = getRng(RNG.NEXT_PROFILE).getValue();
+      for(var i=0; i<=numberOfDays; i++){
+        toSpr.setPosValue(4 + (i*15), 14, defaultCalorieOutput);
+        toSpr.setPosValue(5 + (i*15), 14, nextProfile);
+      }
+    }
   }
 }

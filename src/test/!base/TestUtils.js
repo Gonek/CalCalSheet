@@ -299,7 +299,16 @@ class TestUtils {
 
   // SETTINGS
   resetSettings(){
-    
+    let generalSettings = getRng(RNG.GENERAL_SETTINGS);
+    generalSettings.setValue(2, 1);
+    generalSettings.setValue(2, 2);
+    generalSettings.setValue('Active baseline', 3);
+    generalSettings.setValue(true, 4);
+    generalSettings.setValue(true, 5);
+    generalSettings.setValue(true, 6);
+    generalSettings.setValue(true, 7);
+    getRng(RNG.NUTRITION_FIELDS).setValues([[true], [false], [false], [true], [false], [false], [false], [true], [false]]);
+    getRng(RNG.MEALS).setValues([['Breakfast', 12], ['Snack', 5], ['Lunch', 15], ['Snack', 5], ['Dinner', 13], ['Supper', 5]]);
   }
 
   // HISTORY

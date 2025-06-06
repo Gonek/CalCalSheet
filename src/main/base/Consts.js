@@ -79,6 +79,7 @@ const RNG = {
   MEAL5 : 'Meal5',
   MEAL6 : 'Meal6',
   // DAYS
+  NUMBER_OF_DAYS : 'NumberOfDays',
   TODAY : 'Today',
   DEFAULT_DAY : 'DefaultDay',
   FIRST_EMPTY_DAY_INDEX : 'FirstEmptyDayIndex',
@@ -130,10 +131,11 @@ const RNG = {
 }
 
 // VERSIONS
-const VERSION="v1.5"
+const VERSION="v1.6"
 const ROWS_PER_MEAL = 15;
 const V1_4 = 'v1.4';
 const V1_5 = 'v1.5';
+const V1_6 = 'v1.6';
 const VERSION_POSITION = 'E24';
 
 const IMPORT_OPTIONS = {

@@ -39,27 +39,11 @@ class SettingsGivenSteps extends Steps{
     meals_as(meals){
         getRng(RNG.MEALS).setValues(meals);
     }
-
-    basic_settings(){
-        this.future_days_as(2);
-        this.archive_days_as(2);
-        this.default_calorie_output_as('Active baseline');
-        this.consumed_checkbox_as(true);
-        this.noom_as(true);
-        this.auto_macro_cycle_as(true);
-        this.macro_percentages_as(true);
-        this.nutrition_fields_as(true, false, false, true, false, false, false, true, false);
-        this.meals_as([['Breakfast', 12], ['Snack', 5], ['Lunch', 15], ['Snack', 5], ['Dinner', 13], ['Supper', 5]]);
-    }
 }
 
 class SettingsWhenSteps extends Steps{
     apply_settings_clicked(){
         this.clickButton(SPR.SETTINGS, BTN.APPLY_SETTINGS);
-    }
-
-    import_clicked(){
-        this.clickButton(SPR.SETTINGS, BTN.IMPORT);
     }
 }
 
