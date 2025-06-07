@@ -71,17 +71,17 @@ class RecipeCalculatorTest extends TestBase {
       '=IF(ISNUMBER(C34),1,100)',
       '',
       '=IF(ISNUMBER(C34), IF(ISBLANK(C35), "serving", C35), "g")',
-      '=A33*100',
-      '=$A$33*G32',
-      '=$A$33*H32',
-      '=$A$33*I32',
-      '=$A$33*J32',
-      '=$A$33*K32',
-      '=$A$33*L32',
-      '=$A$33*M32',
-      '=$A$33*N32',
-      '=$A$33*O32',
-      '=$A$33*P32'
+      '=ROUND(A33*100, 2)',
+      '=ROUND($A$33*G32, 2)',
+      '=ROUND($A$33*H32, 2)',
+      '=ROUND($A$33*I32, 2)',
+      '=ROUND($A$33*J32, 2)',
+      '=ROUND($A$33*K32, 2)',
+      '=ROUND($A$33*L32, 2)',
+      '=ROUND($A$33*M32, 2)',
+      '=ROUND($A$33*N32, 2)',
+      '=ROUND($A$33*O32, 2)',
+      '=ROUND($A$33*P32, 2)'
     ]
     //WHEN
     let result100g = this.spr.getFormulas('G32:P32');
@@ -148,10 +148,10 @@ class RecipeCalculatorTest extends TestBase {
 
   shouldRecipeCalculatorSheetReturnRightIndexForItems(){
     // GIVEN
-    let items = Array(5).fill(['First', 100]).concat(
-                Array(5).fill(['Second', 100]),
-                Array(5).fill(['Third', 100]),
-                Array(10).fill(['Last', 100]))
+    let items = Array(5).fill(['1 First', 100]).concat(
+                Array(5).fill(['2 Second', 100]),
+                Array(5).fill(['3 Third', 100]),
+                Array(10).fill(['ZZ Last', 100]))
     let expected = Array(5).fill(1)
            .concat(Array(5).fill(2))
            .concat(Array(5).fill(3))

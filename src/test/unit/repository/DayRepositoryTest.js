@@ -83,8 +83,8 @@ class DayRepositoryTest extends TestBase {
         when(this.firstEmptyDayIndexRng).getValue().thenReturn(100);
         var rng1 = {toString() { return 'rng1'}};
         var rng2 = {toString() { return 'rng2'}};
-        when(this.daysSpr).getRng('A100:M115').thenReturn(rng1);
-        when(this.daysSpr).getRng('A115:M130').thenReturn(rng2);
+        when(this.daysSpr).getRng('A100:N115').thenReturn(rng1);
+        when(this.daysSpr).getRng('A115:N130').thenReturn(rng2);
         // WHEN
         this.dayRepository.copyDefaultForFutureDays();
         // THEN

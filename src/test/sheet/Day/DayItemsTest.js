@@ -41,12 +41,12 @@ class DayItemsTest extends TestBaseDay {
 
   shouldDaySheetReturnRightIndexForItems(){
     // GIVEN
-    let meal1 = Array(15).fill(this.item('First', 100));
-    let meal2 = Array(15).fill(this.item('Second', 100));
-    let meal3 = Array(15).fill(this.item('Third', 100));
-    let meal4 = Array(15).fill(this.item('Last', 100));
-    let meal5 = Array(15).fill(this.item('First', 100));
-    let meal6 = Array(15).fill(this.item('Last', 100));
+    let meal1 = Array(15).fill(this.item('1 First', 100));
+    let meal2 = Array(15).fill(this.item('2 Second', 100));
+    let meal3 = Array(15).fill(this.item('3 Third', 100));
+    let meal4 = Array(15).fill(this.item('ZZ Last', 100));
+    let meal5 = Array(15).fill(this.item('1 First', 100));
+    let meal6 = Array(15).fill(this.item('ZZ Last', 100));
     let expected = Array(15).fill(1)
            .concat(Array(15).fill(2))
            .concat(Array(15).fill(3))
@@ -160,7 +160,7 @@ class DayItemsTest extends TestBaseDay {
 
   shouldDaySheetLoadAllSavedItemsInTheItemSelectors(){
     //GIVEN
-    let expected = ['First', 'Second', 'Third', 'All 100', 'All 1', 'Test 100g', 'Test 1 serving', 'Green', 'Yellow', 'Red', 'Max cal', 'Zero cal', 'All Green', 'Last'];
+    let expected = ['1 First', '2 Second', '3 Third', 'All 100', 'All 1', 'All Green', 'Green', 'Max cal', 'Red', 'Test 100g', 'Test 1 serving', 'Yellow', 'Zero cal', 'ZZ Last'];
     //WHEN
     let result = this.daySpr.getValidationCriteriaRangeValues('C15:C104');
     //THEN

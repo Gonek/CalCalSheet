@@ -22,7 +22,7 @@ class DayMealTest extends TestBaseDay {
   shouldDaySheetLoadAllSavedMealsAndItemsInTheFirstItemSelectorInEveryMeal(){
     //GIVEN
     let expected = [`${MEAL_ICON} Meal0`, `${MEAL_ICON} Meal1`, `${MEAL_ICON} Meal2`,
-    'First', 'Second', 'Third', 'All 100', 'All 1', 'Test 100g', 'Test 1 serving', 'Green', 'Yellow', 'Red', 'Max cal', 'Zero cal', 'All Green', 'Last'];
+    '1 First', '2 Second', '3 Third', 'All 100', 'All 1', 'All Green', 'Green', 'Max cal', 'Red', 'Test 100g', 'Test 1 serving', 'Yellow', 'Zero cal', 'ZZ Last'];
     //WHEN
     let result1 = this.daySpr.getValidationCriteriaRangeValues('C15');
     let result2 = this.daySpr.getValidationCriteriaRangeValues('C30');
@@ -52,21 +52,21 @@ class DayMealTest extends TestBaseDay {
   shouldDaySheetLoadAllItemsOfSelectedMealInBackground(){
     //GIVEN
     let expected = [
-      ['First', 10],
-      ['Second', 20],
-      ['Third', 30],
-      ['Last', 99],
-      ['First', 110],
-      ['Second', 120],
-      ['Third', 130],
-      ['Last', 199],
-      ['First', 210],
-      ['Second', 220],
-      ['Third', 230],
-      ['Last', 299],
-      ['First', 310],
-      ['Second', 320],
-      ['Third', 330]
+      ['1 First', 10],
+      ['2 Second', 20],
+      ['3 Third', 30],
+      ['ZZ Last', 99],
+      ['1 First', 110],
+      ['2 Second', 120],
+      ['3 Third', 130],
+      ['ZZ Last', 199],
+      ['1 First', 210],
+      ['2 Second', 220],
+      ['3 Third', 230],
+      ['ZZ Last', 299],
+      ['1 First', 310],
+      ['2 Second', 320],
+      ['3 Third', 330]
     ];
     //WHEN
     this.meal1StartRng.setValue(`${MEAL_ICON} Meal1`);

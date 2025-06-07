@@ -2,6 +2,7 @@ class SettingsServiceTest extends TestBase {
     constructor(){
         super();
         this.daySpr = mockSpr(SPR.DAY, this);
+        this.daysSpr = mockSpr(SPR.DAYS, this);
         this.newItemSpr = mockSpr(SPR.NEW_ITEM, this);
         this.recipeCalculatorSpr = mockSpr(SPR.RECIPE_CALCULATOR, this);
         this.itemsSpr = mockSpr(SPR.ITEMS, this);
@@ -105,25 +106,31 @@ class SettingsServiceTest extends TestBase {
         verify(this.daySpr).hideRows(27, 3).calledOnce();
         verify(this.daySpr).setPosValue(15, 1, 'Breakfast').calledOnce();
         verify(this.daySpr).setPosValue(4, 7, 'Breakfast').calledOnce();
+        verify(this.daysSpr).setPosValue(3, 2, 'Breakfast').calledOnce();
         verify(this.daySpr).showRows(30, 5).calledOnce();
         verify(this.daySpr).hideRows(35, 10).calledOnce();
         verify(this.daySpr).setPosValue(30, 1, 'Snack').calledOnce();
         verify(this.daySpr).setPosValue(5, 7, 'Snack').calledOnce();
+        verify(this.daysSpr).setPosValue(3, 4, 'Snack').calledOnce();
         verify(this.daySpr).showRows(45, 15).calledOnce();
         verify(this.daySpr).setPosValue(45, 1, 'Lunch').calledOnce();
         verify(this.daySpr).setPosValue(6, 7, 'Lunch').calledOnce();
+        verify(this.daysSpr).setPosValue(3, 6, 'Lunch').calledOnce();
         verify(this.daySpr).showRows(60, 5).calledOnce();
         verify(this.daySpr).hideRows(65, 10).calledOnce();
         verify(this.daySpr).setPosValue(60, 1, 'Snack').calledOnce();
         verify(this.daySpr).setPosValue(7, 7, 'Snack').calledOnce();
+        verify(this.daysSpr).setPosValue(3, 8, 'Snack').calledOnce();
         verify(this.daySpr).showRows(75, 13).calledOnce();
         verify(this.daySpr).hideRows(88, 2).calledOnce();
         verify(this.daySpr).setPosValue(75, 1, 'Dinner').calledOnce();
         verify(this.daySpr).setPosValue(8, 7, 'Dinner').calledOnce();
+        verify(this.daysSpr).setPosValue(3, 10, 'Dinner').calledOnce();
         verify(this.daySpr).showRows(90, 5).calledOnce();
         verify(this.daySpr).hideRows(95, 10).calledOnce();
         verify(this.daySpr).setPosValue(90, 1, 'Supper').calledOnce();
         verify(this.daySpr).setPosValue(9, 7, 'Supper').calledOnce();
+        verify(this.daysSpr).setPosValue(3, 12, 'Supper').calledOnce();
     }
 
     shouldApplySetGrammWhenUsePercentageIsFalse(){

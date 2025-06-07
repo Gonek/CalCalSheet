@@ -78,6 +78,7 @@ class ImportService{
     } else {
       fromDetails = fromSpr.getValues('D16:D21');
     }
+    fromDetails[1] = ['=DATEDIF(D16, NOW(), "Y")'];
     toWeightHistoryRng.clearAndSetValues(fromWeightHistory);
     toDetailsRng.clearAndSetValues(fromDetails);
     toMacroRng.clearAndSetValues(fromMacro);

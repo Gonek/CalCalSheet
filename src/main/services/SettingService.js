@@ -2,6 +2,7 @@ class SettingsService{
 
   constructor(){
     this.daySpr = getSpr(SPR.DAY);
+    this.daysSpr = getSpr(SPR.DAYS);
     this.newItemSpr = getSpr(SPR.NEW_ITEM);
     this.recipeCalculatorSpr = getSpr(SPR.RECIPE_CALCULATOR);
     this.itemsSpr = getSpr(SPR.ITEMS);
@@ -69,17 +70,18 @@ class SettingsService{
     meals.forEach((meal, i) => {
       var startPos = ((i + 1) * ROWS_PER_MEAL);
       if (meal[0] != ''){
-        var colShow = meal[1];
-        var colHide = ROWS_PER_MEAL - colShow; 
-        this.daySpr.showRows(startPos, colShow);
-        if(colHide > 0) {
-          this.daySpr.hideRows(startPos + colShow, colHide);
+        var rowShow = meal[1];
+        var rowHide = ROWS_PER_MEAL - rowShow; 
+        this.daySpr.showRows(startPos, rowShow);
+        if(rowHide > 0) {
+          this.daySpr.hideRows(startPos + rowShow, rowHide);
         }
       }else{
         this.daySpr.hideRows(startPos, ROWS_PER_MEAL);
       }
       this.daySpr.setPosValue(startPos, 1, meal[0]);
       this.daySpr.setPosValue(4 + i, 7, meal[0]);
+      this.daysSpr.setPosValue(3, (i*2) + 2, meal[0]);
     })
   }
 }

@@ -92,7 +92,10 @@ const RNG = {
   ADDITIONAL_DATA: 'AdditionalData',
   DEFAULT_CALORIE_OUTPUT: 'DefaultCalorieOutput',
   LAST_PROFILE_INDEX: 'LastProfileIndex',
+  NEXT_PROFILE_INDEX: 'NextProfileIndex',
   NEXT_PROFILE: 'NextProfile',
+  DAYS_FROM: 'DaysFrom',
+  DAYS_UNTIL: 'DaysUntil',
   // NEW ITEM
   NEW_ITEM_FIELDS : 'NewItemFields',
   NEW_ITEM_FIELDS_TO_SAVE : 'NewItemFieldsToSave',

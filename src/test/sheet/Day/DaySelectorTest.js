@@ -52,7 +52,7 @@ class DaySelectorTest extends TestBaseDay {
   shouldDaySheetHaveTheCorrectFormulaForMealFunctionsBackgroudCalculatons(){
     // GIVEN
     let expectedCopyMealFromMealIds = '=IFERROR(JOIN(",", MAP(SPLIT(CopyMealFrom, ", ", FALSE), LAMBDA(meal,LEFT(Meal, 1)))))';
-    let expectedCopyMealToRows = '=IFERROR(JOIN(",", MAP(SPLIT(CopyMealTo, ", ", FALSE), LAMBDA(date, MATCH(DATEVALUE(RIGHT(date, 10)), Days!A1:A, 0)))))';
+    let expectedCopyMealToRows = '=IFERROR(JOIN(",", MAP(SPLIT(CopyMealTo, ", ", FALSE), LAMBDA(date, MATCH(IF(date = "Default", date, DATEVALUE(RIGHT(date, 10))), Days!A1:A, 0)))))';
     let expectedSaveMealFromMealId = '=LEFT(SaveMealFrom,1)';
 
     // WHEN

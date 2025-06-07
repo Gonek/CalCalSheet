@@ -9,6 +9,7 @@ var sheetTests = () => [
     DayHeaderTest,
     DayMealTest,
     DaySelectorTest,
+    DaysTest,
     NewItemTest,
     RecipeCalculatorTest,
     ProfileTest,

@@ -74,7 +74,7 @@ class DayHeaderTest extends TestBaseDay {
   shouldDaySheetHaveTheCorrectFormulaForProfileBackgroundCalculations(){
     // GIVEN
     let expectedProfileBackground = [
-      [`=MATCH(D3, Profile!C3:P3, 0)`, `=INDEX(Days!A4:A,AA1)`, `=MATCH(DATEVALUE(RIGHT(DayName, 10)), Days!A4:A, 0)`, ``],
+      [`=MATCH(D3, Profile!C3:P3, 0)`, `=INDEX(Days!A4:A,AA1)`, `=IFERROR(MATCH(IF(DayName = "Default", DayName, DATEVALUE(RIGHT(DayName, 10))), Days!A4:A, 0), 0)`, ``],
       [`=INDEX(Profile!$C$4:$P$13, 1, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 1, $X$1 +1)`, ``, ``],
       [`=IF(Settings!E10, ROUND($X$2*(Z3/100)/9), Z3)`, `=IF(Settings!E10, ROUND($Y$2*(AA3/100)/9), AA3)`, `=INDEX(Profile!$C$4:$P$13, 2, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 2, $X$1 +1)`],
       [`=INDEX(Profile!$C$4:$P$13, 3, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 3, $X$1 +1)`, ``, ``],
