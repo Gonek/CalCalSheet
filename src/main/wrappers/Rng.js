@@ -1,8 +1,10 @@
 class Rng{
 
-  constructor(name, range = undefined){
+  constructor(name, range = undefined, test = false){
     this.name = name;
-    this.rng = range ? range : getSpSh(SPSH.ACTIVE).getRangeByName(name);
+    if(!test){
+      this.rng = range ? range : getSpSh(SPSH.ACTIVE).getRangeByName(name);
+    }
   }
 
   getName(){

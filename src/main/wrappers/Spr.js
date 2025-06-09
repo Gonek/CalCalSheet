@@ -2,14 +2,15 @@ class Spr{
   /**
    * @param {string} name Name of the sheet
    */
-  constructor(name){
+  constructor(name, test = false){
     this.name = name;
-    
-    if(name.includes('.')){
-      let s = name.split('.');
-      this.spr = getSpSh(s[0]).getSheetByName(s[1]);
-    }else{
-      this.spr = getSpSh(SPSH.ACTIVE).getSheetByName(name);
+    if(!test){
+      if(name.includes('.')){
+        let s = name.split('.');
+        this.spr = getSpSh(s[0]).getSheetByName(s[1]);
+      }else{
+        this.spr = getSpSh(SPSH.ACTIVE).getSheetByName(name);
+      }
     }
   }
 

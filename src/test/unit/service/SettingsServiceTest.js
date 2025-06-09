@@ -31,7 +31,7 @@ class SettingsServiceTest extends TestBase {
 
     shouldApplyApplyGeneralSettingsChangeFieldsAndMeals(){
         // WHEN
-        this.settingsService.apply();
+        this.settingsService.applySettings();
         // THEN
         // General test
         verify(this.rngList).setNumberFormat('0" %"').calledOnce();
@@ -137,7 +137,7 @@ class SettingsServiceTest extends TestBase {
         // GIVEN
         when(this.generalSettingsRng).getColAsArray().thenReturn([2,2,'Active baseline',true,true,true,false]);
         // WHEN
-        this.settingsService.apply();
+        this.settingsService.applySettings();
         // THEN
         verify(this.rngList).setNumberFormat('0" g"').calledOnce();
     }
@@ -146,7 +146,7 @@ class SettingsServiceTest extends TestBase {
         // GIVEN
         when(this.generalSettingsRng).getColAsArray().thenReturn([2,2,'Active baseline',true,false,true,true]);
         // WHEN
-        this.settingsService.apply();
+        this.settingsService.applySettings();
         // THEN
         verify(this.daySpr).switchCols(false, 18, 3).calledOnce();
         verify(this.daySpr).setValue('V4', '').calledOnce();
@@ -160,7 +160,7 @@ class SettingsServiceTest extends TestBase {
         // GIVEN
         when(this.mealsRng).getValues().thenReturn([['Only', 15], ['',''], ['',''], ['',''], ['',''], ['','']]);
         // WHEN
-        this.settingsService.apply();
+        this.settingsService.applySettings();
         // THEN
         verify(this.daySpr).showRows(15, 15).calledOnce();
         verify(this.daySpr).setPosValue(15, 1, 'Only').calledOnce();

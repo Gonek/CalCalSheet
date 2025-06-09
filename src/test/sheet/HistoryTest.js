@@ -7,7 +7,7 @@ class HistoryTest extends TestBase {
   }
 
   clearData(){
-    this.spr.clear('B10:S');
+    this.spr.clear('B10:R');
   }
 
   afterAll(){
@@ -73,10 +73,10 @@ class HistoryTest extends TestBase {
   shouldHistorySheetDaysHaveCorrectFormat(){
     //GIVEN
     let days = [['01/01/2024', 1000, 600, 400, 15, 20, 25, 30, 35, 40, 45, 50, 55, 10.15, '✔️', '❌', '✔️']];
-    let expected = ['01/01/2024', '1,000 kcal', '600 kcal', '400 kcal', '15 g', '20 g', '25 g', '30 g', '35 g', '40 g', '45 g', '50 g', '55 mg', '10.15', '✔️', '❌', '✔️', '']
+    let expected = ['01/01/2024', '1,000 kcal', '600 kcal', '400 kcal', '15 g', '20 g', '25 g', '30 g', '35 g', '40 g', '45 g', '50 g', '55 mg', '10.15', '✔️', '❌', '✔️']
     //WHEN
     this.spr.putDataAtEnd(days);
-    let result = this.spr.getDisplayValues('B10:S10');
+    let result = this.spr.getDisplayValues('B10:R10');
     //THEN
     this.assertEquals(result, expected);
   }

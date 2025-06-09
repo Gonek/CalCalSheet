@@ -15,7 +15,7 @@ class TutorialServiceTest extends TestBase {
     // WHEN
     this.tutorialService.tutorialTestButton();
     // THEN
-    verify(this.activeSpSh).rename('Calorie Calculator Sheet v1.5').calledOnce();
+    verify(this.activeSpSh).rename('Calorie Calculator Sheet v1.6').calledOnce();
   }
 
   shouldTutorialNextSetTutorialPageToTheNextSectionIfCurrentStepLessThenTen(){

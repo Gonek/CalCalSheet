@@ -15,7 +15,7 @@ class NewItemServiceTest extends TestBase {
   shouldAddNewItemCollectDataCallIRepositoryAddOrUpdateAndResetForm(){
     // GIVEN
     when(this.newItemNameAndOldPosRng).getValue(1,1).thenReturn('Name');
-    when(this.newItemNameAndOldPosRng).getValue(1,3).thenReturn(1);
+    when(this.newItemNameAndOldPosRng).getValue(1,4).thenReturn(1);
     when(this.newItemFieldsToSaveRng).getColAsArray().thenReturn([100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     when(this.newItemNoomColourRng).getDisplayValue().thenReturn('Red');
     // WHEN

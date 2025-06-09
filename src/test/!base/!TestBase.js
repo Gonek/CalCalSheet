@@ -110,7 +110,11 @@ class TestBase{
       this.actualTest = test.toString();
       this.actualSuccess = true;
       console.log(`Start test: ${this.actualTest}`);
-      this[test]();
+      try{
+        this[test]();
+      }catch(e){
+        this.error(e);
+      }
       if(this.actualSuccess){
         console.info(`Test finished with: SUCCESS`);
       } else {
@@ -239,6 +243,13 @@ class TestBase{
     this.result.error(this.actualTest, message);
   }
 
+  error(message){
+    this.actualSuccess = false;
+    console.warn(`ERROR! ${message}`);
+    this.result.error(this.actualTest, message);
+  }
+
+
   printResults(result = this.result){
     console.log(``);
     console.log(`All test finished!`);
@@ -246,7 +257,7 @@ class TestBase{
     console.log(`Test run: ${result.tests} Succeded: ${result.tests - result.fails} Failed: ${result.fails}`);
     if (result.messages.length > 0){
       console.warn(`Test failure messages:`);
-      result.messages.forEach((message) => Logger.log(message));
+      result.messages.forEach((message) => console.warn(message));
     }
     console.log(`Test took : ${result.durration} ms`);
     console.log(``);

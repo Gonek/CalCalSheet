@@ -25,9 +25,9 @@ class ItemRepositoryTest extends TestBase {
         // WHEN
         this.itemRepository.addOrUpdate(item, 97);
         // THEN
-        verify(this.itemsSpr).setAreaValue(100, 3, 1, 25, [100, 'g', 1, 500, '=IFERROR(F100/C100)', 10, '=IFERROR(H100/C100)', 11, '=IFERROR(J100/C100)', 12, '=IFERROR(L100/C100)', 
+        verify(this.itemsSpr).setAreaValue(100, 3, 1, 25, [[100, 'g', 1, 500, '=IFERROR(F100/C100)', 10, '=IFERROR(H100/C100)', 11, '=IFERROR(J100/C100)', 12, '=IFERROR(L100/C100)', 
                                            13, '=IFERROR(N100/C100)', 14, '=IFERROR(P100/C100)', 15, '=IFERROR(R100/C100)', 16, '=IFERROR(T100/C100)', 17, '=IFERROR(V100/C100)', 
-                                           18, '=IFERROR(X100/C100)', 'Red', '=IFERROR(F100/(E100*C100))']).calledOnce();
+                                           18, '=IFERROR(X100/C100)', 'Red', '=IFERROR(F100/(E100*C100))']]).calledOnce();
     }
 
     shouldAddAddItemToTheLastRowOfTheSheet(){
@@ -49,9 +49,9 @@ class ItemRepositoryTest extends TestBase {
         // WHEN
         this.itemRepository.update(item, 97);
         // THEN
-        verify(this.itemsSpr).setAreaValue(100, 3, 1, 25, [100, 'g', 1, 500, '=IFERROR(F100/C100)', 10, '=IFERROR(H100/C100)', 11, '=IFERROR(J100/C100)', 12, '=IFERROR(L100/C100)',
+        verify(this.itemsSpr).setAreaValue(100, 3, 1, 25, [[100, 'g', 1, 500, '=IFERROR(F100/C100)', 10, '=IFERROR(H100/C100)', 11, '=IFERROR(J100/C100)', 12, '=IFERROR(L100/C100)',
                                            13, '=IFERROR(N100/C100)', 14, '=IFERROR(P100/C100)', 15, '=IFERROR(R100/C100)', 16, '=IFERROR(T100/C100)', 17, '=IFERROR(V100/C100)', 
-                                           18, '=IFERROR(X100/C100)', 'Red', '=IFERROR(F100/(E100*C100))']).calledOnce();
+                                           18, '=IFERROR(X100/C100)', 'Red', '=IFERROR(F100/(E100*C100))']]).calledOnce();
     }
 
     shouldIsExitCallFindOnSheetAndReturnTrueIfItemFound(){

@@ -28,6 +28,7 @@ class DayServiceTest extends TestBase {
         this.selectedProfileIndexRng = mockRng(RNG.SELECTED_PROFILE_INDEX, this);
         this.macroProfilesRng = mockRng(RNG.MACRO_PROFILES, this);
         this.selecetedProfileRng = mockRng(RNG.SELECTED_PROFILE, this);
+        this.additionalDataRng = mockRng(RNG.ADDITIONAL_DATA, this);
         this.meal1Rng = mockRng(RNG.MEAL1, this);
         this.meal3Rng = mockRng(RNG.MEAL3, this);
         this.meal5Rng = mockRng(RNG.MEAL5, this);
@@ -46,28 +47,32 @@ class DayServiceTest extends TestBase {
         when(this.todayRng).getDisplayValue().thenReturn('10/01/2025');
         when(this.lastFinishedDayRng).getDisplayValue().thenReturn('09/01/2025');
         when(this.dayItemsRng).getValues().thenReturn([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]]);
-        when(this.dayRepository).save(new Day([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]])).thenReturn(true);
+        when(this.dayRepository).save(new Day([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]], 2510, 'Default')).thenReturn(true);
         when(this.dayPrevDateRng).getValue().thenReturn('10/01/2025');
         when(this.summaryRng).getRowAsArray().thenReturn([1800, 10, 11, 12, 13, 14, 15, 16, 17, 18]);
         when(this.calorieDensityRng).getValue().thenReturn(90.5);
-        when(this.checklistRng).getColAsArray().thenReturn(['✔️', '✔️', '✔️', '❌']);
+        when(this.checklistRng).getColAsArray().thenReturn(['✔️', '✔️', '✔️']);
         when(this.calorieOutputRng).getValue().thenReturn(2510);
+        when(this.selecetedProfileRng).getValue().thenReturn('Default');
         when(this.selectedDayItemsRng).getValues().thenReturn([['New', 1], ['New 2', 2], ['New 3', 3], ['New 4', 4]]);
+        when(this.additionalDataRng).getColAsArray().thenReturn([2510, 'Default']);
         when(this.prevDayIndexRng).getValue().thenReturn(14);
         when(this.dayIndexRng).getValue().thenReturn(15);
         // WHEN
         this.dayService.finishDay();
         // THEN
-        verify(this.dayRepository).save(new Day([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]])).calledOnce();
-        verify(this.historyRepository).addOrUpdate(new History('10/01/2025', [1800, 10, 11, 12, 13, 14, 15, 16, 17, 18], 2510, 90.5, ['✔️', '✔️', '✔️', '❌'])).calledOnce();
+        verify(this.dayRepository).save(new Day([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]], 2510, 'Default')).calledOnce();
+        verify(this.historyRepository).addOrUpdate(new History('10/01/2025', [1800, 10, 11, 12, 13, 14, 15, 16, 17, 18], 2510, 90.5, ['✔️', '✔️', '✔️'])).calledOnce();
         verify(this.dayRepository).deletePastDays().calledOnce();
         verify(this.dayRepository).copyDefaultForFutureDays().calledOnce();
         verify(this.lastFinishedDayRng).setValue('10/01/2025').calledOnce();
         verify(this.dayNameRng).setValueAndFlush('🚩 10/01/2025').calledOnce();
         verify(this.dayItemsRng).setValues([['New', '', 1], ['New 2', '', 2], ['New 3', '', 3], ['New 4', '', 4]]).calledOnce();
         verify(this.prevDayIndexRng).setValue(15).calledOnce();
+        verify(this.calorieOutputRng).setValue(2510);
+        verify(this.selecetedProfileRng).setValue('Default');
         verify(this.mealNamesRng).clear().calledOnce();
-        verify(this.app).flush().calledOnce();
+        verify(this.app).flush().called(2);
     }
 
     shouldChangeDaySaveCurrentDayAndLoadTheSelectedIfTheyAreDifferent(){
@@ -75,20 +80,24 @@ class DayServiceTest extends TestBase {
         when(this.prevDayIndexRng).getValue().thenReturn(14);
         when(this.dayIndexRng).getValue().thenReturn(15);
         when(this.dayItemsRng).getValues().thenReturn([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]]);
-        when(this.dayRepository).save(new Day([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]])).thenReturn(true);
+        when(this.dayRepository).save(new Day([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]], 2510, 'Default')).thenReturn(true);
         when(this.dayPrevDateRng).getValue().thenReturn('10/01/2025');
         when(this.summaryRng).getRowAsArray().thenReturn([1800, 10, 11, 12, 13, 14, 15, 16, 17, 18]);
         when(this.calorieDensityRng).getValue().thenReturn(90.5);
-        when(this.checklistRng).getColAsArray().thenReturn(['✔️', '✔️', '✔️', '❌']);
+        when(this.checklistRng).getColAsArray().thenReturn(['✔️', '✔️', '✔️']);
         when(this.calorieOutputRng).getValue().thenReturn(2510);
+        when(this.selecetedProfileRng).getValue().thenReturn('Default');
         when(this.selectedDayItemsRng).getValues().thenReturn([['New', 1], ['New 2', 2], ['New 3', 3], ['New 4', 4]]);
+        when(this.additionalDataRng).getColAsArray().thenReturn([2510, 'Default']);
         // WHEN
         this.dayService.changeDay();
         // THEN
-        verify(this.dayRepository).save(new Day([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]])).calledOnce();
-        verify(this.historyRepository).addOrUpdate(new History('10/01/2025', [1800, 10, 11, 12, 13, 14, 15, 16, 17, 18], 2510, 90.5, ['✔️', '✔️', '✔️', '❌'])).calledOnce();
+        verify(this.dayRepository).save(new Day([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]], 2510, 'Default')).calledOnce();
+        verify(this.historyRepository).addOrUpdate(new History('10/01/2025', [1800, 10, 11, 12, 13, 14, 15, 16, 17, 18], 2510, 90.5, ['✔️', '✔️', '✔️'])).calledOnce();
         verify(this.dayItemsRng).setValues([['New', '', 1], ['New 2', '', 2], ['New 3', '', 3], ['New 4', '', 4]]).calledOnce();
         verify(this.prevDayIndexRng).setValue(15).calledOnce();
+        verify(this.calorieOutputRng).setValue(2510);
+        verify(this.selecetedProfileRng).setValue('Default');
         verify(this.mealNamesRng).clear().calledOnce();
         verify(this.app).flush().calledOnce();
     }

@@ -110,8 +110,8 @@ class ImportService{
   }
 
   importHistory(fromSpr, toSpr){
-    var data = fromSpr.getValues('B10:S');
-    toSpr.clear('B10:S');
+    var data = fromSpr.getValues('B10:R');
+    toSpr.clear('B10:R');
     toSpr.putDataAtEnd(data);
     toSpr.sort(2);
   }

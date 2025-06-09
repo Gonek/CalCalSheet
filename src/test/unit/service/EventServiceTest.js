@@ -37,7 +37,7 @@ class EventServiceTest extends TestBase {
             [SPR.DAY, BTN.SAVE_MEAL, this.dayService, 'saveMeal'],
             [SPR.DAY, BTN.COPY_MEALS, this.dayService, 'copyMeals'],
             [SPR.NEW_ITEM, BTN.SAVE_ITEM, this.newItemService, 'addNewItem'],
-            [SPR.RECIPE_CALCULATOR, BTN.LOAD_RECIPE, this.recipeCalculatorService, 'loadRecipeToRecipeCalculator'],
+            [SPR.RECIPE_CALCULATOR, BTN.LOAD_RECIPE, this.recipeCalculatorService, 'loadRecipe'],
             [SPR.RECIPE_CALCULATOR, BTN.SAVE_RECIPE, this.recipeCalculatorService, 'addRecipeToItemAndRecipes'],
             [SPR.PROFILE, BTN.COPY_CALORIES, this.profileService, 'copyCalories'],
             [SPR.SETTINGS, BTN.APPLY_SETTINGS, this.settingsService, 'applySettings'],

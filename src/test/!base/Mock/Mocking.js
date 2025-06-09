@@ -94,15 +94,15 @@
 }
 
 const mockSpSh = (spsh, owner) => {
-  return mock(new SpSh(spsh), owner);
+  return mock(new SpSh(spsh, true), owner);
 }
 
 const mockSpr = (spr, owner) => {
-  return mock(new Spr(spr), owner);
+  return mock(new Spr(spr, true), owner);
 }
 
 const mockRng = (rng, owner) => {
-  return mock(new Rng(rng), owner);
+  return mock(new Rng(rng, undefined, true), owner);
 }
 
 const printCalls = (obj, objCalls) => {
