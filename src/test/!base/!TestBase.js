@@ -30,7 +30,13 @@ var unitTests = () => [
     SettingsServiceTest,
     TutorialServiceTest];
 var acceptanceTests = () => [
-    NewItemScenarios
+    DayScenarios,
+    FinishDayScenarios,
+    ImportScenarios,
+    NewItemScenarios,
+    ProfileScenarios,
+    RecipeCalculatorScenarios,
+    SettingsScenarios
 ];
 
 class TestBase{

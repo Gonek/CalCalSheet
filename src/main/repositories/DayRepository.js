@@ -41,7 +41,6 @@ class DayRepository{
       this.setDefaultAdditinalData(row, defaultCalorieOutput, nextprofile);
       createDaysFrom.setDate(createDaysFrom.getDate() + 1);
     }
-    this.spr.setPosValue(newDayRow + 15 * createDays, 1, '.');
   }
 
   setDefaultAdditinalData(row, defaultCalorieOutput, nextprofile){

@@ -94,8 +94,8 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
 
     form_is_clear(){
         this.test.assertEmpty(getRng(RNG.RECIPE_NAME).getValue());
-        this.test.assertEqualsArray(getRng(RNG.RECIPE_ITEMS).getValues());
-        this.test.assertEqualsArray(getRng(RNG.RECIPE_SERVING).getValues());
+        this.test.assertArrayEmpty(getRng(RNG.RECIPE_ITEMS).getValues());
+        this.test.assertArrayEmpty(getRng(RNG.RECIPE_SERVING).getValues());
         this.test.assertEquals(getRng(RNG.RECIPE_NOOM_CATEGORY).getValue(), 'Solid');
         this.test.assertEquals(getRng(RNG.RECIPE_SAVE_AS_RECIPE).getValue(), true);
     }

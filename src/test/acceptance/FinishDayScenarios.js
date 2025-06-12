@@ -31,7 +31,7 @@
                 .day_changed_to(3).and()
                 .future_available_days_as_expected(2).and()
                 .archive_available_days_as_expected(2).and()
-                .new_day_calorie_output_set_to(5, 2170).and()
+                .new_day_calorie_output_set_to(5, 2398).and()
                 .new_day_profile_set_to(5, 'Test 7').and()
                 .previous_day_saved(2).and()
                 .saved_with_test_items().and()
@@ -66,8 +66,8 @@
                 .day_changed_to(3).and()
                 .future_available_days_as_expected(2).and()
                 .archive_available_days_as_expected(2).and()
-                .new_day_calorie_output_set_to(4, 1400).and()
-                .new_day_calorie_output_set_to(5, 1400).and()
+                .new_day_calorie_output_set_to(4, 1998).and()
+                .new_day_calorie_output_set_to(5, 1998).and()
                 .new_day_profile_set_to(4, 'Test 1').and()
                 .new_day_profile_set_to(5, 'Test 1');
     }
