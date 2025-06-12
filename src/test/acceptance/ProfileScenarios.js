@@ -6,7 +6,7 @@ class ProfileScenarios extends AcceptanceTestBase{
 
     clearData(){
       this.utils.addDefaultProfile();
-
+      this.utils.resetCalorieCalculatorValues();
     }
 
     scenario_copy_calories_to_new_profile(){

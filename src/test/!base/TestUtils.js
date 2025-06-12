@@ -148,7 +148,13 @@ class TestUtils {
   }
 
   clearDays(){
-    getSpr(SPR.DAYS).clear('B4:N');
+    let spr = getSpr(SPR.DAYS);
+    spr.clear('B4:N');
+    let numDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
+    for(var i = 0; i<=numDays; i++){
+      spr.setPosValue(4 + (i * 15), 14, '2330');
+      spr.setPosValue(5 + (i * 15), 14, 'Default');
+    }
   }
 
   clearDay(){

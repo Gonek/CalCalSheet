@@ -200,5 +200,14 @@ class SettingsThenSteps extends Steps{
         this.test.assertEquals(itemMeals[75][0], meals[5][0]);
     }
 
-
+    meals_changed_at_days(meals){
+        let spr = getSpr(SPR.DAYS);
+        let dayMeals = spr.getValues('B3:M3');
+        this.test.assertEquals(dayMeals[0][0], meals[0]);
+        this.test.assertEquals(dayMeals[0][2], meals[1]);
+        this.test.assertEquals(dayMeals[0][4], meals[2]);
+        this.test.assertEquals(dayMeals[0][6], meals[3]);
+        this.test.assertEquals(dayMeals[0][8], meals[4]);
+        this.test.assertEquals(dayMeals[0][10], meals[5]);
+    }
 }

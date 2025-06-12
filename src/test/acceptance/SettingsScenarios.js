@@ -10,6 +10,7 @@
 
     afterAll(){
       super.afterAll();
+      this.utils.clearDays();
       getObj(SettingsService).applySettings();
     }
 
@@ -46,6 +47,8 @@
           .nutrition_fields_visible_in_history_sheet(true, true, true, true, true, true, true, true, true).and()
           .meals_changed_in_summary(['Meal1', 'Meal2', 'Meal3', 'Meal4', 'Meal5', 'Meal6']).and()
           .meals_changed_at_items([['Meal1', 15], ['Meal2', 15], ['Meal3', 15], ['Meal4', 15], ['Meal5', 15], ['Meal6', 15]]).and()
+          .meals_changed_at_days(['Meal1', 'Meal2', 'Meal3', 'Meal4', 'Meal5', 'Meal6'])
+
     }
 
     scenario_every_field_turned_off_with_only_one_small_meal(){
@@ -81,6 +84,7 @@
           .nutrition_fields_visible_in_history_sheet(false, false, false, false, false, false, false, false, false).and()
           .meals_changed_in_summary(['Only', '', '', '', '', '']).and()
           .meals_changed_at_items([['Only', 5], ['', ''], ['', ''], ['', ''], ['', ''], ['', '']]).and()
+          .meals_changed_at_days(['Only', '', '', '', '', ''])
     }
 
     scenario_change_to_max_future_and_archive_days(){
