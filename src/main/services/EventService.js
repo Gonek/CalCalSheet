@@ -2,10 +2,7 @@
 
 var onEdit = (e) => getObj(EventService).onEdit(e);
 var onOpen = (e) => getObj(EventService).onOpen(e);
-var testButton = () => getObj(EventService).testButton(SPR.DAY, CBOX.DAY_NAME);
-
-// SCHEDULED FUNCTIONS
-var finishDay = () => getObj(DayService).finishDay();
+var testButton = () => getObj(EventService).testButton(SPR.NEW_ITEM, CBOX.NEW_ITEM_NAME);
 
 // OTHER FUNCTIONS
 var startImport = () => getObj(ImportService).startImport();
@@ -29,6 +26,7 @@ class EventService {
         ]
       ],
       [SPR.NEW_ITEM, [
+        new CBox(CBOX.NEW_ITEM_NAME, NewItemService, 'loadItem'),
         new Btn(BTN.SAVE_ITEM, NewItemService, 'addNewItem')]
       ],
       [SPR.RECIPE_CALCULATOR, [  
@@ -66,6 +64,7 @@ class EventService {
   onOpen(e){
     try{
       getObj(DayService).finishDay();
+      getObj(ItemRepository).autoDeleteItems();
     }catch(error){
       alert(error + " " + error.stack);
     }

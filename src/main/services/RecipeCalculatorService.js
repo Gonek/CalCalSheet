@@ -33,8 +33,9 @@ class RecipeCalculatorService {
     let fields = getRng(RNG.RECIPE_FIELDS_TO_SAVE).getRowAsArray();
     fields.splice(1, 1);
     let noomColour = getRng(RNG.RECIPE_NOOM_COLOUR).getValue();
+    let autoDelete = getRng(RNG.RECIPE_AUTO_DELETE).getValue();
     
-    getObj(ItemRepository).addOrUpdate(new Item(itemName, fields, noomColour), oldPos);
+    getObj(ItemRepository).addOrUpdate(new Item(itemName, fields, noomColour, autoDelete), oldPos);
   }
 
   clearCalculator() {
@@ -43,5 +44,6 @@ class RecipeCalculatorService {
     getRng(RNG.RECIPE_SERVING).clear();
     getRng(RNG.RECIPE_NOOM_CATEGORY).setValue('Solid');
     getRng(RNG.RECIPE_SAVE_AS_RECIPE).setValue('True');
+    getRng(RNG.RECIPE_AUTO_DELETE).setValue('Never');
   }
 }

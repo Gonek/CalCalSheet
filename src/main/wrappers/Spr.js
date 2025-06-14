@@ -176,6 +176,10 @@ class Spr{
     this.spr.getRange(range).deleteCells(shiftDimmension)
   }
 
+  deleteRow(deleteIndex){
+    this.spr.deleteRow(deleteIndex);
+  }
+
   deleteRows(deleteFrom, deleteTo){
     this.spr.deleteRows(deleteFrom, deleteTo - deleteFrom);
   }

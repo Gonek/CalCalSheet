@@ -60,7 +60,7 @@ class SettingsService{
     var noom = generalSettings[4];
     this.daySpr.switchCols(noom, 18, 3);
     this.daySpr.setValue('V4', noom ? 'Noom' : '');
-    this.newItemSpr.switchRows(noom, 20, 2);
+    this.newItemSpr.switchRows(noom, 21, 2);
     this.recipeCalculatorSpr.switchRows(noom, 36, 2);
     this.itemsSpr.switchCols(noom, 26);
     this.historySpr.switchCols(noom, 19);

@@ -71,8 +71,8 @@ class SettingsThenSteps extends Steps{
     }
 
     noom_fields_visible_in_new_item_sheet(bool = true){
-        this.test.assertEquals(!getSpr(SPR.NEW_ITEM).isRowHidden(20), bool);
         this.test.assertEquals(!getSpr(SPR.NEW_ITEM).isRowHidden(21), bool);
+        this.test.assertEquals(!getSpr(SPR.NEW_ITEM).isRowHidden(22), bool);
     }
 
     noom_fields_visible_in_recipe_calculator_sheet(bool = true){

@@ -40,9 +40,14 @@ class ImportService{
   }
 
   importItems(fromSpr, toSpr){
-    var data = fromSpr.getValues('B4:AA');
+    var data;
+    if(this.baseVersion == V1_6){
+      data = fromSpr.getValues('B4:AB');
+    } else {
+      data = fromSpr.getValues('B4:AA');
+    }
     if(this.importRng.getValue(2, 2) == IMPORT_OPTIONS.CLEAR_CONTENT) {
-      toSpr.clear('B4:AA');
+      toSpr.clear('B4:AB');
     }
     toSpr.putDataAtEnd(data);
     toSpr.sort(2);

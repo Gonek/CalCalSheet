@@ -21,11 +21,37 @@ class ItemRepository{
   }
 
   update(item, originalPos){
-    this.spr.setAreaValue(originalPos + 3, 3, 1, 25, [this.fieldsToRow(item, originalPos + 3)]);
+    this.spr.setAreaValue(originalPos + 3, 3, 1, 26, [this.fieldsToRow(item, originalPos + 3)]);
   }
 
   isExist(name){
     return this.spr.find(name) != null;
+  }
+
+  autoDeleteItems(){
+    let today = getToday();
+    this.spr.getValues('AB4:AB')
+            .flat()
+            .map((v, i) => [i, v])
+            .filter(e => (e[1] && e[1] <= today))
+            .reverse()
+            .forEach(e => this.spr.deleteRow(e[0]+4));
+  }
+
+  calculateAutoDeleteDate(autoDelete){
+    switch(autoDelete){
+      case 'Never': return null;
+      case '1 Day': return getRelativeDay(+1);
+      case '2 Day': return getRelativeDay(+2);
+      case '3 Day': return getRelativeDay(+3);
+      case '4 Day': return getRelativeDay(+4);
+      case '5 Day': return getRelativeDay(+5);
+      case '6 Day': return getRelativeDay(+6);
+      case '1 Week': return getRelativeDay(+7);
+      case '2 Week': return getRelativeDay(+14);
+      case '3 Week': return getRelativeDay(+21);
+      case '4 Week': return getRelativeDay(+28);
+    }
   }
 
   fieldsToRow(item, row){
@@ -40,6 +66,7 @@ class ItemRepository{
       item.sugarAlcohol, `=IFERROR(T${row}/C${row})`, 
       item.protein, `=IFERROR(V${row}/C${row})`, 
       item.salt, `=IFERROR(X${row}/C${row})`,
-      item.noomColour, `=IFERROR(F${row}/(E${row}*C${row}))`];
+      item.noomColour, `=IFERROR(F${row}/(E${row}*C${row}))`,
+      this.calculateAutoDeleteDate(item.autoDelete)];
   }
 }

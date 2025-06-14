@@ -37,7 +37,7 @@ class GroupRepository{
     var deleteFrom = allItems.findIndex(aName => aName === name);
     if (deleteFrom > -1) { 
       var deleteTo = allItems.findLastIndex(aName => aName === name);
-      this.spr.deleteRows(deleteFrom + 4, deleteTo - deleteFrom + 1);
+      this.spr.deleteRows(deleteFrom + 4, deleteTo + 5);
     }
   }
 }

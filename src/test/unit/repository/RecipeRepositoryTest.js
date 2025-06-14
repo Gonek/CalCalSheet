@@ -12,7 +12,7 @@ class RecipeRepositoryTest extends TestBase {
         // WHEN
         this.recipeRepository.saveRecipe(recipe);
         // THEN
-        verify(this.recipesSpr).deleteRows(6,2).calledOnce();
+        verify(this.recipesSpr).deleteRows(6,8).calledOnce();
         verify(this.recipesSpr).putDataAtEnd([['Recipe', 'Item 1', 10],['Recipe', 'Item 2', 20],['Recipe', 'Item 3', 30]]).calledOnce();
         verify(this.recipesSpr).sort(2).calledOnce();
     }

@@ -37,6 +37,7 @@ const BTN = {
 
 const CBOX = {
   DAY_NAME: 'DayName',
+  NEW_ITEM_NAME: 'NewItemName',
   MEAL_1_START : 'Meal1Start',
   MEAL_2_START : 'Meal2Start',
   MEAL_3_START : 'Meal3Start',
@@ -102,6 +103,7 @@ const RNG = {
   NEW_ITEM_NOOM_COLOUR : 'NewItemNoomColour',
   NEW_ITEM_NOOM_CATEGORY : 'NewItemNoomCategory',
   NEW_ITEM_NAME_AND_OLD_POS : 'NewItemNameAndOldPos',
+  NEW_ITEM_AUTO_DELETE : 'NewItemAutoDelete',
   // RECIPE CALCULATOR
   RECIPE_NAME : 'RecipeName',
   RECIPE_OLD_POS : 'RecipeOldPos',
@@ -114,6 +116,7 @@ const RNG = {
   RECIPE_ITEM_NAMES : 'RecipeItemNames',
   LOAD_RECIPE_NAME : 'LoadRecipeName',
   SELECTED_RECIPE_ITEMS : 'SelectedRecipeItems',
+  RECIPE_AUTO_DELETE : 'RecipeAutoDelete',
   // PROFILE
   CALCULATOR_CALORIES : 'CalculatorCalories',
   GENERATED_DAYS : 'GeneratedDays',
