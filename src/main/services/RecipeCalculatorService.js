@@ -14,11 +14,10 @@ class RecipeCalculatorService {
   }
 
   loadRecipe() {
-    let selectedRecipeNameRng = getRng(RNG.LOAD_RECIPE_NAME);
-    let selectedRecipeItems = getRng(RNG.SELECTED_RECIPE_ITEMS).getValues();
-    this.nameRng.setValue(selectedRecipeNameRng.getValue());
-    this.itemsRng.setValues(selectedRecipeItems);
-    selectedRecipeNameRng.clear();
+    let selectedRecipeItemsRng = getRng(RNG.SELECTED_RECIPE_ITEMS);
+    if(!selectedRecipeItemsRng.isBlank()){
+      this.itemsRng.setValues(selectedRecipeItemsRng.getValues());
+    }
   }
 
   addToRecipes(){

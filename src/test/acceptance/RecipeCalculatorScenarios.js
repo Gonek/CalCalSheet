@@ -32,6 +32,7 @@
             .have_protein_as(64.2).and()
             .have_sodium_as(78.8).and()
             .have_noom_colour_of('Red').and()
+            .have_auto_delete_at_empty().and()
             .recipe_saved_with_name('Basic recipe item').and()
             .recipe_have_basic_items().and()
             .form_is_clear();
@@ -60,6 +61,7 @@
           .have_protein_as(542.49).and()
           .have_sodium_as(665.86).and()
           .have_noom_colour_of('Red').and()
+          .have_auto_delete_at_empty().and()
           .form_is_clear();
   }
 
@@ -101,32 +103,32 @@
         .have_protein_as(64.2).and()
         .have_sodium_as(78.8).and()
         .have_noom_colour_of('Red').and()
+        .have_auto_delete_at_empty().and()
         .form_is_clear();
   }
 
-  scenario_add_item_and_recipe(){
-    this.scenario('Replace recipe using "Recipe calculator"')
+  scenario_add_item_with_auto_delete_at_3_day(){
+    this.scenario('Add item with auto delete in 3 days')
       .given()
-        .test_recipes_available().and()
-        .recipe_name_as('Meal1').and()
+        .test_items_available().and()
+        .recipe_name_as('Test 100g').and()
         .basic_items().and()
-        .set_saved_as_recipe(true)
+        .auto_delete_at_as('3 Day').and()
+        .set_saved_as_recipe(false)
       .when()
         .save_as_item_clicked()
       .then()
-        .item_saved_with_name('Meal1').and()
-        .recipe_saved_with_name('Meal1').and()
-        .recipe_have_basic_items().and()
+        .item_saved_with_name('Test 100g').and()
+        .have_auto_delete_at_as(getRelativeDay(+3)).and()
         .form_is_clear();
   }
 
-  scenario_load_recipe(){
-    this.scenario('Load recipe to recipe calculator')
+  scenario_load_recipe_modify_replace(){
+    this.scenario('Load recipe to recipe calculator modify items and replace original')
       .given()
-        .test_recipes_available().and()
-        .select_meal_to_load('Recipe1')
+        .test_recipes_available()
       .when()
-        .load_recipe_clicked()
+        .recipe_name_set_to('Recipe1')
       .then()
         .form_have_recipe_name_loaded('Recipe1').and()
         .form_have_recipe_items_loaded([['Green', 100],
@@ -153,8 +155,18 @@
                                         ['Green', 2400],
                                         ['Yellow', 2500],
                                         ['Red', 2600],
-                                        ['Green', 2700]]).and()
-        .recipe_name_clear();
+                                        ['Green', 2700]])
+        .given()
+          .basic_items().and()
+          .set_saved_as_recipe(true)
+        .when()
+          .save_as_item_clicked()
+        .then()
+          .item_saved_with_name('Recipe1').and()
+          .have_auto_delete_at_empty().and()
+          .recipe_saved_with_name('Recipe1').and()
+          .recipe_have_basic_items().and()
+          .form_is_clear();
   }
 }
 

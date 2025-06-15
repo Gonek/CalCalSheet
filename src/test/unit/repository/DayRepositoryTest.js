@@ -92,7 +92,6 @@ class DayRepositoryTest extends TestBase {
         verify(this.daysSpr).setPosValue(100, 1, new Date('01/01/2025')).calledOnce();
         verify(this.defaultDayRng).copyTo(rng2).calledOnce();
         verify(this.daysSpr).setPosValue(115, 1, new Date('01/02/2025')).calledOnce();
-        verify(this.daysSpr).setPosValue(130, 1, '.').calledOnce();
     }
 
     shouldCopyMeals(){

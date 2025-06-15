@@ -39,7 +39,7 @@ class ImportGivenSteps extends Steps{
     }
 
     test_items_available(){
-        this.test.utils.addTestIems();
+        this.test.utils.addTestItems();
     }
 
     test_recipes_available(){

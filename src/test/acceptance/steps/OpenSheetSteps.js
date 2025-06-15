@@ -1,4 +1,4 @@
-class FinishDayGivenSteps extends BaseDayGivenSteps{
+class OpenSheetGivenSteps extends BaseDayGivenSteps{
     last_finished_day_set_to(date){
         getRng(RNG.LAST_FINISHED_DAY).setValue(date);
         getObj(App).flush();
@@ -13,13 +13,13 @@ class FinishDayGivenSteps extends BaseDayGivenSteps{
     }
 }
 
-class FinishDayWhenSteps extends Steps{
+class OpenSheetWhenSteps extends Steps{
     sheet_opened(){
         this.onOpen();
     }  
 }
 
-class FinishDayThenSteps extends BaseDayThenSteps{
+class OpenSheetThenSteps extends BaseDayThenSteps{
 
     day_changed_to(to){
         let r = getRng(CBOX.DAY_NAME);
@@ -45,5 +45,10 @@ class FinishDayThenSteps extends BaseDayThenSteps{
 
     new_day_profile_set_to(day, expected){
         this.test.assertEquals(getSpr(SPR.DAYS).getValue(`N${day*15 + 5}`), expected);
+    }
+
+    expired_auto_delete_days_were_deleted(){
+        let items = getSpr(SPR.ITEMS).getValues('B4:B').flat().filter(n => n);
+        this.test.assertEqualsArray(items, ['1 First', '2 Second', '3 Third', 'All 100', 'All 1', 'Green', 'Red', 'Test 100g', 'Test 1 serving', 'Yellow', 'ZZ Last']);
     }
 }

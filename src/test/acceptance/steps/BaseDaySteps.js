@@ -1,7 +1,7 @@
 class BaseDayGivenSteps extends Steps{
 
     test_items_available(){
-        this.test.utils.addTestIems();
+        this.test.utils.addTestItems();
     }
 
     test_days_available(generateFrom = -2){

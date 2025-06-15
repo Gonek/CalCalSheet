@@ -14,6 +14,7 @@ class EventServiceTest extends TestBase {
         this.settingsService = mock(SettingsService, this);
         this.importService = mock(ImportService, this);
         this.tutorialService = mock(TutorialService, this);
+        this.itemRepository = mock(ItemRepository, this);
 
         this.eventService = new EventService();
     }
@@ -23,6 +24,7 @@ class EventServiceTest extends TestBase {
         onOpen();
         // THEN
         verify(this.dayService).finishDay().calledOnce();
+        verify(this.itemRepository).autoDeleteItems().calledOnce();
     }
 
     shouldOnEditCallEventLinkedToButton(){
@@ -36,8 +38,9 @@ class EventServiceTest extends TestBase {
             [SPR.DAY, CBOX.MEAL_6_START, this.dayService, 'loadMeal'],
             [SPR.DAY, BTN.SAVE_MEAL, this.dayService, 'saveMeal'],
             [SPR.DAY, BTN.COPY_MEALS, this.dayService, 'copyMeals'],
+            [SPR.NEW_ITEM, CBOX.NEW_ITEM_NAME, this.newItemService, 'loadItem'],
             [SPR.NEW_ITEM, BTN.SAVE_ITEM, this.newItemService, 'addNewItem'],
-            [SPR.RECIPE_CALCULATOR, BTN.LOAD_RECIPE, this.recipeCalculatorService, 'loadRecipe'],
+            [SPR.RECIPE_CALCULATOR, CBOX.RECIPE_NAME, this.recipeCalculatorService, 'loadRecipe'],
             [SPR.RECIPE_CALCULATOR, BTN.SAVE_RECIPE, this.recipeCalculatorService, 'addRecipeToItemAndRecipes'],
             [SPR.PROFILE, BTN.COPY_CALORIES, this.profileService, 'copyCalories'],
             [SPR.SETTINGS, BTN.APPLY_SETTINGS, this.settingsService, 'applySettings'],

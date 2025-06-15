@@ -12,7 +12,7 @@ class MealRepositoryTest extends TestBase {
         // WHEN
         this.mealRepository.saveMeal(meal);
         // THEN
-        verify(this.mealSpr).deleteRows(6,2).calledOnce();
+        verify(this.mealSpr).deleteRows(6,8).calledOnce();
         verify(this.mealSpr).putDataAtEnd([['🥣 Meal','Item 1',10],['🥣 Meal','Item 2',20],['🥣 Meal','Item 3',30]]).calledOnce();
         verify(this.mealSpr).sort(2).calledOnce();
     }

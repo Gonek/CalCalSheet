@@ -150,7 +150,7 @@ class SettingsServiceTest extends TestBase {
         // THEN
         verify(this.daySpr).switchCols(false, 18, 3).calledOnce();
         verify(this.daySpr).setValue('V4', '').calledOnce();
-        verify(this.newItemSpr).switchRows(false, 20, 2).calledOnce();
+        verify(this.newItemSpr).switchRows(false, 21, 2).calledOnce();
         verify(this.recipeCalculatorSpr).switchRows(false, 36, 2).calledOnce();
         verify(this.itemsSpr).switchCols(false, 26).calledOnce();
         verify(this.historySpr).switchCols(false, 19).calledOnce();

@@ -8,7 +8,7 @@ class TestBaseDay extends TestBase  {
 
   beforeAll(){
     super.beforeAll();
-    this.utils.addTestIems();
+    this.utils.addTestItems();
   }
 
   afterAll(){

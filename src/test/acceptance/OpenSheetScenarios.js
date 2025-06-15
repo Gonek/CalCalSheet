@@ -1,7 +1,7 @@
- class FinishDayScenarios extends AcceptanceTestBase{
+ class OpenSheetScenarios extends AcceptanceTestBase{
 
     constructor(){
-      super(FinishDayGivenSteps, FinishDayWhenSteps, FinishDayThenSteps);
+      super(OpenSheetGivenSteps, OpenSheetWhenSteps, OpenSheetThenSteps);
     }
 
     clearData(){
@@ -44,7 +44,8 @@
                 .history_have_macros_as([975.1, 928.1, 938.1, 1099.1, 1033.1, 1017.2, 981.2, 1061.2, 1231]).and()
                 .history_have_calories_check_as('❌').and()
                 .history_have_macro_check_as('❌').and()
-                .history_have_calorie_density_check_as('✔️');
+                .history_have_calorie_density_check_as('✔️').and()
+                .expired_auto_delete_days_were_deleted();
     }
 
     scenario_finish_day_after_one_day_with_auto_cycle_off_and_bmr(){
@@ -69,7 +70,8 @@
                 .new_day_calorie_output_set_to(4, 1998).and()
                 .new_day_calorie_output_set_to(5, 1998).and()
                 .new_day_profile_set_to(4, 'Test 1').and()
-                .new_day_profile_set_to(5, 'Test 1');
+                .new_day_profile_set_to(5, 'Test 1').and()
+                .expired_auto_delete_days_were_deleted();
     }
 
     scenario_finish_day_after_five_days_with_auto_cycle_and_calorie_max_profile(){
@@ -108,7 +110,8 @@
                 .history_have_macros_as([975.1, 928.1, 938.1, 1099.1, 1033.1, 1017.2, 981.2, 1061.2, 1231]).and()
                 .history_have_calories_check_as('❌').and()
                 .history_have_macro_check_as('❌').and()
-                .history_have_calorie_density_check_as('✔️');
+                .history_have_calorie_density_check_as('✔️').and()
+                .expired_auto_delete_days_were_deleted();
     }
 
     scenario_finish_day_after_no_days(){
@@ -124,9 +127,10 @@
             .when()
                 .sheet_opened()
             .then()
-                .day_changed_to(3);
+                .day_changed_to(3).and()
+                .expired_auto_delete_days_were_deleted();
     }
 
 }
 
-var runFinishDayScenarios = () => new FinishDayScenarios().runAllTests();
+var runOpenSheetScenarios = () => new OpenSheetScenarios().runAllTests();

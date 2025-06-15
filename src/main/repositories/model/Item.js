@@ -1,9 +1,9 @@
 class Item{
-    constructor(name, fields, noomColour, autoDelete){
+    constructor(name, fields, noomColour = null, autoDelete = null){
       this.name = name;
       this.amount = fields[0];
       this.unit = fields[1];
-      this.weight = fields[2] / fields[0];
+      this.weight = fields[2];
       this.calories = fields[3];
       this.totalFat = fields[4];
       this.saturatedFat = fields[5];

@@ -23,6 +23,7 @@ class NewItemScenarios extends AcceptanceTestBase{
             .have_calories_as(95).and()
             .have_basic_macros().and()
             .have_noom_colour_of('Green').and()
+            .have_auto_delete_at_empty().and()
             .form_is_clear();
     }
 
@@ -41,6 +42,7 @@ class NewItemScenarios extends AcceptanceTestBase{
             .have_calories_as(100).and()
             .have_basic_macros().and()
             .have_noom_colour_of('Red').and()
+            .have_auto_delete_at_empty().and()
             .form_is_clear();
     }
 
@@ -68,6 +70,7 @@ class NewItemScenarios extends AcceptanceTestBase{
             .have_protein_as(25.5).and()
             .have_sodium_as(27).and()
             .have_noom_colour_of('Yellow').and()
+            .have_auto_delete_at_empty().and()
             .form_is_clear();
     }
 
@@ -95,6 +98,7 @@ class NewItemScenarios extends AcceptanceTestBase{
             .have_protein_as(102).and()
             .have_sodium_as(108).and()
             .have_noom_colour_of('Red').and()
+            .have_auto_delete_at_empty().and()
             .form_is_clear();
     }
 
@@ -113,6 +117,7 @@ class NewItemScenarios extends AcceptanceTestBase{
             .have_calories_as(100).and()
             .have_basic_macros().and()
             .have_noom_colour_of('Red').and()
+            .have_auto_delete_at_empty().and()
             .form_is_clear();
     }
 
@@ -140,6 +145,7 @@ class NewItemScenarios extends AcceptanceTestBase{
             .have_protein_as(0.2).and()
             .have_sodium_as(0).and()
             .have_noom_colour_of('Green').and()
+            .have_auto_delete_at_empty().and()
             .form_is_clear();
     }
 
@@ -159,7 +165,38 @@ class NewItemScenarios extends AcceptanceTestBase{
             .have_calories_as(100).and()
             .have_basic_macros().and()
             .have_noom_colour_of('Green').and()
+            .have_auto_delete_at_empty().and()
             .form_is_clear();
+    }
+
+    scenario_add_item_with_1_day_auto_delete(){
+        this.scenario('Add new item using the "New item form" with Auto delete at set to 1 day')
+          .given()
+            .item_name_as("1 day auto delete item").and()
+            .serving_as_100g().and()
+            .calories_as(109).and()
+            .all_basic_macros().and()
+            .auto_delete_at_as('1 Day')
+          .when()
+            .save_as_item_clicked()
+          .then()
+            .item_saved_with_name("1 day auto delete item").and()
+            .have_auto_delete_at_as(getRelativeDay(+1));
+    }
+
+    scenario_add_item_with_1_week_auto_delete(){
+        this.scenario('Add new item using the "New item form" with Auto delete at set to 1 week')
+          .given()
+            .item_name_as("1 week auto delete item").and()
+            .serving_as_100g().and()
+            .calories_as(99).and()
+            .all_basic_macros().and()
+            .auto_delete_at_as('1 Week')
+          .when()
+            .save_as_item_clicked()
+          .then()
+            .item_saved_with_name("1 week auto delete item").and()
+            .have_auto_delete_at_as(getRelativeDay(+7));
     }
 
     scenario_add_solid_green_item(){
@@ -312,11 +349,15 @@ class NewItemScenarios extends AcceptanceTestBase{
             .have_noom_colour_of('Red');
     }
 
-    scenario_replace_item(){
-        this.scenario('Replace one item using the "New item form"')
+    scenario_load_modify_and_replace_item(){
+        this.scenario('Load, Modify and replace one item using the "New item form"')
           .given()
-            .test_items_available().and()
-            .item_name_as("Test 100g").and()
+            .test_items_available()
+          .when()
+            .item_name_set_to("Test 100g")
+          .then()
+            .item_loaded_to_form_as(['Test 100g', 100, 'g', 100, 370, 10, 5, 5, 30, 40, 5, 1, 20, 100])
+          .given()
             .serving_as_100g().and()
             .calories_as(95).and()
             .all_basic_macros()

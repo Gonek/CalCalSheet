@@ -30,7 +30,7 @@ class EventService {
         new Btn(BTN.SAVE_ITEM, NewItemService, 'addNewItem')]
       ],
       [SPR.RECIPE_CALCULATOR, [  
-        new Btn(BTN.LOAD_RECIPE, RecipeCalculatorService, 'loadRecipe'),
+        new CBox(CBOX.RECIPE_NAME, RecipeCalculatorService, 'loadRecipe'),
         new Btn(BTN.SAVE_RECIPE, RecipeCalculatorService, 'addRecipeToItemAndRecipes')
         ]
       ],

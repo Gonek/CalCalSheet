@@ -1,7 +1,7 @@
 class RecipeCalculatorGivenSteps extends Steps{
 
     test_items_available(){
-        this.test.utils.addTestIems();
+        this.test.utils.addTestItems();
     }
 
     test_recipes_available(){
@@ -39,8 +39,9 @@ class RecipeCalculatorGivenSteps extends Steps{
         getRng(RNG.RECIPE_SAVE_AS_RECIPE).setValue(boolean);
     }
 
-    select_meal_to_load(name){
-        getRng(RNG.LOAD_RECIPE_NAME).setValue(name);
+    auto_delete_at_as(value){
+        let autoDeleteRng = getRng(RNG.RECIPE_AUTO_DELETE);
+        autoDeleteRng.setValue(value);
     }
 }
 
@@ -49,8 +50,8 @@ class RecipeCalculatorWhenSteps extends Steps{
         this.clickButton(SPR.RECIPE_CALCULATOR, BTN.SAVE_RECIPE);
     }
 
-    load_recipe_clicked(){
-        this.clickButton(SPR.RECIPE_CALCULATOR, BTN.LOAD_RECIPE);
+    recipe_name_set_to(name){
+        this.changeCbox(SPR.RECIPE_CALCULATOR, CBOX.RECIPE_NAME, name);
     }
 }
 
@@ -98,9 +99,5 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
         this.test.assertArrayEmpty(getRng(RNG.RECIPE_SERVING).getValues());
         this.test.assertEquals(getRng(RNG.RECIPE_NOOM_CATEGORY).getValue(), 'Solid');
         this.test.assertEquals(getRng(RNG.RECIPE_SAVE_AS_RECIPE).getValue(), true);
-    }
-
-    recipe_name_clear(){
-        this.test.assertEmpty(getRng(RNG.LOAD_RECIPE_NAME).getValue());
     }
 }

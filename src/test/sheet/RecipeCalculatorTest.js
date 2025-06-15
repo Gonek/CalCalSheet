@@ -5,7 +5,6 @@ class RecipeCalculatorTest extends TestBase {
     this.spr = getSpr(SPR.RECIPE_CALCULATOR);
     this.itemsSpr = getSpr(SPR.ITEMS);
     this.recipesSpr  = getSpr(SPR.RECIPES);
-    this.loadRecipeNameRng = getRng(RNG.LOAD_RECIPE_NAME);
     this.recipeNameRng = getRng(RNG.RECIPE_NAME);
     this.recipeItemsRng = getRng(RNG.RECIPE_ITEMS);
     this.recipeServingRng = getRng(RNG.RECIPE_SERVING);
@@ -15,7 +14,7 @@ class RecipeCalculatorTest extends TestBase {
 
   beforeAll(){
     super.beforeAll();
-    this.utils.addTestIems();
+    this.utils.addTestItems();
   }
 
   afterAll(){
@@ -33,22 +32,22 @@ class RecipeCalculatorTest extends TestBase {
   shouldRecipeCalculatorSheetHaveCorrectFormulaForItems(){
     //GIVEN
     let expected = Array.from({length:25},(v,k)=>[
-      `=MATCH(B${k + 7}, Items!B$4:B, 0)`,
-      `=IFERROR(INDEX(Items!D$4:D, $D${k + 7}, 0))`,
-      `=IFERROR(INDEX(Items!E$4:E, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!G$4:G, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!I$4:I, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!K$4:K, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!M$4:M, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!O$4:O, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!Q$4:Q, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!S$4:S, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!U$4:U, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!W$4:W, $D${k + 7}, 0)*$C${k + 7})`,
-      `=IFERROR(INDEX(Items!Y$4:Y, $D${k + 7}, 0)*$C${k + 7})`
+      `=MATCH(B${k + 4}, Items!B$4:B, 0)`,
+      `=IFERROR(INDEX(Items!D$4:D, $D${k + 4}, 0))`,
+      `=IFERROR(INDEX(Items!E$4:E, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!G$4:G, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!I$4:I, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!K$4:K, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!M$4:M, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!O$4:O, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!Q$4:Q, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!S$4:S, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!U$4:U, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!W$4:W, $D${k + 4}, 0)*$C${k + 4})`,
+      `=IFERROR(INDEX(Items!Y$4:Y, $D${k + 4}, 0)*$C${k + 4})`
     ]);
     //WHEN
-    let result = this.spr.getFormulas('D7:P31');
+    let result = this.spr.getFormulas('D4:P28');
     //THEN
     this.assertEquals(result, expected);
   }
@@ -56,36 +55,36 @@ class RecipeCalculatorTest extends TestBase {
   shouldRecipeCalculatorSheetHaveCorrectFormulaForNutritions(){
     //GIVEN
     let expected100g = [
-      '=ROUND(IFERROR(SUM(G7:G31)/$A$32),1)', 
-      '=ROUND(IFERROR(SUM(H7:H31)/$A$32),1)',
-      '=ROUND(IFERROR(SUM(I7:I31)/$A$32),1)',
-      '=ROUND(IFERROR(SUM(J7:J31)/$A$32),1)',
-      '=ROUND(IFERROR(SUM(K7:K31)/$A$32),1)',
-      '=ROUND(IFERROR(SUM(L7:L31)/$A$32),1)',
-      '=ROUND(IFERROR(SUM(M7:M31)/$A$32),1)',
-      '=ROUND(IFERROR(SUM(N7:N31)/$A$32),1)',
-      '=ROUND(IFERROR(SUM(O7:O31)/$A$32),1)',
-      '=ROUND(IFERROR(SUM(P7:P31)/$A$32),1)'
+      '=ROUND(IFERROR(SUM(G4:G28)/$A$29),1)', 
+      '=ROUND(IFERROR(SUM(H4:H28)/$A$29),1)',
+      '=ROUND(IFERROR(SUM(I4:I28)/$A$29),1)',
+      '=ROUND(IFERROR(SUM(J4:J28)/$A$29),1)',
+      '=ROUND(IFERROR(SUM(K4:K28)/$A$29),1)',
+      '=ROUND(IFERROR(SUM(L4:L28)/$A$29),1)',
+      '=ROUND(IFERROR(SUM(M4:M28)/$A$29),1)',
+      '=ROUND(IFERROR(SUM(N4:N28)/$A$29),1)',
+      '=ROUND(IFERROR(SUM(O4:O28)/$A$29),1)',
+      '=ROUND(IFERROR(SUM(P4:P28)/$A$29),1)'
     ];
     let expectedSave = [
-      '=IF(ISNUMBER(C34),1,100)',
+      '=IF(ISNUMBER(C31),1,100)',
       '',
-      '=IF(ISNUMBER(C34), IF(ISBLANK(C35), "serving", C35), "g")',
-      '=ROUND(A33*100, 2)',
-      '=ROUND($A$33*G32, 2)',
-      '=ROUND($A$33*H32, 2)',
-      '=ROUND($A$33*I32, 2)',
-      '=ROUND($A$33*J32, 2)',
-      '=ROUND($A$33*K32, 2)',
-      '=ROUND($A$33*L32, 2)',
-      '=ROUND($A$33*M32, 2)',
-      '=ROUND($A$33*N32, 2)',
-      '=ROUND($A$33*O32, 2)',
-      '=ROUND($A$33*P32, 2)'
+      '=IF(ISNUMBER(C31), IF(ISBLANK(C32), "serving", C32), "g")',
+      '=ROUND(A30*100, 2)',
+      '=ROUND($A$30*G29, 2)',
+      '=ROUND($A$30*H29, 2)',
+      '=ROUND($A$30*I29, 2)',
+      '=ROUND($A$30*J29, 2)',
+      '=ROUND($A$30*K29, 2)',
+      '=ROUND($A$30*L29, 2)',
+      '=ROUND($A$30*M29, 2)',
+      '=ROUND($A$30*N29, 2)',
+      '=ROUND($A$30*O29, 2)',
+      '=ROUND($A$30*P29, 2)'
     ]
     //WHEN
-    let result100g = this.spr.getFormulas('G32:P32');
-    let resultSave = this.spr.getFormulas('C33:P33');
+    let result100g = this.spr.getFormulas('G29:P29');
+    let resultSave = this.spr.getFormulas('C30:P30');
     //THEN
     this.assertEquals(result100g, expected100g);
     this.assertEquals(resultSave, expectedSave);
@@ -94,21 +93,24 @@ class RecipeCalculatorTest extends TestBase {
   shouldRecipeCalculatorSheetHaveCorrectBackgroundFormulaForCalculation(){
     //GIVEN
     let expectedNutriCalc = [
-      ['=SUM(F7:F31)/100'],
-      ['=IF(ISNUMBER(C34),A32/C34,1)']
+      ['=SUM(F4:F28)/100'],
+      ['=IF(ISNUMBER(C31),A29/C31,1)']
     ];
-    let expectedSelRecipe = '=IFERROR(FILTER(Recipes!$C$4:$D, $B$3=Recipes!$B$4:$B))';
+    let expectedSelRecipe = '=IFERROR(FILTER(Recipes!$C$4:$D, B3=Recipes!$B$4:$B))';
+    let expectedRecipeNames = '=ARRAYFORMULA({B3;UNIQUE(Recipes!B4:B)})';
     //WHEN
-    let resultNutriCals = this.spr.getFormulas('A32:A33');
-    let resultSelRecipe = this.spr.getFormula('R7');
+    let resultNutriCals = this.spr.getFormulas('A29:A30');
+    let resultSelRecipe = this.spr.getFormula('R4');
+    let resultRecipeNames = this.spr.getFormula('T3');
     //THEN
     this.assertEquals(resultNutriCals, expectedNutriCalc);
     this.assertEquals(resultSelRecipe, expectedSelRecipe);
+    this.assertEquals(resultRecipeNames, expectedRecipeNames);
   }
 
-    shouldRecipeCalculatorSheetHaveCorrectFormulaForNoom(){
+  shouldRecipeCalculatorSheetHaveCorrectFormulaForNoom(){
     //GIVEN
-    let expected = '=IFS(RecipeNoomCategory="Solid", IFS(G32= "", "", G32<=100, "Green", G32<=240, "Yellow", G32>240, "Red"), RecipeNoomCategory="Liquid", IFS(G32= "", "", G32<=40, "Green", G32<=50, "Yellow", G32>50, "Red"), RecipeNoomCategory = "Soup", IFS(G32= "", "", G32<=50, "Green", G32<=100, "Yellow", G32>100, "Red"))';
+    let expected = '=IFS(RecipeNoomCategory="Solid", IFS(G29= "", "", G29<=100, "Green", G29<=240, "Yellow", G29>240, "Red"), RecipeNoomCategory="Liquid", IFS(G29= "", "", G29<=40, "Green", G29<=50, "Yellow", G29>50, "Red"), RecipeNoomCategory = "Soup", IFS(G29= "", "", G29<=50, "Green", G29<=100, "Yellow", G29>100, "Red"))';
     //WHEN
     let result = this.recipeNoomColourRng.getFormula();
     //THEN
@@ -121,7 +123,7 @@ class RecipeCalculatorTest extends TestBase {
     let expected = Array.from({length:25},(v,k)=>['g', '100 g', '100 kcal', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100 mg']);
     //WHEN
     this.recipeItemsRng.setValues(items);
-    let result = this.spr.getDisplayValues('E7:P31');
+    let result = this.spr.getDisplayValues('E4:P28');
     //THEN
     this.assertEquals(result, expected);
   }
@@ -132,7 +134,7 @@ class RecipeCalculatorTest extends TestBase {
     let expected = Array.from({length:2},(v,k)=>['g', '100 g', '100 kcal', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100 mg']);
     //WHEN
     this.recipeItemsRng.setValues(items);
-    let result = this.spr.getDisplayValues('E32:P33');
+    let result = this.spr.getDisplayValues('E29:P30');
     //THEN
     this.assertEquals(result, expected);
   }
@@ -141,7 +143,7 @@ class RecipeCalculatorTest extends TestBase {
     //GIVEN
     let expected = ['g', '100 g', '0 kcal', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0 mg'];
     //WHEN
-    let result = this.spr.getDisplayValues('E32:P32');
+    let result = this.spr.getDisplayValues('E29:P29');
     //THEN
     this.assertEquals(result, expected);
   }
@@ -159,7 +161,7 @@ class RecipeCalculatorTest extends TestBase {
 
     // WHEN
     this.recipeItemsRng.setValues(items);
-    let result = this.spr.getValues('D7:D31').flat();
+    let result = this.spr.getValues('D4:D28').flat();
 
     // THEN
     this.assertEquals(result, expected);
@@ -173,7 +175,7 @@ class RecipeCalculatorTest extends TestBase {
     //WHEN
     this.recipeItemsRng.setValue(itemName, 1, 1);
     this.recipeItemsRng.setValue(itemAmount, 1, 2);
-    let result = this.spr.getValues('E7:P7');
+    let result = this.spr.getValues('E4:P4');
     //THEN
     this.assertEquals(result, expected);
   }
@@ -186,7 +188,7 @@ class RecipeCalculatorTest extends TestBase {
     //WHEN
     this.recipeItemsRng.setValue(itemName, 1, 1);
     this.recipeItemsRng.setValue(itemAmount, 1, 2);
-    let result = this.spr.getValues('E7:P7');
+    let result = this.spr.getValues('E4:P4');
     //THEN
     this.assertEquals(result, expected);
   }
@@ -198,8 +200,8 @@ class RecipeCalculatorTest extends TestBase {
     //WHEN
     this.recipeItemsRng.setValuesWithResize(items);
     this.recipeServingRng.clear();
-    let result100g = this.spr.getValues('E32:P32');
-    let resultSave = this.spr.getValues('E33:P33');
+    let result100g = this.spr.getValues('E29:P29');
+    let resultSave = this.spr.getValues('E30:P30');
     //THEN
     this.assertEquals(result100g, expected);
     this.assertEquals(resultSave, expected);
@@ -214,8 +216,8 @@ class RecipeCalculatorTest extends TestBase {
     //WHEN
     this.recipeItemsRng.setValuesWithResize(items);
     this.recipeServingRng.setValuesWithResize(serving);
-    let result100g = this.spr.getValues('E32:P32');
-    let resultSave = this.spr.getValues('E33:P33');
+    let result100g = this.spr.getValues('E29:P29');
+    let resultSave = this.spr.getValues('E30:P30');
     //THEN
     this.assertEquals(result100g, expected100g);
     this.assertEquals(resultSave, expectedSave);
@@ -230,8 +232,8 @@ class RecipeCalculatorTest extends TestBase {
     //WHEN
     this.recipeItemsRng.setValuesWithResize(items);
     this.recipeServingRng.setValuesWithResize(serving);
-    let result100g = this.spr.getValues('E32:P32');
-    let resultSave = this.spr.getValues('E33:P33');
+    let result100g = this.spr.getValues('E29:P29');
+    let resultSave = this.spr.getValues('E30:P30');
     //THEN
     this.assertEquals(result100g, expected100g);
     this.assertEquals(resultSave, expectedSave);
@@ -267,24 +269,27 @@ class RecipeCalculatorTest extends TestBase {
     this.assertEquals(result, 'Red');
   }
 
-  shouldRecipeCalculatorSheetLoadAllSavedRecepiesInTheRecipeSelector(){
+  shouldRecipeCalculatorSheetLoadAllSavedRecepiesInTheRecipeNameField(){
     //GIVEN
     this.utils.addTestRecipes();
     let expected = ['Recipe1', 'Recipe2', 'Recipe3'];
     //WHEN
-    let result = this.loadRecipeNameRng.getValidationCriteriaRangeValues();
+    let result = this.recipeNameRng.getValidationCriteriaRangeValues();
     //THEN
     this.assertEquals(result, expected);
     this.utils.clearRecipes();
   }
 
-  shouldRecipeCalculatorSheetLoadRecipeNameThrowExceptionIfRecipeNotExist(){
-    //GIVEN WHEN THEN
-    this.assertException(() => {
-      this.loadRecipeNameRng.setValue('Invalid');
-    }, 1);
-    //RESET
-    this.loadRecipeNameRng.clear;
+  shouldRecipeCalculatorSheetLoadAllSavedRecepiesAndTheGivenNameInTheRecipeNameField(){
+    //GIVEN
+    this.utils.addTestRecipes();
+    let expected = ['New Recipe', 'Recipe1', 'Recipe2', 'Recipe3'];
+    //WHEN
+    this.recipeNameRng.setValue('New Recipe');
+    let result = this.recipeNameRng.getValidationCriteriaRangeValues();
+    //THEN
+    this.assertEquals(result, expected);
+    this.utils.clearRecipes();
   }
 
   shouldRecipeCalculatorSheetLoadAllItemsOfSelectedRecipeInBackground(){
@@ -318,18 +323,18 @@ class RecipeCalculatorTest extends TestBase {
       ['Green', 2700]
     ];
     //WHEN
-    this.loadRecipeNameRng.setValue('Recipe1');
+    this.recipeNameRng.setValue('Recipe1');
     let result = this.selectedRecipeItemsRng.getValues();
     //THEN
     this.assertEquals(result, expected);
     //RESET
-    this.loadRecipeNameRng.clear();
+    this.recipeNameRng.clear();
     this.utils.clearRecipes()
   }
 
   shouldRecipeCalculatorSheetLeaveSelectedRecipeItemsEmptyIfNoRecipeSelected(){
     //GIVEN WHEN
-    this.loadRecipeNameRng.clear();
+    this.recipeNameRng.clear();
     let result = this.selectedRecipeItemsRng.getValues();
     //THEN
     this.assertArrayEmpty(result);

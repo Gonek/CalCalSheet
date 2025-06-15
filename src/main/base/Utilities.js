@@ -46,7 +46,8 @@ function arraysEqual(a, b) {
   if (a.length !== b.length) return false;
 
   for (var i = 0; i < a.length; ++i) {
-    if(Array.isArray(a[i]) && Array.isArray(b[i])) {
+    if (a[i] === null && b[i] === null){
+    } else if(Array.isArray(a[i]) && Array.isArray(b[i])) {
       if (!arraysEqual(a[i], b[i])) return false;
     } else if(a[i] instanceof Map && b[i] instanceof Map) {
       if(!mapEqual(a[i], b[i])) return false;

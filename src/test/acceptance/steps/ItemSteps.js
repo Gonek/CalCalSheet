@@ -2,12 +2,12 @@ class ItemThenSteps extends Steps{
 
     item_saved_with_name(name){
         this.name = name;
-        this.itemRow = getSpr(SPR.ITEMS).getValues('B4:AA').find(r => r[0] == name);
+        this.itemRow = getSpr(SPR.ITEMS).getValues('B4:AB').find(r => r[0] == name);
         this.test.assertTrue(this.itemRow);
     }
 
     there_is_only_one_item_saved_with_this_name(){
-       let itemRows = getSpr(SPR.ITEMS).getValues('B4:AA').filter(r => r[0] == this.name);
+       let itemRows = getSpr(SPR.ITEMS).getValues('B4:AB').filter(r => r[0] == this.name);
        this.test.assertEquals(itemRows.length, 1);
     }
 
@@ -90,5 +90,13 @@ class ItemThenSteps extends Steps{
 
     have_noom_colour_of(colour){
         this.test.assertEquals(this.itemRow[24], colour);
+    }
+
+    have_auto_delete_at_as(autoDelete){
+        this.test.assertEquals(this.itemRow[26], autoDelete);
+    }
+
+    have_auto_delete_at_empty(){
+        this.test.assertEmpty(this.itemRow[26]);
     }
 }

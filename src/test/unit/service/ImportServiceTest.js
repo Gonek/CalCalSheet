@@ -37,7 +37,7 @@ class ImportServiceTest extends TestBase {
         // GIVEN
         this.givenImportSettings([true, true, true, true, true, true, true], [IMPORT_OPTIONS.CLEAR_CONTENT, IMPORT_OPTIONS.CLEAR_CONTENT, IMPORT_OPTIONS.CLEAR_CONTENT]);
         let itemsData = ['Items'];
-        when(this.fromItemsSpr).getValues('B4:AA').thenReturn(itemsData);
+        when(this.fromItemsSpr).getValues('B4:AB').thenReturn(itemsData);
         let recipeData = ['Recipe'];
         when(this.fromRecipesSpr).getClearValues('B4:D').thenReturn(recipeData);
         let mealData = ['Meal'];
@@ -59,7 +59,7 @@ class ImportServiceTest extends TestBase {
         // WHEN
         this.importService.startImport();
         // THEN
-        this.verifyDataImport(this.toItemsSpr, 'B4:AA', itemsData);
+        this.verifyDataImport(this.toItemsSpr, 'B4:AB', itemsData);
         this.verifyDataImport(this.toRecipesSpr, 'B4:D', recipeData);
         this.verifyDataImport(this.toMealsSpr, 'B4:D', mealData);
         verify(this.toWeightHistoryRng).clearAndSetValues(weightHistoryData).calledOnce();
@@ -76,7 +76,6 @@ class ImportServiceTest extends TestBase {
     shouldStartImportDoNothingIfNoSheetIsSelected(){
         // GIVEN
         this.givenImportSettings([false, false, false, false, false, false, false], ['', '', '']);
-        when(this.fromSupportSpr).getValue('E24').thenReturn('v1.6');
         // WHEN
         this.importService.startImport();
         // THEN 
@@ -98,11 +97,11 @@ class ImportServiceTest extends TestBase {
         // GIVEN
         this.givenImportSettings([true, false, false, false, false, false, false], [IMPORT_OPTIONS.MERGE_CONTENT, '', '']);
         let itemsData = ['Items'];
-        when(this.fromItemsSpr).getValues('B4:AA').thenReturn(itemsData);
+        when(this.fromItemsSpr).getValues('B4:AB').thenReturn(itemsData);
         // WHEN
         this.importService.startImport();  
         // THEN
-        verify(this.toItemsSpr).clear('B4:AA').neverCalled();
+        verify(this.toItemsSpr).clear('B4:AB').neverCalled();
         verify(this.toItemsSpr).putDataAtEnd(itemsData).calledOnce();
         verify(this.toItemsSpr).sort(2).calledOnce();
     }
@@ -144,7 +143,7 @@ class ImportServiceTest extends TestBase {
         }, false);
     }
 
-    shouldStartImportThrowExeptionIfImportVersionOtherThen14or15(){
+    shouldStartImportThrowExeptionIfImportVersionOtherThen14or15or16(){
         // GIVEN
         when(this.fromSupportSpr).getValue('E24').thenReturn('v1.3');
         when(this.importRng).getValue(1,2).thenReturn('SheetId');

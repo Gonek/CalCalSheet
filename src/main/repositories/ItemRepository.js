@@ -28,6 +28,14 @@ class ItemRepository{
     return this.spr.find(name) != null;
   }
 
+  loadByIndex(index){
+      let fieldIndexes = [1,2,3,4,6,8,10,12,14,16,18,20,22];
+      let name = this.spr.getPosValue(index + 3, 2);
+      let fields = this.spr.getAreaValue(index + 3, 2, 1, 27)[0].filter((v, i) => fieldIndexes.includes(i));
+      fields[2] = fields[2] * fields[0];
+      return new Item(name, fields);
+  }
+
   autoDeleteItems(){
     let today = getToday();
     this.spr.getValues('AB4:AB')
@@ -55,7 +63,7 @@ class ItemRepository{
   }
 
   fieldsToRow(item, row){
-    return [item.amount, item.unit, item.weight, 
+    return [item.amount, item.unit, item.weight / item.amount, 
       item.calories,`=IFERROR(F${row}/C${row})`, 
       item.totalFat, `=IFERROR(H${row}/C${row})`, 
       item.saturatedFat, `=IFERROR(J${row}/C${row})`, 

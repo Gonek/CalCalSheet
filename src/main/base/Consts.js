@@ -28,7 +28,6 @@ const BTN = {
   SAVE_MEAL : 'ButtonSaveMeal',
   COPY_MEALS : 'ButtonCopyMeals',
   SAVE_ITEM : 'ButtonSaveItem',
-  LOAD_RECIPE : 'ButtonLoadRecipe',
   SAVE_RECIPE : 'ButtonSaveRecipe',
   COPY_CALORIES : 'ButtonCopyCalories',
   APPLY_SETTINGS : 'ButtonApplySettings',
@@ -38,6 +37,7 @@ const BTN = {
 const CBOX = {
   DAY_NAME: 'DayName',
   NEW_ITEM_NAME: 'NewItemName',
+  RECIPE_NAME: 'RecipeName',
   MEAL_1_START : 'Meal1Start',
   MEAL_2_START : 'Meal2Start',
   MEAL_3_START : 'Meal3Start',
@@ -114,7 +114,6 @@ const RNG = {
   RECIPE_SAVE_AS_RECIPE : 'RecipeSaveAsRecipe',
   RECIPE_ITEMS : 'RecipeItems',
   RECIPE_ITEM_NAMES : 'RecipeItemNames',
-  LOAD_RECIPE_NAME : 'LoadRecipeName',
   SELECTED_RECIPE_ITEMS : 'SelectedRecipeItems',
   RECIPE_AUTO_DELETE : 'RecipeAutoDelete',
   // PROFILE
