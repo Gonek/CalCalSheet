@@ -4,40 +4,8 @@ const TIMES = {
   ONCE : 1,
   TWICE : 2
 }
-var sheetTests = () => [
-    DayItemsTest,
-    DayHeaderTest,
-    DayMealTest,
-    DaySelectorTest,
-    DaysTest,
-    NewItemTest,
-    RecipeCalculatorTest,
-    ProfileTest,
-    HistoryTest,
-    SettingsTest];
-var unitTests = () => [
-    DayRepositoryTest,
-    HistoryRepositoryTest,
-    ItemRepositoryTest,
-    MealRepositoryTest,
-    RecipeRepositoryTest,
-    DayServiceTest,
-    EventServiceTest,
-    ImportServiceTest,
-    NewItemServiceTest,
-    ProfileServiceTest,
-    RecipeCalculatorServiceTest,
-    SettingsServiceTest,
-    TutorialServiceTest];
-var acceptanceTests = () => [
-    DayScenarios,
-    FinishDayScenarios,
-    ImportScenarios,
-    NewItemScenarios,
-    ProfileScenarios,
-    RecipeCalculatorScenarios,
-    SettingsScenarios
-];
+
+
 
 class TestBase{
 
@@ -48,7 +16,7 @@ class TestBase{
   }
 
   initVariables(){
-    this.result = new testResult();
+    this.result = new TestResult();
     this.actualTest = "";
     this.actualSuccess = true;
     this.testClassName = this.constructor.name;
@@ -69,14 +37,16 @@ class TestBase{
   }
 
   runAllTestsCore(){
-    Logger.log(`Start running all test for ${this.testClassName}`);
+    console.info(`Start running all test for ${this.testClassName}`);
+    console.info('');
     try{
       this.beforeAll();
       this.testCases.forEach(test => this.runTest(test));
     } finally {
       this.afterAll();
     }
-    Logger.log(`Test finished for ${this.testClassName}`);
+    console.info(`Test finished for ${this.testClassName}`);
+    console.info('⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯');
     return this.result;
   }
 
@@ -119,14 +89,15 @@ class TestBase{
       try{
         this[test]();
       }catch(e){
+        this.result.errors++;
         this.error(e);
       }
       if(this.actualSuccess){
-        console.info(`Test finished with: SUCCESS`);
+        console.info(`Test finished with: ✔️ SUCCESS`);
       } else {
-        console.warn(`Test finished with: FAILURE`);
+        console.warn(`Test finished with: ❌ FAILURE`);
       }
-      console.log(``);
+      console.log('');
       this.result.inc(this.actualSuccess);
     } finally {
       this.afterEach();
@@ -238,39 +209,43 @@ class TestBase{
   }
 
   succeded(message){
-    if(!this instanceof AcceptanceTestBase){
-      console.info(`OK! ${message}`);
+    if(!(this instanceof AcceptanceTestBase)){
+      console.info(`🟢 ${message}`);
     }
   }
 
   failed(message){
     this.actualSuccess = false;
-    console.warn(`FAIL! ${message}`);
+    console.warn(`🟡 FAIL!: ${message}`);
     this.result.error(this.actualTest, message);
   }
 
   error(message){
     this.actualSuccess = false;
-    console.warn(`ERROR! ${message}`);
+    console.warn(`🔴 ERROR!: ${message}`);
     this.result.error(this.actualTest, message);
   }
 
-
   printResults(result = this.result){
-    console.log(``);
-    console.log(`All test finished!`);
-    console.log(``);
-    console.log(`Test run: ${result.tests} Succeded: ${result.tests - result.fails} Failed: ${result.fails}`);
+    console.info(`🏁 All test finished! 🏁`);
+    console.info(``);
+    console.info(`Test run: ${result.tests} 🎯`);
+    console.info(`  🟢 Succeded: ${result.tests - result.fails - result.fails}`);
+    console.info(`  🟡 Failed: ${result.fails}`);
+    console.info(`  🔴 Errored: ${result.errors}`);
     if (result.messages.length > 0){
-      console.warn(`Test failure messages:`);
+      console.info(``);
+      console.info(`Test failure messages:`);
       result.messages.forEach((message) => console.warn(message));
     }
-    console.log(`Test took : ${result.durration} ms`);
-    console.log(``);
+    console.info(``);
+    let date = new Date(result.durration);
+    console.info(`Test took : ${result.durration} ms ⏱️ ( ${date.getMinutes()} min and ${date.getSeconds()} sec )`);
+    console.info(``);
     if(result.fails>0){
-      console.warn(`TEST RESULT : FAILURE`);
+      console.warn(`TEST RESULT : ❌ FAILURE`);
     } else {
-      console.info(`TEST RESULT : SUCCESS`);
+      console.info(`TEST RESULT : ✔️ SUCCESS`);
     }
   }
 
@@ -292,18 +267,3 @@ class TestBase{
   }
 }
 
-var runAllUnitTests = () =>{
-  new TestBase().runMultipleTestClass(unitTests());
-}
-
-var runAllSheetTests = () =>{
-  new TestBase().runMultipleTestClass(sheetTests());
-}
-
-var runAllAcceptance = () =>{
-  new TestBase().runMultipleTestClass(acceptanceTests());
-}
-
-var runAllTest = () => {
-  new TestBase().runMultipleTestClass(unitTests().concat(sheetTests(), acceptanceTests()));
-}

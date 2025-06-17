@@ -144,7 +144,6 @@ class TestUtils {
       spr.setValue(`A${19+(i*15)}`, new Date(date));
       date.setDate(date.getDate() + 1);
     }
-    spr.setValue(`A${19+(i*15)}`,'.');
   }
 
   clearDays(){

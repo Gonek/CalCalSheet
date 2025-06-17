@@ -1,7 +1,8 @@
-class testResult{
+class TestResult{
   constructor(){
     this.tests = 0;
     this.fails = 0;
+    this.errors = 0;
     this.messages = [];
     this.startTime = 0;
     this.durration = 0;
@@ -27,6 +28,7 @@ class testResult{
   add(testResult){
     this.tests = this.tests + testResult.tests;
     this.fails = this.fails + testResult.fails;
+    this.errors = this.errors + testResult.errors;
     this.messages = this.messages.concat(testResult.messages);
   }
 }
