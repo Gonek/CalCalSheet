@@ -14,7 +14,7 @@ class SettingsTest extends TestBase {
     //WHEN
     let resultDefaultCalorieOutputs = this.generalRng.getValidationCriteriaValues(3);
     //THEN
-    this.assertEquals(resultDefaultCalorieOutputs, expectedDefaultCalorieOutputs);
+    assertEquals(resultDefaultCalorieOutputs, expectedDefaultCalorieOutputs);
   }
 
   shouldSettingsSheetImportDropBoxesAcceptValidValues(){
@@ -25,9 +25,9 @@ class SettingsTest extends TestBase {
     let result2 = this.importRng.getValidationCriteriaValues(3, 2);
     let result3 = this.importRng.getValidationCriteriaValues(4, 2);
     // THEN
-    this.assertEquals(result1, expected);
-    this.assertEquals(result2, expected);
-    this.assertEquals(result3, expected);
+    assertEquals(result1, expected);
+    assertEquals(result2, expected);
+    assertEquals(result3, expected);
   }
 
   shouldSettingsSheetMealSizeAcceptValuesBetween5And15(){
@@ -41,12 +41,12 @@ class SettingsTest extends TestBase {
     let result5 = this.mealsRng.getValidationCriteriaValues(5, 2);
     let result6 = this.mealsRng.getValidationCriteriaValues(6, 2);
     // THEN
-    this.assertEquals(result1, expected);
-    this.assertEquals(result2, expected);
-    this.assertEquals(result3, expected);
-    this.assertEquals(result4, expected);
-    this.assertEquals(result5, expected);
-    this.assertEquals(result6, expected);
+    assertEquals(result1, expected);
+    assertEquals(result2, expected);
+    assertEquals(result3, expected);
+    assertEquals(result4, expected);
+    assertEquals(result5, expected);
+    assertEquals(result6, expected);
   }
 
 /** 
@@ -54,7 +54,7 @@ class SettingsTest extends TestBase {
  * 
   shouldSettingsSheetMealSizeShouldThrowExpectionInValueInvalid(){
     //GIVEN WHEN THEN
-    this.assertException(() => {
+    assertException(() => {
       this.mealsRng.setValue(1, 1, 2);
     }, true);
     //RESET

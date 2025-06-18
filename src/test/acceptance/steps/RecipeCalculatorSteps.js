@@ -60,12 +60,12 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
     recipe_saved_with_name(name){
         this.name = name;
         let recipeFind = getSpr(SPR.RECIPES).getValues('B4:D').find(r => r[0] == name);
-        this.test.assertTrue(recipeFind);
+        assertTrue(recipeFind);
     }
 
     no_recipe_saved_with_name(name){
         let recipeFind = getSpr(SPR.RECIPES).getValues('B4:D').find(r => r[0] == name);
-        this.test.assertFalse(recipeFind);
+        assertFalse(recipeFind);
     }
 
     recipe_have_basic_items(){
@@ -81,23 +81,23 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
 
     recipe_have_items(items){
         let filtered = getSpr(SPR.RECIPES).getValues('B4:D').filter(i => i[0] === this.name);
-        this.test.assertEqualsArray(filtered, items.map(i => [this.name, i[0], i[1]]));
+        assertEqualsArray(filtered, items.map(i => [this.name, i[0], i[1]]));
     }
 
     form_have_recipe_name_loaded(name){
         this.name = name;
-        this.test.assertEquals(getRng(RNG.RECIPE_NAME).getValue(), name);
+        assertEquals(getRng(RNG.RECIPE_NAME).getValue(), name);
     }
 
     form_have_recipe_items_loaded(items){
-        this.test.assertEquals(getRng(RNG.RECIPE_ITEMS).getValues(), items);
+        assertEquals(getRng(RNG.RECIPE_ITEMS).getValues(), items);
     }
 
     form_is_clear(){
-        this.test.assertEmpty(getRng(RNG.RECIPE_NAME).getValue());
-        this.test.assertArrayEmpty(getRng(RNG.RECIPE_ITEMS).getValues());
-        this.test.assertArrayEmpty(getRng(RNG.RECIPE_SERVING).getValues());
-        this.test.assertEquals(getRng(RNG.RECIPE_NOOM_CATEGORY).getValue(), 'Solid');
-        this.test.assertEquals(getRng(RNG.RECIPE_SAVE_AS_RECIPE).getValue(), true);
+        assertEmpty(getRng(RNG.RECIPE_NAME).getValue());
+        assertArrayEmpty(getRng(RNG.RECIPE_ITEMS).getValues());
+        assertArrayEmpty(getRng(RNG.RECIPE_SERVING).getValues());
+        assertEquals(getRng(RNG.RECIPE_NOOM_CATEGORY).getValue(), 'Solid');
+        assertEquals(getRng(RNG.RECIPE_SAVE_AS_RECIPE).getValue(), true);
     }
 }

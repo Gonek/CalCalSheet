@@ -36,9 +36,9 @@ class NewItemTest extends TestBase {
     let resultNoomFormula = this.spr.getFormula('F22');
     let resultItemNamesFormula = this.spr.getFormula('I3');
     //THEN
-    this.assertEquals(resultFormula, expectedFormula);
-    this.assertEquals(resultNoomFormula, expectedNoomFormula);
-    this.assertEquals(resultItemNamesFormula, expectedItemNamesFormula);
+    assertEquals(resultFormula, expectedFormula);
+    assertEquals(resultNoomFormula, expectedNoomFormula);
+    assertEquals(resultItemNamesFormula, expectedItemNamesFormula);
   }
 
   shouldNewItemSheetHaveTheCorrectFormulaVisbleCalculatons(){
@@ -63,8 +63,8 @@ class NewItemTest extends TestBase {
     let resultSaveFormula = this.spr.getFormulas('D4:D16');
     let resultCalorieFormula = this.spr.getFormula('C23');
     //THEN
-    this.assertEquals(resultSaveFormula, expectedSaveFormula);
-    this.assertEquals(resultCalorieFormula, expectedCalorieFormula);
+    assertEquals(resultSaveFormula, expectedSaveFormula);
+    assertEquals(resultCalorieFormula, expectedCalorieFormula);
   }
 
   shouldNewItemSheetCalculateMacroCaloriesCalulations(){
@@ -78,7 +78,7 @@ class NewItemTest extends TestBase {
 
     let result = this.spr.getValue('C23');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetHaveRightFormat(){
@@ -90,8 +90,8 @@ class NewItemTest extends TestBase {
     let inputFormat = this.spr.getDisplayValues('C4:C16');
     let saveFormat = this.spr.getDisplayValues('D4:D16');
     //THEN
-    this.assertEquals(inputFormat, expected);
-    this.assertEquals(saveFormat, expected);
+    assertEquals(inputFormat, expected);
+    assertEquals(saveFormat, expected);
   }
 
   shouldNewItemSheetCalculateNutritionsCorrectlyFor100gTo100g(){
@@ -102,7 +102,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C16', item);
     let result = this.spr.getValues('D4:D16'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateNutritionsCorrectlyForServingToServing(){
@@ -113,7 +113,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C16', item);
     let result = this.spr.getValues('D4:D16'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateNutritionsCorrectlyFor100gToServing(){
@@ -124,7 +124,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C19', item);
     let result = this.spr.getValues('D4:D16'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateNutritionsCorrectlyForServingTo100g(){
@@ -135,7 +135,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C16', item);
     let result = this.spr.getValues('D4:D16'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateNutritionsCorrectlyForAdditinalWater(){
@@ -146,7 +146,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C20', item);
     let result = this.spr.getValues('D4:D16'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateGreenSolidNoomColourCorrectly(){
@@ -158,7 +158,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C7', item);
     let result = this.spr.getValue('C22'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateYellowSolidNoomColourCorrectly(){
@@ -170,7 +170,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C7', item);
     let result = this.spr.getValue('C22'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateRedSolidNoomColourCorrectly(){
@@ -182,7 +182,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C7', item);
     let result = this.spr.getValue('C22'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateGreenLiquidNoomColourCorrectly(){
@@ -194,7 +194,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C7', item);
     let result = this.spr.getValue('C22'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateYellowLiquidNoomColourCorrectly(){
@@ -206,7 +206,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C7', item);
     let result = this.spr.getValue('C22'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateRedLiquidNoomColourCorrectly(){
@@ -218,7 +218,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C7', item);
     let result = this.spr.getValue('C22'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateGreenSoupNoomColourCorrectly(){
@@ -230,7 +230,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C7', item);
     let result = this.spr.getValue('C22'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateYellowSoupNoomColourCorrectly(){
@@ -242,7 +242,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C7', item);
     let result = this.spr.getValue('C22'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetCalculateRedSoupNoomColourCorrectly(){
@@ -254,7 +254,7 @@ class NewItemTest extends TestBase {
     this.spr.setValues('C3:C7', item);
     let result = this.spr.getValue('C22'); 
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldNewItemSheetLoadAllItemsInTheNameField(){
@@ -264,7 +264,7 @@ class NewItemTest extends TestBase {
     //WHEN
     let result = this.spr.getRng('C3').getValidationCriteriaRangeValues();
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
     this.utils.clearRecipes();
   }
 
@@ -277,7 +277,7 @@ class NewItemTest extends TestBase {
     nameRng.setValue('New Item');
     let result = nameRng.getValidationCriteriaRangeValues();
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
     this.utils.clearRecipes();
   }
 }

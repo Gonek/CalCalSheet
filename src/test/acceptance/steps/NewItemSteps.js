@@ -91,30 +91,30 @@ class NewItemThenSteps extends ItemThenSteps{
 
     item_loaded_to_form_as(expected){
         let itemsForm = getRng(RNG.NEW_ITEM_FIELDS).getValues().flat();
-        this.test.assertEqualsArray(itemsForm, [ ... expected, 'Never', '', '', '']);
+        assertEqualsArray(itemsForm, [ ... expected, 'Never', '', '', '']);
     }
 
     form_is_clear(){
         let itemsForm = getRng(RNG.NEW_ITEM_FIELDS).getValues().flat();
-        this.test.assertEmpty(itemsForm[0]);
-        this.test.assertEmpty(itemsForm[1]);
-        this.test.assertEmpty(itemsForm[2]);
-        this.test.assertEmpty(itemsForm[3]);
-        this.test.assertEmpty(itemsForm[4]);
-        this.test.assertEmpty(itemsForm[5]);
-        this.test.assertEmpty(itemsForm[6]);
-        this.test.assertEmpty(itemsForm[7]);
-        this.test.assertEmpty(itemsForm[8]);
-        this.test.assertEmpty(itemsForm[9]);
-        this.test.assertEmpty(itemsForm[10]);
-        this.test.assertEmpty(itemsForm[11]);
-        this.test.assertEmpty(itemsForm[12]);
-        this.test.assertEmpty(itemsForm[13]);
-        this.test.assertEmpty(itemsForm[15]);
-        this.test.assertEmpty(itemsForm[16]);
-        this.test.assertEmpty(itemsForm[17]);
-        this.test.assertEquals(itemsForm[14], "Never");
-        this.test.assertEquals(getRng(RNG.NEW_ITEM_NOOM_CATEGORY).getValue(), "Solid");
-        this.test.assertEquals(getRng(RNG.NEW_ITEM_NOOM_COLOUR).getFormula(), "=F22");
+        assertEmpty(itemsForm[0]);
+        assertEmpty(itemsForm[1]);
+        assertEmpty(itemsForm[2]);
+        assertEmpty(itemsForm[3]);
+        assertEmpty(itemsForm[4]);
+        assertEmpty(itemsForm[5]);
+        assertEmpty(itemsForm[6]);
+        assertEmpty(itemsForm[7]);
+        assertEmpty(itemsForm[8]);
+        assertEmpty(itemsForm[9]);
+        assertEmpty(itemsForm[10]);
+        assertEmpty(itemsForm[11]);
+        assertEmpty(itemsForm[12]);
+        assertEmpty(itemsForm[13]);
+        assertEmpty(itemsForm[15]);
+        assertEmpty(itemsForm[16]);
+        assertEmpty(itemsForm[17]);
+        assertEquals(itemsForm[14], "Never");
+        assertEquals(getRng(RNG.NEW_ITEM_NOOM_CATEGORY).getValue(), "Solid");
+        assertEquals(getRng(RNG.NEW_ITEM_NOOM_COLOUR).getFormula(), "=F22");
     }
 }

@@ -41,28 +41,28 @@ class BaseDayThenSteps extends Steps{
 
     items_of_day_loaded(expected){
         let result = getRng(RNG.DAY_ITEMS).getValues();
-        this.test.assertEqualsArray(result, expected);
+        assertEqualsArray(result, expected);
     }
 
     output_calories_loaded(expected){
        let result = getRng(RNG.CALORIE_OUTPUT).getValue();
-       this.test.assertEquals(result, expected);
+       assertEquals(result, expected);
     }
 
     profile_loaded(expected){
        let result = getRng(RNG.SELECTED_PROFILE).getValue();
-       this.test.assertEquals(result, expected);
+       assertEquals(result, expected);
     }
 
     previous_day_saved(to){
         this.previousDayItems = getSpr(SPR.DAYS).getAreaValue(4 + (to * 15), 2, 15, 12);
         this.previousDayData = getSpr(SPR.DAYS).getAreaValue(4 + (to * 15), 14, 15, 1);
-        this.test.assertTrue(this.previousDayItems);
-        this.test.assertTrue(this.previousDayData);
+        assertTrue(this.previousDayItems);
+        assertTrue(this.previousDayData);
     }
 
     saved_with_test_items(){
-        this.test.assertEqualsArray(this.previousDayItems,
+        assertEqualsArray(this.previousDayItems,
             [['1 First', 50,     '2 Second', 85,      '3 Third', 100,   '1 First', 20,  '', '',     'ZZ Last', 225], 
              ['All 100', 100,    'All 1', 25,         'Yellow', 110,    'Yellow', 1000, '', '',     'Max cal', 10],  
              ['All Green', 1000, 'Test 1 serving', 2, 'Zero cal', 2500, '', '',         '', '',     'Red', 55],
@@ -81,43 +81,43 @@ class BaseDayThenSteps extends Steps{
     }
 
     saved_with_calorie_output(expected){
-        this.test.assertEquals(this.previousDayData[0], expected);
+        assertEquals(this.previousDayData[0], expected);
     }
 
     saved_with_profile(expected){
-        this.test.assertEquals(this.previousDayData[1], expected);
+        assertEquals(this.previousDayData[1], expected);
     }
 
     history_saved_for_prevous_day(date){
         this.historyRow = getSpr(SPR.HISTORY).getValues('B10:S').find(r => r[0].getTime() == date.getTime());
-        this.test.assertTrue(this.historyRow);
+        assertTrue(this.historyRow);
     }
 
     history_have_calories_intake_as(expected){
-        this.test.assertEquals(this.historyRow[1], expected);
+        assertEquals(this.historyRow[1], expected);
     }
 
     history_have_calories_burned_as(expected){
-        this.test.assertEquals(this.historyRow[2], expected);
+        assertEquals(this.historyRow[2], expected);
     }
 
     history_have_calories_difference_as(expected){
-        this.test.assertEquals(this.historyRow[3], expected);
+        assertEquals(this.historyRow[3], expected);
     }
 
     history_have_macros_as(expected){
-        this.test.assertEqualsArray(this.historyRow.slice(4, 13), expected);
+        assertEqualsArray(this.historyRow.slice(4, 13), expected);
     }
 
     history_have_calories_check_as(expected){
-        this.test.assertEquals(this.historyRow[14], expected);
+        assertEquals(this.historyRow[14], expected);
     }
 
     history_have_macro_check_as(expected){
-        this.test.assertEquals(this.historyRow[15], expected);
+        assertEquals(this.historyRow[15], expected);
     }
 
     history_have_calorie_density_check_as(expected){
-        this.test.assertEquals(this.historyRow[16], expected);
+        assertEquals(this.historyRow[16], expected);
     }
 }

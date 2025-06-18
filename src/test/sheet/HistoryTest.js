@@ -40,10 +40,10 @@ class HistoryTest extends TestBase {
     let resultMax = this.spr.getFormulas('C6:O6');
     let resultMin = this.spr.getFormulas('C7:O7');
     //THEN
-    this.assertEquals(resultAverage, expectedAverage);
-    this.assertEquals(resultSum, expectedSum);
-    this.assertEquals(resultMax, expectedMax);
-    this.assertEquals(resultMin, expectedMin);
+    assertEquals(resultAverage, expectedAverage);
+    assertEquals(resultSum, expectedSum);
+    assertEquals(resultMax, expectedMax);
+    assertEquals(resultMin, expectedMin);
   }
 
   shouldHistorySheetBackgroundCalculationsHaveCorrectFormula(){
@@ -52,7 +52,7 @@ class HistoryTest extends TestBase {
     //WHEN
     let result = this.spr.getFormula('A3');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldHistorySheetStatisticsHaveCorrectFormat(){
@@ -64,10 +64,10 @@ class HistoryTest extends TestBase {
     let resultMax = this.spr.getDisplayValues('C6:O6');
     let resultMin = this.spr.getDisplayValues('C7:O7');
     //THEN
-    this.assertEquals(resultAverage, expected);
-    this.assertEquals(resultSum, expected.slice(0, 12));
-    this.assertEquals(resultMax, expected);
-    this.assertEquals(resultMin, expected);
+    assertEquals(resultAverage, expected);
+    assertEquals(resultSum, expected.slice(0, 12));
+    assertEquals(resultMax, expected);
+    assertEquals(resultMin, expected);
   }
 
   shouldHistorySheetDaysHaveCorrectFormat(){
@@ -78,7 +78,7 @@ class HistoryTest extends TestBase {
     this.spr.putDataAtEnd(days);
     let result = this.spr.getDisplayValues('B10:R10');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldHistorySheetCalculateCorrectSummaryInCaseOfLast7DaysSeleceted() {
@@ -94,7 +94,7 @@ class HistoryTest extends TestBase {
     this.intervalRng.setValue('Last 7 days');
     let result = this.spr.getValues('C4:O7');
     //THEN
-    this.assertEquals(result, expectedSummary);
+    assertEquals(result, expectedSummary);
   }
 
   shouldHistorySheetCalculateCorrectSummaryInCaseOfLast30DaysSeleceted() {
@@ -110,7 +110,7 @@ class HistoryTest extends TestBase {
     this.intervalRng.setValue('Last 30 days');
     let result = this.spr.getValues('C4:O7');
     //THEN
-    this.assertEquals(result, expectedSummary);
+    assertEquals(result, expectedSummary);
   }
 
   shouldHistorySheetCalculateCorrectSummaryInCaseOfLast90DaysSeleceted() {
@@ -126,7 +126,7 @@ class HistoryTest extends TestBase {
     this.intervalRng.setValue('Last 90 days');
     let result = this.spr.getValues('C4:O7');
     //THEN
-    this.assertEquals(result, expectedSummary);
+    assertEquals(result, expectedSummary);
   }
 
   shouldHistorySheetCalculateCorrectSummaryInCaseOfOverallSeleceted() {
@@ -142,12 +142,12 @@ class HistoryTest extends TestBase {
     this.intervalRng.setValue('Overall');
     let result = this.spr.getValues('C4:O7');
     //THEN
-    this.assertEquals(result, expectedSummary);
+    assertEquals(result, expectedSummary);
   }
 
   shouldThrowExceptionIfInvalidTimePeriodSeleceted(){
     // GIVEN WHEN THEN
-    this.assertException(() => {
+    assertException(() => {
       this.intervalRng.setValue('Non existing period');
     }, true);
     // RESET

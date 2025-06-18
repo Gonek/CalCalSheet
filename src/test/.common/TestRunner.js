@@ -1,6 +1,24 @@
 
 var runAllUnitTests = () =>{
-  new TestBase().runMultipleTestClass([
+  testSheet = new TestSheet();
+  new TestBase().runMultipleTestClass(unitTests());
+}
+
+var runAllSheetTests = () =>{
+  testSheet = new TestSheet();
+  new TestBase().runMultipleTestClass(sheetTests());
+}
+
+var runAllAcceptance = () =>{
+  new TestBase().runMultipleTestClass(acceptanceTests());
+}
+
+var runAllTest = () => {
+  testSheet = new TestSheet();
+  new TestBase().runAllTestClass(unitTests(), sheetTests(), acceptanceTests());
+}
+
+var unitTests = () => [
     DayRepositoryTest,
     HistoryRepositoryTest,
     ItemRepositoryTest,
@@ -13,11 +31,9 @@ var runAllUnitTests = () =>{
     ProfileServiceTest,
     RecipeCalculatorServiceTest,
     SettingsServiceTest,
-    TutorialServiceTest]);
-}
+    TutorialServiceTest];
 
-var runAllSheetTests = () =>{
-  new TestBase().runMultipleTestClass([
+var sheetTests = () => [
     DayItemsTest,
     DayHeaderTest,
     DayMealTest,
@@ -27,11 +43,10 @@ var runAllSheetTests = () =>{
     RecipeCalculatorTest,
     ProfileTest,
     HistoryTest,
-    SettingsTest]);
-}
+    SettingsTest
+]
 
-var runAllAcceptance = () =>{
-  new TestBase().runMultipleTestClass([
+var acceptanceTests = () => [
     DayScenarios,
     OpenSheetScenarios,
     ImportScenarios,
@@ -39,9 +54,4 @@ var runAllAcceptance = () =>{
     ProfileScenarios,
     RecipeCalculatorScenarios,
     SettingsScenarios
-]);
-}
-
-var runAllTest = () => {
-  //new TestBase().runMultipleTestClass(unitTests().concat(sheetTests(), acceptanceTests()));
-}
+]

@@ -65,10 +65,10 @@ class DayHeaderTest extends TestBaseDay {
     let diffResult = this.daySpr.getFormulas('H12:Q12');
 
     // THEN
-    this.assertEquals(mealResult, mealExpected);
-    this.assertEquals(sumExpected, sumResult);
-    this.assertEquals(rangeExpected, rangeResult);
-    this.assertEquals(diffExpected, diffResult);
+    assertEquals(mealResult, mealExpected);
+    assertEquals(sumExpected, sumResult);
+    assertEquals(rangeExpected, rangeResult);
+    assertEquals(diffExpected, diffResult);
   }
 
   shouldDaySheetHaveTheCorrectFormulaForProfileBackgroundCalculations(){
@@ -95,8 +95,8 @@ class DayHeaderTest extends TestBaseDay {
     let resultProfileBackground = this.daySpr.getFormulas('X1:AA11');
     let resultNoomBackground = this.daySpr.getFormulas('X12:Y14');
     // THEN
-    this.assertEquals(resultProfileBackground, expectedProfileBackground);
-    this.assertEquals(resultNoomBackground, expectedNoomBackground);
+    assertEquals(resultProfileBackground, expectedProfileBackground);
+    assertEquals(resultNoomBackground, expectedNoomBackground);
   }
 
   shouldDaySheetHaveTheCorrectFormulaForNoomSummary(){
@@ -115,7 +115,7 @@ class DayHeaderTest extends TestBaseDay {
     // WHEN
     let resultNoom = this.daySpr.getFormulas(`T4:T12`);
     // THEN
-    this.assertEquals(resultNoom, expectedNoom);
+    assertEquals(resultNoom, expectedNoom);
   }
 
   shouldDaySheetHaveTheCorrectFormulaForLeftSideSummary(){
@@ -133,9 +133,9 @@ class DayHeaderTest extends TestBaseDay {
     let resultChecklist = this.daySpr.getFormulas('D7:D9');
     let resultCalDensity = this.daySpr.getFormulas('B12:D12');
     // THEN
-    this.assertEquals(resultOutput, expectedOutput);
-    this.assertEquals(resultChecklist, expectedChecklist);
-    this.assertEquals(resultCalDensity, expectedCalDensity);
+    assertEquals(resultOutput, expectedOutput);
+    assertEquals(resultChecklist, expectedChecklist);
+    assertEquals(resultCalDensity, expectedCalDensity);
   }
 
   shouldDaySheetUseRightFormatForSummaries(){
@@ -144,7 +144,7 @@ class DayHeaderTest extends TestBaseDay {
     // WHEN
     let result = this.daySpr.getDisplayValues('H4:Q10');
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetCalculateSummariesCorretly(){
@@ -163,8 +163,8 @@ class DayHeaderTest extends TestBaseDay {
     let resultMeals = this.daySpr.getValues('H4:Q9');
     let resultSummary = this.daySpr.getValues('H10:Q10');
     // THEN
-    this.assertEquals(resultMeals, expectedMeals);
-    this.assertEquals(resultSummary, expectedSummary);
+    assertEquals(resultMeals, expectedMeals);
+    assertEquals(resultSummary, expectedSummary);
   }
 
   shouldDaySheetCalculateCorrectRangeForMarcoProfileWhenUsePercentage(){
@@ -188,8 +188,8 @@ class DayHeaderTest extends TestBaseDay {
     let resultBackground = this.daySpr.getValues('X1:Y11');
     let resultRange = this.daySpr.getDisplayValues('H11:Q11');
     // THEN
-    this.assertEquals(resultBackground, expectedBackgroud);
-    this.assertEquals(resultRange, expectedRange);
+    assertEquals(resultBackground, expectedBackgroud);
+    assertEquals(resultRange, expectedRange);
   }
 
   shouldDaySheetCalculateCorrectRangeForMarcoProfileWhenOnlyUseGrams(){
@@ -213,8 +213,8 @@ class DayHeaderTest extends TestBaseDay {
     let resultBackground = this.daySpr.getValues('X1:Y11');
     let resultRange = this.daySpr.getDisplayValues('H11:Q11');
     // THEN
-    this.assertEquals(resultBackground, expectedBackgroud);
-    this.assertEquals(resultRange, expectedRange);
+    assertEquals(resultBackground, expectedBackgroud);
+    assertEquals(resultRange, expectedRange);
     // RESET 
     this.generalSettingsRng.setValue("TRUE", 7);
   }
@@ -225,7 +225,7 @@ class DayHeaderTest extends TestBaseDay {
     // WHEN
     let result = this.selectedProfileRng.getValidationCriteriaRangeValues();
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetCalulateRangeForMultipleProfiles(){
@@ -236,7 +236,7 @@ class DayHeaderTest extends TestBaseDay {
       this.selectedProfileRng.setValue(`Test ${i}`);
       let result = this.daySpr.getDisplayValue('H11');
       // THEN 
-      this.assertEquals(result, expectedCalories);
+      assertEquals(result, expectedCalories);
     }
   }
 
@@ -249,7 +249,7 @@ class DayHeaderTest extends TestBaseDay {
     this.selectedProfileRng.setValue('Test 1');
     let resultDiff = this.daySpr.getValues('H12:Q12'); 
     // THEN
-    this.assertEquals(resultDiff, expectedDiff);
+    assertEquals(resultDiff, expectedDiff);
   }
 
   shouldDaySheetCalculateCorrectCalorieDensity(){
@@ -260,7 +260,7 @@ class DayHeaderTest extends TestBaseDay {
     this.addItemsDaySheet(meal);
     let resultDensity = this.calDensityRng.getValue();
     // THEN
-    this.assertEquals(resultDensity, expectedDensity);
+    assertEquals(resultDensity, expectedDensity);
   }
 
   shouldDaySheetCalculateRightNoomSummary(){
@@ -275,9 +275,9 @@ class DayHeaderTest extends TestBaseDay {
     let resultYellow = this.daySpr.getValue('T7');
     let resultRed = this.daySpr.getValue('T10');
     // THEN
-    this.assertEquals(resultGreen, expectedGreen);
-    this.assertEquals(resultYellow, expectedYellow);
-    this.assertEquals(resultRed, expectedRed);
+    assertEquals(resultGreen, expectedGreen);
+    assertEquals(resultYellow, expectedYellow);
+    assertEquals(resultRed, expectedRed);
   }
 
   shouldDaySheetHaveAllGreenChecklistInAllTheValuesAreInRange(){
@@ -291,7 +291,7 @@ class DayHeaderTest extends TestBaseDay {
     SpreadsheetApp.flush();
     let resultChecklist = this.checklist.getValues();
     // THEN
-    this.assertEquals(resultChecklist, expectedChecklist);
+    assertEquals(resultChecklist, expectedChecklist);
   }
 
   shouldDaySheetCalculateCalorieBurntDifferenceCorrectly(){
@@ -304,12 +304,12 @@ class DayHeaderTest extends TestBaseDay {
     this.calOutputRng.setValue(calOutput);
     let resultDifference = this.daySpr.getValue('D5');
     // THEN
-    this.assertEquals(resultDifference, expectedDifference);
+    assertEquals(resultDifference, expectedDifference);
   }
 
   shouldThrowExceptionIfInvalidProfileSeleceted(){
     // GIVEN WHEN THEN
-    this.assertException(() => {
+    assertException(() => {
       this.selectedProfileRng.setValue(`Non existing profile`);
     }, true);
   }

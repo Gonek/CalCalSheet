@@ -31,13 +31,13 @@ class DaysTest extends TestBase {
     let meal6Formula = this.daySpr.getFormula('X90');
     let additinalDataFormula = this.daySpr.getFormula('Z15');
     // THEN
-    this.assertEquals(meal1Formula, expectedMeal1);
-    this.assertEquals(meal2Formula, expectedMeal2);
-    this.assertEquals(meal3Formula, expectedMeal3);
-    this.assertEquals(meal4Formula, expectedMeal4);
-    this.assertEquals(meal5Formula, expectedMeal5);
-    this.assertEquals(meal6Formula, expectedMeal6);
-    this.assertEquals(additinalDataFormula, expectedAdditinalData);
+    assertEquals(meal1Formula, expectedMeal1);
+    assertEquals(meal2Formula, expectedMeal2);
+    assertEquals(meal3Formula, expectedMeal3);
+    assertEquals(meal4Formula, expectedMeal4);
+    assertEquals(meal5Formula, expectedMeal5);
+    assertEquals(meal6Formula, expectedMeal6);
+    assertEquals(additinalDataFormula, expectedAdditinalData);
   }
 
   shouldDaysBackgroudFormulasBeCorrect(){
@@ -75,21 +75,21 @@ class DaysTest extends TestBase {
     let minMaxCalForProfile = this.daysSpr.getFormulas('Q15:Q16');
     let days = this.daysSpr.getFormulas('R2');
     // THEN
-    this.assertEquals(numberOfDays, expectedNumberOfDays);
-    this.assertEquals(firstEmptyDayIndex, expectedFirstEmptyDayIndex);
-    this.assertEquals(today, expectedToday);
-    this.assertEquals(daysFrom, expectedDaysFrom);
-    this.assertEquals(daysUntil, expectedDaysUntil);
-    this.assertEquals(deleteDaysUntil, expectedDeleteDaysUntil);
-    this.assertEquals(createDaysFrom, expectedCreateDaysFrom);
-    this.assertEquals(createDays, expectedCreateDays);
-    this.assertEquals(deleteDaysFrom, expectedDeleteDaysFrom);
-    this.assertEquals(defaultCalorieOutput, expectedDefaultCalorieOutput);
-    this.assertEquals(lastProfileIndex, expectedLastProfileIndex);
-    this.assertEquals(nextProfileIndex, expectedNextProfileIndex);
-    this.assertEquals(nextProfile, expectedNextProfile);
-    this.assertEquals(minMaxCalForProfile, expectedMinMaxCalForProfile);
-    this.assertEquals(days, expectedDays);
+    assertEquals(numberOfDays, expectedNumberOfDays);
+    assertEquals(firstEmptyDayIndex, expectedFirstEmptyDayIndex);
+    assertEquals(today, expectedToday);
+    assertEquals(daysFrom, expectedDaysFrom);
+    assertEquals(daysUntil, expectedDaysUntil);
+    assertEquals(deleteDaysUntil, expectedDeleteDaysUntil);
+    assertEquals(createDaysFrom, expectedCreateDaysFrom);
+    assertEquals(createDays, expectedCreateDays);
+    assertEquals(deleteDaysFrom, expectedDeleteDaysFrom);
+    assertEquals(defaultCalorieOutput, expectedDefaultCalorieOutput);
+    assertEquals(lastProfileIndex, expectedLastProfileIndex);
+    assertEquals(nextProfileIndex, expectedNextProfileIndex);
+    assertEquals(nextProfile, expectedNextProfile);
+    assertEquals(minMaxCalForProfile, expectedMinMaxCalForProfile);
+    assertEquals(days, expectedDays);
   }
 }
 

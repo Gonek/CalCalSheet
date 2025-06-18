@@ -31,12 +31,12 @@ class DayMealTest extends TestBaseDay {
     let result5 = this.daySpr.getValidationCriteriaRangeValues('C75');
     let result6 = this.daySpr.getValidationCriteriaRangeValues('C90');
     //THEN
-    this.assertEquals(result1, expected);
-    this.assertEquals(result2, expected);
-    this.assertEquals(result3, expected);
-    this.assertEquals(result4, expected);
-    this.assertEquals(result5, expected);
-    this.assertEquals(result6, expected);
+    assertEquals(result1, expected);
+    assertEquals(result2, expected);
+    assertEquals(result3, expected);
+    assertEquals(result4, expected);
+    assertEquals(result5, expected);
+    assertEquals(result6, expected);
   }
 
   shouldDaySheetLoadMealNameOfSelectedMealInBackground(){
@@ -46,7 +46,7 @@ class DayMealTest extends TestBaseDay {
     this.meal1StartRng.setValue(`${MEAL_ICON} Meal1`);
     let result = this.selectedMealNameRng.getValue();
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetLoadAllItemsOfSelectedMealInBackground(){
@@ -72,7 +72,7 @@ class DayMealTest extends TestBaseDay {
     this.meal1StartRng.setValue(`${MEAL_ICON} Meal1`);
     let result = this.selectedMealItemsRng.getValues();
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetMealBackgroundItemsStayEmptyIfNoMealSelectedInBackground(){
@@ -80,7 +80,7 @@ class DayMealTest extends TestBaseDay {
     this.meal1StartRng.setValue(`Green`);
     let result = this.selectedMealItemsRng.getValues();
     //THEN
-    this.assertArrayEmpty(result);
+    assertArrayEmpty(result);
   }
 }
 

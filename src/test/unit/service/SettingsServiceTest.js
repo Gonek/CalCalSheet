@@ -1,19 +1,19 @@
 class SettingsServiceTest extends TestBase {
     constructor(){
         super();
-        this.daySpr = mockSpr(SPR.DAY, this);
-        this.daysSpr = mockSpr(SPR.DAYS, this);
-        this.newItemSpr = mockSpr(SPR.NEW_ITEM, this);
-        this.recipeCalculatorSpr = mockSpr(SPR.RECIPE_CALCULATOR, this);
-        this.itemsSpr = mockSpr(SPR.ITEMS, this);
-        this.profileSpr = mockSpr(SPR.PROFILE, this);
-        this.historySpr = mockSpr(SPR.HISTORY, this);
-        this.nutritionFieldsRng = mockRng(RNG.NUTRITION_FIELDS, this);
-        this.generalSettingsRng = mockRng(RNG.GENERAL_SETTINGS, this);
-        this.dayIndexRng = mockRng(RNG.DAY_INDEX, this);
-        this.prevDayIndexRng = mockRng(RNG.DAY_PREV_DAY_INDEX, this);
-        this.mealsRng = mockRng(RNG.MEALS, this);
-        this.dayRepository = mock(DayRepository, this);
+        this.daySpr = mockSpr(SPR.DAY);
+        this.daysSpr = mockSpr(SPR.DAYS);
+        this.newItemSpr = mockSpr(SPR.NEW_ITEM);
+        this.recipeCalculatorSpr = mockSpr(SPR.RECIPE_CALCULATOR);
+        this.itemsSpr = mockSpr(SPR.ITEMS);
+        this.profileSpr = mockSpr(SPR.PROFILE);
+        this.historySpr = mockSpr(SPR.HISTORY);
+        this.nutritionFieldsRng = mockRng(RNG.NUTRITION_FIELDS);
+        this.generalSettingsRng = mockRng(RNG.GENERAL_SETTINGS);
+        this.dayIndexRng = mockRng(RNG.DAY_INDEX);
+        this.prevDayIndexRng = mockRng(RNG.DAY_PREV_DAY_INDEX);
+        this.mealsRng = mockRng(RNG.MEALS);
+        this.dayRepository = mock(DayRepository);
 
         this.settingsService = new SettingsService();
     }
@@ -21,7 +21,7 @@ class SettingsServiceTest extends TestBase {
     beforeEach(){
         super.beforeEach();
         // GIVEN
-        this.rngList = mock(new (RngList), this);
+        this.rngList = mock(new (RngList));
         when(this.nutritionFieldsRng).getColAsArray().thenReturn([true, false, false, true, false, false, false, true, false]);
         when(this.generalSettingsRng).getColAsArray().thenReturn([2, 2, 'Active baseline', true, true, true, true]);
         when(this.mealsRng).getValues().thenReturn([['Breakfast', 12], ['Snack', 5], ['Lunch', 15], ['Snack', 5], ['Dinner', 13], ['Supper', 5]]);

@@ -61,10 +61,10 @@ class ImportThenSteps extends Steps{
         let expected_row_27 = ['Leek', 100, 'g', 1, 61, 0.61, 0.30, 0.0, 0.0, 0.00, 0.0, 0.00, 14.0, 0.14, 1.8, 0.02, 3.9, 0.04, 0, 0.00, 1.5, 0.02, 20, 0.20, 'Green', 0.61];
         let expected_row_46 = ['Water',	1, 'g', 1, 0, 0.00, 0.00, 0.00,	0.0, 0.00, 0.0, 0.00, 0.0, 0.00, 0.0, 0.00, 0.0, 0.00, 0, 0.00, 0.0, 0.00, 0, 0.00,	'Green', 0.00];
 
-        this.test.assertEqualsArray(items[0], expected_row_1);
-        this.test.assertEqualsArray(items[11], expected_row_12);
-        this.test.assertEqualsArray(items[26], expected_row_27);
-        this.test.assertEqualsArray(items[45], expected_row_46);
+        assertEqualsArray(items[0], expected_row_1);
+        assertEqualsArray(items[11], expected_row_12);
+        assertEqualsArray(items[26], expected_row_27);
+        assertEqualsArray(items[45], expected_row_46);
     }
 
     items_imported_with_merge(){
@@ -74,15 +74,15 @@ class ImportThenSteps extends Steps{
         let expected_row_54 = ['Test 1 serving', 1, 'Serving',50, 250, 250.00, 25.00, 25.00, 2.0, 2.00,	0.0, 0.00, 45.0, 45.00, 1.0, 1.00, 21.0, 21.00, 0, 0.00, 4.0, 4.00, 12, 12.00, 'Red', 5.00];
         let expected_row_60 = ['ZZ Last', 100, 'g', 1, 100, 1.00, 100.00, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0, 1.00, 100, 1.00, 100.0, 1.00, 100, 1.00,	'Green', 1.00];
 
-        this.test.assertEqualsArray(items[0], expected_row_1);
-        this.test.assertEqualsArray(items[26], expected_row_27);
-        this.test.assertEqualsArray(items[53], expected_row_54);
-        this.test.assertEqualsArray(items[59], expected_row_60);
+        assertEqualsArray(items[0], expected_row_1);
+        assertEqualsArray(items[26], expected_row_27);
+        assertEqualsArray(items[53], expected_row_54);
+        assertEqualsArray(items[59], expected_row_60);
     }
 
     items_not_imported(){
         let items = getSpr(SPR.ITEMS).getValues('B4:AA');
-        this.test.assertArrayEmpty(items);
+        assertArrayEmpty(items);
     }
 
     recipes_imported(){
@@ -95,7 +95,7 @@ class ImportThenSteps extends Steps{
                         ['Stone soup', 'Celery', 120],
                         ['Stone soup', 'Carrot', 235],
                         ['Stone soup', 'Water', 2000]];
-        this.test.assertEqualsArray(recipes, expected);
+        assertEqualsArray(recipes, expected);
     }
 
     recipes_imported_with_merge(){
@@ -136,12 +136,12 @@ class ImportThenSteps extends Steps{
                         ['Stone soup', 'Celery', 120],
                         ['Stone soup', 'Carrot', 235],
                         ['Stone soup', 'Water', 2000]];
-        this.test.assertEqualsArray(recipes, expected);
+        assertEqualsArray(recipes, expected);
     }
 
     recipes_not_imported(){
         let recipes = getSpr(SPR.RECIPES).getValues('B4:D');
-        this.test.assertArrayEmpty(recipes);
+        assertArrayEmpty(recipes);
     }
 
     meals_imported(){
@@ -156,7 +156,7 @@ class ImportThenSteps extends Steps{
                         ['🥣 Heavy snack', 'Pistacio', 20],
                         ['🥣 Heavy snack', 'Cashew',  20],
                         ['🥣 Heavy snack', 'Sugar', 35]]
-        this.test.assertEqualsArray(meals, expected);
+        assertEqualsArray(meals, expected);
     }
 
     meals_imported_with_merge(){
@@ -191,12 +191,12 @@ class ImportThenSteps extends Steps{
                         ['🥣 Meal2', 'Max cal', 100],
                         ['🥣 Meal2', 'Zero cal', 500],
                         ['🥣 Meal2', 'All Green', 256]]
-        this.test.assertEqualsArray(meals, expected);
+        assertEqualsArray(meals, expected);
     }
 
     meals_not_imported(){
         let meals = getSpr(SPR.MEALS).getValues('B4:D');
-        this.test.assertArrayEmpty(meals);
+        assertArrayEmpty(meals);
     }
 
     profile_imported(){
@@ -212,7 +212,7 @@ class ImportThenSteps extends Steps{
                         [0,19,               0,19,               0,19,                0,19,                  0,19,               0,19,              '', ''],
                         [10, 35,	         10, 35,	         10, 35, 	          10, 35, 	             10, 35, 	         10, 35,            '', ''],
                         [0,2000,             0,2000,             0,2000,              0,2000,                0,2000,             0,2000,            '', '']]
-        this.test.assertEqualsArray(profiles, expected);
+        assertEqualsArray(profiles, expected);
     }
 
     profile_not_imported(){
@@ -228,7 +228,7 @@ class ImportThenSteps extends Steps{
                         [0, 19, '', '','', '', '', '', '', '', '', '', '', ''],
                         [10, 35, '', '','', '', '', '', '', '', '', '', '', ''],
                         [0, 10, '', '','', '', '', '', '', '', '', '', '', '']]
-        this.test.assertEqualsArray(profiles, expected);
+        assertEqualsArray(profiles, expected);
     }
 
     settings_imported(){
@@ -236,9 +236,9 @@ class ImportThenSteps extends Steps{
         let nutritionFields = getRng(RNG.NUTRITION_FIELDS).getColAsArray();
         let meals = getRng(RNG.MEALS).getValues();
 
-        this.test.assertEqualsArray(generalSettings, [2, 2, 'Calorie Max', false, false, true, false]);
-        this.test.assertEqualsArray(nutritionFields, [true, true, false, true, false, true, false, true, true]);
-        this.test.assertEqualsArray(meals,           [['Morning food', 10],
+        assertEqualsArray(generalSettings, [2, 2, 'Calorie Max', false, false, true, false]);
+        assertEqualsArray(nutritionFields, [true, true, false, true, false, true, false, true, true]);
+        assertEqualsArray(meals,           [['Morning food', 10],
                                                       ['Secound brekfast', 8],
                                                       ['Feast', 15],
                                                       ['Late lunch', 7],
@@ -250,12 +250,12 @@ class ImportThenSteps extends Steps{
         let history = getSpr(SPR.HISTORY).getValues('B10:R18');
         let expected = Array.from({length:9},(v,k)=>[new Date(2025, 0, 10 + k), 2000 + k, 2400 + k, 400, 10 + k, 20 + k, 30 + k, 40 + k, 50 + k, 60 + k, 70 + k, 80 + k, 90 + k, 100.00 + k, '✔️', '❌', '✔️']);
     
-        this.test.assertEqualsArray(history, expected);
+        assertEqualsArray(history, expected);
     }
 
     history_not_imported(){
         let history = getSpr(SPR.HISTORY).getValues('B10:R18');
-        this.test.assertArrayEmpty(history);
+        assertArrayEmpty(history);
     }
 
     days_imported(){
@@ -271,17 +271,17 @@ class ImportThenSteps extends Steps{
         expected[50] = ['Garlic', 50, '', '', '', '', '', '', '', '', '', ''];
         let expectedAdditionalInfo = [[3000], ['Borring day']];
 
-        this.test.assertEqualsArray(daysSpr.getValues('B4:M93'), expected);
-        this.test.assertEqualsArray(daysSpr.getValues('N4:N5'), expectedAdditionalInfo);
-        this.test.assertEqualsArray(daysSpr.getValues('N19:N20'), expectedAdditionalInfo);
-        this.test.assertEqualsArray(daysSpr.getValues('N34:N35'), expectedAdditionalInfo);
-        this.test.assertEqualsArray(daysSpr.getValues('N49:N50'), expectedAdditionalInfo);
-        this.test.assertEqualsArray(daysSpr.getValues('N64:N65'), expectedAdditionalInfo);
-        this.test.assertEqualsArray(daysSpr.getValues('N79:N80'), expectedAdditionalInfo);
+        assertEqualsArray(daysSpr.getValues('B4:M93'), expected);
+        assertEqualsArray(daysSpr.getValues('N4:N5'), expectedAdditionalInfo);
+        assertEqualsArray(daysSpr.getValues('N19:N20'), expectedAdditionalInfo);
+        assertEqualsArray(daysSpr.getValues('N34:N35'), expectedAdditionalInfo);
+        assertEqualsArray(daysSpr.getValues('N49:N50'), expectedAdditionalInfo);
+        assertEqualsArray(daysSpr.getValues('N64:N65'), expectedAdditionalInfo);
+        assertEqualsArray(daysSpr.getValues('N79:N80'), expectedAdditionalInfo);
     }
 
     days_not_imported(){
         let days = getSpr(SPR.DAYS).getValues('B4:M');
-        this.test.assertArrayEmpty(days);
+        assertArrayEmpty(days);
     }
 }

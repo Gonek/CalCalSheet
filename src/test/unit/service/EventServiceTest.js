@@ -1,20 +1,20 @@
 class EventServiceTest extends TestBase {
     constructor(){
         super();
-        this.daySpr = mockSpr(SPR.DAY, this);
-        this.newItemSpr = mockSpr(SPR.NEW_ITEM, this);
-        this.recipeCalculatorSpr = mockSpr(SPR.RECIPE_CALCULATOR, this);
-        this.profileSpr = mockSpr(SPR.PROFILE, this);
-        this.settingsSpr = mockSpr(SPR.SETTINGS, this);
-        this.tuturialSpr = mockSpr(SPR.TUTORIAL, this);
-        this.dayService = mock(DayService, this);
-        this.newItemService = mock(NewItemService, this);
-        this.recipeCalculatorService = mock(RecipeCalculatorService, this);
-        this.profileService = mock(ProfileService, this);
-        this.settingsService = mock(SettingsService, this);
-        this.importService = mock(ImportService, this);
-        this.tutorialService = mock(TutorialService, this);
-        this.itemRepository = mock(ItemRepository, this);
+        this.daySpr = mockSpr(SPR.DAY);
+        this.newItemSpr = mockSpr(SPR.NEW_ITEM);
+        this.recipeCalculatorSpr = mockSpr(SPR.RECIPE_CALCULATOR);
+        this.profileSpr = mockSpr(SPR.PROFILE);
+        this.settingsSpr = mockSpr(SPR.SETTINGS);
+        this.tuturialSpr = mockSpr(SPR.TUTORIAL);
+        this.dayService = mock(DayService);
+        this.newItemService = mock(NewItemService);
+        this.recipeCalculatorService = mock(RecipeCalculatorService);
+        this.profileService = mock(ProfileService);
+        this.settingsService = mock(SettingsService);
+        this.importService = mock(ImportService);
+        this.tutorialService = mock(TutorialService);
+        this.itemRepository = mock(ItemRepository);
 
         this.eventService = new EventService();
     }
@@ -59,7 +59,7 @@ class EventServiceTest extends TestBase {
             onEdit(this.createEvent(d[0], a1Pos));
             // THEN
             verify(d[2])[d[3]](any()).calledOnce();
-            this.clearMockCalls();
+            clearMockCalls();
         })
     }
 

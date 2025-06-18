@@ -2,19 +2,19 @@ class RecipeCalculatorServiceTest extends TestBase {
 
   constructor(){
     super();
-    this.recipeNameRng = mockRng(RNG.RECIPE_NAME, this);
-    this.recipeItemsRng = mockRng(RNG.RECIPE_ITEMS, this);
-    this.recipeOldPosRng = mockRng(RNG.RECIPE_OLD_POS, this);
-    this.recipeFieldsToSaveRng = mockRng(RNG.RECIPE_FIELDS_TO_SAVE, this);
-    this.recipeNoomColourRng = mockRng(RNG.RECIPE_NOOM_COLOUR, this);
-    this.loadRecipeNameRng = mockRng(RNG.LOAD_RECIPE_NAME, this);
-    this.selectedRecipeItemsRng = mockRng(RNG.SELECTED_RECIPE_ITEMS, this);
-    this.recipeServingRng = mockRng(RNG.RECIPE_SERVING, this);
-    this.recipeNoomCategoryRng = mockRng(RNG.RECIPE_NOOM_CATEGORY, this);
-    this.recipeSaveAsRecipeRng = mockRng(RNG.RECIPE_SAVE_AS_RECIPE, this);
-    this.recipeAutoDeleteRng = mockRng(RNG.RECIPE_AUTO_DELETE, this);
-    this.itemRepository = mock(ItemRepository, this);
-    this.recipeRepository = mock(RecipeRepository, this);
+    this.recipeNameRng = mockRng(RNG.RECIPE_NAME);
+    this.recipeItemsRng = mockRng(RNG.RECIPE_ITEMS);
+    this.recipeOldPosRng = mockRng(RNG.RECIPE_OLD_POS);
+    this.recipeFieldsToSaveRng = mockRng(RNG.RECIPE_FIELDS_TO_SAVE);
+    this.recipeNoomColourRng = mockRng(RNG.RECIPE_NOOM_COLOUR);
+    this.loadRecipeNameRng = mockRng(RNG.LOAD_RECIPE_NAME);
+    this.selectedRecipeItemsRng = mockRng(RNG.SELECTED_RECIPE_ITEMS);
+    this.recipeServingRng = mockRng(RNG.RECIPE_SERVING);
+    this.recipeNoomCategoryRng = mockRng(RNG.RECIPE_NOOM_CATEGORY);
+    this.recipeSaveAsRecipeRng = mockRng(RNG.RECIPE_SAVE_AS_RECIPE);
+    this.recipeAutoDeleteRng = mockRng(RNG.RECIPE_AUTO_DELETE);
+    this.itemRepository = mock(ItemRepository);
+    this.recipeRepository = mock(RecipeRepository);
 
     this.recipeCalculatorService = new RecipeCalculatorService();
   }

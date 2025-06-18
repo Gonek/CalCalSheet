@@ -22,7 +22,6 @@ class RecipeCalculatorTest extends TestBase {
     this.utils.clearItems();
   }
 
-
   clearData(){
     this.recipeNameRng.clear();
     this.recipeItemsRng.clear();
@@ -49,7 +48,7 @@ class RecipeCalculatorTest extends TestBase {
     //WHEN
     let result = this.spr.getFormulas('D4:P28');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldRecipeCalculatorSheetHaveCorrectFormulaForNutritions(){
@@ -86,8 +85,8 @@ class RecipeCalculatorTest extends TestBase {
     let result100g = this.spr.getFormulas('G29:P29');
     let resultSave = this.spr.getFormulas('C30:P30');
     //THEN
-    this.assertEquals(result100g, expected100g);
-    this.assertEquals(resultSave, expectedSave);
+    assertEquals(result100g, expected100g);
+    assertEquals(resultSave, expectedSave);
   }
 
   shouldRecipeCalculatorSheetHaveCorrectBackgroundFormulaForCalculation(){
@@ -103,9 +102,9 @@ class RecipeCalculatorTest extends TestBase {
     let resultSelRecipe = this.spr.getFormula('R4');
     let resultRecipeNames = this.spr.getFormula('T3');
     //THEN
-    this.assertEquals(resultNutriCals, expectedNutriCalc);
-    this.assertEquals(resultSelRecipe, expectedSelRecipe);
-    this.assertEquals(resultRecipeNames, expectedRecipeNames);
+    assertEquals(resultNutriCals, expectedNutriCalc);
+    assertEquals(resultSelRecipe, expectedSelRecipe);
+    assertEquals(resultRecipeNames, expectedRecipeNames);
   }
 
   shouldRecipeCalculatorSheetHaveCorrectFormulaForNoom(){
@@ -114,7 +113,7 @@ class RecipeCalculatorTest extends TestBase {
     //WHEN
     let result = this.recipeNoomColourRng.getFormula();
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldRecipeCalculatorSheetHaveCorrectFormatForItems(){
@@ -125,7 +124,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeItemsRng.setValues(items);
     let result = this.spr.getDisplayValues('E4:P28');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldRecipeCalculatorSheetHaveCorrectFormatForNutritions(){
@@ -136,7 +135,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeItemsRng.setValues(items);
     let result = this.spr.getDisplayValues('E29:P30');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldRecipeCalculatorSheetLeave100gNutritions0IfNoItemAdded(){
@@ -145,7 +144,7 @@ class RecipeCalculatorTest extends TestBase {
     //WHEN
     let result = this.spr.getDisplayValues('E29:P29');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldRecipeCalculatorSheetReturnRightIndexForItems(){
@@ -164,7 +163,7 @@ class RecipeCalculatorTest extends TestBase {
     let result = this.spr.getValues('D4:D28').flat();
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldRecipeCalculatorSheetCalculateItemNutritionRightFor100g(){
@@ -177,7 +176,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeItemsRng.setValue(itemAmount, 1, 2);
     let result = this.spr.getValues('E4:P4');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldRecipeCalculatorSheetCalculateItemNutritionRightForServings(){
@@ -190,7 +189,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeItemsRng.setValue(itemAmount, 1, 2);
     let result = this.spr.getValues('E4:P4');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldRecipeCalculatorSheetCalculateRecipeCalorieFor100gCorreclty(){
@@ -203,8 +202,8 @@ class RecipeCalculatorTest extends TestBase {
     let result100g = this.spr.getValues('E29:P29');
     let resultSave = this.spr.getValues('E30:P30');
     //THEN
-    this.assertEquals(result100g, expected);
-    this.assertEquals(resultSave, expected);
+    assertEquals(result100g, expected);
+    assertEquals(resultSave, expected);
   }
 
   shouldRecipeCalculatorSheetCalculateRecipeCalorieFor1ServingCorreclty(){
@@ -219,8 +218,8 @@ class RecipeCalculatorTest extends TestBase {
     let result100g = this.spr.getValues('E29:P29');
     let resultSave = this.spr.getValues('E30:P30');
     //THEN
-    this.assertEquals(result100g, expected100g);
-    this.assertEquals(resultSave, expectedSave);
+    assertEquals(result100g, expected100g);
+    assertEquals(resultSave, expectedSave);
   }
 
   shouldRecipeCalculatorSheetCalculateRecipeCalorieForMultipleServingCorreclty(){
@@ -235,8 +234,8 @@ class RecipeCalculatorTest extends TestBase {
     let result100g = this.spr.getValues('E29:P29');
     let resultSave = this.spr.getValues('E30:P30');
     //THEN
-    this.assertEquals(result100g, expected100g);
-    this.assertEquals(resultSave, expectedSave);
+    assertEquals(result100g, expected100g);
+    assertEquals(resultSave, expectedSave);
   }
 
   shouldRecipeCalculatorSheetCalculateSolidGreenNoomCorreclty(){
@@ -246,7 +245,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeItemsRng.setValuesWithResize(item);
     let result = this.recipeNoomColourRng.getValue();
     //THEN
-    this.assertEquals(result, 'Green');
+    assertEquals(result, 'Green');
   }
 
   shouldRecipeCalculatorSheetCalculateSolidYellowNoomCorreclty(){
@@ -256,7 +255,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeItemsRng.setValuesWithResize(item);
     let result = this.recipeNoomColourRng.getValue();
     //THEN
-    this.assertEquals(result, 'Yellow');
+    assertEquals(result, 'Yellow');
   }
 
   shouldRecipeCalculatorSheetCalculateSolidRedNoomCorreclty(){
@@ -266,7 +265,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeItemsRng.setValuesWithResize(item);
     let result = this.recipeNoomColourRng.getValue();
     //THEN
-    this.assertEquals(result, 'Red');
+    assertEquals(result, 'Red');
   }
 
   shouldRecipeCalculatorSheetLoadAllSavedRecepiesInTheRecipeNameField(){
@@ -276,7 +275,7 @@ class RecipeCalculatorTest extends TestBase {
     //WHEN
     let result = this.recipeNameRng.getValidationCriteriaRangeValues();
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
     this.utils.clearRecipes();
   }
 
@@ -288,7 +287,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeNameRng.setValue('New Recipe');
     let result = this.recipeNameRng.getValidationCriteriaRangeValues();
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
     this.utils.clearRecipes();
   }
 
@@ -326,7 +325,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeNameRng.setValue('Recipe1');
     let result = this.selectedRecipeItemsRng.getValues();
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
     //RESET
     this.recipeNameRng.clear();
     this.utils.clearRecipes()
@@ -337,7 +336,7 @@ class RecipeCalculatorTest extends TestBase {
     this.recipeNameRng.clear();
     let result = this.selectedRecipeItemsRng.getValues();
     //THEN
-    this.assertArrayEmpty(result);
+    assertArrayEmpty(result);
   }
 
 

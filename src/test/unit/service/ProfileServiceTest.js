@@ -1,8 +1,8 @@
 class ProfileServiceTest extends TestBase {
     constructor(){
         super();
-        this.macroProfileRng = mockRng(RNG.MACRO_PROFILES, this);
-        this.calculatorCaloriesRng = mockRng(RNG.CALCULATOR_CALORIES, this);
+        this.macroProfileRng = mockRng(RNG.MACRO_PROFILES);
+        this.calculatorCaloriesRng = mockRng(RNG.CALCULATOR_CALORIES);
         this.profileService = new ProfileService();
     }
 
@@ -24,7 +24,7 @@ class ProfileServiceTest extends TestBase {
         // WHEN
         let result = this.profileService.getNextMacroProfileName(2);
         // THEN
-        this.assertEquals(result, 'NextProfileName');
+        assertEquals(result, 'NextProfileName');
     }
 
     shouldNextMacroProfileNameReturnSelectedProfileNameFirstPositionWhenProfileIndexIsSeven(){
@@ -33,7 +33,7 @@ class ProfileServiceTest extends TestBase {
         // WHEN
         let result = this.profileService.getNextMacroProfileName(7);
         // THEN
-        this.assertEquals(result, 'FirstProfileName');
+        assertEquals(result, 'FirstProfileName');
     }
 }
 

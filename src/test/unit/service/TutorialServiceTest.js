@@ -2,11 +2,11 @@ class TutorialServiceTest extends TestBase {
 
   constructor(){
     super();
-    this.activeSpSh = mockSpSh(SPSH.ACTIVE, this);
-    this.tutorialSpr = mockSpr(SPR.TUTORIAL, this);
-    this.tutorialStepRng = mockRng(RNG.TUTORIAL_STEP, this);
-    this.tutorialNextPosRng = mockRng(RNG.TUTORIAL_NEXT_POS, this);
-    this.tutorialResetPosRng = mockRng(RNG.TUTORIAL_RESET_POS, this);
+    this.activeSpSh = mockSpSh(SPSH.ACTIVE);
+    this.tutorialSpr = mockSpr(SPR.TUTORIAL);
+    this.tutorialStepRng = mockRng(RNG.TUTORIAL_STEP);
+    this.tutorialNextPosRng = mockRng(RNG.TUTORIAL_NEXT_POS);
+    this.tutorialResetPosRng = mockRng(RNG.TUTORIAL_RESET_POS);
 
     this.tutorialService = new TutorialService();
   }

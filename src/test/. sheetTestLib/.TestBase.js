@@ -1,11 +1,15 @@
 const TEST_METHOD_MARKER = 'should';
 const SCENARIO_METHOD_MARKER = 'scenario_';
+const TIMEOUT_TRESHOLD_MS = 300000;
 const TIMES = {
   ONCE : 1,
   TWICE : 2
 }
-
-
+const STATUS = {
+  SUCCESS : 1,
+  FAIL: 2,
+  ERROR: 3
+}
 
 class TestBase{
 
@@ -16,11 +20,7 @@ class TestBase{
   }
 
   initVariables(){
-    this.result = new TestResult();
-    this.actualTest = "";
-    this.actualSuccess = true;
     this.testClassName = this.constructor.name;
-    this.mocks = [];
   }
 
   findTests(){
@@ -30,34 +30,109 @@ class TestBase{
   }
 
   runAllTests(){
-    this.result.start();
-    this.runAllTestsCore();
-    this.result.end();
-    this.printResults();
-  }
-
-  runAllTestsCore(){
-    console.info(`Start running all test for ${this.testClassName}`);
-    console.info('');
     try{
-      this.beforeAll();
-      this.testCases.forEach(test => this.runTest(test));
-    } finally {
-      this.afterAll();
+      this.start();
+      this.runAllTestsCore();
+      this.end();
+    }catch(e){
+      this.timeOut(e);
     }
-    console.info(`Test finished for ${this.testClassName}`);
-    console.info('⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯');
-    return this.result;
   }
 
   runMultipleTestClass(classes){
-    this.result.start();
+    try{
+      this.start(); 
+      this.runMultipleTestClassCore(classes);
+      this.end();
+    }catch(e){
+      this.timeOut(e);
+    }
+  }
+
+  runAllTestClass(unitTests, sheetTests, acceptanceTests){
+    try{
+      this.start();
+      this.printUpdate('Start running all Unit tests', 'Unit tests');
+      this.runMultipleTestClassCore(unitTests);
+
+      this.printUpdate('Start running all Sheet tests', 'Sheet tests');
+      this.runMultipleTestClassCore(sheetTests);
+
+      this.printUpdate('Start running all Acceptance tests', 'Acceptance tests');
+      this.runMultipleTestClassCore(acceptanceTests);
+      this.end();
+    }catch(e){
+      this.timeOut(e);
+    }
+  }
+
+  runMultipleTestClassCore(classes){
     classes.forEach((testClass) => {
       let testObj = new testClass();
-      this.result.add(testObj.runAllTestsCore());
+      testObj.runAllTestsCore();
     });
-    this.result.end();
+  }
+
+  runAllTestsCore(){
+    if(testData.savedClassCheck(this.testClassName)) return;
+    this.printUpdate(`Start running all test for ${this.testClassName}`, this.testClassName);
+    try{
+      this.beforeAll();
+      this.testCases.forEach(test => this.runTest(test));
+    }finally{
+      this.afterAll();
+
+    }
+    console.info(`Test finished for ${this.testClassName}`);
+    console.info('⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯');
+  }
+
+  runTest(test){
+    this.timoutKillSwitch();
+    if(testData.savedTestCheck(test.toString())) return;
+    this.beforeEach();
+    try{
+      testData.currentStatus = STATUS.SUCCESS;
+      console.log(`Start test: ${testData.currentTest}`);
+      try{
+        this[test]();
+      }catch(e){
+        testData.errors++;
+        testError(e);
+      }
+      if(testData.currentStatus == STATUS.SUCCESS){
+        console.info(`Test finished with: ✔️ SUCCESS`);
+      } else {
+        console.warn(`Test finished with: ${testData.currentStatus == STATUS.FAIL ? '⚠️ FAILURE' : '❌ ERROR'}`);
+      }
+      console.log('');
+      testData.inc(testData.currentStatus);
+      testSheet?.printTestNameAndResult(testData.currentTest, testData.currentStatus);
+    } finally {
+      this.afterEach();
+    }
+  }
+
+  start(){
+    testSheet?.start();
+    testData.start();
+  }
+
+  timeOut(e){
+    if(e instanceof TimeOutException){
+      testSheet?.timeOut();
+      console.info('Test runtime reached the treshold, progress got saved.');
+      console.info('');
+      console.info('Please execute the same test runner again to countinue!');
+    }else{
+      throw e;
+    }
+  }
+
+  end(){
+    testData.end();
     this.printResults();
+    testSheet?.finished();
   }
 
   beforeAll(){}
@@ -75,178 +150,40 @@ class TestBase{
 
   clear(){
     this.clearData();
-    this.clearMockCalls();
+    clearMockCalls();
   }
 
   clearData(){}
 
-  runTest(test){
-    this.beforeEach();
-    try{
-      this.actualTest = test.toString();
-      this.actualSuccess = true;
-      console.log(`Start test: ${this.actualTest}`);
-      try{
-        this[test]();
-      }catch(e){
-        this.result.errors++;
-        this.error(e);
-      }
-      if(this.actualSuccess){
-        console.info(`Test finished with: ✔️ SUCCESS`);
-      } else {
-        console.warn(`Test finished with: ❌ FAILURE`);
-      }
-      console.log('');
-      this.result.inc(this.actualSuccess);
-    } finally {
-      this.afterEach();
+  printUpdate(consoleUpdate, sheetUpdate){
+    if(!testData.savedTest){
+      console.info(consoleUpdate);
+      console.info('');
+      testSheet?.printUpdate(sheetUpdate);
     }
   }
 
-  assertTrue(result){
-    if(result) {
-      this.succeded(`Result is true as expected`);
-    }else{
-      this.failed(`Result is false`);
-    }
-  }
-
-  assertFalse(result){
-    if(!result) {
-      this.succeded(`Result is false as expected`);
-    }else{
-      this.failed(`Result is true`);
-    }
-  }
-
-  assertEquals(result, expected){
-    if(result.toString() == expected.toString()) {
-      this.succeded(`result is equal to expected`);
-    }else{
-      this.failed(`"${result}" expected to be "${expected}"`);
-    }
-  }
-
-  assertEqualsArray(result, expected){
-    if(arraysEqual(result, expected)) {
-      this.succeded(`result is equal to expected`);
-    }else{
-      this.failed(`"${JSON.stringify(result)}" expected to be "${JSON.stringify(expected)}"`);
-    }
-  }
-
-  assertNull(result){
-    if(result === undefined || result === null){
-      this.succeded(`Result is null!`);
-    }else{
-      this.failed(`Result expected to be null, but it was ${result}`);
-    }
-  }
-
-  assertEmpty(result){
-    if(result !== undefined || result !== null){
-      if(result.toString() == ""){
-        this.succeded(`Result is empty!`);
-      }else{
-        this.failed(`Result expected to be empty, but it was ${result}`);
-      }
-    }else{
-      this.failed(`Result expected to be empty, but were null/undefined`);
-    }
-  }
-
-  assertArrayEmpty(result){
-    if(result){
-      if(clear(result).length == 0){
-        this.succeded(`Result is empty!`);
-      }else{
-        this.failed(`Result expected to be empty, but it was ${result}`);
-      }
-    }else{
-      this.failed(`Result expected to be empty, but were null/undefined`);
-    }
-  }
-
-  assertNotEmpty(result){
-    if(result){
-      if(result.toString() !== ""){
-        this.succeded(`Result is not empty!`);
-      }else{
-        this.failed(`Result expected to be not empty`);
-      }
-    }else{
-      this.failed(`Result expected to be not empty, but were null/undefined`);
-    }
-  }
-
-  assertNoException(test, needFlush = false){
-    try{
-      test();
-      if(needFlush) SpreadsheetApp.flush();
-      this.succeded('No exception occured');
-    }catch(e){
-      this.failed(`No exception expected, but there was ${e}!`);
-    }
-  }
-
-  assertException(test, needFlush = false, exception = undefined){
-    try{
-      test();
-      if(needFlush) SpreadsheetApp.flush();
-      this.failed('Exception expected, but there was none!');
-    }catch(e){
-      if(exception){
-        if(e instanceof exception){
-          this.succeded('Expected type of exception occured');
-        }else{
-          this.failed(`${e} occured but ${exception} was expected`);
-        }
-      }else{
-        this.succeded('Exception occured');
-      }
-    }
-  }
-
-  succeded(message){
-    if(!(this instanceof AcceptanceTestBase)){
-      console.info(`🟢 ${message}`);
-    }
-  }
-
-  failed(message){
-    this.actualSuccess = false;
-    console.warn(`🟡 FAIL!: ${message}`);
-    this.result.error(this.actualTest, message);
-  }
-
-  error(message){
-    this.actualSuccess = false;
-    console.warn(`🔴 ERROR!: ${message}`);
-    this.result.error(this.actualTest, message);
-  }
-
-  printResults(result = this.result){
+  printResults(){
     console.info(`🏁 All test finished! 🏁`);
     console.info(``);
-    console.info(`Test run: ${result.tests} 🎯`);
-    console.info(`  🟢 Succeded: ${result.tests - result.fails - result.fails}`);
-    console.info(`  🟡 Failed: ${result.fails}`);
-    console.info(`  🔴 Errored: ${result.errors}`);
-    if (result.messages.length > 0){
+    console.info(`Test run: ${testData.tests} 🎯`);
+    console.info(`  🟢 Succeded: ${testData.tests - testData.fails - testData.errors}`);
+    console.info(`  🟡 Failed: ${testData.fails}`);
+    console.info(`  🔴 Errored: ${testData.errors}`);
+    if (testData.messages.length > 0){
       console.info(``);
       console.info(`Test failure messages:`);
-      result.messages.forEach((message) => console.warn(message));
+      testData.messages.forEach((message) => console.warn(message));
     }
     console.info(``);
-    let date = new Date(result.durration);
-    console.info(`Test took : ${result.durration} ms ⏱️ ( ${date.getMinutes()} min and ${date.getSeconds()} sec )`);
+    console.info(`Test took: ${testData.durration} ms ⏱️ ( ${testData.getTime().getMinutes()} min and ${testData.getTime().getSeconds()} sec )`);
     console.info(``);
-    if(result.fails>0){
+    if(testData.fails + testData.errors >0){
       console.warn(`TEST RESULT : ❌ FAILURE`);
     } else {
       console.info(`TEST RESULT : ✔️ SUCCESS`);
     }
+    testSheet?.printSummary(testData);
   }
 
   getAllMethodNames(obj) {
@@ -258,12 +195,14 @@ class TestBase{
     return methods;
   }
 
-  registerMock(mockObj) {
-    this.mocks.push(mockObj);
-  }
-
-  clearMockCalls(){
-    this.mocks.forEach(m => m.clear());
+  timoutKillSwitch(){
+    if(testSheet && (testData.getCurrentRunDuration() > TIMEOUT_TRESHOLD_MS)){
+      testData.savedClass = testData.currentClass;
+      testData.savedTest = testData.currentTest;
+      testData.end();
+      testSheet.saveProgress();
+      throw new TimeOutException();
+    } 
   }
 }
 

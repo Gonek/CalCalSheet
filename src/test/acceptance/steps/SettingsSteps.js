@@ -51,41 +51,41 @@ class SettingsThenSteps extends Steps{
     future_available_days_as_expected(futureDays){
         let daysDates = getSpr(SPR.DAYS).getRng('A4:A').getColAsArray();
         let result = daysDates.filter(d => d > getToday()).length;
-        this.test.assertEquals(result, futureDays);
+        assertEquals(result, futureDays);
     }
 
     archive_available_days_as_expected(pastDays){
         let daysDates = getSpr(SPR.DAYS).getRng('A4:A').getColAsArray();
         let result = daysDates.filter(d => (d!='') && (d < getToday())).length;
-        this.test.assertEquals(result, pastDays);
+        assertEquals(result, pastDays);
     }
 
     consumed_checkbox_visible(bool = true){
-        this.test.assertEquals(!getSpr(SPR.DAY).isColHidden(2), bool);
+        assertEquals(!getSpr(SPR.DAY).isColHidden(2), bool);
     }
 
     noom_fields_visible_in_day_sheet(bool = true){
-        this.test.assertEquals(!getSpr(SPR.DAY).isColHidden(18), bool);
-        this.test.assertEquals(!getSpr(SPR.DAY).isColHidden(19), bool);
-        this.test.assertEquals(!getSpr(SPR.DAY).isColHidden(20), bool);
+        assertEquals(!getSpr(SPR.DAY).isColHidden(18), bool);
+        assertEquals(!getSpr(SPR.DAY).isColHidden(19), bool);
+        assertEquals(!getSpr(SPR.DAY).isColHidden(20), bool);
     }
 
     noom_fields_visible_in_new_item_sheet(bool = true){
-        this.test.assertEquals(!getSpr(SPR.NEW_ITEM).isRowHidden(21), bool);
-        this.test.assertEquals(!getSpr(SPR.NEW_ITEM).isRowHidden(22), bool);
+        assertEquals(!getSpr(SPR.NEW_ITEM).isRowHidden(21), bool);
+        assertEquals(!getSpr(SPR.NEW_ITEM).isRowHidden(22), bool);
     }
 
     noom_fields_visible_in_recipe_calculator_sheet(bool = true){
-        this.test.assertEquals(!getSpr(SPR.RECIPE_CALCULATOR).isRowHidden(36), bool);
-        this.test.assertEquals(!getSpr(SPR.RECIPE_CALCULATOR).isRowHidden(37), bool);
+        assertEquals(!getSpr(SPR.RECIPE_CALCULATOR).isRowHidden(36), bool);
+        assertEquals(!getSpr(SPR.RECIPE_CALCULATOR).isRowHidden(37), bool);
     }
 
     noom_field_visible_in_items_sheet(bool = true){
-        this.test.assertEquals(!getSpr(SPR.ITEMS).isColHidden(26), bool);
+        assertEquals(!getSpr(SPR.ITEMS).isColHidden(26), bool);
     }
 
     noom_field_visible_in_history_sheet(bool = true){
-        this.test.assertEquals(!getSpr(SPR.HISTORY).isColHidden(19), bool);
+        assertEquals(!getSpr(SPR.HISTORY).isColHidden(19), bool);
     }
 
     percentage_used_for_macros(bool = true){
@@ -94,120 +94,120 @@ class SettingsThenSteps extends Steps{
 
     nutrition_fields_visible_in_day_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
         let spr = getSpr(SPR.DAY);
-        this.test.assertEquals(!spr.isColHidden(9), fat);
-        this.test.assertEquals(!spr.isColHidden(10), sfat);
-        this.test.assertEquals(!spr.isColHidden(11), tfat);
-        this.test.assertEquals(!spr.isColHidden(12), carb);
-        this.test.assertEquals(!spr.isColHidden(13), fiber);
-        this.test.assertEquals(!spr.isColHidden(14), sugar);
-        this.test.assertEquals(!spr.isColHidden(15), salk);
-        this.test.assertEquals(!spr.isColHidden(16), prot);
-        this.test.assertEquals(!spr.isColHidden(17), salt);
+        assertEquals(!spr.isColHidden(9), fat);
+        assertEquals(!spr.isColHidden(10), sfat);
+        assertEquals(!spr.isColHidden(11), tfat);
+        assertEquals(!spr.isColHidden(12), carb);
+        assertEquals(!spr.isColHidden(13), fiber);
+        assertEquals(!spr.isColHidden(14), sugar);
+        assertEquals(!spr.isColHidden(15), salk);
+        assertEquals(!spr.isColHidden(16), prot);
+        assertEquals(!spr.isColHidden(17), salt);
     }
 
     nutrition_fields_visible_in_new_item_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
         let spr = getSpr(SPR.NEW_ITEM);
-        this.test.assertEquals(!spr.isRowHidden(8), fat);
-        this.test.assertEquals(!spr.isRowHidden(9), sfat);
-        this.test.assertEquals(!spr.isRowHidden(10), tfat);
-        this.test.assertEquals(!spr.isRowHidden(11), carb);
-        this.test.assertEquals(!spr.isRowHidden(12), fiber);
-        this.test.assertEquals(!spr.isRowHidden(13), sugar);
-        this.test.assertEquals(!spr.isRowHidden(14), salk);
-        this.test.assertEquals(!spr.isRowHidden(15), prot);
-        this.test.assertEquals(!spr.isRowHidden(16), salt);
+        assertEquals(!spr.isRowHidden(8), fat);
+        assertEquals(!spr.isRowHidden(9), sfat);
+        assertEquals(!spr.isRowHidden(10), tfat);
+        assertEquals(!spr.isRowHidden(11), carb);
+        assertEquals(!spr.isRowHidden(12), fiber);
+        assertEquals(!spr.isRowHidden(13), sugar);
+        assertEquals(!spr.isRowHidden(14), salk);
+        assertEquals(!spr.isRowHidden(15), prot);
+        assertEquals(!spr.isRowHidden(16), salt);
     }
 
     nutrition_fields_visible_in_recipe_calulator_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
         let spr = getSpr(SPR.RECIPE_CALCULATOR);
-        this.test.assertEquals(!spr.isColHidden(8), fat);
-        this.test.assertEquals(!spr.isColHidden(9), sfat);
-        this.test.assertEquals(!spr.isColHidden(10), tfat);
-        this.test.assertEquals(!spr.isColHidden(11), carb);
-        this.test.assertEquals(!spr.isColHidden(12), fiber);
-        this.test.assertEquals(!spr.isColHidden(13), sugar);
-        this.test.assertEquals(!spr.isColHidden(14), salk);
-        this.test.assertEquals(!spr.isColHidden(15), prot);
-        this.test.assertEquals(!spr.isColHidden(16), salt);
+        assertEquals(!spr.isColHidden(8), fat);
+        assertEquals(!spr.isColHidden(9), sfat);
+        assertEquals(!spr.isColHidden(10), tfat);
+        assertEquals(!spr.isColHidden(11), carb);
+        assertEquals(!spr.isColHidden(12), fiber);
+        assertEquals(!spr.isColHidden(13), sugar);
+        assertEquals(!spr.isColHidden(14), salk);
+        assertEquals(!spr.isColHidden(15), prot);
+        assertEquals(!spr.isColHidden(16), salt);
     }
 
     nutrition_fields_visible_in_profile_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
         let spr = getSpr(SPR.PROFILE);
-        this.test.assertEquals(!spr.isRowHidden(5), fat);
-        this.test.assertEquals(!spr.isRowHidden(6), sfat);
-        this.test.assertEquals(!spr.isRowHidden(7), tfat);
-        this.test.assertEquals(!spr.isRowHidden(8), carb);
-        this.test.assertEquals(!spr.isRowHidden(9), fiber);
-        this.test.assertEquals(!spr.isRowHidden(10), sugar);
-        this.test.assertEquals(!spr.isRowHidden(11), salk);
-        this.test.assertEquals(!spr.isRowHidden(12), prot);
-        this.test.assertEquals(!spr.isRowHidden(13), salt);
+        assertEquals(!spr.isRowHidden(5), fat);
+        assertEquals(!spr.isRowHidden(6), sfat);
+        assertEquals(!spr.isRowHidden(7), tfat);
+        assertEquals(!spr.isRowHidden(8), carb);
+        assertEquals(!spr.isRowHidden(9), fiber);
+        assertEquals(!spr.isRowHidden(10), sugar);
+        assertEquals(!spr.isRowHidden(11), salk);
+        assertEquals(!spr.isRowHidden(12), prot);
+        assertEquals(!spr.isRowHidden(13), salt);
     }
 
     nutrition_fields_visible_in_items_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
         let spr = getSpr(SPR.ITEMS);
-        this.test.assertEquals(!spr.isColHidden(8), fat); 
-        this.test.assertEquals(!spr.isColHidden(9), fat); 
-        this.test.assertEquals(!spr.isColHidden(10), sfat);
-        this.test.assertEquals(!spr.isColHidden(11), sfat);
-        this.test.assertEquals(!spr.isColHidden(12), tfat);
-        this.test.assertEquals(!spr.isColHidden(13), tfat);
-        this.test.assertEquals(!spr.isColHidden(14), carb);
-        this.test.assertEquals(!spr.isColHidden(15), carb);
-        this.test.assertEquals(!spr.isColHidden(16), fiber);
-        this.test.assertEquals(!spr.isColHidden(17), fiber);
-        this.test.assertEquals(!spr.isColHidden(18), sugar);
-        this.test.assertEquals(!spr.isColHidden(19), sugar);
-        this.test.assertEquals(!spr.isColHidden(20), salk);
-        this.test.assertEquals(!spr.isColHidden(21), salk);
-        this.test.assertEquals(!spr.isColHidden(22), prot);
-        this.test.assertEquals(!spr.isColHidden(23), prot);
-        this.test.assertEquals(!spr.isColHidden(24), salt);
-        this.test.assertEquals(!spr.isColHidden(25), salt);
+        assertEquals(!spr.isColHidden(8), fat); 
+        assertEquals(!spr.isColHidden(9), fat); 
+        assertEquals(!spr.isColHidden(10), sfat);
+        assertEquals(!spr.isColHidden(11), sfat);
+        assertEquals(!spr.isColHidden(12), tfat);
+        assertEquals(!spr.isColHidden(13), tfat);
+        assertEquals(!spr.isColHidden(14), carb);
+        assertEquals(!spr.isColHidden(15), carb);
+        assertEquals(!spr.isColHidden(16), fiber);
+        assertEquals(!spr.isColHidden(17), fiber);
+        assertEquals(!spr.isColHidden(18), sugar);
+        assertEquals(!spr.isColHidden(19), sugar);
+        assertEquals(!spr.isColHidden(20), salk);
+        assertEquals(!spr.isColHidden(21), salk);
+        assertEquals(!spr.isColHidden(22), prot);
+        assertEquals(!spr.isColHidden(23), prot);
+        assertEquals(!spr.isColHidden(24), salt);
+        assertEquals(!spr.isColHidden(25), salt);
     }
 
     nutrition_fields_visible_in_history_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
         let spr = getSpr(SPR.HISTORY);
-        this.test.assertEquals(!spr.isColHidden(6), fat);
-        this.test.assertEquals(!spr.isColHidden(7), sfat);
-        this.test.assertEquals(!spr.isColHidden(8), tfat);
-        this.test.assertEquals(!spr.isColHidden(9), carb);
-        this.test.assertEquals(!spr.isColHidden(10), fiber);
-        this.test.assertEquals(!spr.isColHidden(11), sugar);
-        this.test.assertEquals(!spr.isColHidden(12), salk);
-        this.test.assertEquals(!spr.isColHidden(13), prot);
-        this.test.assertEquals(!spr.isColHidden(14), salt);
+        assertEquals(!spr.isColHidden(6), fat);
+        assertEquals(!spr.isColHidden(7), sfat);
+        assertEquals(!spr.isColHidden(8), tfat);
+        assertEquals(!spr.isColHidden(9), carb);
+        assertEquals(!spr.isColHidden(10), fiber);
+        assertEquals(!spr.isColHidden(11), sugar);
+        assertEquals(!spr.isColHidden(12), salk);
+        assertEquals(!spr.isColHidden(13), prot);
+        assertEquals(!spr.isColHidden(14), salt);
     }
 
     meals_changed_in_summary(meals){
         let sumMeals = getSpr(SPR.DAY).getValues('G4:G9');
-        this.test.assertEquals(sumMeals[0][0], meals[0]);
-        this.test.assertEquals(sumMeals[1][0], meals[1]);
-        this.test.assertEquals(sumMeals[2][0], meals[2]);
-        this.test.assertEquals(sumMeals[3][0], meals[3]);
-        this.test.assertEquals(sumMeals[4][0], meals[4]);
-        this.test.assertEquals(sumMeals[5][0], meals[5]);
+        assertEquals(sumMeals[0][0], meals[0]);
+        assertEquals(sumMeals[1][0], meals[1]);
+        assertEquals(sumMeals[2][0], meals[2]);
+        assertEquals(sumMeals[3][0], meals[3]);
+        assertEquals(sumMeals[4][0], meals[4]);
+        assertEquals(sumMeals[5][0], meals[5]);
     }
 
     meals_changed_at_items(meals){
         let spr = getSpr(SPR.DAY);
         let itemMeals = spr.getValues('A15:A104');
-        this.test.assertEquals(itemMeals[0][0], meals[0][0]);
-        this.test.assertEquals(itemMeals[15][0], meals[1][0]);
-        this.test.assertEquals(itemMeals[30][0], meals[2][0]);
-        this.test.assertEquals(itemMeals[45][0], meals[3][0]);
-        this.test.assertEquals(itemMeals[60][0], meals[4][0]);
-        this.test.assertEquals(itemMeals[75][0], meals[5][0]);
+        assertEquals(itemMeals[0][0], meals[0][0]);
+        assertEquals(itemMeals[15][0], meals[1][0]);
+        assertEquals(itemMeals[30][0], meals[2][0]);
+        assertEquals(itemMeals[45][0], meals[3][0]);
+        assertEquals(itemMeals[60][0], meals[4][0]);
+        assertEquals(itemMeals[75][0], meals[5][0]);
     }
 
     meals_changed_at_days(meals){
         let spr = getSpr(SPR.DAYS);
         let dayMeals = spr.getValues('B3:M3');
-        this.test.assertEquals(dayMeals[0][0], meals[0]);
-        this.test.assertEquals(dayMeals[0][2], meals[1]);
-        this.test.assertEquals(dayMeals[0][4], meals[2]);
-        this.test.assertEquals(dayMeals[0][6], meals[3]);
-        this.test.assertEquals(dayMeals[0][8], meals[4]);
-        this.test.assertEquals(dayMeals[0][10], meals[5]);
+        assertEquals(dayMeals[0][0], meals[0]);
+        assertEquals(dayMeals[0][2], meals[1]);
+        assertEquals(dayMeals[0][4], meals[2]);
+        assertEquals(dayMeals[0][6], meals[3]);
+        assertEquals(dayMeals[0][8], meals[4]);
+        assertEquals(dayMeals[0][10], meals[5]);
     }
 }

@@ -1,14 +1,14 @@
 class DayRepositoryTest extends TestBase {
     constructor(){
         super();
-        this.daysSpr = mockSpr(SPR.DAYS, this);
-        this.prevDayIndexRng = mockRng(RNG.DAY_PREV_DAY_INDEX, this);
-        this.deleteDaysUntilRng = mockRng(RNG.DELETE_DAYS_UNTIL, this);
-        this.deleteDaysFromRng = mockRng(RNG.DELETE_DAYS_FROM, this);
-        this.firstEmptyDayIndexRng = mockRng(RNG.FIRST_EMPTY_DAY_INDEX, this);
-        this.defaultDayRng = mockRng(RNG.DEFAULT_DAY, this);
-        this.createDaysFromRng = mockRng(RNG.CREATE_DAYS_FROM, this);
-        this.createDaysRng = mockRng(RNG.CREATE_DAYS, this);
+        this.daysSpr = mockSpr(SPR.DAYS);
+        this.prevDayIndexRng = mockRng(RNG.DAY_PREV_DAY_INDEX);
+        this.deleteDaysUntilRng = mockRng(RNG.DELETE_DAYS_UNTIL);
+        this.deleteDaysFromRng = mockRng(RNG.DELETE_DAYS_FROM);
+        this.firstEmptyDayIndexRng = mockRng(RNG.FIRST_EMPTY_DAY_INDEX);
+        this.defaultDayRng = mockRng(RNG.DEFAULT_DAY);
+        this.createDaysFromRng = mockRng(RNG.CREATE_DAYS_FROM);
+        this.createDaysRng = mockRng(RNG.CREATE_DAYS);
 
         this.dayRepository = new DayRepository();
     }
@@ -35,7 +35,7 @@ class DayRepositoryTest extends TestBase {
                                                        ['Item 12', 12, 'Item 27', 27, 'Item 42', 42, 'Item 57', 57, 'Item 72', 72, 'Item 87', 87], 
                                                        ['Item 13', 13, 'Item 28', 28, 'Item 43', 43, 'Item 58', 58, 'Item 73', 73, 'Item 88', 88], 
                                                        ['Item 14', 14, 'Item 29', 29, 'Item 44', 44, 'Item 59', 59, 'Item 74', 74, 'Item 89', 89]]).calledOnce();
-        this.assertEquals(result, true);
+        assertEquals(result, true);
     }
 
     shouldDeletePastDaysDeleteRowsTillDeleteDaysUntil(){

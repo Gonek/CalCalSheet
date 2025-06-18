@@ -1,7 +1,7 @@
 class MealRepositoryTest extends TestBase {
     constructor(){
         super();
-        this.mealSpr = mockSpr(SPR.MEALS, this);
+        this.mealSpr = mockSpr(SPR.MEALS);
         this.mealRepository = new MealRepository();
     }
 

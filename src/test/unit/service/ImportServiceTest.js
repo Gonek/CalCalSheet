@@ -2,33 +2,33 @@ class ImportServiceTest extends TestBase {
     constructor(){
         super();
         this.sId = 'SheetId';
-        this.importRng = mockRng(RNG.IMPORT, this);
-        this.importSpSh = mockSpSh(this.sId, this);
-        this.fromSupportSpr = mockSpr(`${this.sId}.${SPR.SUPPORT}`, this);
-        this.fromItemsSpr = mockSpr(`${this.sId}.${SPR.ITEMS}`, this);
-        this.fromRecipesSpr = mockSpr(`${this.sId}.${SPR.RECIPES}`, this);
-        this.fromMealsSpr = mockSpr(`${this.sId}.${SPR.MEALS}`, this);
-        this.fromProfileSpr = mockSpr(`${this.sId}.${SPR.PROFILE}`, this);
-        this.fromSettingsSpr = mockSpr(`${this.sId}.${SPR.SETTINGS}`, this);
-        this.fromHistorySpr = mockSpr(`${this.sId}.${SPR.HISTORY}`, this);
-        this.fromDaysSpr = mockSpr(`${this.sId}.${SPR.DAYS}`, this);
-        this.toSupportSpr = mockSpr(SPR.SUPPORT, this);
-        this.toItemsSpr = mockSpr(SPR.ITEMS, this);
-        this.toRecipesSpr = mockSpr(SPR.RECIPES, this);
-        this.toMealsSpr = mockSpr(SPR.MEALS, this);
-        this.toProfileSpr = mockSpr(SPR.PROFILE, this);
-        this.toSettingsSpr = mockSpr(SPR.SETTINGS, this);
-        this.toHistorySpr = mockSpr(SPR.HISTORY, this);
-        this.toDaysSpr = mockSpr(SPR.DAYS, this);
-        this.toWeightHistoryRng = mock(Rng, this); 
-        this.toDetailsRng = mock(Rng, this); 
-        this.toMacroRng = mock(Rng, this); 
-        this.toGeneralRng = mock(Rng, this); 
-        this.toNutritionRng = mock(Rng, this); 
-        this.toMealsRng = mock(Rng, this); 
-        this.fromDaysRng = mock(Rng, this);
-        this.toDaysRng = mock(Rng, this);
-        this.settingsService = mock(SettingsService, this);
+        this.importRng = mockRng(RNG.IMPORT);
+        this.importSpSh = mockSpSh(this.sId);
+        this.fromSupportSpr = mockSpr(`${this.sId}.${SPR.SUPPORT}`);
+        this.fromItemsSpr = mockSpr(`${this.sId}.${SPR.ITEMS}`);
+        this.fromRecipesSpr = mockSpr(`${this.sId}.${SPR.RECIPES}`);
+        this.fromMealsSpr = mockSpr(`${this.sId}.${SPR.MEALS}`);
+        this.fromProfileSpr = mockSpr(`${this.sId}.${SPR.PROFILE}`);
+        this.fromSettingsSpr = mockSpr(`${this.sId}.${SPR.SETTINGS}`);
+        this.fromHistorySpr = mockSpr(`${this.sId}.${SPR.HISTORY}`);
+        this.fromDaysSpr = mockSpr(`${this.sId}.${SPR.DAYS}`);
+        this.toSupportSpr = mockSpr(SPR.SUPPORT);
+        this.toItemsSpr = mockSpr(SPR.ITEMS);
+        this.toRecipesSpr = mockSpr(SPR.RECIPES);
+        this.toMealsSpr = mockSpr(SPR.MEALS);
+        this.toProfileSpr = mockSpr(SPR.PROFILE);
+        this.toSettingsSpr = mockSpr(SPR.SETTINGS);
+        this.toHistorySpr = mockSpr(SPR.HISTORY);
+        this.toDaysSpr = mockSpr(SPR.DAYS);
+        this.toWeightHistoryRng = mock(Rng); 
+        this.toDetailsRng = mock(Rng); 
+        this.toMacroRng = mock(Rng); 
+        this.toGeneralRng = mock(Rng); 
+        this.toNutritionRng = mock(Rng); 
+        this.toMealsRng = mock(Rng); 
+        this.fromDaysRng = mock(Rng);
+        this.toDaysRng = mock(Rng);
+        this.settingsService = mock(SettingsService);
 
         this.importService = new ImportService();
     }
@@ -134,11 +134,11 @@ class ImportServiceTest extends TestBase {
 
     shouldStartImportThrowExeptionIfImportIdMissingOrIncorrect(){
         // GIVEN
-        this.noIdSpSh = mockSpSh('noId', this);
+        this.noIdSpSh = mockSpSh('noId');
         when(this.importRng).getValue(1,2).thenReturn('noId');
         when(this.noIdSpSh).isExist().thenReturn(false);
         // WHEN THEN
-        this.assertException(() => {
+        assertException(() => {
             this.importService.startImport();
         }, false);
     }
@@ -149,7 +149,7 @@ class ImportServiceTest extends TestBase {
         when(this.importRng).getValue(1,2).thenReturn('SheetId');
         when(this.importSpSh).isExist().thenReturn(true);
         // WHEN THEN
-        this.assertException(() => {
+        assertException(() => {
             this.importService.startImport();
         }, false);
     }

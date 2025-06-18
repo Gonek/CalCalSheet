@@ -46,31 +46,31 @@ class DayThenSteps extends BaseDayThenSteps{
 
     meal_loaded_to_meal_no_(mealNumber, expected){
         let result = getRng(`Meal${mealNumber}`).getValues();
-        this.test.assertEqualsArray(result, expected)
+        assertEqualsArray(result, expected)
     }
 
     meal_copied(to, mealNo, expected){
         let result = getSpr(SPR.DAYS).getAreaValue(to * 15 + 4, mealNo * 2, 15, 2);
-        this.test.assertEqualsArray(result, resizeMatrix(expected, 2, 15, ''));
+        assertEqualsArray(result, resizeMatrix(expected, 2, 15, ''));
     }
 
     meal_save_as_filled_with_name(expected){
-        this.test.assertEquals(getRng(RNG.SAVE_MEAL_AS).getValue(), expected);
+        assertEquals(getRng(RNG.SAVE_MEAL_AS).getValue(), expected);
     }
 
     meal_saved_with_name(name){
         this.name = name;
         let mealFind = getSpr(SPR.MEALS).getValues('B4:D').find(r => r[0] == name);
-        this.test.assertTrue(mealFind);
+        assertTrue(mealFind);
     }
 
     no_meal_saved_with_name(name){
         let mealFind = getSpr(SPR.MEALS).getValues('B4:D').find(r => r[0] == name);
-        this.test.assertFalse(mealFind);
+        assertFalse(mealFind);
     }
 
     meal_have_items(items){
         let filtered = getSpr(SPR.MEALS).getValues('B4:D').filter(i => i[0] === this.name);
-        this.test.assertEqualsArray(filtered, items.map(i => [this.name, i[0], i[1]]));
+        assertEqualsArray(filtered, items.map(i => [this.name, i[0], i[1]]));
     }
 }

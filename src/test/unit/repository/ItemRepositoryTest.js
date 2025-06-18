@@ -2,7 +2,7 @@ class ItemRepositoryTest extends TestBase {
     constructor(){
         super();
 
-        this.itemsSpr = mockSpr(SPR.ITEMS, this);
+        this.itemsSpr = mockSpr(SPR.ITEMS);
         this.itemRepository = new ItemRepository();
     }
 
@@ -60,7 +60,7 @@ class ItemRepositoryTest extends TestBase {
         // WHEN
         let result = this.itemRepository.isExist('name');
         // THEN
-        this.assertEquals(result, true);
+        assertEquals(result, true);
     }
 
     shouldIsExitCallFindOnSheetAndReturnFalseIfItemNotFound(){
@@ -69,7 +69,7 @@ class ItemRepositoryTest extends TestBase {
         // WHEN
         let result = this.itemRepository.isExist('name');
         // THEN
-        this.assertEquals(result, false);
+        assertEquals(result, false);
     }
 
     shouldLoadByIndexReturnTheItemAtIndex(){
@@ -81,7 +81,7 @@ class ItemRepositoryTest extends TestBase {
         // WHEN
         let result = this.itemRepository.loadByIndex(index);
         // THEN
-        this.assertEquals(result, new Item('Name', [10, 2, 30, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]));
+        assertEquals(result, new Item('Name', [10, 2, 30, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]));
     }
 
     shouldAutoDeleteItemsDeleteAllExpiredItems(){

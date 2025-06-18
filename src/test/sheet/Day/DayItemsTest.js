@@ -27,7 +27,7 @@ class DayItemsTest extends TestBaseDay {
     let result = this.daySpr.getFormulas("F15:U104");
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetLeaveNutritionsEmptyIfNoItemAdded(){
@@ -36,7 +36,7 @@ class DayItemsTest extends TestBaseDay {
     // WHEN
     let result = this.daySpr.getDisplayValues('G15:U104');
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetReturnRightIndexForItems(){
@@ -64,7 +64,7 @@ class DayItemsTest extends TestBaseDay {
     let result = this.daySpr.getValues('F15:F104').flat();
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetCalculateNutritionsForAllItemsInRightFormat(){
@@ -77,7 +77,7 @@ class DayItemsTest extends TestBaseDay {
     let result = this.daySpr.getDisplayValues('G15:U104');
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldAll100AndAll1CalcualteTheSameResults(){
@@ -90,7 +90,7 @@ class DayItemsTest extends TestBaseDay {
     let result = this.daySpr.getDisplayValues('G15:U16');
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetCalculateRightNutritionFor100g(){
@@ -103,7 +103,7 @@ class DayItemsTest extends TestBaseDay {
     let result = this.daySpr.getValues('G15:U15');
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetCalculateRightNutritionFor1Serving(){
@@ -116,7 +116,7 @@ class DayItemsTest extends TestBaseDay {
     let result = this.daySpr.getValues('G15:U15');
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetShowCorrectNoomColour(){
@@ -129,7 +129,7 @@ class DayItemsTest extends TestBaseDay {
     let result = this.daySpr.getValues('R15:R17');
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetCalculateRightNutritionForMaxCalorieItem(){
@@ -142,7 +142,7 @@ class DayItemsTest extends TestBaseDay {
     let result = this.daySpr.getValues('G15:U15');
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetCalculateRightNutritionForZeroCalorieItem(){
@@ -155,7 +155,7 @@ class DayItemsTest extends TestBaseDay {
     let result = this.daySpr.getValues('G15:U15');
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetLoadAllSavedItemsInTheItemSelectors(){
@@ -164,7 +164,7 @@ class DayItemsTest extends TestBaseDay {
     //WHEN
     let result = this.daySpr.getValidationCriteriaRangeValues('C15:C104');
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 }
 

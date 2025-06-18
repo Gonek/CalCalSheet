@@ -1,5 +1,6 @@
- const mock = (obj, owner) => {
-    let base = owner;
+ var mocks = [];
+ 
+ const mock = (obj) => {
     let objCalls = [];
     let objReturns = [];
     
@@ -50,9 +51,9 @@
                 neverCalled(){
                     let call = objCalls.find(c => c.isEqual(new Call(prop, args)));
                     if(!call){
-                        base.succeded(`"${prop}" has not been called as expected`)
+                        testSucceded(`"${prop}" has not been called as expected`)
                     }else{      
-                        base.failed(`"${prop}" expected to not called but it was called`);
+                        testFailed(`"${prop}" expected to not called but it was called`);
                     }
                 },
 
@@ -61,12 +62,12 @@
                     let call = objCalls.find(c => c.isEqual(new Call(prop, args)));
                     if(call){
                         if(!times || times == call.count){
-                            base.succeded(`"${prop}" has been called`);
+                            testSucceded(`"${prop}" has been called`);
                         }else{
-                            base.failed(`"${prop}" has been called, but ${call.count} times instead of the expected ${times}`);
+                            testFailed(`"${prop}" has been called, but ${call.count} times instead of the expected ${times}`);
                         }
                     }else{
-                        base.failed(`${target.name}.${prop}(${JSON.stringify(args)}) expected to be called but it didn't`);
+                        testFailed(`${target.name}.${prop}(${JSON.stringify(args)}) expected to be called but it didn't`);
                         printCalls(target, objCalls);
                     }
                 }
@@ -89,20 +90,24 @@
       addObj(obj.name, mockedObj);
     }
     let mockClass = new MockClass(mockedObj, returnObj, verifyObj, objCalls, objReturns, obj);
-    base.registerMock(mockClass);
+    mocks.push(mockClass);
     return mockClass;
 }
 
-const mockSpSh = (spsh, owner) => {
-  return mock(new SpSh(spsh, true), owner);
+const mockSpSh = (spsh) => {
+  return mock(new SpSh(spsh, true));
 }
 
-const mockSpr = (spr, owner) => {
-  return mock(new Spr(spr, true), owner);
+const mockSpr = (spr) => {
+  return mock(new Spr(spr, true));
 }
 
-const mockRng = (rng, owner) => {
-  return mock(new Rng(rng, undefined, true), owner);
+const mockRng = (rng) => {
+  return mock(new Rng(rng, undefined, true));
+}
+
+const clearMockCalls = () => {
+  mocks.forEach(m => m.clear());
 }
 
 const printCalls = (obj, objCalls) => {

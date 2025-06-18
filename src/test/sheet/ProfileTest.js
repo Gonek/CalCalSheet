@@ -20,7 +20,7 @@ class ProfileTest extends TestBase {
     //WHEN
     let result = clearAll(this.weightHistoryRng.getFormulas());
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldProfileSheetCalorieCalculatorHaveCorrectFormula(){
@@ -35,7 +35,7 @@ class ProfileTest extends TestBase {
     //WHEN
     let result = clearAll(this.calorieOutputCalculatorRng.getFormulas());
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldProfileSheetWeightHistoryHaveCorrectFormat(){
@@ -54,7 +54,7 @@ class ProfileTest extends TestBase {
     this.weightsRng.setValues(weights);
     let result = clearAll(this.weightHistoryRng.getDisplayValues());
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
     //RESET 
     this.utils.resetWeight();
   }
@@ -79,7 +79,7 @@ class ProfileTest extends TestBase {
     //WHEN
     let result = this.calorieOutputCalculatorRng.getDisplayValues();
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldProfileSheetCopyCaloriesProfileSelectorAcceptExistingProfiles(){
@@ -90,7 +90,7 @@ class ProfileTest extends TestBase {
     // WHEN
     let result = this.copyCaloriesSelectedProfileRng.getValidationCriteriaRangeValues();
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
     //RESET
     this.utils.addDefaultProfile();
   }
@@ -99,7 +99,7 @@ class ProfileTest extends TestBase {
     //GIVEN
     this.utils.addTestProfiles();
     // WHEN THEN
-    this.assertException(() => {
+    assertException(() => {
       this.copyCaloriesSelectedProfileRng.setValue(`Non existing profile`);
     }, true);
     //RESET
@@ -127,7 +127,7 @@ class ProfileTest extends TestBase {
     this.weightsRng.setValuesWithResize(weights);
     let result = clearAll(this.weightHistoryRng.getDisplayValues());
     //THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
     //RESET 
     this.utils.resetWeight();
   }
@@ -150,10 +150,10 @@ class ProfileTest extends TestBase {
     let resultCalMin = this.calorieOutputCalculatorRng.getValue(11);
     let resultCalMax = this.calorieOutputCalculatorRng.getValue(12);
     //THEN
-    this.assertEquals(resultBMR, expectedBMR);
-    this.assertEquals(resultActive, expectedActive);
-    this.assertEquals(resultCalMin, expectedCalMin);
-    this.assertEquals(resultCalMax, expectedCalMax);
+    assertEquals(resultBMR, expectedBMR);
+    assertEquals(resultActive, expectedActive);
+    assertEquals(resultCalMin, expectedCalMin);
+    assertEquals(resultCalMax, expectedCalMax);
     //RESET
     this.utils.resetCalorieCalculatorValues();
   }
@@ -176,10 +176,10 @@ class ProfileTest extends TestBase {
     let resultCalMin = this.calorieOutputCalculatorRng.getValue(11);
     let resultCalMax = this.calorieOutputCalculatorRng.getValue(12);
     //THEN
-    this.assertEquals(resultBMR, expectedBMR);
-    this.assertEquals(resultActive, expectedActive);
-    this.assertEquals(resultCalMin, expectedCalMin);
-    this.assertEquals(resultCalMax, expectedCalMax);
+    assertEquals(resultBMR, expectedBMR);
+    assertEquals(resultActive, expectedActive);
+    assertEquals(resultCalMin, expectedCalMin);
+    assertEquals(resultCalMax, expectedCalMax);
     //RESET
     this.utils.resetCalorieCalculatorValues();
   }
@@ -202,10 +202,10 @@ class ProfileTest extends TestBase {
     let resultCalMin = this.calorieOutputCalculatorRng.getValue(11);
     let resultCalMax = this.calorieOutputCalculatorRng.getValue(12);
     //THEN
-    this.assertEquals(resultBMR, expectedBMR);
-    this.assertEquals(resultActive, expectedActive);
-    this.assertEquals(resultCalMin, expectedCalMin);
-    this.assertEquals(resultCalMax, expectedCalMax);
+    assertEquals(resultBMR, expectedBMR);
+    assertEquals(resultActive, expectedActive);
+    assertEquals(resultCalMin, expectedCalMin);
+    assertEquals(resultCalMax, expectedCalMax);
     //RESET
     this.utils.resetCalorieCalculatorValues();
   }
@@ -228,10 +228,10 @@ class ProfileTest extends TestBase {
     let resultCalMin = this.calorieOutputCalculatorRng.getValue(11);
     let resultCalMax = this.calorieOutputCalculatorRng.getValue(12);
     //THEN
-    this.assertEquals(resultBMR, expectedBMR);
-    this.assertEquals(resultActive, expectedActive);
-    this.assertEquals(resultCalMin, expectedCalMin);
-    this.assertEquals(resultCalMax, expectedCalMax);
+    assertEquals(resultBMR, expectedBMR);
+    assertEquals(resultActive, expectedActive);
+    assertEquals(resultCalMin, expectedCalMin);
+    assertEquals(resultCalMax, expectedCalMax);
     //RESET
     this.utils.resetCalorieCalculatorValues();
   }
@@ -246,9 +246,9 @@ class ProfileTest extends TestBase {
     let resultLevel = this.calorieOutputCalculatorRng.getValidationCriteriaValues(5);  
     let resultGoal = this.calorieOutputCalculatorRng.getValidationCriteriaValues(10);
     // THEN
-    this.assertEquals(resultSex, expectedSex);
-    this.assertEquals(resultLevel, expectedLevel);
-    this.assertEquals(resultGoal, expectedGoal);
+    assertEquals(resultSex, expectedSex);
+    assertEquals(resultLevel, expectedLevel);
+    assertEquals(resultGoal, expectedGoal);
   }
 }
 

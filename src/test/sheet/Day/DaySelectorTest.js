@@ -46,7 +46,7 @@ class DaySelectorTest extends TestBaseDay {
     let result = this.selectedDayItemsRng.getFormulas();
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 
   shouldDaySheetHaveTheCorrectFormulaForMealFunctionsBackgroudCalculatons(){
@@ -61,9 +61,9 @@ class DaySelectorTest extends TestBaseDay {
     let resultSaveMealFromMealId = this.saveMealFromMealIdRng.getFormulas();
 
     // THEN
-    this.assertEquals(resultCopyMealFromMealIds, expectedCopyMealFromMealIds);
-    this.assertEquals(resultCopyMealToRows, expectedCopyMealToRows);
-    this.assertEquals(resultSaveMealFromMealId, expectedSaveMealFromMealId);
+    assertEquals(resultCopyMealFromMealIds, expectedCopyMealFromMealIds);
+    assertEquals(resultCopyMealToRows, expectedCopyMealToRows);
+    assertEquals(resultSaveMealFromMealId, expectedSaveMealFromMealId);
   }
 
   shouldDaySheetLoadSelectedDayItemsInBackground(){
@@ -76,7 +76,7 @@ class DaySelectorTest extends TestBaseDay {
     let result = this.selectedDayItemsRng.getValues();
 
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
 
     // RESET
     this.dayNameRng.setValue(originalDay);
@@ -94,8 +94,8 @@ class DaySelectorTest extends TestBaseDay {
     let resultCopyMealToRows = this.copyMealToRowsRng.getValue();
 
     // THEN
-    this.assertEquals(resultCopyMealFromMealIds, expectedCopyMealFromMealIds);
-    this.assertEquals(resultCopyMealToRows, expectedCopyMealToRows);
+    assertEquals(resultCopyMealFromMealIds, expectedCopyMealFromMealIds);
+    assertEquals(resultCopyMealToRows, expectedCopyMealToRows);
   }
 
   shouldDaySheetCalculateSaveMealBackgroundFieldCorrectly(){
@@ -105,7 +105,7 @@ class DaySelectorTest extends TestBaseDay {
     // WHEN
     let result = this.saveMealFromMealIdRng.getValue();
     // THEN
-    this.assertEquals(result, expected);
+    assertEquals(result, expected);
   }
 }
 

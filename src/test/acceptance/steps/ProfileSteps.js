@@ -50,13 +50,13 @@ class ProfileWhenSteps extends Steps{
 class ProfileThenSteps extends Steps{
     have_profile_as(name){
         this.profileIndex = getRng(RNG.MACRO_PROFILES).getValues()[0].findIndex(r => r == name);
-        this.test.assertTrue(this.profileIndex > 0);
+        assertTrue(this.profileIndex > 0);
     }
 
     have_calories_as(min, max){
         let pMin = getRng(RNG.MACRO_PROFILES).getValues()[1][this.profileIndex];
         let pMax = getRng(RNG.MACRO_PROFILES).getValues()[1][this.profileIndex + 1];
-        this.test.assertEquals(pMin, min);
-        this.test.assertEquals(pMax, max);
+        assertEquals(pMin, min);
+        assertEquals(pMax, max);
     }
 }
