@@ -1,6 +1,6 @@
 class RecipeRepositoryTest extends TestBase {
-    constructor(){
-        super();
+    beforeAll(){
+        super.beforeAll();
         this.recipesSpr = mockSpr(SPR.RECIPES);
         this.recipeRepository = new RecipeRepository();
     }

@@ -70,9 +70,15 @@ class TestSheet{
         this.setStatus('Test finished');
     }
 
-    printUpdate(update){
-        this.testSheet.appendRow(['', update]);
-        this.setFont(this.getLastRowRange(), null, null, 'bold');
+    printUpdate(update, isTestName){
+        if(isTestName){
+            this.testSheet.appendRow(['', update]);
+            this.setFont(this.getLastRowRange(), null, null, 'bold');
+        }else{
+            this.testSheet.appendRow(['', '  ']);
+            this.testSheet.appendRow(['', update]);
+            this.setFont(this.getLastRowRange(), 12, null, 'bold', 'Center');
+        }
     }
 
     printTestNameAndResult(testName, result){

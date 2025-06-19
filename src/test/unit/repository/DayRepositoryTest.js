@@ -1,6 +1,6 @@
 class DayRepositoryTest extends TestBase {
-    constructor(){
-        super();
+    beforeAll(){
+        super.beforeAll();
         this.daysSpr = mockSpr(SPR.DAYS);
         this.prevDayIndexRng = mockRng(RNG.DAY_PREV_DAY_INDEX);
         this.deleteDaysUntilRng = mockRng(RNG.DELETE_DAYS_UNTIL);

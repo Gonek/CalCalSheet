@@ -1,6 +1,6 @@
 class EventServiceTest extends TestBase {
-    constructor(){
-        super();
+    beforeAll(){
+        super.beforeAll();
         this.daySpr = mockSpr(SPR.DAY);
         this.newItemSpr = mockSpr(SPR.NEW_ITEM);
         this.recipeCalculatorSpr = mockSpr(SPR.RECIPE_CALCULATOR);

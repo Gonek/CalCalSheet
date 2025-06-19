@@ -1,6 +1,6 @@
 class DayServiceTest extends TestBase {
-    constructor(){
-        super();
+    beforeAll(){
+        super.beforeAll();
         this.daySpr = mockSpr(SPR.DAY);
         this.lastFinishedDayRng = mockRng(RNG.LAST_FINISHED_DAY);
         this.todayRng = mockRng(RNG.TODAY);

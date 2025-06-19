@@ -1,6 +1,6 @@
 class ImportServiceTest extends TestBase {
-    constructor(){
-        super();
+    beforeAll(){
+        super.beforeAll();
         this.sId = 'SheetId';
         this.importRng = mockRng(RNG.IMPORT);
         this.importSpSh = mockSpSh(this.sId);

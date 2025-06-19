@@ -1,6 +1,6 @@
 class ProfileServiceTest extends TestBase {
-    constructor(){
-        super();
+    beforeAll(){
+        super.beforeAll();
         this.macroProfileRng = mockRng(RNG.MACRO_PROFILES);
         this.calculatorCaloriesRng = mockRng(RNG.CALCULATOR_CALORIES);
         this.profileService = new ProfileService();

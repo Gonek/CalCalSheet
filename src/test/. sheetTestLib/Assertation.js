@@ -103,7 +103,7 @@ function assertException(test, needFlush = false, exception = undefined){
 }
 
 function testSucceded(message){
-  if(!(this instanceof AcceptanceTestBase)){
+  if(!(testData.isAcceptanceTest)){
     console.info(`🟢 ${message}`);
   }
 }
@@ -115,7 +115,7 @@ function testFailed(message){
 }
 
 function testError(message){
-  testData.currentStatus = STATUS.FAIL;
+  testData.currentStatus = STATUS.ERROR;
   console.warn(`🔴 ERROR!: ${message}`);
   testData.error(message);
 }

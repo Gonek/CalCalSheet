@@ -78,6 +78,10 @@ class Spr{
     return this.getRng(range).getValidationCriteriaValues();
   }
 
+  insertRows(rowIndex, numRows){
+    this.spr.insertRows(rowIndex, numRows);
+  }
+
   setValue(range, value){
     this.spr.getRange(range).setValue(value);
   }

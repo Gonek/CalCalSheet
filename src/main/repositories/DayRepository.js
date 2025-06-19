@@ -31,15 +31,18 @@ class DayRepository{
     let createDaysFrom = new Date(getRng(RNG.CREATE_DAYS_FROM).getValue());
     let createDays = getRng(RNG.CREATE_DAYS).getValue();
     let newDayRow = getRng(RNG.FIRST_EMPTY_DAY_INDEX).getValue();
-    for(let i = 0; i < createDays; i++){
-      let row = newDayRow + 15 * i;
-      let newDayA1 = `A${row}:N${row + 15}`;
-      let nextprofile = getRng(RNG.NEXT_PROFILE).getValue();
-      let defaultCalorieOutput = getRng(RNG.DEFAULT_CALORIE_OUTPUT).getValue();
-      defaultDayRng.copyTo(this.spr.getRng(newDayA1));
-      this.spr.setPosValue(row, 1, new Date(createDaysFrom));
-      this.setDefaultAdditinalData(row, defaultCalorieOutput, nextprofile);
-      createDaysFrom.setDate(createDaysFrom.getDate() + 1);
+    if(createDays > 0){
+      this.spr.insertRows(newDayRow, 15 * createDays);
+      for(let i = 0; i < createDays; i++){
+        let row = newDayRow + 15 * i;
+        let newDayA1 = `A${row}:N${row + 15}`;
+        let nextprofile = getRng(RNG.NEXT_PROFILE).getValue();
+        let defaultCalorieOutput = getRng(RNG.DEFAULT_CALORIE_OUTPUT).getValue();
+        defaultDayRng.copyTo(this.spr.getRng(newDayA1));
+        this.spr.setPosValue(row, 1, new Date(createDaysFrom));
+        this.setDefaultAdditinalData(row, defaultCalorieOutput, nextprofile);
+        createDaysFrom.setDate(createDaysFrom.getDate() + 1);
+      }
     }
   }
 

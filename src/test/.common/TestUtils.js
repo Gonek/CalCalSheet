@@ -316,6 +316,21 @@ class TestUtils {
     getRng(RNG.MEALS).setValues([['Breakfast', 12], ['Snack', 5], ['Lunch', 15], ['Snack', 5], ['Dinner', 13], ['Supper', 5]]);
   }
 
+  clearImports(){
+    let importRng = getRng(RNG.IMPORT);
+    importRng.setValue('', 1, 2);
+    importRng.setValue('Clear', 2, 2);
+    importRng.setValue('Clear', 3, 2);
+    importRng.setValue('Clear', 4, 2);
+    importRng.setValue(true, 2, 3);
+    importRng.setValue(true, 3, 3);
+    importRng.setValue(true, 4, 3);
+    importRng.setValue(true, 5, 3);
+    importRng.setValue(true, 6, 3);
+    importRng.setValue(true, 7, 3);
+    importRng.setValue(true, 8, 3);
+  }
+
   // HISTORY
 
   addTestHistory(){

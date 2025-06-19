@@ -1,6 +1,6 @@
 class SettingsServiceTest extends TestBase {
-    constructor(){
-        super();
+    beforeAll(){
+        super.beforeAll();
         this.daySpr = mockSpr(SPR.DAY);
         this.daysSpr = mockSpr(SPR.DAYS);
         this.newItemSpr = mockSpr(SPR.NEW_ITEM);

@@ -1,36 +1,32 @@
 class TestBaseDay extends TestBase  {
+  
+    beforeAll(){
+        super.beforeAll();
+        this.itemsSpr = getSpr(SPR.ITEMS);
+        this.daySpr = getSpr(SPR.DAY);
+        this.utils.addTestItems();
+    }
 
-  constructor(){
-    super();
-    this.itemsSpr = getSpr(SPR.ITEMS);
-    this.daySpr = getSpr(SPR.DAY);
-  }
+    afterAll(){
+        super.afterAll();
+        this.utils.clearItems();
+    }
 
-  beforeAll(){
-    super.beforeAll();
-    this.utils.addTestItems();
-  }
+    clearData(){
+        this.daySpr.clear(`C15:E104`);
+    }
 
-  afterAll(){
-    super.afterAll();
-    this.utils.clearItems();
-  }
+    // UTILITIES
 
-  clearData(){
-    this.daySpr.clear(`C15:E104`);
-  }
+    item(name, amount){
+        return [name, '', amount];
+    }
 
-  // UTILITIES
+    addItemDaySheet(items, startRow = 15){
+        this.daySpr.setAreaValue(startRow, 3, 1, 3, [items]);
+    }
 
-  item(name, amount){
-    return [name, '', amount];
-  }
-
-  addItemDaySheet(items, startRow = 15){
-    this.daySpr.setAreaValue(startRow, 3, 1, 3, [items]);
-  }
-
-  addItemsDaySheet(items, startRow = 15){
-    this.daySpr.setAreaValue(startRow, 3, items.length, 3, items);
-  }
+    addItemsDaySheet(items, startRow = 15){
+        this.daySpr.setAreaValue(startRow, 3, items.length, 3, items);
+    }
 }

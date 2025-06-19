@@ -1,21 +1,26 @@
  class ImportScenarios extends AcceptanceTestBase{
 
     constructor(){
-      super(ImportGivenSteps, ImportWhenSteps, ImportThenSteps);
+        super(ImportGivenSteps, ImportWhenSteps, ImportThenSteps);
     }
 
     clearData(){
-      this.utils.resetSettings();
-      this.utils.clearDay();
-      this.utils.clearDays();
-      this.utils.clearHistory();
-      this.utils.clearItems();
-      this.utils.clearMeals();
-      this.utils.clearRecipes();
-      this.utils.addDefaultProfile();
-      this.utils.resetWeight();
-      this.utils.resetCalorieCalculatorValues();
-      this.utils.resetSettings();
+        this.utils.resetSettings();
+        this.utils.clearImports();
+        this.utils.clearDay();
+        this.utils.clearDays();
+        this.utils.clearHistory();
+        this.utils.clearItems();
+        this.utils.clearMeals();
+        this.utils.clearRecipes();
+        this.utils.addDefaultProfile();
+        this.utils.resetWeight();
+        this.utils.resetCalorieCalculatorValues();
+    }
+
+    afterAll(){
+        super.afterAll();
+        getObj(SettingsService).applySettings();
     }
 
     scenario_import_all_data_from_1_4(){

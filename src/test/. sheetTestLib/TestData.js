@@ -12,6 +12,7 @@ class TestData{
     this.currentTest;
     this.savedClass;
     this.savedTest;
+    this.isAcceptanceTest;
   }
 
   load(testData){
@@ -23,11 +24,6 @@ class TestData{
     this.durration = testData.durration;
     this.savedClass = testData.savedClass;
     this.savedTest = testData.savedTest;
-  }
-
-  inc(success){
-    this.tests++;
-    if(!success) this.fails++;
   }
 
   error(message){
@@ -42,9 +38,10 @@ class TestData{
     this.durration = this.durration + this.getCurrentRunDuration();
   }
 
-  savedClassCheck(testClassName){
-    this.currentClass = testClassName;
-    return this.savedClass && this.savedClass != testClassName;
+  savedClassCheck(testClass){
+    this.currentClass = testClass.constructor.name;
+    this.isAcceptanceTest = testClass instanceof AcceptanceTestBase;
+    return this.savedClass && this.savedClass != this.currentClass;
   }
 
   savedTestCheck(test){

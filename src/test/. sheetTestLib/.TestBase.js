@@ -1,6 +1,6 @@
 const TEST_METHOD_MARKER = 'should';
 const SCENARIO_METHOD_MARKER = 'scenario_';
-const TIMEOUT_TRESHOLD_MS = 300000;
+const TIMEOUT_TRESHOLD_MS = 330000;
 const TIMES = {
   ONCE : 1,
   TWICE : 2
@@ -74,14 +74,13 @@ class TestBase{
   }
 
   runAllTestsCore(){
-    if(testData.savedClassCheck(this.testClassName)) return;
-    this.printUpdate(`Start running all test for ${this.testClassName}`, this.testClassName);
+    if(testData.savedClassCheck(this)) return;
+    this.printUpdate(`Start running all test for ${this.testClassName}`, this.testClassName, true);
     try{
       this.beforeAll();
       this.testCases.forEach(test => this.runTest(test));
     }finally{
       this.afterAll();
-
     }
     console.info(`Test finished for ${this.testClassName}`);
     console.info('⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯');
@@ -97,20 +96,31 @@ class TestBase{
       try{
         this[test]();
       }catch(e){
-        testData.errors++;
         testError(e);
       }
-      if(testData.currentStatus == STATUS.SUCCESS){
-        console.info(`Test finished with: ✔️ SUCCESS`);
-      } else {
-        console.warn(`Test finished with: ${testData.currentStatus == STATUS.FAIL ? '⚠️ FAILURE' : '❌ ERROR'}`);
-      }
-      console.log('');
-      testData.inc(testData.currentStatus);
-      testSheet?.printTestNameAndResult(testData.currentTest, testData.currentStatus);
+      this.testFinished();
     } finally {
       this.afterEach();
     }
+  }
+
+  testFinished(){
+    testData.tests++;
+    switch(testData.currentStatus){
+      case STATUS.SUCCESS : console.info(`Test finished with: ✔️ SUCCESS`); break;
+      case STATUS.FAIL : {
+        testData.fails++; 
+        console.warn('Test finished with: ⚠️ FAILURE');
+        break;
+      }
+      case STATUS.ERROR : {
+        testData.errors++; 
+        console.warn('Test finished with: ❌ ERROR');
+        break;
+      }
+    }
+    console.log('');
+    testSheet?.printTestNameAndResult(testData.currentTest, testData.currentStatus);
   }
 
   start(){
@@ -135,11 +145,13 @@ class TestBase{
     testSheet?.finished();
   }
 
-  beforeAll(){}
+  beforeAll(){
+    clearDm();
+  }
 
   afterAll(){
-    this.clear();
     clearDm();
+    this.clear();
   }
 
   beforeEach(){
@@ -155,11 +167,11 @@ class TestBase{
 
   clearData(){}
 
-  printUpdate(consoleUpdate, sheetUpdate){
+  printUpdate(consoleUpdate, sheetUpdate, isTestName = false){
     if(!testData.savedTest){
       console.info(consoleUpdate);
       console.info('');
-      testSheet?.printUpdate(sheetUpdate);
+      testSheet?.printUpdate(sheetUpdate, isTestName);
     }
   }
 
