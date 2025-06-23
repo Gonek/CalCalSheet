@@ -1,7 +1,7 @@
 class ItemRepository{
 
   constructor(){
-     this.spr = getSpr(SPR.ITEMS);
+     this.sht = getSpr(SHT.ITEMS);
   }
 
   addOrUpdate(item, originalPos){
@@ -13,37 +13,37 @@ class ItemRepository{
   }
 
   add(item){
-    let row = this.spr.getLastRow()+1;
+    let row = this.sht.getLastRow()+1;
     let rowData = ['', item.name].concat(this.fieldsToRow(item, row));
 
-    this.spr.appendRow(rowData);
-    this.spr.sort(2);
+    this.sht.appendRow(rowData);
+    this.sht.sort(2);
   }
 
   update(item, originalPos){
-    this.spr.setAreaValue(originalPos + 3, 3, 1, 26, [this.fieldsToRow(item, originalPos + 3)]);
+    this.sht.setAreaValue(originalPos + 3, 3, 1, 26, [this.fieldsToRow(item, originalPos + 3)]);
   }
 
   isExist(name){
-    return this.spr.find(name) != null;
+    return this.sht.find(name) != null;
   }
 
   loadByIndex(index){
       let fieldIndexes = [1,2,3,4,6,8,10,12,14,16,18,20,22];
-      let name = this.spr.getPosValue(index + 3, 2);
-      let fields = this.spr.getAreaValue(index + 3, 2, 1, 27)[0].filter((v, i) => fieldIndexes.includes(i));
+      let name = this.sht.getPosValue(index + 3, 2);
+      let fields = this.sht.getAreaValue(index + 3, 2, 1, 27)[0].filter((v, i) => fieldIndexes.includes(i));
       fields[2] = fields[2] * fields[0];
       return new Item(name, fields);
   }
 
   autoDeleteItems(){
     let today = getToday();
-    this.spr.getValues('AB4:AB')
+    this.sht.getValues('AB4:AB')
             .flat()
             .map((v, i) => [i, v])
             .filter(e => (e[1] && e[1] <= today))
             .reverse()
-            .forEach(e => this.spr.deleteRow(e[0]+4));
+            .forEach(e => this.sht.deleteRow(e[0]+4));
   }
 
   calculateAutoDeleteDate(autoDelete){

@@ -1,7 +1,7 @@
 class HistoryRepositoryTest extends TestBase {
     beforeAll(){
         super.beforeAll();
-        this.historySpr = mockSpr(SPR.HISTORY);
+        this.historySpr = mockSpr(SHT.HISTORY);
         this.selectedHistoryDayRng = mockRng(RNG.SELECETED_HISTORY_DAY);
         this.historyRepository = new HistoryRepository();
     }

@@ -79,11 +79,11 @@ class NewItemGivenSteps extends Steps{
 class NewItemWhenSteps extends Steps{
 
     save_as_item_clicked(){
-        this.clickButton(SPR.NEW_ITEM, BTN.SAVE_ITEM);
+        this.clickButton(SHT.NEW_ITEM, BTN.SAVE_ITEM);
     }
 
     item_name_set_to(name){
-        this.changeCbox(SPR.NEW_ITEM, CBOX.NEW_ITEM_NAME, name);
+        this.changeCbox(SHT.NEW_ITEM, CBOX.NEW_ITEM_NAME, name);
     }
 }
 

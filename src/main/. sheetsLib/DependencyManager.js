@@ -11,9 +11,9 @@ var getObj = (type) => dependencyManager.getObj(type);
  */
 var getSpSh = (id) => dependencyManager.getSpSh(id);
 /**
- * Get spr object from the dependency manager
- * @param {String} name of spr
- * @returns {Spr} spr object
+ * Get sht object from the dependency manager
+ * @param {String} name of sht
+ * @returns {Sht} sht object
  */
 var getSpr = (name) => dependencyManager.getSpr(name);
 /**
@@ -25,7 +25,7 @@ var getRng = (name) => dependencyManager.getRng(name);
 
 var addObj = (name, obj) => dependencyManager.addObj(name, obj);
 var addSpSh = (id, spsh) => dependencyManager.addSpSh(id, spsh);
-var addSpr = (name, spr) => dependencyManager.addSpr(name, spr);
+var addSpr = (name, sht) => dependencyManager.addSpr(name, sht);
 var addRng = (name, rng) => dependencyManager.addRng(name, rng);
 
 var clearDm = () => dependencyManager.clear();
@@ -62,20 +62,20 @@ class DependencyManager {
   }
 
   getSpr(name){
-    let spr = this.sprs.get(name);
-    if(!spr){
-      spr = new Spr(name);
-      this.sprs.set(name, spr);
+    let sht = this.sprs.get(name);
+    if(!sht){
+      sht = new Sht(name);
+      this.sprs.set(name, sht);
     }
-    return spr;
+    return sht;
   }
 
   addSpSh(id, spsh){
     this.spshs.set(id, spsh);
   }
 
-  addSpr(name, spr){
-    this.sprs.set(name, spr);
+  addSpr(name, sht){
+    this.sprs.set(name, sht);
   }
 
   getRng(name){

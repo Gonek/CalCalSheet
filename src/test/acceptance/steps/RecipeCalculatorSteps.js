@@ -47,11 +47,11 @@ class RecipeCalculatorGivenSteps extends Steps{
 
 class RecipeCalculatorWhenSteps extends Steps{
     save_as_item_clicked(){
-        this.clickButton(SPR.RECIPE_CALCULATOR, BTN.SAVE_RECIPE);
+        this.clickButton(SHT.RECIPE_CALCULATOR, BTN.SAVE_RECIPE);
     }
 
     recipe_name_set_to(name){
-        this.changeCbox(SPR.RECIPE_CALCULATOR, CBOX.RECIPE_NAME, name);
+        this.changeCbox(SHT.RECIPE_CALCULATOR, CBOX.RECIPE_NAME, name);
     }
 }
 
@@ -59,12 +59,12 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
 
     recipe_saved_with_name(name){
         this.name = name;
-        let recipeFind = getSpr(SPR.RECIPES).getValues('B4:D').find(r => r[0] == name);
+        let recipeFind = getSpr(SHT.RECIPES).getValues('B4:D').find(r => r[0] == name);
         assertTrue(recipeFind);
     }
 
     no_recipe_saved_with_name(name){
-        let recipeFind = getSpr(SPR.RECIPES).getValues('B4:D').find(r => r[0] == name);
+        let recipeFind = getSpr(SHT.RECIPES).getValues('B4:D').find(r => r[0] == name);
         assertFalse(recipeFind);
     }
 
@@ -80,7 +80,7 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
     }
 
     recipe_have_items(items){
-        let filtered = getSpr(SPR.RECIPES).getValues('B4:D').filter(i => i[0] === this.name);
+        let filtered = getSpr(SHT.RECIPES).getValues('B4:D').filter(i => i[0] === this.name);
         assertEqualsArray(filtered, items.map(i => [this.name, i[0], i[1]]));
     }
 

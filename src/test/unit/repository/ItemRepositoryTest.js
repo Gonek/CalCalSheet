@@ -1,7 +1,7 @@
 class ItemRepositoryTest extends TestBase {
     beforeAll(){
         super.beforeAll();
-        this.itemsSpr = mockSpr(SPR.ITEMS);
+        this.itemsSpr = mockSpr(SHT.ITEMS);
         this.itemRepository = new ItemRepository();
     }
 

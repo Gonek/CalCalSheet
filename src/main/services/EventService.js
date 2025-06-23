@@ -2,7 +2,7 @@
 
 var onEdit = (e) => getObj(EventService).onEdit(e);
 var onOpen = (e) => getObj(EventService).onOpen(e);
-var testButton = () => getObj(EventService).testButton(SPR.NEW_ITEM, CBOX.NEW_ITEM_NAME);
+var testButton = () => getObj(EventService).testButton(SHT.NEW_ITEM, CBOX.NEW_ITEM_NAME);
 
 // OTHER FUNCTIONS
 var startImport = () => getObj(ImportService).startImport();
@@ -13,7 +13,7 @@ class EventService {
 
   constructor(){
     this.btns = [
-      [SPR.DAY, [                
+      [SHT.DAY, [                
         new CBox(CBOX.DAY_NAME, DayService, 'changeDay'),
         new CBox(CBOX.MEAL_1_START, DayService, 'loadMeal'),
         new CBox(CBOX.MEAL_2_START, DayService, 'loadMeal'),
@@ -25,24 +25,24 @@ class EventService {
         new Btn(BTN.COPY_MEALS, DayService, 'copyMeals')
         ]
       ],
-      [SPR.NEW_ITEM, [
+      [SHT.NEW_ITEM, [
         new CBox(CBOX.NEW_ITEM_NAME, NewItemService, 'loadItem'),
         new Btn(BTN.SAVE_ITEM, NewItemService, 'addNewItem')]
       ],
-      [SPR.RECIPE_CALCULATOR, [  
+      [SHT.RECIPE_CALCULATOR, [  
         new CBox(CBOX.RECIPE_NAME, RecipeCalculatorService, 'loadRecipe'),
         new Btn(BTN.SAVE_RECIPE, RecipeCalculatorService, 'addRecipeToItemAndRecipes')
         ]
       ],
-      [SPR.PROFILE, [
+      [SHT.PROFILE, [
         new Btn(BTN.COPY_CALORIES, ProfileService, 'copyCalories')]
       ],
-      [SPR.SETTINGS, [           
+      [SHT.SETTINGS, [           
         new Btn(BTN.APPLY_SETTINGS, SettingsService, 'applySettings'),
         new Btn(BTN.IMPORT, ImportService, 'startImport')
         ]
       ],
-      [SPR.TUTORIAL, [
+      [SHT.TUTORIAL, [
         new Btn(BTN.TUTORIAL_TEST, TutorialService, 'tutorialTestButton'),
         new Btn(BTN.SKIP_TUTORIAL, TutorialService, 'resetTutorial'),
         new Btn(BTN.TUTORIAL_NEXT, TutorialService, 'tutorialNext')

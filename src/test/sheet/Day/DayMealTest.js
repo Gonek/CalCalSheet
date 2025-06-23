@@ -2,8 +2,8 @@ class DayMealTest extends TestBaseDay {
 
     beforeAll(){
         super.beforeAll();
-        this.mealsSpr = getSpr(SPR.MEALS);
-        this.daysSpr = getSpr(SPR.DAYS);
+        this.mealsSpr = getSpr(SHT.MEALS);
+        this.daysSpr = getSpr(SHT.DAYS);
         this.meal1StartRng = getRng(CBOX.MEAL_1_START);
         this.selectedMealNameRng = getRng(RNG.SELECTED_MEAL_NAME);
         this.selectedMealItemsRng = getRng(RNG.SELECTED_MEAL_ITEMS);

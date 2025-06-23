@@ -2,9 +2,9 @@ class RecipeCalculatorTest extends TestBase {
 
     beforeAll(){
         super.beforeAll();
-        this.spr = getSpr(SPR.RECIPE_CALCULATOR);
-        this.itemsSpr = getSpr(SPR.ITEMS);
-        this.recipesSpr  = getSpr(SPR.RECIPES);
+        this.sht = getSpr(SHT.RECIPE_CALCULATOR);
+        this.itemsSpr = getSpr(SHT.ITEMS);
+        this.recipesSpr  = getSpr(SHT.RECIPES);
         this.recipeNameRng = getRng(RNG.RECIPE_NAME);
         this.recipeItemsRng = getRng(RNG.RECIPE_ITEMS);
         this.recipeServingRng = getRng(RNG.RECIPE_SERVING);
@@ -42,7 +42,7 @@ class RecipeCalculatorTest extends TestBase {
           `=IFERROR(INDEX(Items!Y$4:Y, $D${k + 4}, 0)*$C${k + 4})`
         ]);
         //WHEN
-        let result = this.spr.getFormulas('D4:P28');
+        let result = this.sht.getFormulas('D4:P28');
         //THEN
         assertEquals(result, expected);
     }
@@ -78,8 +78,8 @@ class RecipeCalculatorTest extends TestBase {
           '=ROUND($A$30*P29, 2)'
         ]
         //WHEN
-        let result100g = this.spr.getFormulas('G29:P29');
-        let resultSave = this.spr.getFormulas('C30:P30');
+        let result100g = this.sht.getFormulas('G29:P29');
+        let resultSave = this.sht.getFormulas('C30:P30');
         //THEN
         assertEquals(result100g, expected100g);
         assertEquals(resultSave, expectedSave);
@@ -94,9 +94,9 @@ class RecipeCalculatorTest extends TestBase {
         let expectedSelRecipe = '=IFERROR(FILTER(Recipes!$C$4:$D, B3=Recipes!$B$4:$B))';
         let expectedRecipeNames = '=ARRAYFORMULA({B3;UNIQUE(Recipes!B4:B)})';
         //WHEN
-        let resultNutriCals = this.spr.getFormulas('A29:A30');
-        let resultSelRecipe = this.spr.getFormula('R4');
-        let resultRecipeNames = this.spr.getFormula('T3');
+        let resultNutriCals = this.sht.getFormulas('A29:A30');
+        let resultSelRecipe = this.sht.getFormula('R4');
+        let resultRecipeNames = this.sht.getFormula('T3');
         //THEN
         assertEquals(resultNutriCals, expectedNutriCalc);
         assertEquals(resultSelRecipe, expectedSelRecipe);
@@ -118,7 +118,7 @@ class RecipeCalculatorTest extends TestBase {
         let expected = Array.from({length:25},(v,k)=>['g', '100 g', '100 kcal', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100 mg']);
         //WHEN
         this.recipeItemsRng.setValues(items);
-        let result = this.spr.getDisplayValues('E4:P28');
+        let result = this.sht.getDisplayValues('E4:P28');
         //THEN
         assertEquals(result, expected);
     }
@@ -129,7 +129,7 @@ class RecipeCalculatorTest extends TestBase {
         let expected = Array.from({length:2},(v,k)=>['g', '100 g', '100 kcal', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100.0 g', '100 mg']);
         //WHEN
         this.recipeItemsRng.setValues(items);
-        let result = this.spr.getDisplayValues('E29:P30');
+        let result = this.sht.getDisplayValues('E29:P30');
         //THEN
         assertEquals(result, expected);
     }
@@ -138,7 +138,7 @@ class RecipeCalculatorTest extends TestBase {
         //GIVEN
         let expected = ['g', '100 g', '0 kcal', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0 mg'];
         //WHEN
-        let result = this.spr.getDisplayValues('E29:P29');
+        let result = this.sht.getDisplayValues('E29:P29');
         //THEN
         assertEquals(result, expected);
     }
@@ -156,7 +156,7 @@ class RecipeCalculatorTest extends TestBase {
 
         // WHEN
         this.recipeItemsRng.setValues(items);
-        let result = this.spr.getValues('D4:D28').flat();
+        let result = this.sht.getValues('D4:D28').flat();
 
         // THEN
         assertEquals(result, expected);
@@ -170,7 +170,7 @@ class RecipeCalculatorTest extends TestBase {
         //WHEN
         this.recipeItemsRng.setValue(itemName, 1, 1);
         this.recipeItemsRng.setValue(itemAmount, 1, 2);
-        let result = this.spr.getValues('E4:P4');
+        let result = this.sht.getValues('E4:P4');
         //THEN
         assertEquals(result, expected);
     }
@@ -183,7 +183,7 @@ class RecipeCalculatorTest extends TestBase {
         //WHEN
         this.recipeItemsRng.setValue(itemName, 1, 1);
         this.recipeItemsRng.setValue(itemAmount, 1, 2);
-        let result = this.spr.getValues('E4:P4');
+        let result = this.sht.getValues('E4:P4');
         //THEN
         assertEquals(result, expected);
     }
@@ -195,8 +195,8 @@ class RecipeCalculatorTest extends TestBase {
         //WHEN
         this.recipeItemsRng.setValuesWithResize(items);
         this.recipeServingRng.clear();
-        let result100g = this.spr.getValues('E29:P29');
-        let resultSave = this.spr.getValues('E30:P30');
+        let result100g = this.sht.getValues('E29:P29');
+        let resultSave = this.sht.getValues('E30:P30');
         //THEN
         assertEquals(result100g, expected);
         assertEquals(resultSave, expected);
@@ -211,8 +211,8 @@ class RecipeCalculatorTest extends TestBase {
         //WHEN
         this.recipeItemsRng.setValuesWithResize(items);
         this.recipeServingRng.setValuesWithResize(serving);
-        let result100g = this.spr.getValues('E29:P29');
-        let resultSave = this.spr.getValues('E30:P30');
+        let result100g = this.sht.getValues('E29:P29');
+        let resultSave = this.sht.getValues('E30:P30');
         //THEN
         assertEquals(result100g, expected100g);
         assertEquals(resultSave, expectedSave);
@@ -227,8 +227,8 @@ class RecipeCalculatorTest extends TestBase {
         //WHEN
         this.recipeItemsRng.setValuesWithResize(items);
         this.recipeServingRng.setValuesWithResize(serving);
-        let result100g = this.spr.getValues('E29:P29');
-        let resultSave = this.spr.getValues('E30:P30');
+        let result100g = this.sht.getValues('E29:P29');
+        let resultSave = this.sht.getValues('E30:P30');
         //THEN
         assertEquals(result100g, expected100g);
         assertEquals(resultSave, expectedSave);

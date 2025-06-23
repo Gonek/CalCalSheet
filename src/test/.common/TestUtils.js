@@ -25,17 +25,17 @@ class TestUtils {
                       ['Zero cal',        100,  'g',      1,  0,    0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    'Green',  0,         getYesterday()],
                       ['ZZ Last',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         '']
                     ];
-      getSpr(SPR.ITEMS).putDataAtEnd(testData);
+      getSpr(SHT.ITEMS).putDataAtEnd(testData);
   }
 
   clearItems() {
-      getSpr(SPR.ITEMS).clear('B4:AB');
+      getSpr(SHT.ITEMS).clear('B4:AB');
   }
 
   // TEST DAYS 
 
   addTestDays(generateFrom = -2){
-    let spr = getSpr(SPR.DAYS);
+    let sht = getSpr(SHT.DAYS);
     this.clearDays();
     var testData = [// Breakfast      Snack             Lunch            Snack          Dinner            Supper          Additional data
                     // Default
@@ -135,24 +135,24 @@ class TestUtils {
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
     ];
-    spr.setAreaValueAtPos(4, 2, testData);
+    sht.setAreaValueAtPos(4, 2, testData);
     let date = getToday(); 
     date.setDate(date.getDate() + generateFrom)
-    spr.setValue('A4', 'Default');
+    sht.setValue('A4', 'Default');
     let i;
     for(i = 0; i < 5; i++){
-      spr.setValue(`A${19+(i*15)}`, new Date(date));
+      sht.setValue(`A${19+(i*15)}`, new Date(date));
       date.setDate(date.getDate() + 1);
     }
   }
 
   clearDays(){
-    let spr = getSpr(SPR.DAYS);
-    spr.clear('B4:N');
+    let sht = getSpr(SHT.DAYS);
+    sht.clear('B4:N');
     let numDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
     for(var i = 0; i<=numDays; i++){
-      spr.setPosValue(4 + (i * 15), 14, '2330');
-      spr.setPosValue(5 + (i * 15), 14, 'Default');
+      sht.setPosValue(4 + (i * 15), 14, '2330');
+      sht.setPosValue(5 + (i * 15), 14, 'Default');
     }
   }
 
@@ -229,11 +229,11 @@ class TestUtils {
       [`${MEAL_ICON} Meal2`, 'Zero cal', 500],
       [`${MEAL_ICON} Meal2`, 'All Green', 256]
     ];
-    getSpr(SPR.MEALS).putDataAtEnd(testData);
+    getSpr(SHT.MEALS).putDataAtEnd(testData);
   }
 
   clearMeals(){
-    getSpr(SPR.MEALS).clear('B4:D');
+    getSpr(SHT.MEALS).clear('B4:D');
   }
 
   // RECIPES
@@ -270,11 +270,11 @@ class TestUtils {
       ['Recipe2', 'Test 100g', 500],
       ['Recipe3', 'Test 1 serving', 2]
     ];
-    getSpr(SPR.RECIPES).putDataAtEnd(testData);
+    getSpr(SHT.RECIPES).putDataAtEnd(testData);
   }
 
   clearRecipes(){
-    getSpr(SPR.RECIPES).clear('B4:D');
+    getSpr(SHT.RECIPES).clear('B4:D');
   }
 
   clearRecipeCalculator(){
@@ -334,16 +334,16 @@ class TestUtils {
   // HISTORY
 
   addTestHistory(){
-    let spr = getSpr(SPR.HISTORY);
-    spr.clear('B10:S');
+    let sht = getSpr(SHT.HISTORY);
+    sht.clear('B10:S');
     let days = Array.from({length:100},(v,row)=> 
       Array.from({length:14},(v,col)=> row + col)
     );
-    spr.putDataAtEnd(days);
+    sht.putDataAtEnd(days);
   }
 
   clearHistory(){
-    getSpr(SPR.HISTORY).clear('B10:S');
+    getSpr(SHT.HISTORY).clear('B10:S');
   }
 
   incCol(startChar, i){

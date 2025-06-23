@@ -11,11 +11,11 @@ class DayGivenSteps extends BaseDayGivenSteps{
     }
 
     copy_to_as(to){
-        this.changeCboxToIndex(SPR.DAY, RNG.COPY_MEAL_TO, to);
+        this.changeCboxToIndex(SHT.DAY, RNG.COPY_MEAL_TO, to);
     }
 
     save_from_as_meal_no_(to){
-        this.changeCboxToIndex(SPR.DAY, RNG.SAVE_MEAL_FROM, to -1);
+        this.changeCboxToIndex(SHT.DAY, RNG.SAVE_MEAL_FROM, to -1);
     }
 
     save_as_as(name){
@@ -26,19 +26,19 @@ class DayGivenSteps extends BaseDayGivenSteps{
 class DayWhenSteps extends Steps{
 
     day_changed(to){
-        this.changeCboxToIndex(SPR.DAY, CBOX.DAY_NAME, to);
+        this.changeCboxToIndex(SHT.DAY, CBOX.DAY_NAME, to);
     }
 
     meal_selected_in_meal_no_(mealNumber, mealSelected){
-        this.changeCbox(SPR.DAY, `Meal${mealNumber}Start`, mealSelected);
+        this.changeCbox(SHT.DAY, `Meal${mealNumber}Start`, mealSelected);
     }
 
     copy_meal_clicked(){
-        this.clickButton(SPR.DAY, BTN.COPY_MEALS);
+        this.clickButton(SHT.DAY, BTN.COPY_MEALS);
     }
 
     save_meal_clicked(){
-        this.clickButton(SPR.DAY, BTN.SAVE_MEAL);
+        this.clickButton(SHT.DAY, BTN.SAVE_MEAL);
     }  
 }
 
@@ -50,7 +50,7 @@ class DayThenSteps extends BaseDayThenSteps{
     }
 
     meal_copied(to, mealNo, expected){
-        let result = getSpr(SPR.DAYS).getAreaValue(to * 15 + 4, mealNo * 2, 15, 2);
+        let result = getSpr(SHT.DAYS).getAreaValue(to * 15 + 4, mealNo * 2, 15, 2);
         assertEqualsArray(result, resizeMatrix(expected, 2, 15, ''));
     }
 
@@ -60,17 +60,17 @@ class DayThenSteps extends BaseDayThenSteps{
 
     meal_saved_with_name(name){
         this.name = name;
-        let mealFind = getSpr(SPR.MEALS).getValues('B4:D').find(r => r[0] == name);
+        let mealFind = getSpr(SHT.MEALS).getValues('B4:D').find(r => r[0] == name);
         assertTrue(mealFind);
     }
 
     no_meal_saved_with_name(name){
-        let mealFind = getSpr(SPR.MEALS).getValues('B4:D').find(r => r[0] == name);
+        let mealFind = getSpr(SHT.MEALS).getValues('B4:D').find(r => r[0] == name);
         assertFalse(mealFind);
     }
 
     meal_have_items(items){
-        let filtered = getSpr(SPR.MEALS).getValues('B4:D').filter(i => i[0] === this.name);
+        let filtered = getSpr(SHT.MEALS).getValues('B4:D').filter(i => i[0] === this.name);
         assertEqualsArray(filtered, items.map(i => [this.name, i[0], i[1]]));
     }
 }

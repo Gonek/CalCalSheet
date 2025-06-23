@@ -3,7 +3,7 @@ class TutorialServiceTest extends TestBase {
     beforeAll(){
         super.beforeAll();
         this.activeSpSh = mockSpSh(SPSH.ACTIVE);
-        this.tutorialSpr = mockSpr(SPR.TUTORIAL);
+        this.tutorialSpr = mockSpr(SHT.TUTORIAL);
         this.tutorialStepRng = mockRng(RNG.TUTORIAL_STEP);
         this.tutorialNextPosRng = mockRng(RNG.TUTORIAL_NEXT_POS);
         this.tutorialResetPosRng = mockRng(RNG.TUTORIAL_RESET_POS);

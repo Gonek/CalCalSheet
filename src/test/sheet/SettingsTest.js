@@ -2,7 +2,7 @@ class SettingsTest extends TestBase {
 
     beforeAll(){
         super.beforeAll();
-        this.spr = getSpr(SPR.SETTINGS);
+        this.sht = getSpr(SHT.SETTINGS);
         this.generalRng = getRng(RNG.GENERAL_SETTINGS);
         this.mealsRng = getRng(RNG.MEALS);
         this.importRng = getRng(RNG.IMPORT); 

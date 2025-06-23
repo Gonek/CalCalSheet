@@ -1,20 +1,20 @@
 class DayRepository{
 
   constructor(){
-     this.spr = getSpr(SPR.DAYS);
+     this.sht = getSpr(SHT.DAYS);
   }
 
   save(day){
     let prevDayIndex = getRng(RNG.DAY_PREV_DAY_INDEX).getValue();
-    this.spr.setAreaValueAtPos(prevDayIndex + 3, 2, this.rearrangeItems(day));
-    this.spr.setAreaValueAtPos(prevDayIndex + 3, 14, [[day.outputCalories], [day.macroProfile]]);
+    this.sht.setAreaValueAtPos(prevDayIndex + 3, 2, this.rearrangeItems(day));
+    this.sht.setAreaValueAtPos(prevDayIndex + 3, 14, [[day.outputCalories], [day.macroProfile]]);
     return prevDayIndex > 1;
   }
 
   deletePastDays(){
     let lastRowToDelete = getRng(RNG.DELETE_DAYS_UNTIL).getValue();
     if(lastRowToDelete > 0){
-      this.spr.deleteRows(19, lastRowToDelete+1);
+      this.sht.deleteRows(19, lastRowToDelete+1);
     }
   }
 
@@ -22,7 +22,7 @@ class DayRepository{
     let firstRowToDelete = getRng(RNG.DELETE_DAYS_FROM).getValue()
     let newDayRow = getRng(RNG.FIRST_EMPTY_DAY_INDEX).getValue();
     if(firstRowToDelete > 0){
-      this.spr.deleteRows(firstRowToDelete, newDayRow);
+      this.sht.deleteRows(firstRowToDelete, newDayRow);
     }
   }
 
@@ -32,14 +32,14 @@ class DayRepository{
     let createDays = getRng(RNG.CREATE_DAYS).getValue();
     let newDayRow = getRng(RNG.FIRST_EMPTY_DAY_INDEX).getValue();
     if(createDays > 0){
-      this.spr.insertRows(newDayRow, 15 * createDays);
+      this.sht.insertRows(newDayRow, 15 * createDays);
       for(let i = 0; i < createDays; i++){
         let row = newDayRow + 15 * i;
         let newDayA1 = `A${row}:N${row + 15}`;
         let nextprofile = getRng(RNG.NEXT_PROFILE).getValue();
         let defaultCalorieOutput = getRng(RNG.DEFAULT_CALORIE_OUTPUT).getValue();
-        defaultDayRng.copyTo(this.spr.getRng(newDayA1));
-        this.spr.setPosValue(row, 1, new Date(createDaysFrom));
+        defaultDayRng.copyTo(this.sht.getRng(newDayA1));
+        this.sht.setPosValue(row, 1, new Date(createDaysFrom));
         this.setDefaultAdditinalData(row, defaultCalorieOutput, nextprofile);
         createDaysFrom.setDate(createDaysFrom.getDate() + 1);
       }
@@ -47,14 +47,14 @@ class DayRepository{
   }
 
   setDefaultAdditinalData(row, defaultCalorieOutput, nextprofile){
-    this.spr.setPosValue(row, 14, defaultCalorieOutput);
-    this.spr.setPosValue(row+1, 14, nextprofile);
+    this.sht.setPosValue(row, 14, defaultCalorieOutput);
+    this.sht.setPosValue(row+1, 14, nextprofile);
   }
 
   copyMeals(mealsMaps, copyToRows){
     copyToRows.forEach(startRow => 
       mealsMaps.forEach((values, i) =>
-        this.spr.setAreaValue(startRow, i * 2, 15, 2, values)
+        this.sht.setAreaValue(startRow, i * 2, 15, 2, values)
       )
     )
   }

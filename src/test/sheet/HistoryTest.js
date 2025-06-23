@@ -2,12 +2,12 @@ class HistoryTest extends TestBase {
 
     beforeAll(){
         super.beforeAll();
-        this.spr = getSpr(SPR.HISTORY);
+        this.sht = getSpr(SHT.HISTORY);
         this.intervalRng = getRng(RNG.HISTORY_INTERVAL);
     }
 
     clearData(){
-        this.spr.clear('B10:R');
+        this.sht.clear('B10:R');
     }
 
     afterAll(){
@@ -35,10 +35,10 @@ class HistoryTest extends TestBase {
               return `=MIN(OFFSET($${col}$10:$${col},MAX(0,COUNT($${col}$10:$${col})-$A$3),0,$A$3,1))`
             });
         //WHEN
-        let resultAverage = this.spr.getFormulas('C4:O4');
-        let resultSum = this.spr.getFormulas('C5:N5');
-        let resultMax = this.spr.getFormulas('C6:O6');
-        let resultMin = this.spr.getFormulas('C7:O7');
+        let resultAverage = this.sht.getFormulas('C4:O4');
+        let resultSum = this.sht.getFormulas('C5:N5');
+        let resultMax = this.sht.getFormulas('C6:O6');
+        let resultMin = this.sht.getFormulas('C7:O7');
         //THEN
         assertEquals(resultAverage, expectedAverage);
         assertEquals(resultSum, expectedSum);
@@ -50,7 +50,7 @@ class HistoryTest extends TestBase {
         //GIVEN 
         let expected = '=IFS(B3="Last 7 days", 7, B3="Last 30 days", 30, B3="Last 90 days", 90, B3 = "Overall", 99999)';
         //WHEN
-        let result = this.spr.getFormula('A3');
+        let result = this.sht.getFormula('A3');
         //THEN
         assertEquals(result, expected);
     }
@@ -59,10 +59,10 @@ class HistoryTest extends TestBase {
         //GIVEN
         let expected = ['0 kcal', '0 kcal', '0 kcal', '0 g', '0 g', '0 g', '0 g', '0 g', '0 g', '0 g', '0 g', '0 mg', '0.00'];
         //WHEN
-        let resultAverage = this.spr.getDisplayValues('C4:O4');
-        let resultSum = this.spr.getDisplayValues('C5:N5');
-        let resultMax = this.spr.getDisplayValues('C6:O6');
-        let resultMin = this.spr.getDisplayValues('C7:O7');
+        let resultAverage = this.sht.getDisplayValues('C4:O4');
+        let resultSum = this.sht.getDisplayValues('C5:N5');
+        let resultMax = this.sht.getDisplayValues('C6:O6');
+        let resultMin = this.sht.getDisplayValues('C7:O7');
         //THEN
         assertEquals(resultAverage, expected);
         assertEquals(resultSum, expected.slice(0, 12));
@@ -75,8 +75,8 @@ class HistoryTest extends TestBase {
         let days = [['01/01/2024', 1000, 600, 400, 15, 20, 25, 30, 35, 40, 45, 50, 55, 10.15, '✔️', '❌', '✔️']];
         let expected = ['01/01/2024', '1,000 kcal', '600 kcal', '400 kcal', '15 g', '20 g', '25 g', '30 g', '35 g', '40 g', '45 g', '50 g', '55 mg', '10.15', '✔️', '❌', '✔️']
         //WHEN
-        this.spr.putDataAtEnd(days);
-        let result = this.spr.getDisplayValues('B10:R10');
+        this.sht.putDataAtEnd(days);
+        let result = this.sht.getDisplayValues('B10:R10');
         //THEN
         assertEquals(result, expected);
     }
@@ -92,7 +92,7 @@ class HistoryTest extends TestBase {
         ]
         //WHEN
         this.intervalRng.setValue('Last 7 days');
-        let result = this.spr.getValues('C4:O7');
+        let result = this.sht.getValues('C4:O7');
         //THEN
         assertEquals(result, expectedSummary);
     }
@@ -108,7 +108,7 @@ class HistoryTest extends TestBase {
         ]
         //WHEN
         this.intervalRng.setValue('Last 30 days');
-        let result = this.spr.getValues('C4:O7');
+        let result = this.sht.getValues('C4:O7');
         //THEN
         assertEquals(result, expectedSummary);
     }
@@ -124,7 +124,7 @@ class HistoryTest extends TestBase {
         ]
         //WHEN
         this.intervalRng.setValue('Last 90 days');
-        let result = this.spr.getValues('C4:O7');
+        let result = this.sht.getValues('C4:O7');
         //THEN
         assertEquals(result, expectedSummary);
     }
@@ -140,7 +140,7 @@ class HistoryTest extends TestBase {
         ]
         //WHEN
         this.intervalRng.setValue('Overall');
-        let result = this.spr.getValues('C4:O7');
+        let result = this.sht.getValues('C4:O7');
         //THEN
         assertEquals(result, expectedSummary);
     }

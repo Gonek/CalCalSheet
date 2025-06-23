@@ -49,13 +49,13 @@ class ImportGivenSteps extends Steps{
 
 class ImportWhenSteps extends Steps{
     import_clicked(){
-        this.clickButton(SPR.SETTINGS, BTN.IMPORT);
+        this.clickButton(SHT.SETTINGS, BTN.IMPORT);
     }
 }
 
 class ImportThenSteps extends Steps{
     items_imported(){
-        let items = getSpr(SPR.ITEMS).getValues('B4:AA49');
+        let items = getSpr(SHT.ITEMS).getValues('B4:AA49');
         let expected_row_1 = ['Almond',	100, 'g', 1, 576, 5.76, 49.00, 0.49, 3.7, 0.04, 0.0, 0.00, 22.0, 0.22, 12.0, 0.12, 3.9, 0.04, 0, 0.00, 21.0, 0.21, 1, 0.01, 'Red', 5.76];
         let expected_row_12 = ['Carrot', 100, 'g', 1, 41, 0.41, 0.2, 0.0, 0.0, 0.00, 0.0, 0.00, 10.0, 0.1, 3.0, 0.03, 3.5, 0.04, 0, 0.00, 0.9, 0.1, 58, 0.58, 'Green', 0.41];
         let expected_row_27 = ['Leek', 100, 'g', 1, 61, 0.61, 0.30, 0.0, 0.0, 0.00, 0.0, 0.00, 14.0, 0.14, 1.8, 0.02, 3.9, 0.04, 0, 0.00, 1.5, 0.02, 20, 0.20, 'Green', 0.61];
@@ -68,7 +68,7 @@ class ImportThenSteps extends Steps{
     }
 
     items_imported_with_merge(){
-        let items = getSpr(SPR.ITEMS).getValues('B4:AA63');
+        let items = getSpr(SHT.ITEMS).getValues('B4:AA63');
         let expected_row_1 = ['1 First', 100, 'g', 1, 100, 1.00, 100.00, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0,	1.00, 100.0, 1.00, 100.0, 1.00, 100, 1.00, 100.0, 1.00, 100, 1.00, 'Green', 1.00];
         let expected_row_27 = ['Fig', 100, 'g', 1, 74, 0.74, 0.30, 0.00, 0.1, 0.00, 0.0, 0.00, 19.0, 0.19, 2.9, 0.03, 16.0, 0.16, 0, 0.00, 0.8, 0.01, 1, 0.01, 'Green', 0.74];
         let expected_row_54 = ['Test 1 serving', 1, 'Serving',50, 250, 250.00, 25.00, 25.00, 2.0, 2.00,	0.0, 0.00, 45.0, 45.00, 1.0, 1.00, 21.0, 21.00, 0, 0.00, 4.0, 4.00, 12, 12.00, 'Red', 5.00];
@@ -81,12 +81,12 @@ class ImportThenSteps extends Steps{
     }
 
     items_not_imported(){
-        let items = getSpr(SPR.ITEMS).getValues('B4:AA');
+        let items = getSpr(SHT.ITEMS).getValues('B4:AA');
         assertArrayEmpty(items);
     }
 
     recipes_imported(){
-        let recipes = getSpr(SPR.RECIPES).getValues('B4:D11');
+        let recipes = getSpr(SHT.RECIPES).getValues('B4:D11');
         let expected = [['Banana cake', 'Egg', 100],
                         ['Banana cake', 'Banana', 250],
                         ['Banana cake', 'Sugar', 200],
@@ -99,7 +99,7 @@ class ImportThenSteps extends Steps{
     }
 
     recipes_imported_with_merge(){
-        let recipes = getSpr(SPR.RECIPES).getValues('B4:D39');
+        let recipes = getSpr(SHT.RECIPES).getValues('B4:D39');
         let expected = [['Banana cake', 'Egg', 100],
                         ['Banana cake', 'Banana', 250],
                         ['Banana cake', 'Sugar', 200],
@@ -140,12 +140,12 @@ class ImportThenSteps extends Steps{
     }
 
     recipes_not_imported(){
-        let recipes = getSpr(SPR.RECIPES).getValues('B4:D');
+        let recipes = getSpr(SHT.RECIPES).getValues('B4:D');
         assertArrayEmpty(recipes);
     }
 
     meals_imported(){
-        let meals = getSpr(SPR.MEALS).getValues('B4:D13');
+        let meals = getSpr(SHT.MEALS).getValues('B4:D13');
         let expected = [['🥣 Fruit bow', 'Apple', 120],
                         ['🥣 Fruit bow', 'Banana', 120],
                         ['🥣 Fruit bow', 'Strawberry', 50],
@@ -160,7 +160,7 @@ class ImportThenSteps extends Steps{
     }
 
     meals_imported_with_merge(){
-        let meals = getSpr(SPR.MEALS).getValues('B4:D33');
+        let meals = getSpr(SHT.MEALS).getValues('B4:D33');
         let expected = [['🥣 Fruit bow', 'Apple', 120],
                         ['🥣 Fruit bow', 'Banana', 120],
                         ['🥣 Fruit bow', 'Strawberry', 50],
@@ -195,7 +195,7 @@ class ImportThenSteps extends Steps{
     }
 
     meals_not_imported(){
-        let meals = getSpr(SPR.MEALS).getValues('B4:D');
+        let meals = getSpr(SHT.MEALS).getValues('B4:D');
         assertArrayEmpty(meals);
     }
 
@@ -247,19 +247,19 @@ class ImportThenSteps extends Steps{
     }
 
     history_imported(){
-        let history = getSpr(SPR.HISTORY).getValues('B10:R18');
+        let history = getSpr(SHT.HISTORY).getValues('B10:R18');
         let expected = Array.from({length:9},(v,k)=>[new Date(2025, 0, 10 + k), 2000 + k, 2400 + k, 400, 10 + k, 20 + k, 30 + k, 40 + k, 50 + k, 60 + k, 70 + k, 80 + k, 90 + k, 100.00 + k, '✔️', '❌', '✔️']);
     
         assertEqualsArray(history, expected);
     }
 
     history_not_imported(){
-        let history = getSpr(SPR.HISTORY).getValues('B10:R18');
+        let history = getSpr(SHT.HISTORY).getValues('B10:R18');
         assertArrayEmpty(history);
     }
 
     days_imported(){
-        let daysSpr = getSpr(SPR.DAYS);
+        let daysSpr = getSpr(SHT.DAYS);
         let expected = Array(90).fill(Array(12).fill(''));
         expected[15] = ['Carrot', 750, 'Cashew', 210, '', '', 'Blueberry', 850, '', '', 'Potato', 500];
         expected[30] = ['Banana', 500, '', '', 'Blueberry', 1000, '', '', 'Apple', 250, '', ''];
@@ -281,7 +281,7 @@ class ImportThenSteps extends Steps{
     }
 
     days_not_imported(){
-        let days = getSpr(SPR.DAYS).getValues('B4:M');
+        let days = getSpr(SHT.DAYS).getValues('B4:M');
         assertArrayEmpty(days);
     }
 }

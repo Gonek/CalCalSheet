@@ -1,7 +1,7 @@
 class HistoryRepository{
 
   constructor(){
-     this.spr = getSpr(SPR.HISTORY);
+     this.sht = getSpr(SHT.HISTORY);
   }
 
   addOrUpdate(history){
@@ -14,14 +14,14 @@ class HistoryRepository{
   }
 
   add(history){
-    let row = this.spr.getLastRow()+1;
+    let row = this.sht.getLastRow()+1;
     let rowData = this.fieldsToRow(history, row);
-    this.spr.appendRow(rowData);
-    this.spr.sort(2);
+    this.sht.appendRow(rowData);
+    this.sht.sort(2);
   }
   
   update(history, originalPos){
-    this.spr.setAreaValue(originalPos + 9, 1, 1, 18, [this.fieldsToRow(history, originalPos + 9)]);
+    this.sht.setAreaValue(originalPos + 9, 1, 1, 18, [this.fieldsToRow(history, originalPos + 9)]);
   }
 
   fieldsToRow(history, row){

@@ -1,7 +1,7 @@
 class RecipeRepository extends GroupRepository{
 
   constructor(){
-    super(SPR.RECIPES);
+    super(SHT.RECIPES);
   }
 
   saveRecipe(recipe) {

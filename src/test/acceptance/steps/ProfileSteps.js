@@ -43,7 +43,7 @@ class ProfileGivenSteps extends Steps{
 
 class ProfileWhenSteps extends Steps{
     copy_calories_clicked(){
-        this.clickButton(SPR.PROFILE, BTN.COPY_CALORIES);
+        this.clickButton(SHT.PROFILE, BTN.COPY_CALORIES);
     }
 }
 

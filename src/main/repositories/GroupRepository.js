@@ -6,7 +6,7 @@
 class GroupRepository{
 
   constructor(name){
-    this.spr = getSpr(name);
+    this.sht = getSpr(name);
   }
 
   /**
@@ -24,8 +24,8 @@ class GroupRepository{
    */
   saveToRepository(group){
     let data = group.items.map(row => [group.name, row[0], row[1]]);
-    this.spr.putDataAtEnd(data);
-    this.spr.sort(2);
+    this.sht.putDataAtEnd(data);
+    this.sht.sort(2);
   }
 
   /**
@@ -33,11 +33,11 @@ class GroupRepository{
    * @param {String} name of item
    */
   deleteIfExist(name){
-    var allItems = this.spr.getValues(REPOSITORY_AREA).flat();
+    var allItems = this.sht.getValues(REPOSITORY_AREA).flat();
     var deleteFrom = allItems.findIndex(aName => aName === name);
     if (deleteFrom > -1) { 
       var deleteTo = allItems.findLastIndex(aName => aName === name);
-      this.spr.deleteRows(deleteFrom + 4, deleteTo + 5);
+      this.sht.deleteRows(deleteFrom + 4, deleteTo + 5);
     }
   }
 }

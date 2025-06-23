@@ -1,7 +1,7 @@
 class DayService{
 
   constructor(){
-    this.spr = getSpr(SPR.DAY);
+    this.sht = getSpr(SHT.DAY);
     this.app = getObj(App);
     this.dayRepository = getObj(DayRepository);
   }
@@ -37,7 +37,7 @@ class DayService{
     let mealName = cbox.getRng().getValue();
     if(mealName.indexOf('🥣') == 0){
       let startrow = cbox.getRng().getRow();
-      getSpr(SPR.DAY).setValue(`V${startrow}`, mealName.substring(3));
+      getSpr(SHT.DAY).setValue(`V${startrow}`, mealName.substring(3));
       let sourceData = getRng(`${RNG.SELECTED_MEAL_ITEMS}`)
                           .getValues()
                           .map(row => [row[0], '', row[1]]);

@@ -17,7 +17,7 @@ class ImportService{
     if(!getSpSh(this.importId).isExist()){
       throw new Error("Loading import sheet failed! Please check the sheet Id");
     } 
-    this.baseVersion = getSpr(`${this.importId}.${SPR.SUPPORT}`).getValue(VERSION_POSITION);
+    this.baseVersion = getSpr(`${this.importId}.${SHT.SUPPORT}`).getValue(VERSION_POSITION);
     if (this.baseVersion !== V1_4 && this.baseVersion !== V1_5 && this.baseVersion !== V1_6){
       throw new Error("Sorry, you can only import version 1.4, 1.5, 1.6 sheets");
     } 
@@ -26,7 +26,7 @@ class ImportService{
   importData(sheetName){
     var fromSpr = getSpr(`${this.importId}.${sheetName}`);
     var toSpr = getSpr(sheetName);
-    if(fromSpr.spr){
+    if(fromSpr.sht){
       switch(sheetName){
         case 'Items': this.importItems(fromSpr, toSpr); break;
         case 'Recipes': this.importRecipes(fromSpr, toSpr); break;

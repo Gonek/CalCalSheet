@@ -1,12 +1,12 @@
 class EventServiceTest extends TestBase {
     beforeAll(){
         super.beforeAll();
-        this.daySpr = mockSpr(SPR.DAY);
-        this.newItemSpr = mockSpr(SPR.NEW_ITEM);
-        this.recipeCalculatorSpr = mockSpr(SPR.RECIPE_CALCULATOR);
-        this.profileSpr = mockSpr(SPR.PROFILE);
-        this.settingsSpr = mockSpr(SPR.SETTINGS);
-        this.tuturialSpr = mockSpr(SPR.TUTORIAL);
+        this.daySpr = mockSpr(SHT.DAY);
+        this.newItemSpr = mockSpr(SHT.NEW_ITEM);
+        this.recipeCalculatorSpr = mockSpr(SHT.RECIPE_CALCULATOR);
+        this.profileSpr = mockSpr(SHT.PROFILE);
+        this.settingsSpr = mockSpr(SHT.SETTINGS);
+        this.tuturialSpr = mockSpr(SHT.TUTORIAL);
         this.dayService = mock(DayService);
         this.newItemService = mock(NewItemService);
         this.recipeCalculatorService = mock(RecipeCalculatorService);
@@ -29,25 +29,25 @@ class EventServiceTest extends TestBase {
 
     shouldOnEditCallEventLinkedToButton(){
         let data = [
-            [SPR.DAY, CBOX.DAY_NAME, this.dayService, 'changeDay'],
-            [SPR.DAY, CBOX.MEAL_1_START, this.dayService, 'loadMeal'],
-            [SPR.DAY, CBOX.MEAL_2_START, this.dayService, 'loadMeal'],
-            [SPR.DAY, CBOX.MEAL_3_START, this.dayService, 'loadMeal'],
-            [SPR.DAY, CBOX.MEAL_4_START, this.dayService, 'loadMeal'],
-            [SPR.DAY, CBOX.MEAL_5_START, this.dayService, 'loadMeal'],
-            [SPR.DAY, CBOX.MEAL_6_START, this.dayService, 'loadMeal'],
-            [SPR.DAY, BTN.SAVE_MEAL, this.dayService, 'saveMeal'],
-            [SPR.DAY, BTN.COPY_MEALS, this.dayService, 'copyMeals'],
-            [SPR.NEW_ITEM, CBOX.NEW_ITEM_NAME, this.newItemService, 'loadItem'],
-            [SPR.NEW_ITEM, BTN.SAVE_ITEM, this.newItemService, 'addNewItem'],
-            [SPR.RECIPE_CALCULATOR, CBOX.RECIPE_NAME, this.recipeCalculatorService, 'loadRecipe'],
-            [SPR.RECIPE_CALCULATOR, BTN.SAVE_RECIPE, this.recipeCalculatorService, 'addRecipeToItemAndRecipes'],
-            [SPR.PROFILE, BTN.COPY_CALORIES, this.profileService, 'copyCalories'],
-            [SPR.SETTINGS, BTN.APPLY_SETTINGS, this.settingsService, 'applySettings'],
-            [SPR.SETTINGS, BTN.IMPORT, this.importService, 'startImport'],
-            [SPR.TUTORIAL, BTN.TUTORIAL_TEST, this.tutorialService, 'tutorialTestButton'],
-            [SPR.TUTORIAL, BTN.SKIP_TUTORIAL, this.tutorialService, 'resetTutorial'],
-            [SPR.TUTORIAL, BTN.TUTORIAL_NEXT, this.tutorialService, 'tutorialNext']
+            [SHT.DAY, CBOX.DAY_NAME, this.dayService, 'changeDay'],
+            [SHT.DAY, CBOX.MEAL_1_START, this.dayService, 'loadMeal'],
+            [SHT.DAY, CBOX.MEAL_2_START, this.dayService, 'loadMeal'],
+            [SHT.DAY, CBOX.MEAL_3_START, this.dayService, 'loadMeal'],
+            [SHT.DAY, CBOX.MEAL_4_START, this.dayService, 'loadMeal'],
+            [SHT.DAY, CBOX.MEAL_5_START, this.dayService, 'loadMeal'],
+            [SHT.DAY, CBOX.MEAL_6_START, this.dayService, 'loadMeal'],
+            [SHT.DAY, BTN.SAVE_MEAL, this.dayService, 'saveMeal'],
+            [SHT.DAY, BTN.COPY_MEALS, this.dayService, 'copyMeals'],
+            [SHT.NEW_ITEM, CBOX.NEW_ITEM_NAME, this.newItemService, 'loadItem'],
+            [SHT.NEW_ITEM, BTN.SAVE_ITEM, this.newItemService, 'addNewItem'],
+            [SHT.RECIPE_CALCULATOR, CBOX.RECIPE_NAME, this.recipeCalculatorService, 'loadRecipe'],
+            [SHT.RECIPE_CALCULATOR, BTN.SAVE_RECIPE, this.recipeCalculatorService, 'addRecipeToItemAndRecipes'],
+            [SHT.PROFILE, BTN.COPY_CALORIES, this.profileService, 'copyCalories'],
+            [SHT.SETTINGS, BTN.APPLY_SETTINGS, this.settingsService, 'applySettings'],
+            [SHT.SETTINGS, BTN.IMPORT, this.importService, 'startImport'],
+            [SHT.TUTORIAL, BTN.TUTORIAL_TEST, this.tutorialService, 'tutorialTestButton'],
+            [SHT.TUTORIAL, BTN.SKIP_TUTORIAL, this.tutorialService, 'resetTutorial'],
+            [SHT.TUTORIAL, BTN.TUTORIAL_NEXT, this.tutorialService, 'tutorialNext']
         ];
         let a1Pos = 'B2';
         let base = this;

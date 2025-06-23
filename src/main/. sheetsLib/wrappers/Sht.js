@@ -1,4 +1,4 @@
-class Spr{
+class Sht{
   /**
    * @param {string} name Name of the sheet
    */
@@ -7,9 +7,9 @@ class Spr{
     if(!test){
       if(name.includes('.')){
         let s = name.split('.');
-        this.spr = getSpSh(s[0]).getSheetByName(s[1]);
+        this.sht = getSpSh(s[0]).getSheetByName(s[1]);
       }else{
-        this.spr = getSpSh(SPSH.ACTIVE).getSheetByName(name);
+        this.sht = getSpSh(SPSH.ACTIVE).getSheetByName(name);
       }
     }
   }
@@ -19,55 +19,55 @@ class Spr{
   }
 
   getValue(range) {
-    return this.spr.getRange(range).getValue();
+    return this.sht.getRange(range).getValue();
   }
 
   getValues(range) {
-    return this.spr.getRange(range).getValues();
+    return this.sht.getRange(range).getValues();
   }
 
   getClearValues(range) {
-    return clear(this.spr.getRange(range).getValues());
+    return clear(this.sht.getRange(range).getValues());
   }
 
   getPosValue(row, col){
-    return this.spr.getRange(row, col).getValue();
+    return this.sht.getRange(row, col).getValue();
   }
 
   getAreaValue(row, col, numRows, numCols){
-    return this.spr.getRange(row, col, numRows, numCols).getValues();
+    return this.sht.getRange(row, col, numRows, numCols).getValues();
   }
 
   getDisplayValue(range) {
-    return this.spr.getRange(range).getDisplayValue();
+    return this.sht.getRange(range).getDisplayValue();
   }
 
   getDisplayValues(range) {
-    return this.spr.getRange(range).getDisplayValues();
+    return this.sht.getRange(range).getDisplayValues();
   }
 
   getClearDisplayValues(range) {
-    return clear(this.spr.getRange(range).getDisplayValues());
+    return clear(this.sht.getRange(range).getDisplayValues());
   }
 
   getFormula(range){
-    return this.spr.getRange(range).getFormula();
+    return this.sht.getRange(range).getFormula();
   }
 
   getFormulas(range){
-    return this.spr.getRange(range).getFormulas();
+    return this.sht.getRange(range).getFormulas();
   }
 
   getClearFormulas(range){
-    return clear(this.spr.getRange(range).getFormulas());
+    return clear(this.sht.getRange(range).getFormulas());
   }
 
   getRng(range){
-    return new Rng(undefined, this.spr.getRange(range));
+    return new Rng(undefined, this.sht.getRange(range));
   }
 
   getRngList(ranges){
-    return new RngList(this.spr.getRangeList(ranges));
+    return new RngList(this.sht.getRangeList(ranges));
   }
 
   getValidationCriteriaRangeValues(range){
@@ -79,23 +79,23 @@ class Spr{
   }
 
   insertRows(rowIndex, numRows){
-    this.spr.insertRows(rowIndex, numRows);
+    this.sht.insertRows(rowIndex, numRows);
   }
 
   setValue(range, value){
-    this.spr.getRange(range).setValue(value);
+    this.sht.getRange(range).setValue(value);
   }
 
   setValues(range, values){
-    this.spr.getRange(range).setValues(values);
+    this.sht.getRange(range).setValues(values);
   }
 
   setPosValue(row, col, value){
-    this.spr.getRange(row, col).setValue(value);
+    this.sht.getRange(row, col).setValue(value);
   }
 
   setAreaValue(row, col, numRows, numCols, values){
-    this.spr.getRange(row, col, numRows, numCols).setValues(values);
+    this.sht.getRange(row, col, numRows, numCols).setValues(values);
   }
 
   setAreaValueAtPos(row, col, values){
@@ -109,15 +109,15 @@ class Spr{
   }
 
   setName(name){
-    this.spr.setName(name);
+    this.sht.setName(name);
   }
 
   getLastRow(){
-    return this.spr.getLastRow();
+    return this.sht.getLastRow();
   }
 
   appendRow(rowOfData){
-    this.spr.appendRow(rowOfData);
+    this.sht.appendRow(rowOfData);
   }
 
   switchCols(condition, pos, size = 1){
@@ -129,67 +129,67 @@ class Spr{
   }
 
   showCols(pos, size = 1){
-    this.spr.showColumns(pos, size);
+    this.sht.showColumns(pos, size);
   }
 
   hideCols(pos, size = 1){
-    this.spr.hideColumns(pos, size);
+    this.sht.hideColumns(pos, size);
   }
 
   showRows(pos, size = 1){
-    this.spr.showRows(pos, size);
+    this.sht.showRows(pos, size);
   }
 
   hideRows(pos, size = 1){
-    this.spr.hideRows(pos, size);
+    this.sht.hideRows(pos, size);
   }
 
   isColHidden(col){
-    return this.spr.isColumnHiddenByUser(col);
+    return this.sht.isColumnHiddenByUser(col);
   }
 
   isRowHidden(row){
-    return this.spr.isRowHiddenByUser(row);
+    return this.sht.isRowHiddenByUser(row);
   }
 
   hideSheet(){
-    this.spr.hideSheet();
+    this.sht.hideSheet();
   }
 
   activate(){
-    this.spr.activate();
+    this.sht.activate();
   }
 
   setActiveSelectionRng(rng){
-    this.spr.setActiveSelection(rng.rng);
+    this.sht.setActiveSelection(rng.rng);
   }
 
   setActiveSelection(range){
-    this.spr.setActiveSelection(range);
+    this.sht.setActiveSelection(range);
   }
 
   sort(column){
-    this.spr.getFilter().sort(column, true);
+    this.sht.getFilter().sort(column, true);
   }
 
   clear(range){
-    this.spr.getRange(range).clearContent();
+    this.sht.getRange(range).clearContent();
   }
 
   deleteCells(range, shiftDimmension = SpreadsheetApp.Dimension.ROWS){
-    this.spr.getRange(range).deleteCells(shiftDimmension)
+    this.sht.getRange(range).deleteCells(shiftDimmension)
   }
 
   deleteRow(deleteIndex){
-    this.spr.deleteRow(deleteIndex);
+    this.sht.deleteRow(deleteIndex);
   }
 
   deleteRows(deleteFrom, deleteTo){
-    this.spr.deleteRows(deleteFrom, deleteTo - deleteFrom);
+    this.sht.deleteRows(deleteFrom, deleteTo - deleteFrom);
   }
 
   deleteSpr(){
-    ACTIVE.deleteSheet(this.spr);
+    ACTIVE.deleteSheet(this.sht);
   }
 
 }

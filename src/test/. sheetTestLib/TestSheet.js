@@ -102,7 +102,7 @@ class TestSheet{
         this.setFont(summaryRange, 11, 'Calibri', 'bold', 'left');
         this.setFont(testGroupRange, null, null, 'normal');
         let results = [[' Test Run: ', testData.tests],
-                       ['   🟢 Succeded:', testData.tests - - testData.fails - testData.errors],
+                       ['   🟢 Succeded:', testData.tests - testData.fails - testData.errors],
                        ['   🟡 Failed:', testData.fails],
                        ['   🔴 Errored:', testData.errors],
                        ['', ''],

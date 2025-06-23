@@ -15,12 +15,8 @@ class TestBase{
 
   constructor(){
     this.utils = new TestUtils(this);
-    this.initVariables();
-    this.findTests();
-  }
-
-  initVariables(){
     this.testClassName = this.constructor.name;
+    this.findTests();
   }
 
   findTests(){

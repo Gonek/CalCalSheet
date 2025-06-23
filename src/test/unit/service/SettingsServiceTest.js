@@ -1,13 +1,13 @@
 class SettingsServiceTest extends TestBase {
     beforeAll(){
         super.beforeAll();
-        this.daySpr = mockSpr(SPR.DAY);
-        this.daysSpr = mockSpr(SPR.DAYS);
-        this.newItemSpr = mockSpr(SPR.NEW_ITEM);
-        this.recipeCalculatorSpr = mockSpr(SPR.RECIPE_CALCULATOR);
-        this.itemsSpr = mockSpr(SPR.ITEMS);
-        this.profileSpr = mockSpr(SPR.PROFILE);
-        this.historySpr = mockSpr(SPR.HISTORY);
+        this.daySpr = mockSpr(SHT.DAY);
+        this.daysSpr = mockSpr(SHT.DAYS);
+        this.newItemSpr = mockSpr(SHT.NEW_ITEM);
+        this.recipeCalculatorSpr = mockSpr(SHT.RECIPE_CALCULATOR);
+        this.itemsSpr = mockSpr(SHT.ITEMS);
+        this.profileSpr = mockSpr(SHT.PROFILE);
+        this.historySpr = mockSpr(SHT.HISTORY);
         this.nutritionFieldsRng = mockRng(RNG.NUTRITION_FIELDS);
         this.generalSettingsRng = mockRng(RNG.GENERAL_SETTINGS);
         this.dayIndexRng = mockRng(RNG.DAY_INDEX);

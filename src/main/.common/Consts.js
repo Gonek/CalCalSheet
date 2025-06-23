@@ -4,7 +4,7 @@ const SPSH = {
 }
 
 // SHEETS
-const SPR = {
+const SHT = {
   TUTORIAL : 'Tutorial',
   DAY : 'Day',
   NEW_ITEM : 'New Item',
