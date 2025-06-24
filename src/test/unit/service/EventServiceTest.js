@@ -63,17 +63,17 @@ class EventServiceTest extends TestBase {
         })
     }
 
-    createEvent(sheetName, A1Pos){
+    createEvent(sheetId, A1Pos){
         return { 
             source : { 
-            getSheetName(){ 
-                return sheetName 
-            }
+                getSheetId(){ 
+                    return sheetId 
+                }
             }, 
             range : { 
-            getA1Notation(){ 
-                return A1Pos 
-            }
+                getA1Notation(){ 
+                    return A1Pos 
+                }
             }
         }
     }

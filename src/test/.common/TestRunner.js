@@ -1,11 +1,9 @@
 
 var runAllUnitTests = () =>{
-  testSheet = new TestSheet();
   new TestBase().runMultipleTestClass(unitTests());
 }
 
 var runAllSheetTests = () =>{
-  testSheet = new TestSheet();
   new TestBase().runMultipleTestClass(sheetTests());
 }
 

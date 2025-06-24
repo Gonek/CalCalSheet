@@ -150,12 +150,3 @@ const IMPORT_OPTIONS = {
 
 // REPOSITORY
 const REPOSITORY_AREA = 'B4:B';
-
-// MEALS 
-const MEAL_ICON="🥣";
-const MEAL1_START_ROW = 15; 
-const MEAL2_START_ROW = 30; 
-const MEAL3_START_ROW = 45; 
-const MEAL4_START_ROW = 60; 
-const MEAL5_START_ROW = 75; 
-const MEAL6_START_ROW = 90; 
