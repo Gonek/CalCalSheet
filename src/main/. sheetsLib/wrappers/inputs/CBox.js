@@ -1,2 +1,0 @@
-class CBox extends Input{
-}
