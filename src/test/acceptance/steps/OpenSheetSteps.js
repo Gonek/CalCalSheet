@@ -28,27 +28,27 @@ class OpenSheetThenSteps extends BaseDayThenSteps{
     }
 
     future_available_days_as_expected(futureDays){
-        let daysDates = getSpr(SHT.DAYS).getRng('A4:A').getColAsArray();
+        let daysDates = getSht(SHT.DAYS).getRng('A4:A').getColAsArray();
         let result = daysDates.filter(d => d > getToday()).length;
         assertEquals(result, futureDays);
     }
 
     archive_available_days_as_expected(pastDays){
-        let daysDates = getSpr(SHT.DAYS).getRng('A4:A').getColAsArray();
+        let daysDates = getSht(SHT.DAYS).getRng('A4:A').getColAsArray();
         let result = daysDates.filter(d => (d!='') && (d < getToday())).length;
         assertEquals(result, pastDays);
     }
 
     new_day_calorie_output_set_to(day, expected){
-        assertEquals(getSpr(SHT.DAYS).getValue(`N${day*15 + 4}`), expected);
+        assertEquals(getSht(SHT.DAYS).getValue(`N${day*15 + 4}`), expected);
     }
 
     new_day_profile_set_to(day, expected){
-        assertEquals(getSpr(SHT.DAYS).getValue(`N${day*15 + 5}`), expected);
+        assertEquals(getSht(SHT.DAYS).getValue(`N${day*15 + 5}`), expected);
     }
 
     expired_auto_delete_days_were_deleted(){
-        let items = getSpr(SHT.ITEMS).getValues('B4:B').flat().filter(n => n);
+        let items = getSht(SHT.ITEMS).getValues('B4:B').flat().filter(n => n);
         assertEqualsArray(items, ['1 First', '2 Second', '3 Third', 'All 100', 'All 1', 'Green', 'Red', 'Test 100g', 'Test 1 serving', 'Yellow', 'ZZ Last']);
     }
 }

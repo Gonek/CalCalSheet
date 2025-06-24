@@ -2,8 +2,8 @@ class TestBaseDay extends TestBase  {
   
     beforeAll(){
         super.beforeAll();
-        this.itemsSpr = getSpr(SHT.ITEMS);
-        this.daySpr = getSpr(SHT.DAY);
+        this.itemsSpr = getSht(SHT.ITEMS);
+        this.daySpr = getSht(SHT.DAY);
         this.utils.addTestItems();
     }
 

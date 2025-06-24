@@ -2,7 +2,7 @@ class ProfileTest extends TestBase {
 
     beforeAll(){
         super.beforeAll();
-        this.sht = getSpr(SHT.PROFILE);
+        this.sht = getSht(SHT.PROFILE);
         this.weightsRng = getRng(RNG.WEIGHTS);
         this.weightHistoryRng = getRng(RNG.WEIGHT_HISTORY);
         this.calorieOutputCalculatorRng = getRng(RNG.CALORIE_OUTPUT_CALCULATOR);

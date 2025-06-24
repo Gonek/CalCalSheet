@@ -22,6 +22,10 @@ class SpSh{
         return this.spsh.getSheetByName(name);
     }
 
+    getSheetById(id){
+        return this.spsh.getSheetById(id);
+    }
+
     getRangeByName(name){
         return this.spsh.getRangeByName(name);
     }

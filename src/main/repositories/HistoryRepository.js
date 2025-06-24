@@ -1,7 +1,7 @@
 class HistoryRepository{
 
   constructor(){
-     this.sht = getSpr(SHT.HISTORY);
+     this.sht = getSht(SHT.HISTORY);
   }
 
   addOrUpdate(history){

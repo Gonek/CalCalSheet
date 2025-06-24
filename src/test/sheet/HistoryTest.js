@@ -2,7 +2,7 @@ class HistoryTest extends TestBase {
 
     beforeAll(){
         super.beforeAll();
-        this.sht = getSpr(SHT.HISTORY);
+        this.sht = getSht(SHT.HISTORY);
         this.intervalRng = getRng(RNG.HISTORY_INTERVAL);
     }
 

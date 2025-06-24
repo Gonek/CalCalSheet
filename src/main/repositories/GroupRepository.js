@@ -6,7 +6,7 @@
 class GroupRepository{
 
   constructor(name){
-    this.sht = getSpr(name);
+    this.sht = getSht(name);
   }
 
   /**

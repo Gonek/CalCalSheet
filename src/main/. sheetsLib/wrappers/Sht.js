@@ -1,21 +1,21 @@
 class Sht{
   /**
-   * @param {string} name Name of the sheet
+   * @param {String} id Id of the sheet
    */
-  constructor(name, test = false){
-    this.name = name;
+  constructor(id, test = false){
+    this.id = id;
     if(!test){
-      if(name.includes('.')){
-        let s = name.split('.');
-        this.sht = getSpSh(s[0]).getSheetByName(s[1]);
+      if(typeof id === "string" && id.includes('.')){
+        let s = id.split('.');
+        this.sht = getSpSh(s[0]).getSheetById(s[1]);
       }else{
-        this.sht = getSpSh(SPSH.ACTIVE).getSheetByName(name);
+        this.sht = getSpSh(SPSH.ACTIVE).getSheetById(id);
       }
     }
   }
 
-  getName(){
-    return this.name;
+  getId(){
+    return this.id;
   }
 
   getValue(range) {

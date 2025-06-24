@@ -8,7 +8,11 @@ class Btn extends Input{
     try{
       super.run();
     } catch (error) {
-      alert(error);
+      if(!testData?.isTestInProgress){
+        alert(error + " " + error.stack);
+      }else{
+        throw error;
+      }
     } finally {
       this.resetButton();
     }

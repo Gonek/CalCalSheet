@@ -14,7 +14,7 @@ class TutorialService{
 
   resetTutorial(){
     let stepRng = getRng(RNG.TUTORIAL_STEP);
-    let sht = getSpr(SHT.TUTORIAL);
+    let sht = getSht(SHT.TUTORIAL);
     sht.setActiveSelectionRng(stepRng);
     sht.hideSheet();
     let positions = getRng(RNG.TUTORIAL_RESET_POS).getRowAsArray();
@@ -28,7 +28,7 @@ class TutorialService{
 
   tutorialStep(){
     let stepRng = getRng(RNG.TUTORIAL_STEP);
-    let sht = getSpr(SHT.TUTORIAL);
+    let sht = getSht(SHT.TUTORIAL);
     let positions = getRng(RNG.TUTORIAL_NEXT_POS).getRowAsArray();
     let showFrom = positions[0];
     let showTo = positions[1];

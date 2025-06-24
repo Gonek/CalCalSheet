@@ -1,7 +1,7 @@
 class DayRepository{
 
   constructor(){
-     this.sht = getSpr(SHT.DAYS);
+     this.sht = getSht(SHT.DAYS);
   }
 
   save(day){

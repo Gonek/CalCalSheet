@@ -8,8 +8,20 @@ class ImportService{
     this.importId = this.importRng.getValue(1, 2);
     this.validateImport();
     for (var i = 2; i <= 8; i++) {
-      if (this.importRng.getValue(i, 3)) 
-        this.importData(this.importRng.getValue(i, 1))
+      if (this.importRng.getValue(i, 3))
+        this.importData(this.getSheetIdByPos(i));
+    }
+  }
+
+  getSheetIdByPos(pos){
+    switch(pos){
+      case 2: return SHT.ITEMS;
+      case 3: return SHT.RECIPES;
+      case 4: return SHT.MEALS;
+      case 5: return SHT.PROFILE;
+      case 6: return SHT.SETTINGS;
+      case 7: return SHT.HISTORY;
+      case 8: return SHT.DAYS;
     }
   }
 
@@ -17,24 +29,24 @@ class ImportService{
     if(!getSpSh(this.importId).isExist()){
       throw new Error("Loading import sheet failed! Please check the sheet Id");
     } 
-    this.baseVersion = getSpr(`${this.importId}.${SHT.SUPPORT}`).getValue(VERSION_POSITION);
+    this.baseVersion = getSht(`${this.importId}.${SHT.SUPPORT}`).getValue(VERSION_POSITION);
     if (this.baseVersion !== V1_4 && this.baseVersion !== V1_5 && this.baseVersion !== V1_6){
       throw new Error("Sorry, you can only import version 1.4, 1.5, 1.6 sheets");
     } 
   }
 
-  importData(sheetName){
-    var fromSpr = getSpr(`${this.importId}.${sheetName}`);
-    var toSpr = getSpr(sheetName);
+  importData(sheetId){
+    var fromSpr = getSht(`${this.importId}.${sheetId}`);
+    var toSpr = getSht(sheetId);
     if(fromSpr.sht){
-      switch(sheetName){
-        case 'Items': this.importItems(fromSpr, toSpr); break;
-        case 'Recipes': this.importRecipes(fromSpr, toSpr); break;
-        case 'Meals': this.importMeals(fromSpr, toSpr); break;
-        case 'Profile': this.importProfile(fromSpr, toSpr); break;
-        case 'Settings': this.importSettings(fromSpr, toSpr); break;
-        case 'History': this.importHistory(fromSpr, toSpr); break;
-        case 'Days': this.importDays(fromSpr, toSpr); break;
+      switch(sheetId){
+        case SHT.ITEMS: this.importItems(fromSpr, toSpr); break;
+        case SHT.RECIPES: this.importRecipes(fromSpr, toSpr); break;
+        case SHT.MEALS: this.importMeals(fromSpr, toSpr); break;
+        case SHT.PROFILE: this.importProfile(fromSpr, toSpr); break;
+        case SHT.SETTINGS: this.importSettings(fromSpr, toSpr); break;
+        case SHT.HISTORY: this.importHistory(fromSpr, toSpr); break;
+        case SHT.DAYS: this.importDays(fromSpr, toSpr); break;
       }
     }
   }

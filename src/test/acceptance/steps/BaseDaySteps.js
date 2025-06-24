@@ -55,8 +55,8 @@ class BaseDayThenSteps extends Steps{
     }
 
     previous_day_saved(to){
-        this.previousDayItems = getSpr(SHT.DAYS).getAreaValue(4 + (to * 15), 2, 15, 12);
-        this.previousDayData = getSpr(SHT.DAYS).getAreaValue(4 + (to * 15), 14, 15, 1);
+        this.previousDayItems = getSht(SHT.DAYS).getAreaValue(4 + (to * 15), 2, 15, 12);
+        this.previousDayData = getSht(SHT.DAYS).getAreaValue(4 + (to * 15), 14, 15, 1);
         assertTrue(this.previousDayItems);
         assertTrue(this.previousDayData);
     }
@@ -89,7 +89,7 @@ class BaseDayThenSteps extends Steps{
     }
 
     history_saved_for_prevous_day(date){
-        this.historyRow = getSpr(SHT.HISTORY).getValues('B10:S').find(r => r[0].getTime() == date.getTime());
+        this.historyRow = getSht(SHT.HISTORY).getValues('B10:S').find(r => r[0].getTime() == date.getTime());
         assertTrue(this.historyRow);
     }
 

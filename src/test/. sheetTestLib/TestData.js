@@ -13,6 +13,7 @@ class TestData{
     this.savedClass;
     this.savedTest;
     this.isAcceptanceTest;
+    this.isTestInProgress = false;
   }
 
   load(testData){
@@ -32,10 +33,12 @@ class TestData{
 
   start(){
     this.startTime = new Date();
+    this.isTestInProgress = true;
   }
 
   end(){
     this.durration = this.durration + this.getCurrentRunDuration();
+    this.isTestInProgress = false;
   }
 
   savedClassCheck(testClass){

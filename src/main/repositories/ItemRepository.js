@@ -1,7 +1,7 @@
 class ItemRepository{
 
   constructor(){
-     this.sht = getSpr(SHT.ITEMS);
+     this.sht = getSht(SHT.ITEMS);
   }
 
   addOrUpdate(item, originalPos){

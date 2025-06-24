@@ -1,13 +1,13 @@
 class SettingsService{
 
   constructor(){
-    this.daySpr = getSpr(SHT.DAY);
-    this.daysSpr = getSpr(SHT.DAYS);
-    this.newItemSpr = getSpr(SHT.NEW_ITEM);
-    this.recipeCalculatorSpr = getSpr(SHT.RECIPE_CALCULATOR);
-    this.itemsSpr = getSpr(SHT.ITEMS);
-    this.profileSpr = getSpr(SHT.PROFILE);
-    this.historySpr = getSpr(SHT.HISTORY);
+    this.daySpr = getSht(SHT.DAY);
+    this.daysSpr = getSht(SHT.DAYS);
+    this.newItemSpr = getSht(SHT.NEW_ITEM);
+    this.recipeCalculatorSpr = getSht(SHT.RECIPE_CALCULATOR);
+    this.itemsSpr = getSht(SHT.ITEMS);
+    this.profileSpr = getSht(SHT.PROFILE);
+    this.historySpr = getSht(SHT.HISTORY);
   }
 
   applySettings(){

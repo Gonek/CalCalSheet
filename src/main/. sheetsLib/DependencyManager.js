@@ -12,10 +12,10 @@ var getObj = (type) => dependencyManager.getObj(type);
 var getSpSh = (id) => dependencyManager.getSpSh(id);
 /**
  * Get sht object from the dependency manager
- * @param {String} name of sht
+ * @param {Integer} id of sht
  * @returns {Sht} sht object
  */
-var getSpr = (name) => dependencyManager.getSpr(name);
+var getSht = (name) => dependencyManager.getSht(name);
 /**
  * Get rng object from the dependency manager
  * @param {String} name of rng
@@ -61,11 +61,11 @@ class DependencyManager {
     return spsh;
   }
 
-  getSpr(name){
-    let sht = this.sprs.get(name);
+  getSht(id){
+    let sht = this.sprs.get(id);
     if(!sht){
-      sht = new Sht(name);
-      this.sprs.set(name, sht);
+      sht = new Sht(id);
+      this.sprs.set(id, sht);
     }
     return sht;
   }

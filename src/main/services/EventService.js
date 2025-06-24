@@ -53,11 +53,11 @@ class EventService {
 
   onEdit(e){
     try{
-      let sheetName = e.source.getSheetName();
+      let sheetId = e.source.getSheetId();
       let a1Pos = e.range.getA1Notation();
-      this.checkButtons(sheetName, a1Pos);
-    } catch(error){
-      alert(error + " " + error.stack);
+      this.checkButtons(sheetId, a1Pos);
+    }catch(error){
+      this.errorHandler(error);
     }
   }
 
@@ -66,7 +66,15 @@ class EventService {
       getObj(DayService).finishDay();
       getObj(ItemRepository).autoDeleteItems();
     }catch(error){
+      this.errorHandler(error);
+    }
+  }
+
+  errorHandler(error){
+    if(!testData?.isTestInProgress){
       alert(error + " " + error.stack);
+    }else{
+      throw error;
     }
   }
 
@@ -74,30 +82,13 @@ class EventService {
     this.checkButtons(sheetName, getRng(btnName).getA1Pos());
   }
 
-  checkButtons(sheetName, a1Pos){
-    let sheetBtns = this.btns.find(s => s[0] == sheetName);
+  checkButtons(sheetId, a1Pos){
+    let sheetBtns = this.btns.find(s => s[0] == sheetId);
     if(sheetBtns){
       let btn = sheetBtns[1].find(btn => btn.isSamePos(a1Pos, btn));
       if(btn){
         btn.run();
       }
     }             
-  }
-
-  isCellIsRangeCell(e, range){
-    return e.range.getA1Notation() == getRng(range).getA1Pos();
-  }
-
-  isCellInPositionInSheet(e, sheet, pos) {
-    return (e.source.getSheetName() == sheet) && (e.range.getA1Notation() == pos);
-  }
-
-  isCellInPositions(e, pos) {
-    return pos.includes(e.range.getA1Notation());
-  }
-
-  mealLoaderFieldChanged(e) {
-    if(String(e.range.getValue()).indexOf(MEAL_ICON) == 0){
-    }
   }
 }

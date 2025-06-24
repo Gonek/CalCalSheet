@@ -49,43 +49,43 @@ class SettingsWhenSteps extends Steps{
 
 class SettingsThenSteps extends Steps{
     future_available_days_as_expected(futureDays){
-        let daysDates = getSpr(SHT.DAYS).getRng('A4:A').getColAsArray();
+        let daysDates = getSht(SHT.DAYS).getRng('A4:A').getColAsArray();
         let result = daysDates.filter(d => d > getToday()).length;
         assertEquals(result, futureDays);
     }
 
     archive_available_days_as_expected(pastDays){
-        let daysDates = getSpr(SHT.DAYS).getRng('A4:A').getColAsArray();
+        let daysDates = getSht(SHT.DAYS).getRng('A4:A').getColAsArray();
         let result = daysDates.filter(d => (d!='') && (d < getToday())).length;
         assertEquals(result, pastDays);
     }
 
     consumed_checkbox_visible(bool = true){
-        assertEquals(!getSpr(SHT.DAY).isColHidden(2), bool);
+        assertEquals(!getSht(SHT.DAY).isColHidden(2), bool);
     }
 
     noom_fields_visible_in_day_sheet(bool = true){
-        assertEquals(!getSpr(SHT.DAY).isColHidden(18), bool);
-        assertEquals(!getSpr(SHT.DAY).isColHidden(19), bool);
-        assertEquals(!getSpr(SHT.DAY).isColHidden(20), bool);
+        assertEquals(!getSht(SHT.DAY).isColHidden(18), bool);
+        assertEquals(!getSht(SHT.DAY).isColHidden(19), bool);
+        assertEquals(!getSht(SHT.DAY).isColHidden(20), bool);
     }
 
     noom_fields_visible_in_new_item_sheet(bool = true){
-        assertEquals(!getSpr(SHT.NEW_ITEM).isRowHidden(21), bool);
-        assertEquals(!getSpr(SHT.NEW_ITEM).isRowHidden(22), bool);
+        assertEquals(!getSht(SHT.NEW_ITEM).isRowHidden(21), bool);
+        assertEquals(!getSht(SHT.NEW_ITEM).isRowHidden(22), bool);
     }
 
     noom_fields_visible_in_recipe_calculator_sheet(bool = true){
-        assertEquals(!getSpr(SHT.RECIPE_CALCULATOR).isRowHidden(36), bool);
-        assertEquals(!getSpr(SHT.RECIPE_CALCULATOR).isRowHidden(37), bool);
+        assertEquals(!getSht(SHT.RECIPE_CALCULATOR).isRowHidden(36), bool);
+        assertEquals(!getSht(SHT.RECIPE_CALCULATOR).isRowHidden(37), bool);
     }
 
     noom_field_visible_in_items_sheet(bool = true){
-        assertEquals(!getSpr(SHT.ITEMS).isColHidden(26), bool);
+        assertEquals(!getSht(SHT.ITEMS).isColHidden(26), bool);
     }
 
     noom_field_visible_in_history_sheet(bool = true){
-        assertEquals(!getSpr(SHT.HISTORY).isColHidden(19), bool);
+        assertEquals(!getSht(SHT.HISTORY).isColHidden(19), bool);
     }
 
     percentage_used_for_macros(bool = true){
@@ -93,7 +93,7 @@ class SettingsThenSteps extends Steps{
     }
 
     nutrition_fields_visible_in_day_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
-        let sht = getSpr(SHT.DAY);
+        let sht = getSht(SHT.DAY);
         assertEquals(!sht.isColHidden(9), fat);
         assertEquals(!sht.isColHidden(10), sfat);
         assertEquals(!sht.isColHidden(11), tfat);
@@ -106,7 +106,7 @@ class SettingsThenSteps extends Steps{
     }
 
     nutrition_fields_visible_in_new_item_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
-        let sht = getSpr(SHT.NEW_ITEM);
+        let sht = getSht(SHT.NEW_ITEM);
         assertEquals(!sht.isRowHidden(8), fat);
         assertEquals(!sht.isRowHidden(9), sfat);
         assertEquals(!sht.isRowHidden(10), tfat);
@@ -119,7 +119,7 @@ class SettingsThenSteps extends Steps{
     }
 
     nutrition_fields_visible_in_recipe_calulator_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
-        let sht = getSpr(SHT.RECIPE_CALCULATOR);
+        let sht = getSht(SHT.RECIPE_CALCULATOR);
         assertEquals(!sht.isColHidden(8), fat);
         assertEquals(!sht.isColHidden(9), sfat);
         assertEquals(!sht.isColHidden(10), tfat);
@@ -132,7 +132,7 @@ class SettingsThenSteps extends Steps{
     }
 
     nutrition_fields_visible_in_profile_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
-        let sht = getSpr(SHT.PROFILE);
+        let sht = getSht(SHT.PROFILE);
         assertEquals(!sht.isRowHidden(5), fat);
         assertEquals(!sht.isRowHidden(6), sfat);
         assertEquals(!sht.isRowHidden(7), tfat);
@@ -145,7 +145,7 @@ class SettingsThenSteps extends Steps{
     }
 
     nutrition_fields_visible_in_items_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
-        let sht = getSpr(SHT.ITEMS);
+        let sht = getSht(SHT.ITEMS);
         assertEquals(!sht.isColHidden(8), fat); 
         assertEquals(!sht.isColHidden(9), fat); 
         assertEquals(!sht.isColHidden(10), sfat);
@@ -167,7 +167,7 @@ class SettingsThenSteps extends Steps{
     }
 
     nutrition_fields_visible_in_history_sheet(fat, sfat, tfat, carb, fiber, sugar, salk, prot, salt){
-        let sht = getSpr(SHT.HISTORY);
+        let sht = getSht(SHT.HISTORY);
         assertEquals(!sht.isColHidden(6), fat);
         assertEquals(!sht.isColHidden(7), sfat);
         assertEquals(!sht.isColHidden(8), tfat);
@@ -180,7 +180,7 @@ class SettingsThenSteps extends Steps{
     }
 
     meals_changed_in_summary(meals){
-        let sumMeals = getSpr(SHT.DAY).getValues('G4:G9');
+        let sumMeals = getSht(SHT.DAY).getValues('G4:G9');
         assertEquals(sumMeals[0][0], meals[0]);
         assertEquals(sumMeals[1][0], meals[1]);
         assertEquals(sumMeals[2][0], meals[2]);
@@ -190,7 +190,7 @@ class SettingsThenSteps extends Steps{
     }
 
     meals_changed_at_items(meals){
-        let sht = getSpr(SHT.DAY);
+        let sht = getSht(SHT.DAY);
         let itemMeals = sht.getValues('A15:A104');
         assertEquals(itemMeals[0][0], meals[0][0]);
         assertEquals(itemMeals[15][0], meals[1][0]);
@@ -201,7 +201,7 @@ class SettingsThenSteps extends Steps{
     }
 
     meals_changed_at_days(meals){
-        let sht = getSpr(SHT.DAYS);
+        let sht = getSht(SHT.DAYS);
         let dayMeals = sht.getValues('B3:M3');
         assertEquals(dayMeals[0][0], meals[0]);
         assertEquals(dayMeals[0][2], meals[1]);

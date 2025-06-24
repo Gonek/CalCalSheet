@@ -50,7 +50,7 @@ class DayThenSteps extends BaseDayThenSteps{
     }
 
     meal_copied(to, mealNo, expected){
-        let result = getSpr(SHT.DAYS).getAreaValue(to * 15 + 4, mealNo * 2, 15, 2);
+        let result = getSht(SHT.DAYS).getAreaValue(to * 15 + 4, mealNo * 2, 15, 2);
         assertEqualsArray(result, resizeMatrix(expected, 2, 15, ''));
     }
 
@@ -60,17 +60,17 @@ class DayThenSteps extends BaseDayThenSteps{
 
     meal_saved_with_name(name){
         this.name = name;
-        let mealFind = getSpr(SHT.MEALS).getValues('B4:D').find(r => r[0] == name);
+        let mealFind = getSht(SHT.MEALS).getValues('B4:D').find(r => r[0] == name);
         assertTrue(mealFind);
     }
 
     no_meal_saved_with_name(name){
-        let mealFind = getSpr(SHT.MEALS).getValues('B4:D').find(r => r[0] == name);
+        let mealFind = getSht(SHT.MEALS).getValues('B4:D').find(r => r[0] == name);
         assertFalse(mealFind);
     }
 
     meal_have_items(items){
-        let filtered = getSpr(SHT.MEALS).getValues('B4:D').filter(i => i[0] === this.name);
+        let filtered = getSht(SHT.MEALS).getValues('B4:D').filter(i => i[0] === this.name);
         assertEqualsArray(filtered, items.map(i => [this.name, i[0], i[1]]));
     }
 }

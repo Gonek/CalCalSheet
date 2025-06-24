@@ -5,18 +5,18 @@ const SPSH = {
 
 // SHEETS
 const SHT = {
-  TUTORIAL : 'Tutorial',
-  DAY : 'Day',
-  NEW_ITEM : 'New Item',
-  RECIPE_CALCULATOR : 'Recipe calculator',
-  PROFILE : 'Profile',
-  SETTINGS : 'Settings',
-  ITEMS : 'Items',
-  DAYS : 'Days',
-  RECIPES : 'Recipes',
-  MEALS : 'Meals',
-  HISTORY : 'History',
-  SUPPORT : 'Support'
+  TUTORIAL : 888970968,
+  DAY : 63625420,
+  NEW_ITEM : 1366047430,
+  RECIPE_CALCULATOR : 1281519016,
+  PROFILE : 1038793478,
+  SETTINGS : 1486461364,
+  ITEMS : 917648508,
+  DAYS : 144890067,
+  RECIPES : 1776577136,
+  MEALS : 2140804303,
+  HISTORY : 1711513882,
+  SUPPORT : 1747942668
 }
 
 // NAMED RANGES

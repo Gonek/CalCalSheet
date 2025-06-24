@@ -2,7 +2,7 @@ class NewItemTest extends TestBase {
 
     beforeAll(){
         super.beforeAll();
-        this.sht = getSpr(SHT.NEW_ITEM);
+        this.sht = getSht(SHT.NEW_ITEM);
     }
 
     clearData(){
