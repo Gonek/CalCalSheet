@@ -5,11 +5,11 @@
     }
 
     clearData(){
-        this.utils.clearItems();
-        this.utils.clearDays();
-        this.utils.clearDay();
-        this.utils.clearHistory();
-        this.utils.addDefaultProfile();
+        testData.clearItems();
+        testData.clearDays();
+        testData.clearDay();
+        testData.clearHistory();
+        testData.addDefaultProfile();
     }
 
     scenario_finish_day_after_one_day_with_auto_cycle_and_active_baseline(){

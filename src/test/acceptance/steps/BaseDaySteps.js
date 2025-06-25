@@ -1,15 +1,15 @@
 class BaseDayGivenSteps extends Steps{
 
     test_items_available(){
-        this.test.utils.addTestItems();
+        testData.addTestItems();
     }
 
     test_days_available(generateFrom = -2){
-        this.test.utils.addTestDays(generateFrom);
+        testData.addTestDays(generateFrom);
     }
 
     test_profiles_available(){
-        this.test.utils.addTestProfiles();
+        testData.addTestProfiles();
     }
     
     previous_day_set_to(to){

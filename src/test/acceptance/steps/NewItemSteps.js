@@ -1,7 +1,7 @@
 class NewItemGivenSteps extends Steps{
 
     test_items_available(){
-        this.test.utils.addTestItems();
+        testData.addTestItems();
     }
 
     item_name_as(name){

@@ -10,12 +10,12 @@ class RecipeCalculatorTest extends TestBase {
         this.recipeServingRng = getRng(RNG.RECIPE_SERVING);
         this.recipeNoomColourRng = getRng(RNG.RECIPE_NOOM_COLOUR);
         this.selectedRecipeItemsRng = getRng(RNG.SELECTED_RECIPE_ITEMS);
-        this.utils.addTestItems();
+        testData.addTestItems();
     }
 
     afterAll(){
         super.afterAll();
-        this.utils.clearItems();
+        testData.clearItems();
     }
 
     clearData(){
@@ -152,7 +152,7 @@ class RecipeCalculatorTest extends TestBase {
         let expected = Array(5).fill(1)
               .concat(Array(5).fill(2))
               .concat(Array(5).fill(3))
-              .concat(Array(10).fill(this.utils.LAST_ITEM_INDEX));
+              .concat(Array(10).fill(testData.LAST_ITEM_INDEX));
 
         // WHEN
         this.recipeItemsRng.setValues(items);
@@ -266,30 +266,30 @@ class RecipeCalculatorTest extends TestBase {
 
     shouldRecipeCalculatorSheetLoadAllSavedRecepiesInTheRecipeNameField(){
         //GIVEN
-        this.utils.addTestRecipes();
+        testData.addTestRecipes();
         let expected = ['Recipe1', 'Recipe2', 'Recipe3'];
         //WHEN
         let result = this.recipeNameRng.getValidationCriteriaRangeValues();
         //THEN
         assertEquals(result, expected);
-        this.utils.clearRecipes();
+        testData.clearRecipes();
     }
 
     shouldRecipeCalculatorSheetLoadAllSavedRecepiesAndTheGivenNameInTheRecipeNameField(){
         //GIVEN
-        this.utils.addTestRecipes();
+        testData.addTestRecipes();
         let expected = ['New Recipe', 'Recipe1', 'Recipe2', 'Recipe3'];
         //WHEN
         this.recipeNameRng.setValue('New Recipe');
         let result = this.recipeNameRng.getValidationCriteriaRangeValues();
         //THEN
         assertEquals(result, expected);
-        this.utils.clearRecipes();
+        testData.clearRecipes();
     }
 
     shouldRecipeCalculatorSheetLoadAllItemsOfSelectedRecipeInBackground(){
         //GIVEN
-        this.utils.addTestRecipes();
+        testData.addTestRecipes();
         let expected = [
           ['Green', 100],
           ['Yellow', 200],
@@ -324,7 +324,7 @@ class RecipeCalculatorTest extends TestBase {
         assertEquals(result, expected);
         //RESET
         this.recipeNameRng.clear();
-        this.utils.clearRecipes();
+        testData.clearRecipes();
     }
 
     shouldRecipeCalculatorSheetLeaveSelectedRecipeItemsEmptyIfNoRecipeSelected(){

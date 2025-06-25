@@ -1,11 +1,11 @@
 class RecipeCalculatorGivenSteps extends Steps{
 
     test_items_available(){
-        this.test.utils.addTestItems();
+        testData.addTestItems();
     }
 
     test_recipes_available(){
-        this.test.utils.addTestRecipes();
+        testData.addTestRecipes();
     }
 
     recipe_name_as(name){

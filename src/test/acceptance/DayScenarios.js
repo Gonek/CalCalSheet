@@ -5,12 +5,12 @@
     }
 
     clearData(){
-      this.utils.clearItems();
-      this.utils.clearDays();
-      this.utils.clearMeals();
-      this.utils.clearDay();
-      this.utils.clearHistory();
-      this.utils.addDefaultProfile();
+      testData.clearItems();
+      testData.clearDays();
+      testData.clearMeals();
+      testData.clearDay();
+      testData.clearHistory();
+      testData.addDefaultProfile();
     }
 
     scenario_change_day_to_yesterday(){

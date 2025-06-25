@@ -5,12 +5,12 @@
     }
 
     clearData(){
-      this.utils.resetSettings();
+      testData.resetSettings();
     }
 
     afterAll(){
       super.afterAll();
-      this.utils.clearDays();
+      testData.clearDays();
       getObj(SettingsService).applySettings();
     }
 

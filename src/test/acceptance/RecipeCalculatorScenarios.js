@@ -5,9 +5,9 @@
     }
 
     clearData(){
-      this.utils.clearItems();
-      this.utils.clearRecipes();
-      this.utils.clearRecipeCalculator();
+      testData.clearItems();
+      testData.clearRecipes();
+      testData.clearRecipeCalculator();
     }
     
     scenario_add_item_and_recipe(){

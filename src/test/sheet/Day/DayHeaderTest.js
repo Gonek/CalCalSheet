@@ -8,13 +8,13 @@ class DayHeaderTest extends TestBaseDay {
         this.calDensityRng = getRng(RNG.CALORIE_DENSITY);
         this.calOutputRng = getRng(RNG.CALORIE_OUTPUT);
         this.checklist = getRng(RNG.CHECKLIST);
-        this.utils.addTestProfiles();
+        testData.addTestProfiles();
         this.selectedProfileRng.setValue('Test 1');
     }
 
     afterAll(){
         super.afterAll();
-        this.utils.addDefaultProfile();
+        testData.addDefaultProfile();
         this.selectedProfileRng.setValue('Default');
     }
 
@@ -22,7 +22,7 @@ class DayHeaderTest extends TestBaseDay {
         // GIVEN
         let mealExpected = Array.from({length:6},(v,row)=> 
                             Array.from({length:10},(v,col)=> 
-                            `=IF(ISBLANK($G${row + 4}), "", SUM(${this.utils.incCol('H', col)}${(row * 15) + 15}:${this.utils.incCol('H', col)}${(row * 15) + 29}))`));
+                            `=IF(ISBLANK($G${row + 4}), "", SUM(${testData.incCol('H', col)}${(row * 15) + 15}:${testData.incCol('H', col)}${(row * 15) + 29}))`));
         let sumExpected = [ `=ROUND(SUM(H15:H104))`, 
                             `=ROUND(SUM(I15:I104), 1)`, 
                             `=ROUND(SUM(J15:J104), 1)`, 

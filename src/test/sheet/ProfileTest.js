@@ -40,7 +40,7 @@ class ProfileTest extends TestBase {
 
     shouldProfileSheetWeightHistoryHaveCorrectFormat(){
         //GIVEN
-        this.utils.resetWeight();
+        testData.resetWeight();
         let weights = Array(72).fill(['01/01/2024', '', '80', '']);
         let expected =
         ['01/01/2024', '80.00 kg', '-', '-'].concat(
@@ -56,12 +56,12 @@ class ProfileTest extends TestBase {
         //THEN
         assertEquals(result, expected);
         //RESET 
-        this.utils.resetWeight();
+        testData.resetWeight();
     }
 
     shouldProfileSheetCalorieCalculatorHaveCorrectFormat(){
         //GIVEN
-        this.utils.resetCalorieCalculatorValues();
+        testData.resetCalorieCalculatorValues();
         let expected = [
           ['01/01/2000'],
           ['25'],
@@ -84,7 +84,7 @@ class ProfileTest extends TestBase {
 
     shouldProfileSheetCopyCaloriesProfileSelectorAcceptExistingProfiles(){
         //GIVEN
-        this.utils.addTestProfiles();
+        testData.addTestProfiles();
         // GIVEN
         let expected = ['Test 1', 'Test 2', 'Test 3', 'Test 4', 'Test 5', 'Test 6', 'Test 7'];
         // WHEN
@@ -92,23 +92,23 @@ class ProfileTest extends TestBase {
         // THEN
         assertEquals(result, expected);
         //RESET
-        this.utils.addDefaultProfile();
+        testData.addDefaultProfile();
     }
 
     shouldProfileSheetCopyCaloriesProfileSelectorThrowExpectionIfProfileNotExist(){
         //GIVEN
-        this.utils.addTestProfiles();
+        testData.addTestProfiles();
         // WHEN THEN
         assertException(() => {
           this.copyCaloriesSelectedProfileRng.setValue(`Non existing profile`);
         }, true);
         //RESET
-        this.utils.addDefaultProfile();
+        testData.addDefaultProfile();
     }
 
     shouldProfileSheetWeightHistoryCalulateWeightDifferencesCorrectly(){
         //GIVEN
-        this.utils.resetWeight();
+        testData.resetWeight();
         let weights = [
           ['01/01/2024', '', '80', ''],
           ['01/02/2024', '', '78.75', ''],
@@ -129,7 +129,7 @@ class ProfileTest extends TestBase {
         //THEN
         assertEquals(result, expected);
         //RESET 
-        this.utils.resetWeight();
+        testData.resetWeight();
     }
 
     shouldProfileSheetCalorieOuputCalculatorCalulateCaloriesCorrectlyForWoman1(){
@@ -155,7 +155,7 @@ class ProfileTest extends TestBase {
         assertEquals(resultCalMin, expectedCalMin);
         assertEquals(resultCalMax, expectedCalMax);
         //RESET
-        this.utils.resetCalorieCalculatorValues();
+        testData.resetCalorieCalculatorValues();
     }
 
     shouldProfileSheetCalorieOuputCalculatorCalulateCaloriesCorrectlyForWoman2(){
@@ -181,7 +181,7 @@ class ProfileTest extends TestBase {
         assertEquals(resultCalMin, expectedCalMin);
         assertEquals(resultCalMax, expectedCalMax);
         //RESET
-        this.utils.resetCalorieCalculatorValues();
+        testData.resetCalorieCalculatorValues();
     }
 
     shouldProfileSheetCalorieOuputCalculatorCalulateCaloriesCorrectlyForMan1(){
@@ -207,7 +207,7 @@ class ProfileTest extends TestBase {
         assertEquals(resultCalMin, expectedCalMin);
         assertEquals(resultCalMax, expectedCalMax);
         //RESET
-        this.utils.resetCalorieCalculatorValues();
+        testData.resetCalorieCalculatorValues();
     }
 
     shouldProfileSheetCalorieOuputCalculatorCalulateCaloriesCorrectlyForMan2(){
@@ -233,7 +233,7 @@ class ProfileTest extends TestBase {
         assertEquals(resultCalMin, expectedCalMin);
         assertEquals(resultCalMax, expectedCalMax);
         //RESET
-        this.utils.resetCalorieCalculatorValues();
+        testData.resetCalorieCalculatorValues();
     }
 
     shouldProfileSheetCopyCalorieOuputCalculatorDropBoxesAcceptCorrectValues(){

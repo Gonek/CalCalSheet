@@ -1,7 +1,7 @@
 class SettingsGivenSteps extends Steps{
 
     test_days_available(){
-        this.test.utils.addTestDays();
+        testData.addTestDays();
     }
 
     future_days_as(days){

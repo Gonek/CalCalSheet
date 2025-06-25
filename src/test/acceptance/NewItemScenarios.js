@@ -5,7 +5,7 @@ class NewItemScenarios extends AcceptanceTestBase{
     }
 
     clearData(){
-      this.utils.clearItems();
+      testData.clearItems();
     }
 
     scenario_add_100g_item(){

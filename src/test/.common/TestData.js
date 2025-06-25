@@ -1,8 +1,7 @@
-class TestUtils {
+class TestData {
 
-  constructor(testBase){
+  constructor(){
     this.LAST_ITEM_INDEX = 14;
-    this.testBase = testBase;
   }
 
   // TEST ITEMS
@@ -351,3 +350,4 @@ class TestUtils {
   }
 }
 
+var testData = new TestData();

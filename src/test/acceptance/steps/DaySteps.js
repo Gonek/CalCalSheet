@@ -1,7 +1,7 @@
 class DayGivenSteps extends BaseDayGivenSteps{
 
     test_meals_available(){
-        this.test.utils.addTestMeals();
+        testData.addTestMeals();
     }
 
     copy_from_as(meals){

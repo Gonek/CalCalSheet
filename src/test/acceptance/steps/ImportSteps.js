@@ -35,15 +35,15 @@ class ImportGivenSteps extends Steps{
     }
 
     test_meals_available(){
-        this.test.utils.addTestMeals();
+        testData.addTestMeals();
     }
 
     test_items_available(){
-        this.test.utils.addTestItems();
+        testData.addTestItems();
     }
 
     test_recipes_available(){
-        this.test.utils.addTestRecipes();
+        testData.addTestRecipes();
     }
 }
 

@@ -1,11 +1,11 @@
 class ProfileGivenSteps extends Steps{
 
     default_profile_available(){
-        this.test.utils.addDefaultProfile();
+        testData.addDefaultProfile();
     }
 
     test_profiles_available(){
-        this.test.utils.addTestProfiles();
+        testData.addTestProfiles();
     }
 
     copy_to_as(profile){

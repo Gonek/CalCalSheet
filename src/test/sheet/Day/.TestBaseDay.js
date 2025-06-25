@@ -4,12 +4,12 @@ class TestBaseDay extends TestBase  {
         super.beforeAll();
         this.itemsSpr = getSht(SHT.ITEMS);
         this.daySpr = getSht(SHT.DAY);
-        this.utils.addTestItems();
+        testData.addTestItems();
     }
 
     afterAll(){
         super.afterAll();
-        this.utils.clearItems();
+        testData.clearItems();
     }
 
     clearData(){

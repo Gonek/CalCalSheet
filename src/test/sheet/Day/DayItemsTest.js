@@ -46,9 +46,9 @@ class DayItemsTest extends TestBaseDay {
         let expected = Array(15).fill(1)
               .concat(Array(15).fill(2))
               .concat(Array(15).fill(3))
-              .concat(Array(15).fill(this.utils.LAST_ITEM_INDEX))
+              .concat(Array(15).fill(testData.LAST_ITEM_INDEX))
               .concat(Array(15).fill(1))
-              .concat(Array(15).fill(this.utils.LAST_ITEM_INDEX));
+              .concat(Array(15).fill(testData.LAST_ITEM_INDEX));
 
         // WHEN
         this.addItemsDaySheet(meal1, 15);

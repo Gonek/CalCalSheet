@@ -14,7 +14,7 @@ class DaySelectorTest extends TestBaseDay {
         this.saveMealFromRng = getRng(RNG.SAVE_MEAL_FROM);
         this.saveMealFromMealIdRng = getRng(RNG.SAVE_MEAL_FROM_MEAL_ID);
         this.saveMealAsRng = getRng(RNG.SAVE_MEAL_AS);
-        this.utils.addTestDays();
+        testData.addTestDays();
     }
 
     afterAll(){
@@ -24,7 +24,7 @@ class DaySelectorTest extends TestBaseDay {
         this.copyMealToRng.clear();
         this.saveMealFromRng.clear();
         this.saveMealAsRng.clear();
-        this.utils.clearDays();
+        testData.clearDays();
     }
 
     shouldDaySheetHaveTheCorrectFormulaForDaySelectorBackgroudCalculatons(){

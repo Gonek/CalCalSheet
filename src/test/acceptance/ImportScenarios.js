@@ -5,17 +5,17 @@
     }
 
     clearData(){
-        this.utils.resetSettings();
-        this.utils.clearImports();
-        this.utils.clearDay();
-        this.utils.clearDays();
-        this.utils.clearHistory();
-        this.utils.clearItems();
-        this.utils.clearMeals();
-        this.utils.clearRecipes();
-        this.utils.addDefaultProfile();
-        this.utils.resetWeight();
-        this.utils.resetCalorieCalculatorValues();
+        testData.resetSettings();
+        testData.clearImports();
+        testData.clearDay();
+        testData.clearDays();
+        testData.clearHistory();
+        testData.clearItems();
+        testData.clearMeals();
+        testData.clearRecipes();
+        testData.addDefaultProfile();
+        testData.resetWeight();
+        testData.resetCalorieCalculatorValues();
     }
 
     afterAll(){

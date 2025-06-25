@@ -259,18 +259,18 @@ class NewItemTest extends TestBase {
 
     shouldNewItemSheetLoadAllItemsInTheNameField(){
         //GIVEN
-        this.utils.addTestItems();
+        testData.addTestItems();
         let expected = ['1 First', '2 Second', '3 Third', 'All 100', 'All 1', 'All Green', 'Green', 'Max cal', 'Red', 'Test 100g', 'Test 1 serving', 'Yellow', 'Zero cal', 'ZZ Last'];
         //WHEN
         let result = this.sht.getRng('C3').getValidationCriteriaRangeValues();
         //THEN
         assertEquals(result, expected);
-        this.utils.clearRecipes();
+        testData.clearRecipes();
     }
 
     shouldNewItemSheetLoadAllItemsAndTheGivenNameInTheNameField(){
         //GIVEN
-        this.utils.addTestItems();
+        testData.addTestItems();
         let nameRng = this.sht.getRng('C3');
         let expected = ['New Item', '1 First', '2 Second', '3 Third', 'All 100', 'All 1', 'All Green', 'Green', 'Max cal', 'Red', 'Test 100g', 'Test 1 serving', 'Yellow', 'Zero cal', 'ZZ Last'];
         //WHEN
@@ -278,7 +278,7 @@ class NewItemTest extends TestBase {
         let result = nameRng.getValidationCriteriaRangeValues();
         //THEN
         assertEquals(result, expected);
-        this.utils.clearRecipes();
+        testData.clearRecipes();
     }
 }
 

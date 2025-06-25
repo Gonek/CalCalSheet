@@ -7,12 +7,12 @@ class DayMealTest extends TestBaseDay {
         this.meal1StartRng = getRng(CBOX.MEAL_1_START);
         this.selectedMealNameRng = getRng(RNG.SELECTED_MEAL_NAME);
         this.selectedMealItemsRng = getRng(RNG.SELECTED_MEAL_ITEMS);
-        this.utils.addTestMeals();
+        testData.addTestMeals();
     }
 
     afterAll(){
         super.afterAll();
-        this.utils.clearMeals();
+        testData.clearMeals();
     }
 
     shouldDaySheetLoadAllSavedMealsAndItemsInTheFirstItemSelectorInEveryMeal(){
