@@ -2,7 +2,7 @@ class DaySelectorTest extends TestBaseDay {
 
     beforeAll(){
         super.beforeAll();
-        this.daysSpr = getSht(SHT.DAYS);
+        this.daysSht = getSht(SHT.DAYS);
         this.dayNameRng = getRng(CBOX.DAY_NAME);
         this.selectedDayItemsRng = getRng(RNG.SELECTED_DAY_ITEMS);
         this.days = this.dayNameRng.getValidationCriteriaRangeValues();

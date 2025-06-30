@@ -4,22 +4,22 @@ class ImportServiceTest extends TestBase {
         this.sId = 'SheetId';
         this.importRng = mockRng(RNG.IMPORT);
         this.importSpSh = mockSpSh(this.sId);
-        this.fromSupportSpr = mockSpr(`${this.sId}.${SHT.SUPPORT}`);
-        this.fromItemsSpr = mockSpr(`${this.sId}.${SHT.ITEMS}`);
-        this.fromRecipesSpr = mockSpr(`${this.sId}.${SHT.RECIPES}`);
-        this.fromMealsSpr = mockSpr(`${this.sId}.${SHT.MEALS}`);
-        this.fromProfileSpr = mockSpr(`${this.sId}.${SHT.PROFILE}`);
-        this.fromSettingsSpr = mockSpr(`${this.sId}.${SHT.SETTINGS}`);
-        this.fromHistorySpr = mockSpr(`${this.sId}.${SHT.HISTORY}`);
-        this.fromDaysSpr = mockSpr(`${this.sId}.${SHT.DAYS}`);
-        this.toSupportSpr = mockSpr(SHT.SUPPORT);
-        this.toItemsSpr = mockSpr(SHT.ITEMS);
-        this.toRecipesSpr = mockSpr(SHT.RECIPES);
-        this.toMealsSpr = mockSpr(SHT.MEALS);
-        this.toProfileSpr = mockSpr(SHT.PROFILE);
-        this.toSettingsSpr = mockSpr(SHT.SETTINGS);
-        this.toHistorySpr = mockSpr(SHT.HISTORY);
-        this.toDaysSpr = mockSpr(SHT.DAYS);
+        this.fromSupportSht = mockSht(`${this.sId}.${SHT.SUPPORT}`);
+        this.fromItemsSht = mockSht(`${this.sId}.${SHT.ITEMS}`);
+        this.fromRecipesSht = mockSht(`${this.sId}.${SHT.RECIPES}`);
+        this.fromMealsSht = mockSht(`${this.sId}.${SHT.MEALS}`);
+        this.fromProfileSht = mockSht(`${this.sId}.${SHT.PROFILE}`);
+        this.fromSettingsSht = mockSht(`${this.sId}.${SHT.SETTINGS}`);
+        this.fromHistorySht = mockSht(`${this.sId}.${SHT.HISTORY}`);
+        this.fromDaysSht = mockSht(`${this.sId}.${SHT.DAYS}`);
+        this.toSupportSht = mockSht(SHT.SUPPORT);
+        this.toItemsSht = mockSht(SHT.ITEMS);
+        this.toRecipesSht = mockSht(SHT.RECIPES);
+        this.toMealsSht = mockSht(SHT.MEALS);
+        this.toProfileSht = mockSht(SHT.PROFILE);
+        this.toSettingsSht = mockSht(SHT.SETTINGS);
+        this.toHistorySht = mockSht(SHT.HISTORY);
+        this.toDaysSht = mockSht(SHT.DAYS);
         this.toWeightHistoryRng = mock(Rng); 
         this.toDetailsRng = mock(Rng); 
         this.toMacroRng = mock(Rng); 
@@ -37,11 +37,11 @@ class ImportServiceTest extends TestBase {
         // GIVEN
         this.givenImportSettings([true, true, true, true, true, true, true], [IMPORT_OPTIONS.CLEAR_CONTENT, IMPORT_OPTIONS.CLEAR_CONTENT, IMPORT_OPTIONS.CLEAR_CONTENT]);
         let itemsData = ['Items'];
-        when(this.fromItemsSpr).getValues('B4:AB').thenReturn(itemsData);
+        when(this.fromItemsSht).getValues('B4:AB').thenReturn(itemsData);
         let recipeData = ['Recipe'];
-        when(this.fromRecipesSpr).getClearValues('B4:D').thenReturn(recipeData);
+        when(this.fromRecipesSht).getClearValues('B4:D').thenReturn(recipeData);
         let mealData = ['Meal'];
-        when(this.fromMealsSpr).getClearValues('B4:D').thenReturn(mealData);
+        when(this.fromMealsSht).getClearValues('B4:D').thenReturn(mealData);
         let macroData = ['Macro'];
         let weightHistoryData = ['WeightHistory'];
         let detailsData = ['deatils'];
@@ -51,17 +51,17 @@ class ImportServiceTest extends TestBase {
         let mealsData = ['Meals'];
         this.givenSettings(generalData, nutritionData, mealsData);
         let historyData = ['History'];
-        when(this.fromHistorySpr).getValues('B10:R').thenReturn(historyData);
-        when(this.fromDaysSpr).getRng('A4:N').thenReturn(this.fromDaysRng);
-        when(this.toDaysSpr).getRng('A4:N').thenReturn(this.toDaysRng);
+        when(this.fromHistorySht).getValues('B10:R').thenReturn(historyData);
+        when(this.fromDaysSht).getRng('A4:N').thenReturn(this.fromDaysRng);
+        when(this.toDaysSht).getRng('A4:N').thenReturn(this.toDaysRng);
         let daysData = ['Days'];
         when(this.fromDaysRng).getValues().thenReturn(daysData)
         // WHEN
         this.importService.startImport();
         // THEN
-        this.verifyDataImport(this.toItemsSpr, 'B4:AB', itemsData);
-        this.verifyDataImport(this.toRecipesSpr, 'B4:D', recipeData);
-        this.verifyDataImport(this.toMealsSpr, 'B4:D', mealData);
+        this.verifyDataImport(this.toItemsSht, 'B4:AB', itemsData);
+        this.verifyDataImport(this.toRecipesSht, 'B4:D', recipeData);
+        this.verifyDataImport(this.toMealsSht, 'B4:D', mealData);
         verify(this.toWeightHistoryRng).clearAndSetValues(weightHistoryData).calledOnce();
         verify(this.toMacroRng).clearAndSetValues(macroData).calledOnce();
         verify(this.toDetailsRng).clearAndSetValues(detailsData).calledOnce();
@@ -69,7 +69,7 @@ class ImportServiceTest extends TestBase {
         verify(this.toNutritionRng).clearAndSetValues(nutritionData).calledOnce();
         verify(this.toMealsRng).clearAndSetValues(mealsData).calledOnce();
         verify(this.settingsService).applySettings().calledOnce();
-        this.verifyDataImport(this.toHistorySpr, 'B10:R', historyData); 
+        this.verifyDataImport(this.toHistorySht, 'B10:R', historyData); 
         verify(this.toDaysRng).setValuesWithResize(daysData).calledOnce();
     }
 
@@ -79,9 +79,9 @@ class ImportServiceTest extends TestBase {
         // WHEN
         this.importService.startImport();
         // THEN 
-        this.verifyDataImport(this.toItemsSpr, 'B4:AA', any(), 0);
-        this.verifyDataImport(this.toRecipesSpr, 'B4:D', any(), 0);
-        this.verifyDataImport(this.toMealsSpr, 'B4:D', any(), 0);
+        this.verifyDataImport(this.toItemsSht, 'B4:AA', any(), 0);
+        this.verifyDataImport(this.toRecipesSht, 'B4:D', any(), 0);
+        this.verifyDataImport(this.toMealsSht, 'B4:D', any(), 0);
         verify(this.toWeightHistoryRng).clearAndSetValues(any()).neverCalled();
         verify(this.toMacroRng).clearAndSetValues(any()).neverCalled();
         verify(this.toDetailsRng).clearAndSetValues(any()).neverCalled();
@@ -89,7 +89,7 @@ class ImportServiceTest extends TestBase {
         verify(this.toNutritionRng).clearAndSetValues(any()).neverCalled();
         verify(this.toMealsRng).clearAndSetValues(any()).neverCalled();
         verify(this.settingsService).applySettings().neverCalled();
-        this.verifyDataImport(this.toHistorySpr, 'B10:R', any(), 0); 
+        this.verifyDataImport(this.toHistorySht, 'B10:R', any(), 0); 
         verify(this.toDaysRng).setValuesWithResize(any()).neverCalled();
     }
 
@@ -97,39 +97,39 @@ class ImportServiceTest extends TestBase {
         // GIVEN
         this.givenImportSettings([true, false, false, false, false, false, false], [IMPORT_OPTIONS.MERGE_CONTENT, '', '']);
         let itemsData = ['Items'];
-        when(this.fromItemsSpr).getValues('B4:AB').thenReturn(itemsData);
+        when(this.fromItemsSht).getValues('B4:AB').thenReturn(itemsData);
         // WHEN
         this.importService.startImport();  
         // THEN
-        verify(this.toItemsSpr).clear('B4:AB').neverCalled();
-        verify(this.toItemsSpr).putDataAtEnd(itemsData).calledOnce();
-        verify(this.toItemsSpr).sort(2).calledOnce();
+        verify(this.toItemsSht).clear('B4:AB').neverCalled();
+        verify(this.toItemsSht).putDataAtEnd(itemsData).calledOnce();
+        verify(this.toItemsSht).sort(2).calledOnce();
     }
 
     shouldStartImportDoNotClearRecipesIfMergeSelected(){
         // GIVEN
         this.givenImportSettings([false, true, false, false, false, false, false], ['', IMPORT_OPTIONS.MERGE_CONTENT, '']);
         let recipeData = ['Recipe'];
-        when(this.fromRecipesSpr).getClearValues('B4:D').thenReturn(recipeData);
+        when(this.fromRecipesSht).getClearValues('B4:D').thenReturn(recipeData);
         // WHEN
         this.importService.startImport();  
         // THEN
-        verify(this.toRecipesSpr).clear('B4:D').neverCalled();
-        verify(this.toRecipesSpr).putDataAtEnd(recipeData).calledOnce();
-        verify(this.toRecipesSpr).sort(2).calledOnce();
+        verify(this.toRecipesSht).clear('B4:D').neverCalled();
+        verify(this.toRecipesSht).putDataAtEnd(recipeData).calledOnce();
+        verify(this.toRecipesSht).sort(2).calledOnce();
     }
 
     shouldStartImportDoNotClearMealIfMergeSelected(){
         // GIVEN
         this.givenImportSettings([false, false, true, false, false, false, false], ['',  '', IMPORT_OPTIONS.MERGE_CONTENT]);
         let mealData = ['Meal'];
-        when(this.fromMealsSpr).getClearValues('B4:D').thenReturn(mealData);
+        when(this.fromMealsSht).getClearValues('B4:D').thenReturn(mealData);
         // WHEN
         this.importService.startImport();  
         // THEN
-        verify(this.toMealsSpr).clear('B4:D').neverCalled();
-        verify(this.toMealsSpr).putDataAtEnd(mealData).calledOnce();
-        verify(this.toMealsSpr).sort(2).calledOnce();
+        verify(this.toMealsSht).clear('B4:D').neverCalled();
+        verify(this.toMealsSht).putDataAtEnd(mealData).calledOnce();
+        verify(this.toMealsSht).sort(2).calledOnce();
     }
 
     shouldStartImportThrowExeptionIfImportIdMissingOrIncorrect(){
@@ -145,7 +145,7 @@ class ImportServiceTest extends TestBase {
 
     shouldStartImportThrowExeptionIfImportVersionOtherThen14or15or16(){
         // GIVEN
-        when(this.fromSupportSpr).getValue('E24').thenReturn('v1.3');
+        when(this.fromSupportSht).getValue('E24').thenReturn('v1.3');
         when(this.importRng).getValue(1,2).thenReturn('SheetId');
         when(this.importSpSh).isExist().thenReturn(true);
         // WHEN THEN
@@ -156,7 +156,7 @@ class ImportServiceTest extends TestBase {
 
     givenImportSettings(enabled, importOption){
         when(this.importSpSh).isExist().thenReturn(true);
-        when(this.fromSupportSpr).getValue('E24').thenReturn('v1.6');
+        when(this.fromSupportSht).getValue('E24').thenReturn('v1.6');
         when(this.importRng).getValue(1,2).thenReturn('SheetId');
         when(this.importRng).getValue(2,1).thenReturn('Items');
         when(this.importRng).getValue(2,2).thenReturn(importOption[0]);
@@ -178,21 +178,21 @@ class ImportServiceTest extends TestBase {
     }
 
     givenProfile(macroData, weightHistoryData, detailsData){
-        when(this.fromProfileSpr).getValues('I16:L112').thenReturn(weightHistoryData);
-        when(this.fromProfileSpr).getValues('C3:P13').thenReturn(macroData);
-        when(this.fromProfileSpr).getValues('D16:D21').thenReturn(detailsData);
-        when(this.toProfileSpr).getRng('I16:L112').thenReturn(this.toWeightHistoryRng);
-        when(this.toProfileSpr).getRng('C3:P13').thenReturn(this.toMacroRng);
-        when(this.toProfileSpr).getRng('D16:D21').thenReturn(this.toDetailsRng);
+        when(this.fromProfileSht).getValues('I16:L112').thenReturn(weightHistoryData);
+        when(this.fromProfileSht).getValues('C3:P13').thenReturn(macroData);
+        when(this.fromProfileSht).getValues('D16:D21').thenReturn(detailsData);
+        when(this.toProfileSht).getRng('I16:L112').thenReturn(this.toWeightHistoryRng);
+        when(this.toProfileSht).getRng('C3:P13').thenReturn(this.toMacroRng);
+        when(this.toProfileSht).getRng('D16:D21').thenReturn(this.toDetailsRng);
     }
 
     givenSettings(generalData, nutritionData, mealsData){
-        when(this.fromSettingsSpr).getValues('E4:G10').thenReturn(generalData);
-        when(this.fromSettingsSpr).getValues('D12:D20').thenReturn(nutritionData);
-        when(this.fromSettingsSpr).getValues('F13:G18').thenReturn(mealsData);
-        when(this.toSettingsSpr).getRng('E4:G10').thenReturn(this.toGeneralRng);
-        when(this.toSettingsSpr).getRng('D12:D20').thenReturn(this.toNutritionRng);
-        when(this.toSettingsSpr).getRng('F13:G18').thenReturn(this.toMealsRng);
+        when(this.fromSettingsSht).getValues('E4:G10').thenReturn(generalData);
+        when(this.fromSettingsSht).getValues('D12:D20').thenReturn(nutritionData);
+        when(this.fromSettingsSht).getValues('F13:G18').thenReturn(mealsData);
+        when(this.toSettingsSht).getRng('E4:G10').thenReturn(this.toGeneralRng);
+        when(this.toSettingsSht).getRng('D12:D20').thenReturn(this.toNutritionRng);
+        when(this.toSettingsSht).getRng('F13:G18').thenReturn(this.toMealsRng);
     }
 
     verifyDataImport(sprMock, a1Area, data, times = 1){

@@ -2,8 +2,8 @@ class TestBaseDay extends TestBase  {
   
     beforeAll(){
         super.beforeAll();
-        this.itemsSpr = getSht(SHT.ITEMS);
-        this.daySpr = getSht(SHT.DAY);
+        this.itemsSht = getSht(SHT.ITEMS);
+        this.daySht = getSht(SHT.DAY);
         testData.addTestItems();
     }
 
@@ -13,7 +13,7 @@ class TestBaseDay extends TestBase  {
     }
 
     clearData(){
-        this.daySpr.clear(`C15:E104`);
+        this.daySht.clear(`C15:E104`);
     }
 
     // UTILITIES
@@ -23,10 +23,10 @@ class TestBaseDay extends TestBase  {
     }
 
     addItemDaySheet(items, startRow = 15){
-        this.daySpr.setAreaValue(startRow, 3, 1, 3, [items]);
+        this.daySht.setAreaValue(startRow, 3, 1, 3, [items]);
     }
 
     addItemsDaySheet(items, startRow = 15){
-        this.daySpr.setAreaValue(startRow, 3, items.length, 3, items);
+        this.daySht.setAreaValue(startRow, 3, items.length, 3, items);
     }
 }

@@ -2,7 +2,7 @@
 
 var onEdit = (e) => getObj(EventService).onEdit(e);
 var onOpen = (e) => getObj(EventService).onOpen(e);
-var testButton = () => getObj(EventService).testButton(SHT.NEW_ITEM, CBOX.NEW_ITEM_NAME);
+var testButton = () => getObj(EventService).testButton(SHT.SETTINGS, BTN.APPLY_SETTINGS);
 
 // OTHER FUNCTIONS
 var startImport = () => getObj(ImportService).startImport();
@@ -43,6 +43,7 @@ class EventService extends AbstractEventService{
         ]
       ],
       [SHT.TUTORIAL, [
+        new CBox(CBOX.LANGUAGE, SettingsService, 'changeLanguage'),
         new Btn(BTN.TUTORIAL_TEST, TutorialService, 'tutorialTestButton'),
         new Btn(BTN.SKIP_TUTORIAL, TutorialService, 'resetTutorial'),
         new Btn(BTN.TUTORIAL_NEXT, TutorialService, 'tutorialNext')

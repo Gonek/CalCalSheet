@@ -36,6 +36,7 @@ const BTN = {
 
 const CBOX = {
   DAY_NAME: 'DayName',
+  LANGUAGE : 'Language',
   NEW_ITEM_NAME: 'NewItemName',
   RECIPE_NAME: 'RecipeName',
   MEAL_1_START : 'Meal1Start',
@@ -48,6 +49,8 @@ const CBOX = {
 
 const RNG = {
   // - TUTORIAL
+  LANGUAGE : 'Language',
+  PREVIOUS_LANGUAGE : 'PreviousLanguage',
   TUTORIAL_STEP: 'TutorialStep',
   TUTORIAL_NEXT_POS: 'TutorialNextPos',
   TUTORIAL_RESET_POS: 'TutorialResetPos',
@@ -123,6 +126,7 @@ const RNG = {
   NUMBER_OF_PROFILES : 'NumberOfProfiles',
   WEIGHT_HISTORY : 'WeightHistory',
   WEIGHTS : 'Weights',
+  IS_MEASUREMENT_METRIC : 'IsMeasurementMetric',
   CALORIE_OUTPUT_CALCULATOR : 'CalorieOutputCalculator',
   COPY_CALORIES_SELECTED_PROFILE : 'CopyCaloriesSelectedProfile',
   // SETTINGS
@@ -130,9 +134,13 @@ const RNG = {
   GENERAL_SETTINGS : 'GeneralSettings',
   NUTRITION_FIELDS : 'NutritionFields',
   MEALS : 'Meals',
+  LOCALISATION: 'Localisation',
   // HISTORY
   HISTORY_INTERVAL : 'HistoryInterval',
-  SELECETED_HISTORY_DAY : 'SelectedHistoryDay'
+  SELECETED_HISTORY_DAY : 'SelectedHistoryDay',
+  // TEXTS
+  SHEETS: 'Sheets', 
+  NOTES: 'Notes'
 }
 
 // VERSIONS

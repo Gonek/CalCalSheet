@@ -1,13 +1,13 @@
 class SettingsService{
 
   constructor(){
-    this.daySpr = getSht(SHT.DAY);
-    this.daysSpr = getSht(SHT.DAYS);
-    this.newItemSpr = getSht(SHT.NEW_ITEM);
-    this.recipeCalculatorSpr = getSht(SHT.RECIPE_CALCULATOR);
-    this.itemsSpr = getSht(SHT.ITEMS);
-    this.profileSpr = getSht(SHT.PROFILE);
-    this.historySpr = getSht(SHT.HISTORY);
+    this.daySht = getSht(SHT.DAY);
+    this.daysSht = getSht(SHT.DAYS);
+    this.newItemSht = getSht(SHT.NEW_ITEM);
+    this.recipeCalculatorSht = getSht(SHT.RECIPE_CALCULATOR);
+    this.itemsSht = getSht(SHT.ITEMS);
+    this.profileSht = getSht(SHT.PROFILE);
+    this.historySht = getSht(SHT.HISTORY);
   }
 
   applySettings(){
@@ -18,10 +18,11 @@ class SettingsService{
     this.applyGeneralSettings(generalSettings);
     this.changeFields(nutritionFields, generalSettings);
     this.changeMeals(meals);
+    this.changeLocalisation();
   }
 
   applyGeneralSettings(generalSettings){
-    let profileRngList = this.profileSpr.getRngList(['C5:P5', 'C8:P8', 'C12:P12']);
+    let profileRngList = this.profileSht.getRngList(['C5:P5', 'C8:P8', 'C12:P12']);
     if(generalSettings[6]){
       profileRngList.setNumberFormat('0" %"');
     } else {
@@ -42,28 +43,28 @@ class SettingsService{
 
   changeNutritonFields(nutritionFields){
     nutritionFields.forEach((field, i) => {
-      this.daySpr.switchCols(field, i + 9);
-      this.newItemSpr.switchRows(field, i + 8);
-      this.recipeCalculatorSpr.switchCols(field, i + 8);
-      this.itemsSpr.switchCols(field, (i*2) + 8, 2);
-      this.profileSpr.switchRows(field, i + 5);
-      this.historySpr.switchCols(field, i + 6);
+      this.daySht.switchCols(field, i + 9);
+      this.newItemSht.switchRows(field, i + 8);
+      this.recipeCalculatorSht.switchCols(field, i + 8);
+      this.itemsSht.switchCols(field, (i*2) + 8, 2);
+      this.profileSht.switchRows(field, i + 5);
+      this.historySht.switchCols(field, i + 6);
     })
   }
 
   changeCheckBox(generalSettings){
     var consumedCbx = generalSettings[3];
-    this.daySpr.switchCols(consumedCbx, 2);
+    this.daySht.switchCols(consumedCbx, 2);
   }
 
   changeNoom(generalSettings){
     var noom = generalSettings[4];
-    this.daySpr.switchCols(noom, 18, 3);
-    this.daySpr.setValue('V4', noom ? 'Noom' : '');
-    this.newItemSpr.switchRows(noom, 21, 2);
-    this.recipeCalculatorSpr.switchRows(noom, 36, 2);
-    this.itemsSpr.switchCols(noom, 26);
-    this.historySpr.switchCols(noom, 19);
+    this.daySht.switchCols(noom, 18, 3);
+    this.daySht.setValue('V4', noom ? 'Noom' : '');
+    this.newItemSht.switchRows(noom, 21, 2);
+    this.recipeCalculatorSht.switchRows(noom, 36, 2);
+    this.itemsSht.switchCols(noom, 26);
+    this.historySht.switchCols(noom, 19);
   }
 
   changeMeals(meals){
@@ -72,16 +73,105 @@ class SettingsService{
       if (meal[0] != ''){
         var rowShow = meal[1];
         var rowHide = ROWS_PER_MEAL - rowShow; 
-        this.daySpr.showRows(startPos, rowShow);
+        this.daySht.showRows(startPos, rowShow);
         if(rowHide > 0) {
-          this.daySpr.hideRows(startPos + rowShow, rowHide);
+          this.daySht.hideRows(startPos + rowShow, rowHide);
         }
       }else{
-        this.daySpr.hideRows(startPos, ROWS_PER_MEAL);
+        this.daySht.hideRows(startPos, ROWS_PER_MEAL);
       }
-      this.daySpr.setPosValue(startPos, 1, meal[0]);
-      this.daySpr.setPosValue(4 + i, 7, meal[0]);
-      this.daysSpr.setPosValue(3, (i*2) + 2, meal[0]);
+      this.daySht.setPosValue(startPos, 1, meal[0]);
+      this.daySht.setPosValue(4 + i, 7, meal[0]);
+      this.daysSht.setPosValue(3, (i*2) + 2, meal[0]);
     })
+  }
+
+  changeLocalisation(){
+    let localisationRng = getRng(RNG.LOCALISATION);
+    let localisationData = localisationRng.getColAsArray();
+    let language = localisationData[0];
+    let timeZone = localisationData[1];
+    let dateFormat = localisationData[2];
+    let measurement = localisationData[3];
+    let measurements = localisationRng.getValidationCriteriaRangeValues(4);
+
+    getRng(RNG.LANGUAGE).setValue(language);
+    this.changeLanguage(language);
+    getRng(RNG.TODAY).setValue(`=ROUNDDOWN(NOW() +${timeZone}/24)`);
+    this.changeDateFormat(dateFormat);
+    this.changeMeassurement(measurement == measurements[0]);
+  }
+
+  changeLanguage(language = undefined){
+    let prevLangRng = getRng(RNG.PREVIOUS_LANGUAGE);
+    if(!language){
+      language = getRng(RNG.LANGUAGE).getValue();
+    }
+    if(prevLangRng.getValue() == language) return;
+
+    let sheets = getRng(RNG.SHEETS).getValues();
+    let notes = getRng(RNG.NOTES).getValues();
+    let activeSpsh = getSpSh(SPSH.ACTIVE);
+    let tutorialSht = getSht(SHT.TUTORIAL);
+
+    sheets.forEach(s => {
+      activeSpsh.getShtById(s[0]).setName(s[1]);
+    });
+
+    getObj(App).flush();
+
+    notes.forEach(n => {
+      tutorialSht.getRng(n[0]).setNote(n[1]);
+    });
+
+    prevLangRng.setValue(language);
+  }
+
+  changeDateFormat(dateFormat){
+    getSht(SHT.DAYS).getRng('A19:A').setNumberFormat(dateFormat);
+    getSht(SHT.PROFILE).getRng('I16:J').setNumberFormat(dateFormat);
+    getSht(SHT.ITEMS).getRng('AB4:AB').setNumberFormat(dateFormat);
+    getSht(SHT.HISTORY).getRng('B10:B').setNumberFormat(dateFormat);
+  }
+
+  changeMeassurement(isNewMeasurementMetric){
+    let isMeasurementMetricRng = getRng(RNG.IS_MEASUREMENT_METRIC);
+    let isMeasurementMetric = isMeasurementMetricRng.getValue();
+
+    if(isNewMeasurementMetric != isMeasurementMetric){
+      let calcHeightRng = getSht(SHT.PROFILE).getRng('D19:F19');
+      let calcWeightRng = getSht(SHT.PROFILE).getRng('D21');
+      let weigthRng = getSht(SHT.PROFILE).getRng('K16:K');
+
+      let newWeightFormat = isNewMeasurementMetric ? '0.00" kg"' : '0.00" lb"';
+      let newWeights = weigthRng.getColAsArray().map(w => [this.convertKgAndLb(isNewMeasurementMetric, w)]);
+      weigthRng.setValues(newWeights);
+      weigthRng.setNumberFormat(newWeightFormat);
+
+      calcWeightRng.setValue(this.convertKgAndLb(isNewMeasurementMetric, calcWeightRng.getValue()));
+      calcWeightRng.setNumberFormat(newWeightFormat);
+
+      calcHeightRng.setValue(this.convertCmAndInch(isNewMeasurementMetric, calcHeightRng.getValue()));
+      calcHeightRng.setNumberFormat(isNewMeasurementMetric ? '0" cm"' : '0" in"');
+
+      isMeasurementMetricRng.setValue(isNewMeasurementMetric);
+    }
+  }
+
+  convertKgAndLb(isNewMeasurementMetric, weight){
+    if(!weight) return null; 
+    if(isNewMeasurementMetric) {
+        return weight / 2.205;
+    } else {
+        return weight * 2.205;
+    }
+  }
+
+  convertCmAndInch(isNewMeasurementMetric, height){
+    if(isNewMeasurementMetric) {
+        return height * 2.54;
+    } else {
+        return height / 2.54;
+    }
   }
 }

@@ -259,7 +259,7 @@ class ImportThenSteps extends Steps{
     }
 
     days_imported(){
-        let daysSpr = getSht(SHT.DAYS);
+        let daysSht = getSht(SHT.DAYS);
         let expected = Array(90).fill(Array(12).fill(''));
         expected[15] = ['Carrot', 750, 'Cashew', 210, '', '', 'Blueberry', 850, '', '', 'Potato', 500];
         expected[30] = ['Banana', 500, '', '', 'Blueberry', 1000, '', '', 'Apple', 250, '', ''];
@@ -271,13 +271,13 @@ class ImportThenSteps extends Steps{
         expected[50] = ['Garlic', 50, '', '', '', '', '', '', '', '', '', ''];
         let expectedAdditionalInfo = [[3000], ['Borring day']];
 
-        assertEqualsArray(daysSpr.getValues('B4:M93'), expected);
-        assertEqualsArray(daysSpr.getValues('N4:N5'), expectedAdditionalInfo);
-        assertEqualsArray(daysSpr.getValues('N19:N20'), expectedAdditionalInfo);
-        assertEqualsArray(daysSpr.getValues('N34:N35'), expectedAdditionalInfo);
-        assertEqualsArray(daysSpr.getValues('N49:N50'), expectedAdditionalInfo);
-        assertEqualsArray(daysSpr.getValues('N64:N65'), expectedAdditionalInfo);
-        assertEqualsArray(daysSpr.getValues('N79:N80'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('B4:M93'), expected);
+        assertEqualsArray(daysSht.getValues('N4:N5'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('N19:N20'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('N34:N35'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('N49:N50'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('N64:N65'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('N79:N80'), expectedAdditionalInfo);
     }
 
     days_not_imported(){

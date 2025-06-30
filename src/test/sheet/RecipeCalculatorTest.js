@@ -3,8 +3,8 @@ class RecipeCalculatorTest extends TestBase {
     beforeAll(){
         super.beforeAll();
         this.sht = getSht(SHT.RECIPE_CALCULATOR);
-        this.itemsSpr = getSht(SHT.ITEMS);
-        this.recipesSpr  = getSht(SHT.RECIPES);
+        this.itemsSht = getSht(SHT.ITEMS);
+        this.recipesSht  = getSht(SHT.RECIPES);
         this.recipeNameRng = getRng(RNG.RECIPE_NAME);
         this.recipeItemsRng = getRng(RNG.RECIPE_ITEMS);
         this.recipeServingRng = getRng(RNG.RECIPE_SERVING);

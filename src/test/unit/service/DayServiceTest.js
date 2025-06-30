@@ -1,7 +1,7 @@
 class DayServiceTest extends TestBase {
     beforeAll(){
         super.beforeAll();
-        this.daySpr = mockSpr(SHT.DAY);
+        this.daySht = mockSht(SHT.DAY);
         this.lastFinishedDayRng = mockRng(RNG.LAST_FINISHED_DAY);
         this.todayRng = mockRng(RNG.TODAY);
         this.dayNameRng = mockRng(CBOX.DAY_NAME);
@@ -126,7 +126,7 @@ class DayServiceTest extends TestBase {
         // WHEN
         this.dayService.loadMeal(this.mockBox.mockObj);
         // THEN
-        verify(this.daySpr).setValue('V15', 'Meal').calledOnce();
+        verify(this.daySht).setValue('V15', 'Meal').calledOnce();
         verify(this.meal1Rng).setValues([['Item 1', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]]).calledOnce();
     }
 
@@ -137,7 +137,7 @@ class DayServiceTest extends TestBase {
         // WHEN
         this.dayService.loadMeal(this.mockBox.mockObj);
         // THEN
-        verify(this.daySpr).setValue(any()).neverCalled()
+        verify(this.daySht).setValue(any()).neverCalled()
         verify(this.meal1Rng).setValues(any()).neverCalled();
     }
 

@@ -36,64 +36,64 @@ class ImportService{
   }
 
   importData(sheetId){
-    var fromSpr = getSht(`${this.importId}.${sheetId}`);
-    var toSpr = getSht(sheetId);
-    if(fromSpr.sht){
+    var fromSht = getSht(`${this.importId}.${sheetId}`);
+    var toSht = getSht(sheetId);
+    if(fromSht.sht){
       switch(sheetId){
-        case SHT.ITEMS: this.importItems(fromSpr, toSpr); break;
-        case SHT.RECIPES: this.importRecipes(fromSpr, toSpr); break;
-        case SHT.MEALS: this.importMeals(fromSpr, toSpr); break;
-        case SHT.PROFILE: this.importProfile(fromSpr, toSpr); break;
-        case SHT.SETTINGS: this.importSettings(fromSpr, toSpr); break;
-        case SHT.HISTORY: this.importHistory(fromSpr, toSpr); break;
-        case SHT.DAYS: this.importDays(fromSpr, toSpr); break;
+        case SHT.ITEMS: this.importItems(fromSht, toSht); break;
+        case SHT.RECIPES: this.importRecipes(fromSht, toSht); break;
+        case SHT.MEALS: this.importMeals(fromSht, toSht); break;
+        case SHT.PROFILE: this.importProfile(fromSht, toSht); break;
+        case SHT.SETTINGS: this.importSettings(fromSht, toSht); break;
+        case SHT.HISTORY: this.importHistory(fromSht, toSht); break;
+        case SHT.DAYS: this.importDays(fromSht, toSht); break;
       }
     }
   }
 
-  importItems(fromSpr, toSpr){
+  importItems(fromSht, toSht){
     var data;
     if(this.baseVersion == V1_6){
-      data = fromSpr.getValues('B4:AB');
+      data = fromSht.getValues('B4:AB');
     } else {
-      data = fromSpr.getValues('B4:AA');
+      data = fromSht.getValues('B4:AA');
     }
     if(this.importRng.getValue(2, 2) == IMPORT_OPTIONS.CLEAR_CONTENT) {
-      toSpr.clear('B4:AB');
+      toSht.clear('B4:AB');
     }
-    toSpr.putDataAtEnd(data);
-    toSpr.sort(2);
+    toSht.putDataAtEnd(data);
+    toSht.sort(2);
   }
 
-  importRecipes(fromSpr, toSpr){
-    var data = fromSpr.getClearValues('B4:D');
+  importRecipes(fromSht, toSht){
+    var data = fromSht.getClearValues('B4:D');
     if(this.importRng.getValue(3, 2) == IMPORT_OPTIONS.CLEAR_CONTENT) {
-      toSpr.clear('B4:D');
+      toSht.clear('B4:D');
     }
-    toSpr.putDataAtEnd(data);
-    toSpr.sort(2);
+    toSht.putDataAtEnd(data);
+    toSht.sort(2);
   }
 
-  importMeals(fromSpr, toSpr){
-    var data = fromSpr.getClearValues('B4:D');
+  importMeals(fromSht, toSht){
+    var data = fromSht.getClearValues('B4:D');
     if(this.importRng.getValue(4, 2) == IMPORT_OPTIONS.CLEAR_CONTENT) {
-      toSpr.clear('B4:D');
+      toSht.clear('B4:D');
     }
-    toSpr.putDataAtEnd(data);
-    toSpr.sort(2);
+    toSht.putDataAtEnd(data);
+    toSht.sort(2);
   }
 
-  importProfile(fromSpr, toSpr){
-    var fromWeightHistory = fromSpr.getValues('I16:L112');
+  importProfile(fromSht, toSht){
+    var fromWeightHistory = fromSht.getValues('I16:L112');
     var fromDetails;
-    var fromMacro = fromSpr.getValues('C3:P13');
-    var toWeightHistoryRng = toSpr.getRng('I16:L112');
-    var toDetailsRng = toSpr.getRng('D16:D21');
-    var toMacroRng = toSpr.getRng('C3:P13');
+    var fromMacro = fromSht.getValues('C3:P13');
+    var toWeightHistoryRng = toSht.getRng('I16:L112');
+    var toDetailsRng = toSht.getRng('D16:D21');
+    var toMacroRng = toSht.getRng('C3:P13');
     if(this.baseVersion == V1_4){
-      fromDetails = fromSpr.getValues('D19:D24'); 
+      fromDetails = fromSht.getValues('D19:D24'); 
     } else {
-      fromDetails = fromSpr.getValues('D16:D21');
+      fromDetails = fromSht.getValues('D16:D21');
     }
     fromDetails[1] = ['=DATEDIF(D16, NOW(), "Y")'];
     toWeightHistoryRng.clearAndSetValues(fromWeightHistory);
@@ -101,24 +101,24 @@ class ImportService{
     toMacroRng.clearAndSetValues(fromMacro);
   }
 
-  importSettings(fromSpr, toSpr){
+  importSettings(fromSht, toSht){
     var fromGeneral;
     var fromNutrition;
     var fromMeals;
     var toGeneralRng;
     if(this.baseVersion == V1_4){
-      fromGeneral = fromSpr.getValues('E4:G8');
-      fromNutrition = fromSpr.getValues('D10:D18');
-      fromMeals = fromSpr.getValues('F11:G16');
-      toGeneralRng = toSpr.getRng('E6:G10');
+      fromGeneral = fromSht.getValues('E4:G8');
+      fromNutrition = fromSht.getValues('D10:D18');
+      fromMeals = fromSht.getValues('F11:G16');
+      toGeneralRng = toSht.getRng('E6:G10');
     } else {
-      fromGeneral = fromSpr.getValues('E4:G10');
-      fromNutrition = fromSpr.getValues('D12:D20');
-      fromMeals = fromSpr.getValues('F13:G18');
-      toGeneralRng = toSpr.getRng('E4:G10');
+      fromGeneral = fromSht.getValues('E4:G10');
+      fromNutrition = fromSht.getValues('D12:D20');
+      fromMeals = fromSht.getValues('F13:G18');
+      toGeneralRng = toSht.getRng('E4:G10');
     } 
-    var toNutritionRng = toSpr.getRng('D12:D20');
-    var toMealsRng = toSpr.getRng('F13:G18');
+    var toNutritionRng = toSht.getRng('D12:D20');
+    var toMealsRng = toSht.getRng('F13:G18');
     toGeneralRng.clearAndSetValues(fromGeneral);
     toNutritionRng.clearAndSetValues(fromNutrition);
     toMealsRng.clearAndSetValues(fromMeals);
@@ -126,24 +126,24 @@ class ImportService{
     getObj(SettingsService).applySettings();
   }
 
-  importHistory(fromSpr, toSpr){
-    var data = fromSpr.getValues('B10:R');
-    toSpr.clear('B10:R');
-    toSpr.putDataAtEnd(data);
-    toSpr.sort(2);
+  importHistory(fromSht, toSht){
+    var data = fromSht.getValues('B10:R');
+    toSht.clear('B10:R');
+    toSht.putDataAtEnd(data);
+    toSht.sort(2);
   }
 
-  importDays(fromSpr, toSpr){
-    var fromDays = fromSpr.getRng('A4:N');
-    var toDays = toSpr.getRng('A4:N');
+  importDays(fromSht, toSht){
+    var fromDays = fromSht.getRng('A4:N');
+    var toDays = toSht.getRng('A4:N');
     toDays.setValuesWithResize(fromDays.getValues());
     if(this.baseVersion == V1_5){
       let numberOfDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
       let defaultCalorieOutput = getRng(RNG.DEFAULT_CALORIE_OUTPUT).getValue();
       let nextProfile = getRng(RNG.NEXT_PROFILE).getValue();
       for(var i=0; i<=numberOfDays; i++){
-        toSpr.setPosValue(4 + (i*15), 14, defaultCalorieOutput);
-        toSpr.setPosValue(5 + (i*15), 14, nextProfile);
+        toSht.setPosValue(4 + (i*15), 14, defaultCalorieOutput);
+        toSht.setPosValue(5 + (i*15), 14, nextProfile);
       }
     }
   }

@@ -55,10 +55,10 @@ class DayHeaderTest extends TestBaseDay {
                             `=CONCAT(IF(Q10<$X$11, CONCAT("⇧ ", ROUND($X$11-Q10,1)), IF(Q10>$Y$11, CONCAT("⇩ ", ROUND(Q10 - $Y$11,1)), CONCAT("✔ ", ROUND($Y$11-Q10,1)))), " mg")`];
 
         // WHEN
-        let mealResult = this.daySpr.getFormulas('H4:Q9');
-        let sumResult = this.daySpr.getFormulas('H10:Q10');
-        let rangeResult = this.daySpr.getFormulas('H11:Q11');
-        let diffResult = this.daySpr.getFormulas('H12:Q12');
+        let mealResult = this.daySht.getFormulas('H4:Q9');
+        let sumResult = this.daySht.getFormulas('H10:Q10');
+        let rangeResult = this.daySht.getFormulas('H11:Q11');
+        let diffResult = this.daySht.getFormulas('H12:Q12');
 
         // THEN
         assertEquals(mealResult, mealExpected);
@@ -88,8 +88,8 @@ class DayHeaderTest extends TestBaseDay {
           [`=ROUND(Profile!$D$26*0.25,-1)`, `=ROUND(Profile!$D$27*0.25,-1)`]
         ];
         // WHEN
-        let resultProfileBackground = this.daySpr.getFormulas('X1:AA11');
-        let resultNoomBackground = this.daySpr.getFormulas('X12:Y14');
+        let resultProfileBackground = this.daySht.getFormulas('X1:AA11');
+        let resultNoomBackground = this.daySht.getFormulas('X12:Y14');
         // THEN
         assertEquals(resultProfileBackground, expectedProfileBackground);
         assertEquals(resultNoomBackground, expectedNoomBackground);
@@ -109,7 +109,7 @@ class DayHeaderTest extends TestBaseDay {
           [`=CONCAT(IF(T10<X14, CONCAT("⇧ ",X14-T10), IF(T10>Y14, CONCAT("⇩ ",T10-Y14), CONCAT("✔ ", Y14-T10))), " kcal")`]
         ];
         // WHEN
-        let resultNoom = this.daySpr.getFormulas(`T4:T12`);
+        let resultNoom = this.daySht.getFormulas(`T4:T12`);
         // THEN
         assertEquals(resultNoom, expectedNoom);
     }
@@ -125,9 +125,9 @@ class DayHeaderTest extends TestBaseDay {
           '=IFERROR(H10/SUM(U15:U90)*100, 0)', '',
           '=SPARKLINE(B12,{"charttype","bar";"max",250;"min",0;"color1",IFS(B11<50, "Cyan", B12<100, "Green", B12<150, "Yellow", B12<200, "Orange", B12>=200, "Red")})'];
         // WHEN
-        let resultOutput = this.daySpr.getFormula('D5');
-        let resultChecklist = this.daySpr.getFormulas('D7:D9');
-        let resultCalDensity = this.daySpr.getFormulas('B12:D12');
+        let resultOutput = this.daySht.getFormula('D5');
+        let resultChecklist = this.daySht.getFormulas('D7:D9');
+        let resultCalDensity = this.daySht.getFormulas('B12:D12');
         // THEN
         assertEquals(resultOutput, expectedOutput);
         assertEquals(resultChecklist, expectedChecklist);
@@ -138,7 +138,7 @@ class DayHeaderTest extends TestBaseDay {
         // GIVEN
         let expected = Array(7).fill(['0 kcal', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0 mg']);
         // WHEN
-        let result = this.daySpr.getDisplayValues('H4:Q10');
+        let result = this.daySht.getDisplayValues('H4:Q10');
         // THEN
         assertEquals(result, expected);
     }
@@ -156,8 +156,8 @@ class DayHeaderTest extends TestBaseDay {
         this.addItemsDaySheet(meal, 75);
         this.addItemsDaySheet(meal, 90);
         
-        let resultMeals = this.daySpr.getValues('H4:Q9');
-        let resultSummary = this.daySpr.getValues('H10:Q10');
+        let resultMeals = this.daySht.getValues('H4:Q9');
+        let resultSummary = this.daySht.getValues('H10:Q10');
         // THEN
         assertEquals(resultMeals, expectedMeals);
         assertEquals(resultSummary, expectedSummary);
@@ -181,8 +181,8 @@ class DayHeaderTest extends TestBaseDay {
         let expectedRange = ['1000 - 2000 kcal', '11 - 44 g', '11 - 21 g', '12 - 22 g', '33 - 115 g', '14 - 24 g', '15 - 25 g', '16 - 26 g', '43 - 135 g', '18 - 28 mg'];
         // WHEN
         this.generalSettingsRng.setValue("TRUE", 7);
-        let resultBackground = this.daySpr.getValues('X1:Y11');
-        let resultRange = this.daySpr.getDisplayValues('H11:Q11');
+        let resultBackground = this.daySht.getValues('X1:Y11');
+        let resultRange = this.daySht.getDisplayValues('H11:Q11');
         // THEN
         assertEquals(resultBackground, expectedBackgroud);
         assertEquals(resultRange, expectedRange);
@@ -206,8 +206,8 @@ class DayHeaderTest extends TestBaseDay {
         let expectedRange = ['1000 - 2000 kcal', '10 - 20 g', '11 - 21 g', '12 - 22 g', '13 - 23 g', '14 - 24 g', '15 - 25 g', '16 - 26 g', '17 - 27 g', '18 - 28 mg'];
         // WHEN
         this.generalSettingsRng.setValue("FALSE", 7);
-        let resultBackground = this.daySpr.getValues('X1:Y11');
-        let resultRange = this.daySpr.getDisplayValues('H11:Q11');
+        let resultBackground = this.daySht.getValues('X1:Y11');
+        let resultRange = this.daySht.getDisplayValues('H11:Q11');
         // THEN
         assertEquals(resultBackground, expectedBackgroud);
         assertEquals(resultRange, expectedRange);
@@ -230,7 +230,7 @@ class DayHeaderTest extends TestBaseDay {
           let expectedCalories = `${i * 1000} - ${(i +1) * 1000} kcal`;
           // WHEN
           this.selectedProfileRng.setValue(`Test ${i}`);
-          let result = this.daySpr.getDisplayValue('H11');
+          let result = this.daySht.getDisplayValue('H11');
           // THEN 
           assertEquals(result, expectedCalories);
         }
@@ -243,7 +243,7 @@ class DayHeaderTest extends TestBaseDay {
         // WHEN
         this.addItemsDaySheet(meal);
         this.selectedProfileRng.setValue('Test 1');
-        let resultDiff = this.daySpr.getValues('H12:Q12'); 
+        let resultDiff = this.daySht.getValues('H12:Q12'); 
         // THEN
         assertEquals(resultDiff, expectedDiff);
     }
@@ -267,9 +267,9 @@ class DayHeaderTest extends TestBaseDay {
         let expectedRed = 250;
         // WHEN
         this.addItemsDaySheet(meal);
-        let resultGreen = this.daySpr.getValue('T4');
-        let resultYellow = this.daySpr.getValue('T7');
-        let resultRed = this.daySpr.getValue('T10');
+        let resultGreen = this.daySht.getValue('T4');
+        let resultYellow = this.daySht.getValue('T7');
+        let resultRed = this.daySht.getValue('T10');
         // THEN
         assertEquals(resultGreen, expectedGreen);
         assertEquals(resultYellow, expectedYellow);
@@ -298,7 +298,7 @@ class DayHeaderTest extends TestBaseDay {
         // WHEN
         this.addItemsDaySheet(meal);
         this.calOutputRng.setValue(calOutput);
-        let resultDifference = this.daySpr.getValue('D5');
+        let resultDifference = this.daySht.getValue('D5');
         // THEN
         assertEquals(resultDifference, expectedDifference);
     }

@@ -2,8 +2,8 @@ class DayMealTest extends TestBaseDay {
 
     beforeAll(){
         super.beforeAll();
-        this.mealsSpr = getSht(SHT.MEALS);
-        this.daysSpr = getSht(SHT.DAYS);
+        this.mealsSht = getSht(SHT.MEALS);
+        this.daysSht = getSht(SHT.DAYS);
         this.meal1StartRng = getRng(CBOX.MEAL_1_START);
         this.selectedMealNameRng = getRng(RNG.SELECTED_MEAL_NAME);
         this.selectedMealItemsRng = getRng(RNG.SELECTED_MEAL_ITEMS);
@@ -20,12 +20,12 @@ class DayMealTest extends TestBaseDay {
         let expected = [`${MEAL_ICON} Meal0`, `${MEAL_ICON} Meal1`, `${MEAL_ICON} Meal2`,
         '1 First', '2 Second', '3 Third', 'All 100', 'All 1', 'All Green', 'Green', 'Max cal', 'Red', 'Test 100g', 'Test 1 serving', 'Yellow', 'Zero cal', 'ZZ Last'];
         //WHEN
-        let result1 = this.daySpr.getValidationCriteriaRangeValues('C15');
-        let result2 = this.daySpr.getValidationCriteriaRangeValues('C30');
-        let result3 = this.daySpr.getValidationCriteriaRangeValues('C45');
-        let result4 = this.daySpr.getValidationCriteriaRangeValues('C60');
-        let result5 = this.daySpr.getValidationCriteriaRangeValues('C75');
-        let result6 = this.daySpr.getValidationCriteriaRangeValues('C90');
+        let result1 = this.daySht.getValidationCriteriaRangeValues('C15');
+        let result2 = this.daySht.getValidationCriteriaRangeValues('C30');
+        let result3 = this.daySht.getValidationCriteriaRangeValues('C45');
+        let result4 = this.daySht.getValidationCriteriaRangeValues('C60');
+        let result5 = this.daySht.getValidationCriteriaRangeValues('C75');
+        let result6 = this.daySht.getValidationCriteriaRangeValues('C90');
         //THEN
         assertEquals(result1, expected);
         assertEquals(result2, expected);

@@ -1,12 +1,12 @@
 class EventServiceTest extends TestBase {
     beforeAll(){
         super.beforeAll();
-        this.daySpr = mockSpr(SHT.DAY);
-        this.newItemSpr = mockSpr(SHT.NEW_ITEM);
-        this.recipeCalculatorSpr = mockSpr(SHT.RECIPE_CALCULATOR);
-        this.profileSpr = mockSpr(SHT.PROFILE);
-        this.settingsSpr = mockSpr(SHT.SETTINGS);
-        this.tuturialSpr = mockSpr(SHT.TUTORIAL);
+        this.daySht = mockSht(SHT.DAY);
+        this.newItemSht = mockSht(SHT.NEW_ITEM);
+        this.recipeCalculatorSht = mockSht(SHT.RECIPE_CALCULATOR);
+        this.profileSht = mockSht(SHT.PROFILE);
+        this.settingsSht = mockSht(SHT.SETTINGS);
+        this.tuturialSht = mockSht(SHT.TUTORIAL);
         this.dayService = mock(DayService);
         this.newItemService = mock(NewItemService);
         this.recipeCalculatorService = mock(RecipeCalculatorService);

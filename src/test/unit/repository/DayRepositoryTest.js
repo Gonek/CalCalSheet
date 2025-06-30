@@ -1,7 +1,7 @@
 class DayRepositoryTest extends TestBase {
     beforeAll(){
         super.beforeAll();
-        this.daysSpr = mockSpr(SHT.DAYS);
+        this.daysSht = mockSht(SHT.DAYS);
         this.prevDayIndexRng = mockRng(RNG.DAY_PREV_DAY_INDEX);
         this.deleteDaysUntilRng = mockRng(RNG.DELETE_DAYS_UNTIL);
         this.deleteDaysFromRng = mockRng(RNG.DELETE_DAYS_FROM);
@@ -20,7 +20,7 @@ class DayRepositoryTest extends TestBase {
         // WHEN
         var result = this.dayRepository.save(day);
         // THEN
-        verify(this.daysSpr).setAreaValueAtPos(13, 2, [['Item 0', 0, 'Item 15', 15, 'Item 30', 30, 'Item 45', 45, 'Item 60', 60, 'Item 75', 75], 
+        verify(this.daysSht).setAreaValueAtPos(13, 2, [['Item 0', 0, 'Item 15', 15, 'Item 30', 30, 'Item 45', 45, 'Item 60', 60, 'Item 75', 75], 
                                                        ['Item 1', 1, 'Item 16', 16, 'Item 31', 31, 'Item 46', 46, 'Item 61', 61, 'Item 76', 76], 
                                                        ['Item 2', 2, 'Item 17', 17, 'Item 32', 32, 'Item 47', 47, 'Item 62', 62, 'Item 77', 77], 
                                                        ['Item 3', 3, 'Item 18', 18, 'Item 33', 33, 'Item 48', 48, 'Item 63', 63, 'Item 78', 78], 
@@ -44,7 +44,7 @@ class DayRepositoryTest extends TestBase {
         // WHEN
         this.dayRepository.deletePastDays();
         // THEN
-        verify(this.daysSpr).deleteRows(19,41).calledOnce();
+        verify(this.daysSht).deleteRows(19,41).calledOnce();
     }
 
     shouldDeletePastDaysNotDeleteRowsIfDeleteDaysUntilIsZero(){
@@ -53,7 +53,7 @@ class DayRepositoryTest extends TestBase {
         // WHEN
         this.dayRepository.deletePastDays();
         // THEN
-        verify(this.daysSpr).deleteRows(any()).neverCalled();
+        verify(this.daysSht).deleteRows(any()).neverCalled();
     }
 
     shouldDeleteFutureDaysDeleteRowsFormDeleteDaysFromTillFirstEmpty(){
@@ -63,7 +63,7 @@ class DayRepositoryTest extends TestBase {
         // WHEN
         this.dayRepository.deleteFutureDays();
         // THEN
-        verify(this.daysSpr).deleteRows(40,80).calledOnce();
+        verify(this.daysSht).deleteRows(40,80).calledOnce();
     }
 
     shouldDeleteFutureDaysNotDeleteRowsIfDeleteDaysFromIsZero(){
@@ -73,7 +73,7 @@ class DayRepositoryTest extends TestBase {
         // WHEN
         this.dayRepository.deleteFutureDays();
         // THEN
-        verify(this.daysSpr).deleteRows(any()).neverCalled();
+        verify(this.daysSht).deleteRows(any()).neverCalled();
     }
     
     shouldCopyDefaultForFutureDays(){
@@ -83,15 +83,15 @@ class DayRepositoryTest extends TestBase {
         when(this.firstEmptyDayIndexRng).getValue().thenReturn(100);
         var rng1 = {toString() { return 'rng1'}};
         var rng2 = {toString() { return 'rng2'}};
-        when(this.daysSpr).getRng('A100:N115').thenReturn(rng1);
-        when(this.daysSpr).getRng('A115:N130').thenReturn(rng2);
+        when(this.daysSht).getRng('A100:N115').thenReturn(rng1);
+        when(this.daysSht).getRng('A115:N130').thenReturn(rng2);
         // WHEN
         this.dayRepository.copyDefaultForFutureDays();
         // THEN
         verify(this.defaultDayRng).copyTo(rng1).calledOnce();
-        verify(this.daysSpr).setPosValue(100, 1, new Date('01/01/2025')).calledOnce();
+        verify(this.daysSht).setPosValue(100, 1, new Date('01/01/2025')).calledOnce();
         verify(this.defaultDayRng).copyTo(rng2).calledOnce();
-        verify(this.daysSpr).setPosValue(115, 1, new Date('01/02/2025')).calledOnce();
+        verify(this.daysSht).setPosValue(115, 1, new Date('01/02/2025')).calledOnce();
     }
 
     shouldCopyMeals(){
@@ -103,10 +103,10 @@ class DayRepositoryTest extends TestBase {
         // WHEN
         this.dayRepository.copyMeals(mealsMaps, copyToRows);
         // THEN
-        verify(this.daysSpr).setAreaValue(15, 4, 15, 2, [['Item 1', 10]]).calledOnce();
-        verify(this.daysSpr).setAreaValue(30, 4, 15, 2, [['Item 1', 10]]).calledOnce();
-        verify(this.daysSpr).setAreaValue(15, 8, 15, 2, [['Item 2', 20]]).calledOnce();
-        verify(this.daysSpr).setAreaValue(30, 8, 15, 2, [['Item 2', 20]]).calledOnce();
+        verify(this.daysSht).setAreaValue(15, 4, 15, 2, [['Item 1', 10]]).calledOnce();
+        verify(this.daysSht).setAreaValue(30, 4, 15, 2, [['Item 1', 10]]).calledOnce();
+        verify(this.daysSht).setAreaValue(15, 8, 15, 2, [['Item 2', 20]]).calledOnce();
+        verify(this.daysSht).setAreaValue(30, 8, 15, 2, [['Item 2', 20]]).calledOnce();
     }
 }
 

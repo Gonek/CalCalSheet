@@ -8,7 +8,7 @@ class TestData {
 
   addTestItems() {
       this.clearItems();
-      var testData = [// Name         Amounth   Unit    Gramm Cal         TotFat    SatFat    TrFat     Carb      Fiber     Sugar     SugarAlk  Protein   Salt      Noom      Cal/Gramm  Auto Delete at
+      var data = [    // Name         Amounth   Unit    Gramm Cal         TotFat    SatFat    TrFat     Carb      Fiber     Sugar     SugarAlk  Protein   Salt      Noom      Cal/Gramm  Auto Delete at
                       ['1 First',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         getRelativeDay(+1)],
                       ['2 Second',        100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         ''],
                       ['3 Third',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         ''],
@@ -23,8 +23,8 @@ class TestData {
                       ['Yellow',          100,  'g',      1,  200,  2,    20, 0.2,  21, 0.21, 22, 0.22, 23, 0.23, 24, 0.24, 25, 0.25, 26, 0.26, 27, 0.27, 28, 0.28, 'Yellow', 2,         ''],
                       ['Zero cal',        100,  'g',      1,  0,    0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    'Green',  0,         getYesterday()],
                       ['ZZ Last',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         '']
-                    ];
-      getSht(SHT.ITEMS).putDataAtEnd(testData);
+                  ];
+      getSht(SHT.ITEMS).putDataAtEnd(data);
   }
 
   clearItems() {
@@ -36,7 +36,7 @@ class TestData {
   addTestDays(generateFrom = -2){
     let sht = getSht(SHT.DAYS);
     this.clearDays();
-    var testData = [// Breakfast      Snack             Lunch            Snack          Dinner            Supper          Additional data
+    var data = [    // Breakfast      Snack             Lunch            Snack          Dinner            Supper          Additional data
                     // Default
                     ['1 First', 100,  '2 Second', 200,  '3 Third', 300, '1 First', 400, '2 Second', 500,  '3 Third', 600, '2500'],
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         'Test 1'],
@@ -134,7 +134,7 @@ class TestData {
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
     ];
-    sht.setAreaValueAtPos(4, 2, testData);
+    sht.setAreaValueAtPos(4, 2, data);
     let date = getToday(); 
     date.setDate(date.getDate() + generateFrom)
     sht.setValue('A4', 'Default');
@@ -206,7 +206,7 @@ class TestData {
 
   addTestMeals(){
     this.clearMeals();
-    let testData = [
+    let data = [
       [`${MEAL_ICON} Meal0`, 'Test 100g', 150],
       [`${MEAL_ICON} Meal0`, 'Test 100g', 10],
       [`${MEAL_ICON} Meal1`, '1 First', 10],
@@ -228,7 +228,7 @@ class TestData {
       [`${MEAL_ICON} Meal2`, 'Zero cal', 500],
       [`${MEAL_ICON} Meal2`, 'All Green', 256]
     ];
-    getSht(SHT.MEALS).putDataAtEnd(testData);
+    getSht(SHT.MEALS).putDataAtEnd(data);
   }
 
   clearMeals(){
@@ -239,7 +239,7 @@ class TestData {
 
   addTestRecipes(){
     this.clearRecipes();
-    let testData = [
+    let data = [
       ['Recipe1', 'Green', 100],
       ['Recipe1', 'Yellow', 200],
       ['Recipe1', 'Red', 300],
@@ -269,7 +269,7 @@ class TestData {
       ['Recipe2', 'Test 100g', 500],
       ['Recipe3', 'Test 1 serving', 2]
     ];
-    getSht(SHT.RECIPES).putDataAtEnd(testData);
+    getSht(SHT.RECIPES).putDataAtEnd(data);
   }
 
   clearRecipes(){

@@ -2,8 +2,8 @@ class DaysTest extends TestBase {
 
     beforeAll(){
         super.beforeAll();
-        this.daySpr = getSht(SHT.DAY);
-        this.daysSpr = getSht(SHT.DAYS);
+        this.daySht = getSht(SHT.DAY);
+        this.daysSht = getSht(SHT.DAYS);
     }
 
     afterAll(){
@@ -20,13 +20,13 @@ class DaysTest extends TestBase {
         let expectedMeal6 = '=OFFSET(Days!$L$3, DayIndex, 0, 15, 2)';
         let expectedAdditinalData = '=OFFSET(Days!$N$3, DayIndex, 0, 15, 2)';
         // WHEN
-        let meal1Formula = this.daySpr.getFormula('X15');
-        let meal2Formula = this.daySpr.getFormula('X30');
-        let meal3Formula = this.daySpr.getFormula('X45');
-        let meal4Formula = this.daySpr.getFormula('X60');
-        let meal5Formula = this.daySpr.getFormula('X75');
-        let meal6Formula = this.daySpr.getFormula('X90');
-        let additinalDataFormula = this.daySpr.getFormula('Z15');
+        let meal1Formula = this.daySht.getFormula('X15');
+        let meal2Formula = this.daySht.getFormula('X30');
+        let meal3Formula = this.daySht.getFormula('X45');
+        let meal4Formula = this.daySht.getFormula('X60');
+        let meal5Formula = this.daySht.getFormula('X75');
+        let meal6Formula = this.daySht.getFormula('X90');
+        let additinalDataFormula = this.daySht.getFormula('Z15');
         // THEN
         assertEquals(meal1Formula, expectedMeal1);
         assertEquals(meal2Formula, expectedMeal2);
@@ -69,8 +69,8 @@ class DaysTest extends TestBase {
         let lastProfileIndex = getRng(RNG.LAST_PROFILE_INDEX).getFormula();
         let nextProfileIndex = getRng(RNG.NEXT_PROFILE_INDEX).getFormula();
         let nextProfile = getRng(RNG.NEXT_PROFILE).getFormula();
-        let minMaxCalForProfile = this.daysSpr.getFormulas('Q15:Q16');
-        let days = this.daysSpr.getFormulas('R2');
+        let minMaxCalForProfile = this.daysSht.getFormulas('Q15:Q16');
+        let days = this.daysSht.getFormulas('R2');
         // THEN
         assertEquals(numberOfDays, expectedNumberOfDays);
         assertEquals(firstEmptyDayIndex, expectedFirstEmptyDayIndex);

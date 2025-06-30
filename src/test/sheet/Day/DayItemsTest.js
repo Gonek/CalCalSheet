@@ -20,7 +20,7 @@ class DayItemsTest extends TestBaseDay {
           ])
 
         // WHEN
-        let result = this.daySpr.getFormulas("F15:U104");
+        let result = this.daySht.getFormulas("F15:U104");
 
         // THEN
         assertEquals(result, expected);
@@ -30,7 +30,7 @@ class DayItemsTest extends TestBaseDay {
         // GIVEN
         let expected = Array(90).fill(Array(15).fill(""));
         // WHEN
-        let result = this.daySpr.getDisplayValues('G15:U104');
+        let result = this.daySht.getDisplayValues('G15:U104');
         // THEN
         assertEquals(result, expected);
     }
@@ -57,7 +57,7 @@ class DayItemsTest extends TestBaseDay {
         this.addItemsDaySheet(meal4, 60);
         this.addItemsDaySheet(meal5, 75);
         this.addItemsDaySheet(meal6, 90);   
-        let result = this.daySpr.getValues('F15:F104').flat();
+        let result = this.daySht.getValues('F15:F104').flat();
 
         // THEN
         assertEquals(result, expected);
@@ -70,7 +70,7 @@ class DayItemsTest extends TestBaseDay {
         
         // WHEN
         this.addItemsDaySheet(allItem);
-        let result = this.daySpr.getDisplayValues('G15:U104');
+        let result = this.daySht.getDisplayValues('G15:U104');
 
         // THEN
         assertEquals(result, expected);
@@ -83,7 +83,7 @@ class DayItemsTest extends TestBaseDay {
         
         // WHEN
         this.addItemsDaySheet(items);
-        let result = this.daySpr.getDisplayValues('G15:U16');
+        let result = this.daySht.getDisplayValues('G15:U16');
 
         // THEN
         assertEquals(result, expected);
@@ -96,7 +96,7 @@ class DayItemsTest extends TestBaseDay {
 
         // WHEN
         this.addItemDaySheet(item);
-        let result = this.daySpr.getValues('G15:U15');
+        let result = this.daySht.getValues('G15:U15');
 
         // THEN
         assertEquals(result, expected);
@@ -109,7 +109,7 @@ class DayItemsTest extends TestBaseDay {
 
         // WHEN
         this.addItemDaySheet(item);
-        let result = this.daySpr.getValues('G15:U15');
+        let result = this.daySht.getValues('G15:U15');
 
         // THEN
         assertEquals(result, expected);
@@ -122,7 +122,7 @@ class DayItemsTest extends TestBaseDay {
 
         // WHEN
         this.addItemsDaySheet(items);
-        let result = this.daySpr.getValues('R15:R17');
+        let result = this.daySht.getValues('R15:R17');
 
         // THEN
         assertEquals(result, expected);
@@ -135,7 +135,7 @@ class DayItemsTest extends TestBaseDay {
 
         // WHEN
         this.addItemDaySheet(item);
-        let result = this.daySpr.getValues('G15:U15');
+        let result = this.daySht.getValues('G15:U15');
 
         // THEN
         assertEquals(result, expected);
@@ -148,7 +148,7 @@ class DayItemsTest extends TestBaseDay {
 
         // WHEN
         this.addItemDaySheet(item);
-        let result = this.daySpr.getValues('G15:U15');
+        let result = this.daySht.getValues('G15:U15');
 
         // THEN
         assertEquals(result, expected);
@@ -158,7 +158,7 @@ class DayItemsTest extends TestBaseDay {
         //GIVEN
         let expected = ['1 First', '2 Second', '3 Third', 'All 100', 'All 1', 'All Green', 'Green', 'Max cal', 'Red', 'Test 100g', 'Test 1 serving', 'Yellow', 'Zero cal', 'ZZ Last'];
         //WHEN
-        let result = this.daySpr.getValidationCriteriaRangeValues('C15:C104');
+        let result = this.daySht.getValidationCriteriaRangeValues('C15:C104');
         //THEN
         assertEquals(result, expected);
     }
