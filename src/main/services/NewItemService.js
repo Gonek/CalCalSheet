@@ -23,12 +23,19 @@ class NewItemService {
   loadItem(){
     let loadIndex = getRng(RNG.NEW_ITEM_NAME_AND_OLD_POS).getValue(1, 4);
     if(loadIndex > 0){
-      let item = this.itemRepository.loadByIndex(loadIndex);
+      let item = this.itemRepository.load(loadIndex);
       let newItemFields = getRng(RNG.NEW_ITEM_FIELDS);
       newItemFields.setValuesWithResize([[item.name], [item.amount], [item.unit], [item.weight], [item.calories],
                                          [item.totalFat], [item.saturatedFat], [item.transFat], [item.carbohydrate],
                                          [item.fiber], [item.sugar], [item.sugarAlcohol], [item.protein], [item.salt]]);
       getRng(RNG.NEW_ITEM_AUTO_DELETE).setValue('Never');
+    }
+  }
+
+  deleteItems(input){
+    let indexes = input.getData();
+    if(indexes){
+      this.itemRepository.delete(input.getData().split(",").map(Number));
     }
   }
 }

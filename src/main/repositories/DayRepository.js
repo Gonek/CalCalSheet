@@ -4,17 +4,41 @@ class DayRepository{
      this.sht = getSht(SHT.DAYS);
   }
 
-  save(day){
-    let prevDayIndex = getRng(RNG.DAY_PREV_DAY_INDEX).getValue();
-    this.sht.setAreaValueAtPos(prevDayIndex + 3, 2, this.rearrangeItems(day));
-    this.sht.setAreaValueAtPos(prevDayIndex + 3, 14, [[day.outputCalories], [day.macroProfile]]);
-    return prevDayIndex > 1;
+  saveAs(day){
+    let defaultDayRng = getRng(RNG.DEFAULT_DAY);
+    let newDayRow = getRng(RNG.FIRST_EMPTY_TEMPLATE_INDEX).getValue();
+    let newDayA1 = `P${newDayRow}:AC${newDayRow + 15}`;
+    defaultDayRng.copyTo(this.sht.getRng(newDayA1), SpreadsheetApp.CopyPasteType.PASTE_FORMAT);
+    let toSave = this.rearrangeItemsForSave(day);
+    this.sht.setAreaValueAtPos(newDayRow, 16, toSave);
+  }
+
+  update(index, day){
+    let row = this.getRowFromIndex(index);
+    let col = this.getColFromIndex(index);
+    let toSave = this.rearrangeItemsForSave(day);
+    toSave[0][12] = day.outputCalories;
+    toSave[1][12] = day.macroProfile;
+    this.sht.setAreaValueAtPos(row, col, toSave);
+  }
+
+  load(index){
+    let day = new Day();
+    let loaded = this.sht.getAreaValues(this.getRowFromIndex(index), this.getColFromIndex(index), 15, 13);
+    day.items = this.rearrangeItemsForLoad(loaded);
+    day.outputCalories = loaded[0][12];
+    day.macroProfile = loaded[1][12];
+    return day;
+  }
+
+  delete(index){
+    this.sht.deleteCellsInArea(this.getRowFromIndex(index), this.getColFromIndex(index)-1, 15, 14);
   }
 
   deletePastDays(){
     let lastRowToDelete = getRng(RNG.DELETE_DAYS_UNTIL).getValue();
     if(lastRowToDelete > 0){
-      this.sht.deleteRows(19, lastRowToDelete+1);
+      this.sht.deleteCellsInArea(6, 1, lastRowToDelete-5, 14);
     }
   }
 
@@ -22,7 +46,7 @@ class DayRepository{
     let firstRowToDelete = getRng(RNG.DELETE_DAYS_FROM).getValue()
     let newDayRow = getRng(RNG.FIRST_EMPTY_DAY_INDEX).getValue();
     if(firstRowToDelete > 0){
-      this.sht.deleteRows(firstRowToDelete, newDayRow);
+      this.sht.deleteCellsInArea(firstRowToDelete, 1, newDayRow - firstRowToDelete, 14);
     }
   }
 
@@ -51,22 +75,49 @@ class DayRepository{
     this.sht.setPosValue(row+1, 14, nextprofile);
   }
 
-  copyMeals(mealsMaps, copyToRows){
-    copyToRows.forEach(startRow => 
+  copyMealsTo(mealsMaps, copyToIndexes){
+    copyToIndexes.forEach(index => 
       mealsMaps.forEach((values, i) =>
-        this.sht.setAreaValue(startRow, i * 2, 15, 2, values)
+        this.sht.setAreaValue(this.getRowFromIndex(index), this.getColFromIndex(index) + (i-1) * 2, 15, 2, values)
       )
     )
   }
 
-  rearrangeItems(day){
-    return [...Array(15).keys()].map(i => [
-      day.items[i][0], day.items[i][2],
-      day.items[i + 15][0], day.items[i + 15][2],
-      day.items[i + 30][0], day.items[i + 30][2],
-      day.items[i + 45][0], day.items[i + 45][2],
-      day.items[i + 60][0], day.items[i + 60][2],
-      day.items[i + 75][0], day.items[i + 75][2]
+  rearrangeItemsForSave(day){
+    let data = [...Array(15).keys()].map(i => [
+      day.items[i][0], day.items[i][1],
+      day.items[i + 15][0], day.items[i + 15][1],
+      day.items[i + 30][0], day.items[i + 30][1],
+      day.items[i + 45][0], day.items[i + 45][1],
+      day.items[i + 60][0], day.items[i + 60][1],
+      day.items[i + 75][0], day.items[i + 75][1],
+      this.getAdditionalDataForSave(i, day)
     ]);
+    if(day.name) data.forEach(a => a.unshift(day.name));
+    return data;
+  }
+
+  rearrangeItemsForLoad(savedItems){
+    return Array.from({length:6},(v, j)=> 
+      Array.from(
+        {length:15},(v, i)=> [savedItems[i][j*2], savedItems[i][j*2+1]]
+      )
+    ).flat();
+  }
+
+  getAdditionalDataForSave(i, day){
+    switch (i) {
+      case 0: return day.outputCalories;
+      case 1: return day.macroProfile;
+      default : return '';
+    }
+  }
+
+  getRowFromIndex(index){
+    return Math.abs(index) + 5;
+  }
+
+  getColFromIndex(index){
+    return index > 0 ? 2 : 17;
   }
 }

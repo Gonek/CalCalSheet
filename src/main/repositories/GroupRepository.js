@@ -14,7 +14,7 @@ class GroupRepository{
    * @param {Group} item to save
    */
   save(group){
-    this.deleteIfExist(group.name);
+    this.delete([group.name]);
     this.saveToRepository(group);
   }
 
@@ -29,15 +29,16 @@ class GroupRepository{
   }
 
   /**
-   * Delete item from repository
-   * @param {String} name of item
+   * Delete items from repository
+   * @param {Array} names of items
    */
-  deleteIfExist(name){
+  delete(names){
     var allItems = this.sht.getValues(REPOSITORY_AREA).flat();
-    var deleteFrom = allItems.findIndex(aName => aName === name);
-    if (deleteFrom > -1) { 
-      var deleteTo = allItems.findLastIndex(aName => aName === name);
-      this.sht.deleteRows(deleteFrom + 4, deleteTo + 5);
-    }
+    var posToDelete = [];
+    names.forEach(name => posToDelete.unshift([
+                                      allItems.findIndex(aName => aName === name), 
+                                      allItems.findLastIndex(aName => aName === name)]));
+    posToDelete.filter(pos => pos[0] >= 0)
+               .forEach(pos =>  this.sht.deleteRows(pos[0] + 4, pos[1] + 5));
   }
 }

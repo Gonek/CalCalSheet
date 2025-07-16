@@ -32,7 +32,7 @@ class SettingsService{
     dayRepository.deletePastDays();
     dayRepository.deleteFutureDays();
     dayRepository.copyDefaultForFutureDays();
-    getRng(RNG.DAY_PREV_DAY_INDEX).setValue(getRng(RNG.DAY_INDEX).getValue());
+    getRng(RNG.DAY_PREV_DAY_INDEX).setValues(getRng(RNG.DAY_INDEX).getValues());
   }
 
   changeFields(nutritionFields, generalSettings){
@@ -82,7 +82,8 @@ class SettingsService{
       }
       this.daySht.setPosValue(startPos, 1, meal[0]);
       this.daySht.setPosValue(4 + i, 7, meal[0]);
-      this.daysSht.setPosValue(3, (i*2) + 2, meal[0]);
+      this.daysSht.setPosValue(5, (i*2) + 2, meal[0]);
+      this.daysSht.setPosValue(5, (i*2) + 17, meal[0]);
     })
   }
 

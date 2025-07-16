@@ -50,7 +50,7 @@ class DayThenSteps extends BaseDayThenSteps{
     }
 
     meal_copied(to, mealNo, expected){
-        let result = getSht(SHT.DAYS).getAreaValue(to * 15 + 4, mealNo * 2, 15, 2);
+        let result = getSht(SHT.DAYS).getAreaValues(to * 15 + 4, mealNo * 2, 15, 2);
         assertEqualsArray(result, resizeMatrix(expected, 2, 15, ''));
     }
 

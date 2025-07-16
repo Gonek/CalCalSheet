@@ -28,22 +28,28 @@ class ItemRepository{
     return this.sht.find(name) != null;
   }
 
-  loadByIndex(index){
+  load(index){
       let fieldIndexes = [1,2,3,4,6,8,10,12,14,16,18,20,22];
       let name = this.sht.getPosValue(index + 3, 2);
-      let fields = this.sht.getAreaValue(index + 3, 2, 1, 27)[0].filter((v, i) => fieldIndexes.includes(i));
+      let fields = this.sht.getAreaValues(index + 3, 2, 1, 27)[0].filter((v, i) => fieldIndexes.includes(i));
       fields[2] = fields[2] * fields[0];
       return new Item(name, fields);
   }
 
+  delete(indexes){
+    indexes
+      .sort((a, b) => b - a)
+      .forEach(index => this.sht.deleteRow(index + 3));
+  }
+
   autoDeleteItems(){
     let today = getToday();
-    this.sht.getValues('AB4:AB')
+    let indexes = this.sht.getValues('AB4:AB')
             .flat()
             .map((v, i) => [i, v])
             .filter(e => (e[1] && e[1] <= today))
-            .reverse()
-            .forEach(e => this.sht.deleteRow(e[0]+4));
+            .map(e => e[0]+1);
+    this.delete(indexes);
   }
 
   calculateAutoDeleteDate(autoDelete){

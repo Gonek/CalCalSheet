@@ -31,7 +31,7 @@ class NewItemServiceTest extends TestBase {
     shouldLoadItemLoadItemToForm(){
         // GIVEN
         when(this.newItemNameAndOldPosRng).getValue(1,4).thenReturn(1);
-        when(this.itemRepository).loadByIndex().thenReturn(new Item('Name', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]));
+        when(this.itemRepository).load().thenReturn(new Item('Name', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]));
         // WHEN
         this.newItemService.loadItem();
         // THEN

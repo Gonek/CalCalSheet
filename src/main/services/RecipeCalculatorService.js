@@ -37,12 +37,16 @@ class RecipeCalculatorService {
     getObj(ItemRepository).addOrUpdate(new Item(itemName, fields, noomColour, autoDelete), oldPos);
   }
 
-  clearCalculator() {
+  clearCalculator(){
     this.nameRng.clear();
     this.itemsRng.clear();
     getRng(RNG.RECIPE_SERVING).clear();
     getRng(RNG.RECIPE_NOOM_CATEGORY).setValue('Solid');
     getRng(RNG.RECIPE_SAVE_AS_RECIPE).setValue('True');
     getRng(RNG.RECIPE_AUTO_DELETE).setValue('Never');
+  }
+
+  deleteRecipes(input){
+    getObj(RecipeRepository).delete(input.getValue().split(", "));
   }
 }

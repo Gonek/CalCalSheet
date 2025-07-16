@@ -71,14 +71,14 @@ class ItemRepositoryTest extends TestBase {
         assertEquals(result, false);
     }
 
-    shouldLoadByIndexReturnTheItemAtIndex(){
+    shouldLoadReturnTheItemAtIndex(){
         // GIVEN
         let index = 10;
         when(this.itemsSht).getPosValue(13, 2).thenReturn('Name');
-        when(this.itemsSht).getAreaValue(13, 2, 1, 27).thenReturn([[0, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
+        when(this.itemsSht).getAreaValues(13, 2, 1, 27).thenReturn([[0, 10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 
                                                                     14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]]);
         // WHEN
-        let result = this.itemRepository.loadByIndex(index);
+        let result = this.itemRepository.load(index);
         // THEN
         assertEquals(result, new Item('Name', [10, 2, 30, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]));
     }

@@ -13,7 +13,7 @@ class BaseDayGivenSteps extends Steps{
     }
     
     previous_day_set_to(to){
-        getRng(RNG.DAY_PREV_DAY_INDEX).setValue((to * 15) + 1);
+        getRng(RNG.DAY_PREV_DAY_INDEX).setValues((to * 15) + 1);
     }
 
     day_filled_with_items(){
@@ -55,8 +55,8 @@ class BaseDayThenSteps extends Steps{
     }
 
     previous_day_saved(to){
-        this.previousDayItems = getSht(SHT.DAYS).getAreaValue(4 + (to * 15), 2, 15, 12);
-        this.previousDayData = getSht(SHT.DAYS).getAreaValue(4 + (to * 15), 14, 15, 1);
+        this.previousDayItems = getSht(SHT.DAYS).getAreaValues(4 + (to * 15), 2, 15, 12);
+        this.previousDayData = getSht(SHT.DAYS).getAreaValues(4 + (to * 15), 14, 15, 1);
         assertTrue(this.previousDayItems);
         assertTrue(this.previousDayData);
     }
