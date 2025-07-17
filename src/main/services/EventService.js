@@ -35,7 +35,7 @@ class EventService extends AbstractEventService{
       ],
       [SHT.NEW_ITEM, [
         new CBox(CBOX.NEW_ITEM_NAME, NewItemService, 'loadItem', 'C3'),
-        new Btn(BTN.SAVE_ITEM, NewItemService, 'addNewItem', 'E25'),
+        new Btn(BTN.SAVE_ITEM, NewItemService, 'addNewItem', 'E27'),
         new BtnF(BTNF.DELETE_ITEMS, NewItemService, 'deleteItems', 'E31', 1, 4, 5)
       ]
       ],
@@ -49,7 +49,7 @@ class EventService extends AbstractEventService{
         new Btn(BTN.COPY_CALORIES, ProfileService, 'copyCalories', 'F30')]
       ],
       [SHT.SETTINGS, [           
-        new Btn(BTN.APPLY_SETTINGS, SettingsService, 'applySettings', 'G27'),
+        new Btn(BTN.APPLY_SETTINGS, SettingsService, 'applySettings', 'G29'),
         new Btn(BTN.IMPORT, ImportService, 'startImport', 'L13')
         ]
       ],

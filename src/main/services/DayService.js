@@ -151,7 +151,7 @@ class DayService{
   showHideTools(input){
     var sht = getSht(SHT.DAY);
     var areToolsOpen = input.getData() === 'true';
-    sht.switchCols(!areToolsOpen, 25, 7);
+    sht.switchCols(!areToolsOpen, 26, 7);
     input.setData(!areToolsOpen);
   }
 

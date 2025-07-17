@@ -21,7 +21,7 @@ class ItemRepository{
   }
 
   update(item, originalPos){
-    this.sht.setAreaValue(originalPos + 3, 3, 1, 26, [this.fieldsToRow(item, originalPos + 3)]);
+    this.sht.setAreaValue(originalPos + 3, 3, 1, 28, [this.fieldsToRow(item, originalPos + 3)]);
   }
 
   isExist(name){
@@ -29,11 +29,11 @@ class ItemRepository{
   }
 
   load(index){
-      let fieldIndexes = [1,2,3,4,6,8,10,12,14,16,18,20,22];
+      let fieldIndexes = [1,2,3,4,6,8,10,12,14,16,18,20,22,24,25];
       let name = this.sht.getPosValue(index + 3, 2);
-      let fields = this.sht.getAreaValues(index + 3, 2, 1, 27)[0].filter((v, i) => fieldIndexes.includes(i));
+      let fields = this.sht.getAreaValues(index + 3, 2, 1, 29)[0].filter((v, i) => fieldIndexes.includes(i));
       fields[2] = fields[2] * fields[0];
-      return new Item(name, fields);
+      return new Item(name, fields, fields[13], fields[14]);
   }
 
   delete(indexes){
@@ -80,6 +80,7 @@ class ItemRepository{
       item.sugarAlcohol, `=IFERROR(T${row}/C${row})`, 
       item.protein, `=IFERROR(V${row}/C${row})`, 
       item.salt, `=IFERROR(X${row}/C${row})`,
+      item.price, item.pricePerUnit, 
       item.noomColour, `=IFERROR(F${row}/(E${row}*C${row}))`,
       this.calculateAutoDeleteDate(item.autoDelete)];
   }

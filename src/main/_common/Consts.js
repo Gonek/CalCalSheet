@@ -16,7 +16,8 @@ const SHT = {
   RECIPES : 1776577136,
   MEALS : 2140804303,
   HISTORY : 1711513882,
-  SUPPORT : 1747942668
+  SUPPORT : 1747942668,
+  TEXTS : 1975072440
 }
 
 // NAMED RANGES
@@ -82,6 +83,7 @@ const RNG = {
   SELECTED_MEAL_IDS : 'SelectedMealIds',
   SELECTED_MEAL_NAME : 'SelectedMealName',
   SELECTED_MEAL_ITEMS : 'SelectedMealItems',
+  CURRENCY_FORMAT : 'CurrencyFormat',
   MEAL_NAMES : 'MealNames',
   MEAL1 : 'Meal1',
   MEAL2 : 'Meal2',
@@ -113,6 +115,7 @@ const RNG = {
   // NEW ITEM
   NEW_ITEM_FIELDS : 'NewItemFields',
   NEW_ITEM_FIELDS_TO_SAVE : 'NewItemFieldsToSave',
+  NEW_ITEM_PRICE : 'NewItemPrice',
   NEW_ITEM_NOOM_COLOUR : 'NewItemNoomColour',
   NEW_ITEM_NOOM_CATEGORY : 'NewItemNoomCategory',
   NEW_ITEM_NAME_AND_OLD_POS : 'NewItemNameAndOldPos',

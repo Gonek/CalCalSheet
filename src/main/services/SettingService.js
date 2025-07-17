@@ -23,7 +23,7 @@ class SettingsService{
 
   applyGeneralSettings(generalSettings){
     let profileRngList = this.profileSht.getRngList(['C5:P5', 'C8:P8', 'C12:P12']);
-    if(generalSettings[6]){
+    if(generalSettings[7]){
       profileRngList.setNumberFormat('0" %"');
     } else {
       profileRngList.setNumberFormat('0" g"');
@@ -37,6 +37,7 @@ class SettingsService{
 
   changeFields(nutritionFields, generalSettings){
     this.changeNutritonFields(nutritionFields);
+    this.changePrice(generalSettings);
     this.changeCheckBox(generalSettings);
     this.changeNoom(generalSettings);
   }
@@ -52,16 +53,24 @@ class SettingsService{
     })
   }
 
+  changePrice(generalSettings){
+    var price = generalSettings[2];
+    this.daySht.switchCols(price, 18);
+    this.newItemSht.switchRows(price, 17, 2);
+    this.recipeCalculatorSht.switchCols(price, 12);
+    this.profileSht.switchRows(price, 14);
+  }
+
   changeCheckBox(generalSettings){
-    var consumedCbx = generalSettings[3];
+    var consumedCbx = generalSettings[4];
     this.daySht.switchCols(consumedCbx, 2);
   }
 
   changeNoom(generalSettings){
-    var noom = generalSettings[4];
-    this.daySht.switchCols(noom, 18, 3);
+    var noom = generalSettings[5];
+    this.daySht.switchCols(noom, 19, 3);
     this.daySht.setValue('V4', noom ? 'Noom' : '');
-    this.newItemSht.switchRows(noom, 21, 2);
+    this.newItemSht.switchRows(noom, 23, 2);
     this.recipeCalculatorSht.switchRows(noom, 36, 2);
     this.itemsSht.switchCols(noom, 26);
     this.historySht.switchCols(noom, 19);
@@ -69,7 +78,7 @@ class SettingsService{
 
   changeMeals(meals){
     meals.forEach((meal, i) => {
-      var startPos = ((i + 1) * ROWS_PER_MEAL);
+      var startPos = (2 + (i + 1) * ROWS_PER_MEAL);
       if (meal[0] != ''){
         var rowShow = meal[1];
         var rowHide = ROWS_PER_MEAL - rowShow; 
@@ -81,7 +90,7 @@ class SettingsService{
         this.daySht.hideRows(startPos, ROWS_PER_MEAL);
       }
       this.daySht.setPosValue(startPos, 1, meal[0]);
-      this.daySht.setPosValue(4 + i, 7, meal[0]);
+      this.daySht.setPosValue(6 + i, 7, meal[0]);
       this.daysSht.setPosValue(5, (i*2) + 2, meal[0]);
       this.daysSht.setPosValue(5, (i*2) + 17, meal[0]);
     })
@@ -95,12 +104,14 @@ class SettingsService{
     let dateFormat = localisationData[2];
     let measurement = localisationData[3];
     let measurements = localisationRng.getValidationCriteriaRangeValues(4);
+    let currency = localisationData[4];
 
     getRng(RNG.LANGUAGE).setValue(language);
     this.changeLanguage(language);
     getRng(RNG.TODAY).setValue(`=ROUNDDOWN(NOW() +${timeZone}/24)`);
     this.changeDateFormat(dateFormat);
     this.changeMeassurement(measurement == measurements[0]);
+    this.changeCurrency(currency);
   }
 
   changeLanguage(language = undefined){
@@ -157,6 +168,22 @@ class SettingsService{
 
       isMeasurementMetricRng.setValue(isNewMeasurementMetric);
     }
+  }
+
+  changeCurrency(currency){
+    let decimals = ['Ft', '¥'].includes(currency)? '' : '.00';
+    let signInFront = !['Ft','zł','lei'].includes(currency);
+    let unit = getSht(SHT.TEXTS).getRng('B29').getValue();
+
+    let currencyFormat = (signInFront ? currency : '') + '#,##0' + decimals + (!signInFront ? currency : '');
+    let currencyPerUnitFormat = currencyFormat + ' / ' + unit;
+    getRng(RNG.CURRENCY_FORMAT).setValue(currencyFormat);
+    this.daySht.getRng('R6:R12').setNumberFormat(currencyFormat);
+    this.daySht.getRng('R17:R106').setNumberFormat(currencyFormat);
+    this.newItemSht.getRng('C17:C18').setNumberFormat(currencyFormat);
+    this.newItemSht.getRng('D17').setNumberFormat(currencyPerUnitFormat);
+    this.recipeCalculatorSht.getRng('Q4:Q30').setNumberFormat(currencyFormat);
+    this.profileSht.getRng('C14:P14').setNumberFormat(currencyFormat);
   }
 
   convertKgAndLb(isNewMeasurementMetric, weight){
