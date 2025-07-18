@@ -2,7 +2,7 @@
 
 var onEdit = (e) => getObj(EventService).onEdit(e);
 var onOpen = (e) => getObj(EventService).onOpen(e);
-var testButton = () => getObj(EventService).testButton(SHT.NEW_ITEM, BTNF.DELETE_ITEMS, 'E31');
+var testButton = () => getObj(EventService).testButton(SHT.DAY, BTN.SHOW_TOOLS, 'X6');
 
 // OTHER FUNCTIONS
 var startImport = () => getObj(ImportService).startImport();
@@ -22,22 +22,22 @@ class EventService extends AbstractEventService{
         new CBox(CBOX.MEAL_5_START, DayService, 'loadMeal', 'C75'),
         new CBox(CBOX.MEAL_6_START, DayService, 'loadMeal', 'C90'),
         new Fld('ItemAmounts', DayService, 'inLineCalculation', 'E17:E106'),
-        new Btn(BTN.SHOW_TOOLS, DayService, 'showHideTools', 'W6', 2),
-        new BtnF(BTNF.SAVE_DAY_AS, DayService, 'saveDayAs', 'AD2', 1, 4, 5),
-        new BtnF(BTNF.LOAD_DAY, DayService, 'loadDayFrom', 'AD3', 1, 4, 5),
-        new BtnF(BTNF.DELETE_DAYS, DayService, 'deleteDays', 'AD4', 1, 4, 5),
-        new Btn(BTN.CLEAR_DAY, DayService, 'clearDay', 'AD5'),
-        new BtnF(BTNF.SAVE_AS_MEAL, DayService, 'saveAsMeal', 'AD8', 1, 4, 5),
-        new BtnF(BTNF.COPY_MEAL_FROM, DayService, 'copyMealsFrom', 'AD9', 1, 4, 5),
-        new BtnF(BTNF.COPY_MEAL_TO, DayService, 'copyMealsTo', 'AD10', 1, 4, 5),
-        new Btn(BTN.CLEAR_MEAL, DayService, 'clearMeals', 'AD11', 2),
-        new BtnF(BTNF.DELETE_MEALS, DayService, 'deleteMeals', 'AD13', 1, 4)
+        new Btn(BTN.SHOW_TOOLS, DayService, 'showHideTools', 'X6', 2),
+        new BtnF(BTNF.SAVE_DAY_AS, DayService, 'saveDayAs', 'AE2', 1, 4, 5),
+        new BtnF(BTNF.LOAD_DAY, DayService, 'loadDayFrom', 'AE3', 1, 4, 5),
+        new BtnF(BTNF.DELETE_DAYS, DayService, 'deleteDays', 'AE4', 1, 4, 5),
+        new Btn(BTN.CLEAR_DAY, DayService, 'clearDay', 'AE5'),
+        new BtnF(BTNF.SAVE_AS_MEAL, DayService, 'saveAsMeal', 'AE8', 1, 4, 5),
+        new BtnF(BTNF.COPY_MEAL_FROM, DayService, 'copyMealsFrom', 'AE9', 1, 4, 5),
+        new BtnF(BTNF.COPY_MEAL_TO, DayService, 'copyMealsTo', 'AE10', 1, 4, 5),
+        new Btn(BTN.CLEAR_MEAL, DayService, 'clearMeals', 'AE11', 2),
+        new BtnF(BTNF.DELETE_MEALS, DayService, 'deleteMeals', 'AE13', 1, 4)
         ]
       ],
       [SHT.NEW_ITEM, [
         new CBox(CBOX.NEW_ITEM_NAME, NewItemService, 'loadItem', 'C3'),
         new Btn(BTN.SAVE_ITEM, NewItemService, 'addNewItem', 'E27'),
-        new BtnF(BTNF.DELETE_ITEMS, NewItemService, 'deleteItems', 'E31', 1, 4, 5)
+        new BtnF(BTNF.DELETE_ITEMS, NewItemService, 'deleteItems', 'E33', 1, 4, 5)
       ]
       ],
       [SHT.RECIPE_CALCULATOR, [  
@@ -47,7 +47,7 @@ class EventService extends AbstractEventService{
         ]
       ],
       [SHT.PROFILE, [
-        new Btn(BTN.COPY_CALORIES, ProfileService, 'copyCalories', 'F30')]
+        new Btn(BTN.COPY_CALORIES, ProfileService, 'copyCalories', 'F31')]
       ],
       [SHT.SETTINGS, [           
         new Btn(BTN.APPLY_SETTINGS, SettingsService, 'applySettings', 'G29'),

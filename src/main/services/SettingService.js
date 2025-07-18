@@ -57,8 +57,9 @@ class SettingsService{
     var price = generalSettings[2];
     this.daySht.switchCols(price, 18);
     this.newItemSht.switchRows(price, 17, 2);
-    this.recipeCalculatorSht.switchCols(price, 12);
+    this.recipeCalculatorSht.switchCols(price, 17);
     this.profileSht.switchRows(price, 14);
+    this.historySht.switchCols(price, 16);
   }
 
   changeCheckBox(generalSettings){
@@ -176,14 +177,15 @@ class SettingsService{
     let unit = getSht(SHT.TEXTS).getRng('B29').getValue();
 
     let currencyFormat = (signInFront ? currency : '') + '#,##0' + decimals + (!signInFront ? currency : '');
-    let currencyPerUnitFormat = currencyFormat + ' / ' + unit;
+    let currencyPerUnitFormat = currencyFormat + '" / ' + unit + '"';
     getRng(RNG.CURRENCY_FORMAT).setValue(currencyFormat);
     this.daySht.getRng('R6:R12').setNumberFormat(currencyFormat);
     this.daySht.getRng('R17:R106').setNumberFormat(currencyFormat);
-    this.newItemSht.getRng('C17:C18').setNumberFormat(currencyFormat);
+    this.newItemSht.getRng('C17').setNumberFormat(currencyFormat);
     this.newItemSht.getRng('D17').setNumberFormat(currencyPerUnitFormat);
     this.recipeCalculatorSht.getRng('Q4:Q30').setNumberFormat(currencyFormat);
     this.profileSht.getRng('C14:P14').setNumberFormat(currencyFormat);
+    this.historySht.getRng('P4:P').setNumberFormat(currencyFormat);
   }
 
   convertKgAndLb(isNewMeasurementMetric, weight){

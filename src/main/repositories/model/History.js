@@ -12,6 +12,7 @@ class History{
       this.sugarAlcohol = summary[7];
       this.protein = summary[8];
       this.salt = summary[9];
+      this.price = summary[10];
       this.calorieDensity = calorieDensity;
       this.checkCalorie = checklist[0];
       this.checkMacro = checklist[1];
@@ -19,7 +20,7 @@ class History{
     }
 
     toString(){
-      return `History(${this.date},${this.calorieInput},${this.calorieOutput},${this.totalFat},${this.saturatedFat},${this.transFat},${this.carbohydrate},${this.fiber},${this.sugar},${this.sugarAlcohol},${this.protein},${this.salt},${this.calorieDensity},${this.checkCalorie},${this.checkMacro},${this.checkDensity})`;
+      return `History(${this.date},${this.calorieInput},${this.calorieOutput},${this.totalFat},${this.saturatedFat},${this.transFat},${this.carbohydrate},${this.fiber},${this.sugar},${this.sugarAlcohol},${this.protein},${this.salt},${this.price},${this.calorieDensity},${this.checkCalorie},${this.checkMacro},${this.checkDensity})`;
     }
 
     isEqual(other){
@@ -35,6 +36,7 @@ class History{
              this.sugarAlcohol === other.sugarAlcohol && 
              this.protein === other.protein && 
              this.salt === other.salt && 
+             this.price === other.price &&
              this.calorieDensity === other.calorieDensity && 
              this.checkCalorie === other.checkCalorie && 
              this.checkMacro === other.checkMacro && 

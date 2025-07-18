@@ -21,7 +21,7 @@ class HistoryRepository{
   }
   
   update(history, originalPos){
-    this.sht.setAreaValue(originalPos + 9, 1, 1, 18, [this.fieldsToRow(history, originalPos + 9)]);
+    this.sht.setAreaValue(originalPos + 9, 1, 1, 19, [this.fieldsToRow(history, originalPos + 9)]);
   }
 
   fieldsToRow(history, row){
@@ -39,6 +39,7 @@ class HistoryRepository{
       history.sugarAlcohol,
       history.protein,
       history.salt,
+      history.price,
       history.calorieDensity,
       history.checkCalorie,
       history.checkMacro,
