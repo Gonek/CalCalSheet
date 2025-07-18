@@ -148,6 +148,15 @@ class DayService{
 
   // OTHER FUNCTIONS
 
+  inLineCalculation(){
+    let fields = getRng(RNG.IN_ROW_CALC_FIELDS).getColAsArray();
+    let index = fields[0];
+    if(index > 0){
+      let newValue = fields[4];
+      getSht(SHT.DAY).setValue(`E${16 + index}`, newValue);
+    }
+  }
+
   showHideTools(input){
     var sht = getSht(SHT.DAY);
     var areToolsOpen = input.getData() === 'true';

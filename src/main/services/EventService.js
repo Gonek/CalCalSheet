@@ -21,6 +21,7 @@ class EventService extends AbstractEventService{
         new CBox(CBOX.MEAL_4_START, DayService, 'loadMeal', 'C60'),
         new CBox(CBOX.MEAL_5_START, DayService, 'loadMeal', 'C75'),
         new CBox(CBOX.MEAL_6_START, DayService, 'loadMeal', 'C90'),
+        new Fld('ItemAmounts', DayService, 'inLineCalculation', 'E17:E106'),
         new Btn(BTN.SHOW_TOOLS, DayService, 'showHideTools', 'W6', 2),
         new BtnF(BTNF.SAVE_DAY_AS, DayService, 'saveDayAs', 'AD2', 1, 4, 5),
         new BtnF(BTNF.LOAD_DAY, DayService, 'loadDayFrom', 'AD3', 1, 4, 5),

@@ -84,6 +84,7 @@ const RNG = {
   SELECTED_MEAL_NAME : 'SelectedMealName',
   SELECTED_MEAL_ITEMS : 'SelectedMealItems',
   CURRENCY_FORMAT : 'CurrencyFormat',
+  IN_ROW_CALC_FIELDS : 'InRowCalcFields',
   MEAL_NAMES : 'MealNames',
   MEAL1 : 'Meal1',
   MEAL2 : 'Meal2',
