@@ -57,8 +57,8 @@ class EventService extends AbstractEventService{
       [SHT.TUTORIAL, [
         new CBox(CBOX.LANGUAGE, SettingsService, 'changeLanguage', 'J14'),
         new Btn(BTN.TUTORIAL_TEST, TutorialService, 'tutorialTestButton', 'H39'),
-        new Btn(BTN.SKIP_TUTORIAL, TutorialService, 'resetTutorial', 'E580'),
-        new Btn(BTN.TUTORIAL_NEXT, TutorialService, 'tutorialNext', 'K580')
+        new Btn(BTN.SKIP_TUTORIAL, TutorialService, 'resetTutorial', 'E619'),
+        new Btn(BTN.TUTORIAL_NEXT, TutorialService, 'tutorialNext', 'K619')
         ]
       ]
     ]);

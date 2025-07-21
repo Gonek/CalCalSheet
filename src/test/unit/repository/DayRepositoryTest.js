@@ -18,7 +18,7 @@ class DayRepositoryTest extends TestBase {
         var day = new Day(Array.from({length:90},(v,k)=>[`Item ${k}`, '', k]));
         when(this.prevDayIndexRng).getValue().thenReturn(10);
         // WHEN
-        var result = this.dayRepository.save(day);
+        var result = this.dayRepository.saveAs(day);
         // THEN
         verify(this.daysSht).setAreaValueAtPos(13, 2, [['Item 0', 0, 'Item 15', 15, 'Item 30', 30, 'Item 45', 45, 'Item 60', 60, 'Item 75', 75], 
                                                        ['Item 1', 1, 'Item 16', 16, 'Item 31', 31, 'Item 46', 46, 'Item 61', 61, 'Item 76', 76], 

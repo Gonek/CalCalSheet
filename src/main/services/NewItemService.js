@@ -20,7 +20,7 @@ class NewItemService {
     getRng(RNG.NEW_ITEM_FIELDS).clear();
     getRng(RNG.NEW_ITEM_NOOM_CATEGORY).setValue('Solid');
     autoDeleteRng.setValue('Never');
-    noomColourRng.setValue('=F22');
+    noomColourRng.setValue('=F24');
   }
 
   loadItem(){

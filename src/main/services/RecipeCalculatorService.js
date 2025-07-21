@@ -34,7 +34,7 @@ class RecipeCalculatorService {
     let noomColour = getRng(RNG.RECIPE_NOOM_COLOUR).getValue();
     let autoDelete = getRng(RNG.RECIPE_AUTO_DELETE).getValue();
     
-    getObj(ItemRepository).addOrUpdate(new Item(itemName, fields, noomColour, autoDelete), oldPos);
+    getObj(ItemRepository).addOrUpdate(new Item(itemName, fields, fields[13], fields[13] / fields[2], noomColour, autoDelete), oldPos);
   }
 
   clearCalculator(){
