@@ -42,8 +42,8 @@ class NewItemService {
 
   deleteItems(input){
     let indexes = input.getData();
-    if(indexes){
-      this.itemRepository.delete(input.getData().split(",").map(Number));
+    if(indexes && indexes != ''){
+      this.itemRepository.delete(indexes.split(",").map(Number));
     }
   }
 }

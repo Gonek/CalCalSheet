@@ -28,24 +28,6 @@ class DayService{
     this.app.flush();
   }
 
-  loadDay(){
-    let index = getRng(RNG.DAY_INDEX).getValue();
-    let day = this.dayRepository.load(index);
-    getRng(RNG.DAY_ITEMS).setValues(this.toDay(day.items));
-    getRng(RNG.CALORIE_OUTPUT).setValue(day.outputCalories);
-    getRng(RNG.SELECTED_PROFILE).setValue(day.macroProfile);
-    getRng(RNG.DAY_PREV_DAY_INDEX).setValue(index);
-    getRng(RNG.MEAL_NAMES).clear();
-  }
-
-  loadDayFrom(input){
-    let day = this.dayRepository.load(input.getData());
-    getRng(RNG.DAY_ITEMS).setValues(this.toDay(day.items));
-    getRng(RNG.CALORIE_OUTPUT).setValue(day.calorieOutput);
-    getRng(RNG.SELECTED_PROFILE).setValue(day.macroProfile);
-    getRng(RNG.MEAL_NAMES).clear();
-  }
-
   updateDay(){
     let dayItems = this.fromDay(getRng(RNG.DAY_ITEMS).getValues());
     let calorieOutput = getRng(RNG.CALORIE_OUTPUT).getValue();
@@ -54,17 +36,6 @@ class DayService{
     this.dayRepository.update(prevDayIndex, new Day(dayItems, calorieOutput, profile))
     if(prevDayIndex > 0){
       this.saveToHistory();
-    }
-  }
-
-  saveDayAs(input){
-    let dayItems = this.fromDay(getRng(RNG.DAY_ITEMS).getValues());
-    let calorieOutput = getRng(RNG.CALORIE_OUTPUT).getValue();
-    let profile = getRng(RNG.SELECTED_PROFILE).getValue();
-    if(input.getData()){
-      this.dayRepository.update(input.getData(), new Day(dayItems, calorieOutput, profile))
-    } else {
-      this.dayRepository.saveAs(new Day(dayItems, calorieOutput, profile, input.getValue()));
     }
   }
 
@@ -79,9 +50,45 @@ class DayService{
 
     getObj(HistoryRepository).addOrUpdate(history);
   }
+
+  loadDay(){
+    let index = getRng(RNG.DAY_INDEX).getValue();
+    let day = this.dayRepository.load(index);
+    getRng(RNG.DAY_ITEMS).setValues(this.toDay(day.items));
+    getRng(RNG.CALORIE_OUTPUT).setValue(day.outputCalories);
+    getRng(RNG.SELECTED_PROFILE).setValue(day.macroProfile);
+    getRng(RNG.DAY_PREV_DAY_INDEX).setValue(index);
+    getRng(RNG.MEAL_NAMES).clear();
+  }
+
+  loadDayFrom(input){
+    let index = input.getData();
+    if(!index || index == 0) return;
+    let day = this.dayRepository.load(index);
+    getRng(RNG.DAY_ITEMS).setValues(this.toDay(day.items));
+    getRng(RNG.CALORIE_OUTPUT).setValue(day.outputCalories);
+    getRng(RNG.SELECTED_PROFILE).setValue(day.macroProfile);
+    getRng(RNG.MEAL_NAMES).clear();
+  }
+
+  saveDayAs(input){
+    let index = input.getData();
+    let name = input.getValue();
+    if(!index && (!name || name == '')) return;
+    let dayItems = this.fromDay(getRng(RNG.DAY_ITEMS).getValues());
+    let calorieOutput = getRng(RNG.CALORIE_OUTPUT).getValue();
+    let profile = getRng(RNG.SELECTED_PROFILE).getValue();
+    if(index){
+      this.dayRepository.update(index, new Day(dayItems, calorieOutput, profile))
+    } else {
+      this.dayRepository.saveAs(new Day(dayItems, calorieOutput, profile, name));
+    }
+  }
   
   deleteDays(input){
-    input.getData().split(",").sort((a,b) => a - b).forEach(
+    let indexes = input.getData();
+    if(!indexes || indexes == '') return;
+    indexes.split(",").map(Number).sort((a,b) => b - a).forEach(
       index => this.dayRepository.delete(index)
     );
   }
@@ -96,16 +103,15 @@ class DayService{
     let mealName = cbox.getValue();
     if(mealName.indexOf('🥣') == 0){
       let startrow = cbox.getRng().getRow();
-      getSht(SHT.DAY).setValue(`V${startrow}`, mealName.substring(3));
-      let sourceData = this.toDay(getRng(`${RNG.SELECTED_MEAL_ITEMS}`)
-                                  .getValues());
+      getSht(SHT.DAY).setValue(`W${startrow}`, mealName.substring(3));
+      let sourceData = this.toDay(getRng(`${RNG.SELECTED_MEAL_ITEMS}`).getValues());
       getRng(`Meal${(startrow / 15)}`).setValues(sourceData);
     }
   }
 
   saveAsMeal(input){
     let mealIds = getRng(RNG.SELECTED_MEAL_IDS).getValue().split(",");
-    let names = input.getValue().split(",");
+    let names = input.getValue().split(",").filter(n => n!= '');
     let len = Math.min(mealIds.length, names.length);
     let mealRepository = getObj(MealRepository);
 
@@ -119,8 +125,10 @@ class DayService{
   }
 
   copyMealsFrom(input){
+    let copyFromIndex = input.getData();
     let mealIds = getRng(RNG.SELECTED_MEAL_IDS).getValue();
-    let copyFromItems = this.toDay(this.dayRepository.load(input.getData()).items);
+    if(!copyFromIndex || copyFromIndex == 0 || !mealIds || mealIds == '') return;
+    let copyFromItems = this.toDay(this.dayRepository.load(copyFromIndex).items);
     mealIds.split(",").forEach(id => getRng(`Meal${id}`).setValues(copyFromItems.slice((id-1) * 15, id * 15)));
   }
 
@@ -137,13 +145,17 @@ class DayService{
   }
 
   clearMeals(input){
-    input.getData().split(",").forEach(id => 
-      getRng(`meal${id}`).clear()
+    let indexes = input.getData();
+    if(!indexes || indexes == '') return;
+    indexes.split(",").forEach(id => 
+      getRng(`Meal${id}`).clear()
     );
   }
 
   deleteMeals(input){
-    getObj(MealRepository).delete(input.getValue().split(", "));
+    let meals = input.getValue();
+    if(!meals || meals == '') return;
+    getObj(MealRepository).delete(meals.split(", "));
   }
 
   // OTHER FUNCTIONS

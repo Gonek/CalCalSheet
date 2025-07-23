@@ -29,6 +29,7 @@ class ItemRepository{
   }
 
   load(index){
+      if(!index || index <= 0) return;
       let fieldIndexes = [1,2,3,4,6,8,10,12,14,16,18,20,22,24,25];
       let name = this.sht.getPosValue(index + 3, 2);
       let fields = this.sht.getAreaValues(index + 3, 2, 1, 29)[0].filter((v, i) => fieldIndexes.includes(i));
@@ -37,9 +38,11 @@ class ItemRepository{
   }
 
   delete(indexes){
-    indexes
-      .sort((a, b) => b - a)
-      .forEach(index => this.sht.deleteRow(index + 3));
+    if(indexes){
+      indexes
+        .sort((a, b) => b - a)
+        .forEach(index => this.sht.deleteRow(index + 3));
+    }
   }
 
   autoDeleteItems(){

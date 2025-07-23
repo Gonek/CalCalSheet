@@ -24,7 +24,7 @@ class RecipeCalculatorServiceTest extends TestBase {
         when(this.recipeNameRng).getValue().thenReturn('Test');
         when(this.recipeItemsRng).getValues().thenReturn([['A', 100], ['B', 200], ['C', 300], ['D', 400], ['E', 500]]);
         when(this.recipeOldPosRng).getValue().thenReturn(1);
-        when(this.recipeFieldsToSaveRng).getRowAsArray().thenReturn([100, '', 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        when(this.recipeFieldsToSaveRng).getRowAsArray().thenReturn([100, '', 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
         when(this.recipeNoomColourRng).getValue().thenReturn('Yellow');
         when(this.recipeAutoDeleteRng).getValue().thenReturn('Never');
 
@@ -32,7 +32,7 @@ class RecipeCalculatorServiceTest extends TestBase {
         this.recipeCalculatorService.addRecipeToItemAndRecipes();
         // THEN
         verify(this.recipeRepository).saveRecipe(new Recipe('Test', [['A', 100], ['B', 200], ['C', 300], ['D', 400], ['E', 500]])).calledOnce();
-        verify(this.itemRepository).addOrUpdate(new Item('Test', [100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'Yellow', 'Never'), 1).calledOnce();
+        verify(this.itemRepository).addOrUpdate(new Item('Test', [100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11, 0.11, 'Yellow', 'Never'), 1).calledOnce();
         verify(this.recipeNameRng).clear().calledOnce();
         verify(this.recipeItemsRng).clear().calledOnce();
         verify(this.recipeServingRng).clear().calledOnce();
@@ -46,14 +46,14 @@ class RecipeCalculatorServiceTest extends TestBase {
         when(this.recipeNameRng).getValue().thenReturn('Test');
         when(this.recipeItemsRng).getValues().thenReturn([['A', 100], ['B', 200], ['C', 300], ['D', 400], ['E', 500]]);
         when(this.recipeOldPosRng).getValue().thenReturn(1);
-        when(this.recipeFieldsToSaveRng).getRowAsArray().thenReturn([100, '', 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        when(this.recipeFieldsToSaveRng).getRowAsArray().thenReturn([100, '', 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
         when(this.recipeNoomColourRng).getValue().thenReturn('Yellow');
           when(this.recipeAutoDeleteRng).getValue().thenReturn('1 Day');
         // WHEN
         this.recipeCalculatorService.addRecipeToItemAndRecipes();
         // THEN
         verify(this.recipeRepository).saveRecipe(new Recipe('Test', [['A', 100], ['B', 200], ['C', 300], ['D', 400], ['E', 500]])).neverCalled();
-        verify(this.itemRepository).addOrUpdate(new Item('Test', [100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'Yellow', '1 Day'), 1).calledOnce();
+        verify(this.itemRepository).addOrUpdate(new Item('Test', [100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11, 0.11, 'Yellow', '1 Day'), 1).calledOnce();
         verify(this.recipeNameRng).clear().calledOnce();
         verify(this.recipeItemsRng).clear().calledOnce();
         verify(this.recipeServingRng).clear().calledOnce();
@@ -78,6 +78,37 @@ class RecipeCalculatorServiceTest extends TestBase {
         this.recipeCalculatorService.loadRecipe();
         // THEN
         verify(this.recipeItemsRng).setValues(any()).neverCalled();
+    }
+
+
+    shouldDeleteItemsCallsRepositoryDeleteWithTheProvidedIndexes(){
+        // GIVEN
+        let input = mock(BtnF);
+        when(input).getValue().thenReturn('Recipe44, Recipe33');
+        // WHEN
+        this.recipeCalculatorService.deleteRecipes(input.mockObj);
+        // THEN
+        verify(this.recipeRepository).delete(['Recipe44', 'Recipe33']).calledOnce();
+    }
+
+    shouldDeleteItemsDoNothingIfIndexesAreNull(){
+        // GIVEN
+        let input = mock(BtnF);
+        when(input).getValue().thenReturn(null);
+        // WHEN
+        this.recipeCalculatorService.deleteRecipes(input.mockObj);
+        // THEN
+        verify(this.recipeRepository).delete(any()).neverCalled();
+    }
+
+    shouldDeleteItemsDoNothingIfIndexesAreEmpty(){
+        // GIVEN
+        let input = mock(BtnF);
+        when(input).getValue().thenReturn('');
+        // WHEN
+        this.recipeCalculatorService.deleteRecipes(input.mockObj);
+        // THEN
+        verify(this.recipeRepository).delete(any()).neverCalled();
     }
 }
 

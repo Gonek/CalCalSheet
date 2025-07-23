@@ -32,7 +32,7 @@ class SettingsService{
     dayRepository.deletePastDays();
     dayRepository.deleteFutureDays();
     dayRepository.copyDefaultForFutureDays();
-    getRng(RNG.DAY_PREV_DAY_INDEX).setValues(getRng(RNG.DAY_INDEX).getValues());
+    getRng(RNG.DAY_PREV_DAY_INDEX).setValue(getRng(RNG.DAY_INDEX).getValue());
   }
 
   changeFields(nutritionFields, generalSettings){
@@ -70,11 +70,10 @@ class SettingsService{
   changeNoom(generalSettings){
     var noom = generalSettings[5];
     this.daySht.switchCols(noom, 19, 3);
-    this.daySht.setValue('V4', noom ? 'Noom' : '');
+    this.daySht.setValue('W6', noom ? 'Noom' : '');
     this.newItemSht.switchRows(noom, 23, 2);
     this.recipeCalculatorSht.switchRows(noom, 36, 2);
-    this.itemsSht.switchCols(noom, 26);
-    this.historySht.switchCols(noom, 19);
+    this.itemsSht.switchCols(noom, 28);
   }
 
   changeMeals(meals){
@@ -107,20 +106,18 @@ class SettingsService{
     let measurements = localisationRng.getValidationCriteriaRangeValues(4);
     let currency = localisationData[4];
 
-    getRng(RNG.LANGUAGE).setValue(language);
-    this.changeLanguage(language);
+    let languageRng = getRng(RNG.LANGUAGE)
+    languageRng.setValue(language);
+    this.changeLanguage(languageRng);
     getRng(RNG.TODAY).setValue(`=ROUNDDOWN(NOW() +${timeZone}/24)`);
     this.changeDateFormat(dateFormat);
     this.changeMeassurement(measurement == measurements[0]);
     this.changeCurrency(currency);
   }
 
-  changeLanguage(language = undefined){
+  changeLanguage(languageRng){
     let prevLangRng = getRng(RNG.PREVIOUS_LANGUAGE);
-    if(!language){
-      language = getRng(RNG.LANGUAGE);
-    }
-    if(prevLangRng.getValue() == language.getValue()) return;
+    if(prevLangRng.getValue() == languageRng.getValue()) return;
 
     let sheets = getRng(RNG.SHEETS).getValues();
     let notes = getRng(RNG.NOTES).getValues();
@@ -131,13 +128,11 @@ class SettingsService{
       activeSpsh.getShtById(s[0]).setName(s[1]);
     });
 
-    getObj(App).flush();
-
     notes.forEach(n => {
       tutorialSht.getRng(n[0]).setNote(n[1]);
     });
 
-    prevLangRng.setValue(language.getValue());
+    prevLangRng.setValue(languageRng.getValue());
   }
 
   changeDateFormat(dateFormat){
@@ -185,23 +180,24 @@ class SettingsService{
     this.newItemSht.getRng('D17').setNumberFormat(currencyPerUnitFormat);
     this.recipeCalculatorSht.getRng('Q4:Q30').setNumberFormat(currencyFormat);
     this.profileSht.getRng('C14:P14').setNumberFormat(currencyFormat);
+    this.itemsSht.getRng('Z4:AA').setNumberFormat(currencyFormat);
     this.historySht.getRng('P4:P').setNumberFormat(currencyFormat);
   }
 
   convertKgAndLb(isNewMeasurementMetric, weight){
     if(!weight) return null; 
     if(isNewMeasurementMetric) {
-        return weight / 2.205;
+        return (weight / 2.205).toFixed(2);
     } else {
-        return weight * 2.205;
+        return (weight * 2.205).toFixed(2);
     }
   }
 
   convertCmAndInch(isNewMeasurementMetric, height){
     if(isNewMeasurementMetric) {
-        return height * 2.54;
+        return (height * 2.54).toFixed(2);
     } else {
-        return height / 2.54;
+        return (height / 2.54).toFixed(2);
     }
   }
 }

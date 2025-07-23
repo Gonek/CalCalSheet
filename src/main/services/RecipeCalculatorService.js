@@ -47,6 +47,9 @@ class RecipeCalculatorService {
   }
 
   deleteRecipes(input){
-    getObj(RecipeRepository).delete(input.getValue().split(", "));
+    let names = input.getValue();
+    if(names && names != ''){
+      getObj(RecipeRepository).delete(names.split(", "));
+    }
   }
 }

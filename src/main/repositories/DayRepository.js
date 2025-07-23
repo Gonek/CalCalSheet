@@ -5,6 +5,7 @@ class DayRepository{
   }
 
   saveAs(day){
+    if(!day.name) return;
     let defaultDayRng = getRng(RNG.DEFAULT_DAY);
     let newDayRow = getRng(RNG.FIRST_EMPTY_TEMPLATE_INDEX).getValue();
     let newDayA1 = `P${newDayRow}:AC${newDayRow + 15}`;
@@ -17,12 +18,11 @@ class DayRepository{
     let row = this.getRowFromIndex(index);
     let col = this.getColFromIndex(index);
     let toSave = this.rearrangeItemsForSave(day);
-    toSave[0][12] = day.outputCalories;
-    toSave[1][12] = day.macroProfile;
     this.sht.setAreaValueAtPos(row, col, toSave);
   }
 
   load(index){
+    if(index == 0) return;
     let day = new Day();
     let loaded = this.sht.getAreaValues(this.getRowFromIndex(index), this.getColFromIndex(index), 15, 13);
     day.items = this.rearrangeItemsForLoad(loaded);
@@ -32,6 +32,7 @@ class DayRepository{
   }
 
   delete(index){
+    if(index == 0) return;
     this.sht.deleteCellsInArea(this.getRowFromIndex(index), this.getColFromIndex(index)-1, 15, 14);
   }
 
