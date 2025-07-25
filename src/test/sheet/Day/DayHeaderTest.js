@@ -8,6 +8,7 @@ class DayHeaderTest extends TestBaseDay {
         this.calDensityRng = getRng(RNG.CALORIE_DENSITY);
         this.calOutputRng = getRng(RNG.CALORIE_OUTPUT);
         this.checklist = getRng(RNG.CHECKLIST);
+        this.currencyFormatRng = getRng(RNG.CURRENCY_FORMAT);
         testData.addTestProfiles();
         this.selectedProfileRng.setValue('Test 1');
     }
@@ -21,44 +22,47 @@ class DayHeaderTest extends TestBaseDay {
     shouldDaySheetHaveTheCorrectFormulaForAllSummaryRows(){
         // GIVEN
         let mealExpected = Array.from({length:6},(v,row)=> 
-                            Array.from({length:10},(v,col)=> 
-                            `=IF(ISBLANK($G${row + 4}), "", SUM(${testData.incCol('H', col)}${(row * 15) + 15}:${testData.incCol('H', col)}${(row * 15) + 29}))`));
-        let sumExpected = [ `=ROUND(SUM(H15:H104))`, 
-                            `=ROUND(SUM(I15:I104), 1)`, 
-                            `=ROUND(SUM(J15:J104), 1)`, 
-                            `=ROUND(SUM(K15:K104), 1)`, 
-                            `=ROUND(SUM(L15:L104), 1)`, 
-                            `=ROUND(SUM(M15:M104), 1)`, 
-                            `=ROUND(SUM(N15:N104), 1)`, 
-                            `=ROUND(SUM(O15:O104), 1)`, 
-                            `=ROUND(SUM(P15:P104), 1)`, 
-                            `=ROUND(SUM(Q15:Q104))`];      
-        let rangeExpected = [ `=CONCATENATE($X$2, " - ", $Y$2, " kcal")`, 
-                              `=CONCATENATE($X$3, " - ", $Y$3, " g")`, 
-                              `=CONCATENATE($X$4, " - ", $Y$4, " g")`,
-                              `=CONCATENATE($X$5, " - ", $Y$5, " g")`,
-                              `=CONCATENATE($X$6, " - ", $Y$6, " g")`,
-                              `=CONCATENATE($X$7, " - ", $Y$7, " g")`,
-                              `=CONCATENATE($X$8, " - ", $Y$8, " g")`,
-                              `=CONCATENATE($X$9, " - ", $Y$9, " g")`,
-                              `=CONCATENATE($X$10, " - ", $Y$10, " g")`,
-                              `=CONCATENATE($X$11, " - ", $Y$11, " mg")`];
-        let diffExpected = [`=CONCAT(IF(H10<$X$2, CONCAT("⇧ ",$X$2-H10), IF(H10>$Y$2, CONCAT("⇩ ",H10 - $Y$2), CONCAT("✔ ",$Y$2-H10))), " kcal")`,
-                            `=CONCAT(IF(I10<$X$3, CONCAT("⇧ ", ROUND($X$3-I10,1)), IF(I10>$Y$3, CONCAT("⇩ ", ROUND(I10 - $Y$3,1)), CONCAT("✔ ", ROUND($Y$3-I10,1)))), " g")`,
-                            `=CONCAT(IF(J10<$X$4, CONCAT("⇧ ", ROUND($X$4-J10,1)), IF(J10>$Y$4, CONCAT("⇩ ", ROUND(J10 - $Y$4,1)), CONCAT("✔ ", ROUND($Y$4-J10,1)))), " g")`,
-                            `=CONCAT(IF(K10<$X$5, CONCAT("⇧ ", ROUND($X$5-K10,1)), IF(K10>$Y$5, CONCAT("⇩ ", ROUND(K10 - $Y$5,1)), CONCAT("✔ ", ROUND($Y$5-K10,1)))), " g")`,
-                            `=CONCAT(IF(L10<$X$6, CONCAT("⇧ ", ROUND($X$6-L10,1)), IF(L10>$Y$6, CONCAT("⇩ ", ROUND(L10 - $Y$6,1)), CONCAT("✔ ", ROUND($Y$6-L10,1)))), " g")`,
-                            `=CONCAT(IF(M10<$X$7, CONCAT("⇧ ", ROUND($X$7-M10,1)), IF(M10>$Y$7, CONCAT("⇩ ", ROUND(M10 - $Y$7,1)), CONCAT("✔ ", ROUND($Y$7-M10,1)))), " g")`,
-                            `=CONCAT(IF(N10<$X$8, CONCAT("⇧ ", ROUND($X$8-N10,1)), IF(N10>$Y$8, CONCAT("⇩ ", ROUND(N10 - $Y$8,1)), CONCAT("✔ ", ROUND($Y$8-N10,1)))), " g")`,
-                            `=CONCAT(IF(O10<$X$9, CONCAT("⇧ ", ROUND($X$9-O10,1)), IF(O10>$Y$9, CONCAT("⇩ ", ROUND(O10 - $Y$9,1)), CONCAT("✔ ", ROUND($Y$9-O10,1)))), " g")`,
-                            `=CONCAT(IF(P10<$X$10, CONCAT("⇧ ", ROUND($X$10-P10,1)), IF(P10>$Y$10, CONCAT("⇩ ", ROUND(P10 - $Y$10,1)), CONCAT("✔ ", ROUND($Y$10-P10,1)))), " g")`,
-                            `=CONCAT(IF(Q10<$X$11, CONCAT("⇧ ", ROUND($X$11-Q10,1)), IF(Q10>$Y$11, CONCAT("⇩ ", ROUND(Q10 - $Y$11,1)), CONCAT("✔ ", ROUND($Y$11-Q10,1)))), " mg")`];
+                            Array.from({length:11},(v,col)=> 
+                            `=IF(ISBLANK($G${row + 6}), "", SUM(${testData.incCol('H', col)}${(row * 15) + 17}:${testData.incCol('H', col)}${(row * 15) + 31}))`));
+        let sumExpected = [ `=ROUND(SUM(H17:H106))`, 
+                            `=ROUND(SUM(I17:I106), 1)`, 
+                            `=ROUND(SUM(J17:J106), 1)`, 
+                            `=ROUND(SUM(K17:K106), 1)`, 
+                            `=ROUND(SUM(L17:L106), 1)`, 
+                            `=ROUND(SUM(M17:M106), 1)`, 
+                            `=ROUND(SUM(N17:N106), 1)`, 
+                            `=ROUND(SUM(O17:O106), 1)`, 
+                            `=ROUND(SUM(P17:P106), 1)`, 
+                            `=ROUND(SUM(Q17:Q106))`,
+                            `=SUM(R17:R106)`];      
+        let rangeExpected = [ `=CONCATENATE($AG$2, " - ", $AH$2, " kcal")`, 
+                              `=CONCATENATE($AG$3, " - ", $AH$3, " g")`, 
+                              `=CONCATENATE($AG$5, " - ", $AH$5, " g")`,
+                              `=CONCATENATE($AG$6, " - ", $AH$6, " g")`,
+                              `=CONCATENATE($AG$7, " - ", $AH$7, " g")`,
+                              `=CONCATENATE($AG$9, " - ", $AH$9, " g")`,
+                              `=CONCATENATE($AG$10, " - ", $AH$10, " g")`,
+                              `=CONCATENATE($AG$11, " - ", $AH$11, " g")`,
+                              `=CONCATENATE($AG$12, " - ", $AH$12, " g")`,
+                              `=CONCATENATE($AG$14, " - ", $AH$14, " mg")`,
+                              `=CONCATENATE(TEXT($AG$15, CurrencyFormat), " - ", TEXT($AH$15, CurrencyFormat))`];
+        let diffExpected = [`=CONCAT(IF(H12<$AG$2, CONCAT("⇧ ",$AG$2-H12), IF(H12>$AH$2, CONCAT("⇩ ",H12 - $AH$2), CONCAT("✔ ",$AH$2-H12))), " kcal")`,
+                            `=CONCAT(IF(I12<$AG$3, CONCAT("⇧ ", ROUND($AG$3-I12,1)), IF(I12>$AH$3, CONCAT("⇩ ", ROUND(I12 - $AH$3,1)), CONCAT("✔ ", ROUND($AH$3-I12,1)))), " g")`,
+                            `=CONCAT(IF(J12<$AG$5, CONCAT("⇧ ", ROUND($AG$5-J12,1)), IF(J12>$AH$5, CONCAT("⇩ ", ROUND(J12 - $AH$5,1)), CONCAT("✔ ", ROUND($AH$5-J12,1)))), " g")`,
+                            `=CONCAT(IF(K12<$AG$6, CONCAT("⇧ ", ROUND($AG$6-K12,1)), IF(K12>$AH$6, CONCAT("⇩ ", ROUND(K12 - $AH$6,1)), CONCAT("✔ ", ROUND($AH$6-K12,1)))), " g")`,
+                            `=CONCAT(IF(L12<$AG$7, CONCAT("⇧ ", ROUND($AG$7-L12,1)), IF(L12>$AH$7, CONCAT("⇩ ", ROUND(L12 - $AH$7,1)), CONCAT("✔ ", ROUND($AH$7-L12,1)))), " g")`,
+                            `=CONCAT(IF(M12<$AG$9, CONCAT("⇧ ", ROUND($AG$9-M12,1)), IF(M12>$AH$9, CONCAT("⇩ ", ROUND(M12 - $AH$9,1)), CONCAT("✔ ", ROUND($AH$9-M12,1)))), " g")`,
+                            `=CONCAT(IF(N12<$AG$10, CONCAT("⇧ ", ROUND($AG$10-N12,1)), IF(N12>$AH$10, CONCAT("⇩ ", ROUND(N12 - $AH$10,1)), CONCAT("✔ ", ROUND($AH$10-N12,1)))), " g")`,
+                            `=CONCAT(IF(O12<$AG$11, CONCAT("⇧ ", ROUND($AG$11-O12,1)), IF(O12>$AH$11, CONCAT("⇩ ", ROUND(O12 - $AH$11,1)), CONCAT("✔ ", ROUND($AH$11-O12,1)))), " g")`,
+                            `=CONCAT(IF(P12<$AG$12, CONCAT("⇧ ", ROUND($AG$12-P12,1)), IF(P12>$AH$12, CONCAT("⇩ ", ROUND(P12 - $AH$12,1)), CONCAT("✔ ", ROUND($AH$12-P12,1)))), " g")`,
+                            `=CONCAT(IF(Q12<$AG$14, CONCAT("⇧ ", ROUND($AG$14-Q12,1)), IF(Q12>$AH$14, CONCAT("⇩ ", ROUND(Q12 - $AH$14,1)), CONCAT("✔ ", ROUND($AH$14-Q12,1)))), " mg")`,
+                            `=IF(R12<$AG$15, CONCAT("⇧ ", TEXT($AG$15-R12, CurrencyFormat)), IF(R12>$AH$15, CONCAT("⇩ ", TEXT(R12 - $AH$15, CurrencyFormat)), CONCAT("✔ ", TEXT($AH$15-R12, CurrencyFormat))))`];
 
         // WHEN
-        let mealResult = this.daySht.getFormulas('H4:Q9');
-        let sumResult = this.daySht.getFormulas('H10:Q10');
-        let rangeResult = this.daySht.getFormulas('H11:Q11');
-        let diffResult = this.daySht.getFormulas('H12:Q12');
+        let mealResult = this.daySht.getFormulas('H6:R11');
+        let sumResult = this.daySht.getFormulas('H12:R12');
+        let rangeResult = this.daySht.getFormulas('H13:R13');
+        let diffResult = this.daySht.getFormulas('H14:R14');
 
         // THEN
         assertEquals(mealResult, mealExpected);
@@ -70,64 +74,71 @@ class DayHeaderTest extends TestBaseDay {
     shouldDaySheetHaveTheCorrectFormulaForProfileBackgroundCalculations(){
         // GIVEN
         let expectedProfileBackground = [
-          [`=MATCH(D3, Profile!C3:P3, 0)`, `=INDEX(Days!A4:A,AA1)`, `=IFERROR(MATCH(IF(DayName = "Default", DayName, DATEVALUE(RIGHT(DayName, 10))), Days!A4:A, 0), 0)`, ``],
-          [`=INDEX(Profile!$C$4:$P$13, 1, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 1, $X$1 +1)`, ``, ``],
-          [`=IF(Settings!E10, ROUND($X$2*(Z3/100)/9), Z3)`, `=IF(Settings!E10, ROUND($Y$2*(AA3/100)/9), AA3)`, `=INDEX(Profile!$C$4:$P$13, 2, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 2, $X$1 +1)`],
-          [`=INDEX(Profile!$C$4:$P$13, 3, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 3, $X$1 +1)`, ``, ``],
-          [`=INDEX(Profile!$C$4:$P$13, 4, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 4, $X$1 +1)`, ``, ``],
-          [`=IF(Settings!E10, ROUND($X$2*(Z6/100)/4), Z6) `, `=IF(Settings!E10, ROUND($Y$2*(AA6/100)/4), AA6) `, `=INDEX(Profile!$C$4:$P$13, 5, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 5, $X$1 +1)`],
-          [`=INDEX(Profile!$C$4:$P$13, 6, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 6, $X$1 +1)`, ``, ``],
-          [`=INDEX(Profile!$C$4:$P$13, 7, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 7, $X$1 +1)`, ``, ``],
-          [`=INDEX(Profile!$C$4:$P$13, 8, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 8, $X$1 +1)`, ``, ``],
-          [`=IF(Settings!E10, ROUND($X$2*(Z10/100)/4), Z10) `, `=IF(Settings!E10, ROUND($Y$2*(AA10/100)/4), AA10) `, `=INDEX(Profile!$C$4:$P$13, 9, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 9, $X$1 +1)`],
-          [`=INDEX(Profile!$C$4:$P$13, 10, $X$1)`, `=INDEX(Profile!$C$4:$P$13, 10, $X$1 +1)`, ``, ``]
+          [``, `=MATCH(D5, Profile!C3:P3, 0)`],
+          [`=INDEX(Profile!$C$4:$P$13, 1, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 1, $AH$1 +1)`],
+          [`=IF(Settings!E11, ROUND($AG$2*(AG4/100)/9), AG4)`, `=IF(Settings!E11, ROUND($AH$2*(AH4/100)/9), AH4)`], 
+          [`=INDEX(Profile!$C$4:$P$13, 2, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 2, $AH$1 +1)`],
+          [`=INDEX(Profile!$C$4:$P$13, 3, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 3, $AH$1 +1)`],
+          [`=INDEX(Profile!$C$4:$P$13, 4, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 4, $AH$1 +1)`],
+          [`=IF(Settings!E11, ROUND($AG$2*(AG8/100)/4), AG8) `, `=IF(Settings!E11, ROUND($AH$2*(AH8/100)/4), AH8) `],
+          [`=INDEX(Profile!$C$4:$P$13, 5, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 5, $AH$1 +1)`],
+          [`=INDEX(Profile!$C$4:$P$13, 6, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 6, $AH$1 +1)`],
+          [`=INDEX(Profile!$C$4:$P$13, 7, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 7, $AH$1 +1)`],
+          [`=INDEX(Profile!$C$4:$P$13, 8, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 8, $AH$1 +1)`],
+          [`=IF(Settings!E11, ROUND($AG$2*(AG13/100)/4), AG13) `, `=IF(Settings!E11, ROUND($AH$2*(AH13/100)/4), AH13) `], 
+          [`=INDEX(Profile!$C$4:$P$13, 9, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 9, $AH$1 +1)`],
+          [`=INDEX(Profile!$C$4:$P$13, 10, $AH$1)`, `=INDEX(Profile!$C$4:$P$13, 10, $AH$1 +1)`],
+          [`=INDEX(Profile!$C$4:$P$14, 11, $AH$1)`, `=INDEX(Profile!$C$4:$P$14, 11, $AH$1 +1)`],
         ]
         let expectedNoomBackground = [
-          [`=ROUND(Profile!$D$26*0.3,-1)`, `=ROUND(Profile!$D$27*0.3,-1)`],
-          [`=ROUND(Profile!$D$26*0.45,-1)`, `=ROUND(Profile!$D$27*0.45,-1)`],
-          [`=ROUND(Profile!$D$26*0.25,-1)`, `=ROUND(Profile!$D$27*0.25,-1)`]
+          [`=ROUND(Profile!$D$27*0.3,-1)`, `=ROUND(Profile!$D$28*0.3,-1)`],
+          [`=ROUND(Profile!$D$27*0.45,-1)`, `=ROUND(Profile!$D$28*0.45,-1)`],
+          [`=ROUND(Profile!$D$27*0.25,-1)`, `=ROUND(Profile!$D$28*0.25,-1)`]
         ];
+        let expectedCurrencyFormat = '£#,##0.00';
         // WHEN
-        let resultProfileBackground = this.daySht.getFormulas('X1:AA11');
-        let resultNoomBackground = this.daySht.getFormulas('X12:Y14');
+        let resultProfileBackground = this.daySht.getFormulas('AG1:AH15');
+        let resultNoomBackground = this.daySht.getFormulas('AG17:AH19');
+        let resultCurrencyFormat = this.currencyFormatRng.getValue();
         // THEN
         assertEquals(resultProfileBackground, expectedProfileBackground);
         assertEquals(resultNoomBackground, expectedNoomBackground);
+        assertEquals(resultCurrencyFormat, expectedCurrencyFormat);
     }
 
     shouldDaySheetHaveTheCorrectFormulaForNoomSummary(){
         // GIVEN
         let expectedNoom = [
-          [`=ROUND(SUMIF(R15:R104, "Green", H15:H104))`],
-          [`=CONCATENATE(X12, " - ", Y12, " kcal")`],
-          [`=CONCAT(IF(T4<X12, CONCAT("⇧ ",X12-T4), IF(T4>Y12, CONCAT("⇩ ",T4-Y12), CONCAT("✔ ", Y12-T4))), " kcal")`],
-          [`=ROUND(SUMIF(R15:R104, "Yellow", H15:H104))`],
-          [`=CONCATENATE(X13, " - ", Y13, " kcal")`],
-          [`=CONCAT(IF(T7<X13, CONCAT("⇧ ",X13-T7), IF(T7>Y13, CONCAT("⇩ ",T7-Y13), CONCAT("✔ ", Y13-T7))), " kcal")`],
-          [`=ROUND(SUMIF(R15:R104, "Red", H15:H104))`],
-          [`=CONCATENATE(X14, " - ", Y14, " kcal")`],
-          [`=CONCAT(IF(T10<X14, CONCAT("⇧ ",X14-T10), IF(T10>Y14, CONCAT("⇩ ",T10-Y14), CONCAT("✔ ", Y14-T10))), " kcal")`]
+          [`=ROUND(SUMIF(S17:S106, Texts!B82, H17:H106))`],
+          [`=CONCATENATE(AG17, " - ", AH17, " kcal")`],
+          [`=CONCAT(IF(U6<AG17, CONCAT("⇧ ",AG17-U6), IF(U6>AH17, CONCAT("⇩ ",U6-AH17), CONCAT("✔ ", AH17-U6))), " kcal")`],
+          [`=ROUND(SUMIF(S17:S106, Texts!B83, H17:H106))`],
+          [`=CONCATENATE(AG18, " - ", AH18, " kcal")`],
+          [`=CONCAT(IF(U9<AG18, CONCAT("⇧ ",AG18-U9), IF(U9>AH18, CONCAT("⇩ ",U9-AH18), CONCAT("✔ ", AH18-U9))), " kcal")`],
+          [`=ROUND(SUMIF(S17:S106, Texts!B84, H17:H106))`],
+          [`=CONCATENATE(AG19, " - ", AH19, " kcal")`],
+          [`=CONCAT(IF(U12<AG19, CONCAT("⇧ ",AG19-U12), IF(U12>AH19, CONCAT("⇩ ",U12-AH19), CONCAT("✔ ", AH19-U12))), " kcal")`]
         ];
         // WHEN
-        let resultNoom = this.daySht.getFormulas(`T4:T12`);
+        let resultNoom = this.daySht.getFormulas(`U6:U14`);
         // THEN
         assertEquals(resultNoom, expectedNoom);
     }
 
     shouldDaySheetHaveTheCorrectFormulaForLeftSideSummary(){
         // GIVEN
-        let expectedOutput = '=D4-H10';
+        let expectedOutput = '=D6-H12';
         let expectedChecklist = [
-          ['=IF(IFERROR(SEARCH("✔", H12)),"✔️", "❌")'],
-          ['=IF(COUNTIFS(TRANSPOSE(NutritionFields), "TRUE", I12:Q12, "✔*")=COUNTIF(NutritionFields, "TRUE"),"✔️", "❌")'],
-          ['=IF(AND(B12>=50,B12<=100), "✔️", "❌")']];
+          ['=IF(IFERROR(SEARCH("✔", H14)),"✔️", "❌")'],
+          ['=IF(COUNTIFS(TRANSPOSE(NutritionFields), "TRUE", I14:Q14, "✔*")=COUNTIF(NutritionFields, "TRUE"),"✔️", "❌")'],
+          ['=IF(AND(B14>=50,B14<=100), "✔️", "❌")']];
         let expectedCalDensity = [
-          '=IFERROR(H10/SUM(U15:U90)*100, 0)', '',
-          '=SPARKLINE(B12,{"charttype","bar";"max",250;"min",0;"color1",IFS(B11<50, "Cyan", B12<100, "Green", B12<150, "Yellow", B12<200, "Orange", B12>=200, "Red")})'];
+          '=IFERROR(H12/SUM(V17:V92)*100, 0)', '',
+          '=SPARKLINE(B14,{"charttype","bar";"max",250;"min",0;"color1",IFS(B13<50, "Cyan", B14<100, "Green", B14<150, "Yellow", B14<200, "Orange", B14>=200, "Red")})'];
         // WHEN
-        let resultOutput = this.daySht.getFormula('D5');
-        let resultChecklist = this.daySht.getFormulas('D7:D9');
-        let resultCalDensity = this.daySht.getFormulas('B12:D12');
+        let resultOutput = this.daySht.getFormula('D7');
+        let resultChecklist = this.daySht.getFormulas('D9:D11');
+        let resultCalDensity = this.daySht.getFormulas('B14:D14');
         // THEN
         assertEquals(resultOutput, expectedOutput);
         assertEquals(resultChecklist, expectedChecklist);
@@ -136,9 +147,9 @@ class DayHeaderTest extends TestBaseDay {
 
     shouldDaySheetUseRightFormatForSummaries(){
         // GIVEN
-        let expected = Array(7).fill(['0 kcal', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0 mg']);
+        let expected = Array(7).fill(['0 kcal', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0.0 g', '0 mg', '£0.00']);
         // WHEN
-        let result = this.daySht.getDisplayValues('H4:Q10');
+        let result = this.daySht.getDisplayValues('H6:R12');
         // THEN
         assertEquals(result, expected);
     }
@@ -146,18 +157,18 @@ class DayHeaderTest extends TestBaseDay {
     shouldDaySheetCalculateSummariesCorretly(){
         // GIVEN
         let meal = [this.item('Green', 350), this.item('Yellow', 250), this.item('Red', 90)];
-        let expectedMeals = Array(6).fill([1300, 130, 136.9, 143.8, 150.7, 157.6, 164.5, 171.4, 178.3, 185.2]);
-        let expectedSummary = [7800, 780, 821.4, 862.8, 904.2, 945.6, 987, 1028.4, 1069.8, 1111];
+        let expectedMeals = Array(6).fill([1300, 130, 136.9, 143.8, 150.7, 157.6, 164.5, 171.4, 178.3, 185.2, 37.5]);
+        let expectedSummary = [7800, 780, 821.4, 862.8, 904.2, 945.6, 987, 1028.4, 1069.8, 1111, 225];
         // WHEN
-        this.addItemsDaySheet(meal, 15);
-        this.addItemsDaySheet(meal, 30);
-        this.addItemsDaySheet(meal, 45);
-        this.addItemsDaySheet(meal, 60);
-        this.addItemsDaySheet(meal, 75);
-        this.addItemsDaySheet(meal, 90);
+        this.addItemsDaySheet(meal, 17);
+        this.addItemsDaySheet(meal, 32);
+        this.addItemsDaySheet(meal, 47);
+        this.addItemsDaySheet(meal, 62);
+        this.addItemsDaySheet(meal, 77);
+        this.addItemsDaySheet(meal, 92);
         
-        let resultMeals = this.daySht.getValues('H4:Q9');
-        let resultSummary = this.daySht.getValues('H10:Q10');
+        let resultMeals = this.daySht.getValues('H6:R11');
+        let resultSummary = this.daySht.getValues('H12:R12');
         // THEN
         assertEquals(resultMeals, expectedMeals);
         assertEquals(resultSummary, expectedSummary);
@@ -166,23 +177,27 @@ class DayHeaderTest extends TestBaseDay {
     shouldDaySheetCalculateCorrectRangeForMarcoProfileWhenUsePercentage(){
         // GIVEN
         let expectedBackgroud = [
-          [1, getToday()],
+          ['Selected profile:', 1],
           [1000, 2000],
           [11, 44],
+          [10, 20],
           [11, 21],
           [12, 22],
           [33, 115],
+          [13, 23],
           [14, 24],
           [15, 25],
           [16, 26],
           [43, 135],
-          [18, 28]
+          [17, 27],
+          [18, 28],
+          [19, 29],
         ];
-        let expectedRange = ['1000 - 2000 kcal', '11 - 44 g', '11 - 21 g', '12 - 22 g', '33 - 115 g', '14 - 24 g', '15 - 25 g', '16 - 26 g', '43 - 135 g', '18 - 28 mg'];
+        let expectedRange = ['1000 - 2000 kcal', '11 - 44 g', '11 - 21 g', '12 - 22 g', '33 - 115 g', '14 - 24 g', '15 - 25 g', '16 - 26 g', '43 - 135 g', '18 - 28 mg', '£19.00 - £29.00'];
         // WHEN
-        this.generalSettingsRng.setValue("TRUE", 7);
-        let resultBackground = this.daySht.getValues('X1:Y11');
-        let resultRange = this.daySht.getDisplayValues('H11:Q11');
+        this.generalSettingsRng.setValue("TRUE", 8);
+        let resultBackground = this.daySht.getValues('AG1:AH15');
+        let resultRange = this.daySht.getDisplayValues('H13:R13');
         // THEN
         assertEquals(resultBackground, expectedBackgroud);
         assertEquals(resultRange, expectedRange);
@@ -191,28 +206,32 @@ class DayHeaderTest extends TestBaseDay {
     shouldDaySheetCalculateCorrectRangeForMarcoProfileWhenOnlyUseGrams(){
         // GIVEN
         let expectedBackgroud = [
-          [1, getToday()],
+          ['Selected profile:', 1],
           [1000, 2000],
+          [10, 20],
           [10, 20],
           [11, 21],
           [12, 22],
+          [13, 23],
           [13, 23],
           [14, 24],
           [15, 25],
           [16, 26],
           [17, 27],
-          [18, 28]
+          [17, 27],
+          [18, 28],
+          [19, 29]
         ];
-        let expectedRange = ['1000 - 2000 kcal', '10 - 20 g', '11 - 21 g', '12 - 22 g', '13 - 23 g', '14 - 24 g', '15 - 25 g', '16 - 26 g', '17 - 27 g', '18 - 28 mg'];
+        let expectedRange = ['1000 - 2000 kcal', '10 - 20 g', '11 - 21 g', '12 - 22 g', '13 - 23 g', '14 - 24 g', '15 - 25 g', '16 - 26 g', '17 - 27 g', '18 - 28 mg', '£19.00 - £29.00'];
         // WHEN
-        this.generalSettingsRng.setValue("FALSE", 7);
-        let resultBackground = this.daySht.getValues('X1:Y11');
-        let resultRange = this.daySht.getDisplayValues('H11:Q11');
+        this.generalSettingsRng.setValue("FALSE", 8);
+        let resultBackground = this.daySht.getValues('AG1:AH15');
+        let resultRange = this.daySht.getDisplayValues('H13:R13');
         // THEN
         assertEquals(resultBackground, expectedBackgroud);
         assertEquals(resultRange, expectedRange);
         // RESET 
-        this.generalSettingsRng.setValue("TRUE", 7);
+        this.generalSettingsRng.setValue("TRUE", 8);
     }
 
     shouldDaySheetProfileSelectAcceptAllProfiles(){
@@ -230,7 +249,7 @@ class DayHeaderTest extends TestBaseDay {
           let expectedCalories = `${i * 1000} - ${(i +1) * 1000} kcal`;
           // WHEN
           this.selectedProfileRng.setValue(`Test ${i}`);
-          let result = this.daySht.getDisplayValue('H11');
+          let result = this.daySht.getDisplayValue('H13');
           // THEN 
           assertEquals(result, expectedCalories);
         }
@@ -239,11 +258,11 @@ class DayHeaderTest extends TestBaseDay {
     shouldDaySheetCalculateCorrectDifference(){
         // GIVEN
         let meal = [this.item('Green', 100), this.item('Yellow', 100), this.item('Red', 100)];
-        let expectedDiff = ['⇧ 200 kcal','⇩ 36 g','⇩ 62 g','⇩ 64 g','✔ 26 g','⇩ 68 g','⇩ 70 g','⇩ 72 g','✔ 34 g','⇩ 76 mg'];
+        let expectedDiff = ['⇧ 200 kcal','⇩ 36 g','⇩ 62 g','⇩ 64 g','✔ 26 g','⇩ 68 g','⇩ 70 g','⇩ 72 g','✔ 34 g','⇩ 76 mg', '✔ £8.00'];
         // WHEN
         this.addItemsDaySheet(meal);
         this.selectedProfileRng.setValue('Test 1');
-        let resultDiff = this.daySht.getValues('H12:Q12'); 
+        let resultDiff = this.daySht.getValues('H14:R14'); 
         // THEN
         assertEquals(resultDiff, expectedDiff);
     }
@@ -267,9 +286,9 @@ class DayHeaderTest extends TestBaseDay {
         let expectedRed = 250;
         // WHEN
         this.addItemsDaySheet(meal);
-        let resultGreen = this.daySht.getValue('T4');
-        let resultYellow = this.daySht.getValue('T7');
-        let resultRed = this.daySht.getValue('T10');
+        let resultGreen = this.daySht.getValue('U6');
+        let resultYellow = this.daySht.getValue('U9');
+        let resultRed = this.daySht.getValue('U12');
         // THEN
         assertEquals(resultGreen, expectedGreen);
         assertEquals(resultYellow, expectedYellow);
@@ -281,7 +300,7 @@ class DayHeaderTest extends TestBaseDay {
         let meal = [this.item('All Green', 1500)];
         let expectedChecklist = [['✔️'],['✔️'],['✔️']];
         // WHEN
-        this.generalSettingsRng.setValue("TRUE", 5);
+        this.generalSettingsRng.setValue("TRUE", 6);
         this.selectedProfileRng.setValue(`Test 1`);
         this.addItemsDaySheet(meal);
         SpreadsheetApp.flush();
@@ -298,7 +317,7 @@ class DayHeaderTest extends TestBaseDay {
         // WHEN
         this.addItemsDaySheet(meal);
         this.calOutputRng.setValue(calOutput);
-        let resultDifference = this.daySht.getValue('D5');
+        let resultDifference = this.daySht.getValue('D7');
         // THEN
         assertEquals(resultDifference, expectedDifference);
     }

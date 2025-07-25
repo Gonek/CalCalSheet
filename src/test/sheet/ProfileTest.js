@@ -14,8 +14,8 @@ class ProfileTest extends TestBase {
         //GIVEN
         let expected =
         Array.from({length:71},(v,k)=>[
-          `=IF(ISNUMBER(K${17 + k}), K${17 + k}-K${16 + k}, "")`,
-          `=IF(ISNUMBER(K${17 + k}), K${17 + k}-$K$16, "")`
+          `=IF(ISNUMBER(K${18 + k}), K${18 + k}-K${17 + k}, "")`,
+          `=IF(ISNUMBER(K${18 + k}), K${18 + k}-$K$17, "")`
         ]);
         //WHEN
         let result = clearAll(this.weightHistoryRng.getFormulas());
@@ -25,17 +25,21 @@ class ProfileTest extends TestBase {
 
     shouldProfileSheetCalorieCalculatorHaveCorrectFormula(){
         //GIVEN
-        let expected = [
-          ['=DATEDIF(D16, NOW(), "Y")'],
-          ['=ROUND(IF(D18 ="Woman", 655.1+(9.563*D21)+(1.85*D19)-(4.676*D17), 66.5+(13.75*D21)+(5.003*D19)-(6.75*D17)))'],
-          ['=ROUND(D23*IFS(D20="Sedentary",1.2, D20="Lightly active",1.375, D20="Moderately active",1.55, D20="Very active", 1.725, D20="Extra active", 1.9))'],
-          ['=Round($D$24*IFS($D$25="Weight maintain", 0.97, $D$25 ="Weight loss", 0.8, $D$25 = "Weight gain", 1.1),-1)'],
-          ['=Round($D$24*IFS($D$25="Weight maintain", 1.03, $D$25 ="Weight loss", 0.9, $D$25 = "Weight gain", 1.2),-1)']
+        let expectedAge = ['=DATEDIF(D17, NOW(), "Y")'];
+        let expectedCal = [
+          ['=ROUND(IF(IsMeasurementMetric, IF(D19 = Texts!B512, 655.1+(9.563*D22)+(1.85*D20)-(4.676*D18), 66.5+(13.75*D22)+(5.003*D20)-(6.75*D18)), IF(D19 = Texts!B512, 655.1+(4.338*D22)+(4.698*D20)-(4.676*D18), 66.5+(6.238*D22)+(12.708*D20)-(6.75*D18))))'],
+          ['=ROUND(D24*IFS(D21=Texts!B513,1.2, D21=Texts!B514,1.375, D21=Texts!B515,1.55, D21=Texts!B516, 1.725, D21=Texts!B517, 1.9))'],
+          ['=ROUND($D$25*IFS($D$26=Texts!B524, 0.97, $D$26 =Texts!B525, 0.8, $D$26 = Texts!B526, 1.1),-1)'],
+          ['=ROUND($D$25*IFS($D$26=Texts!B524, 1.03, $D$26 =Texts!B525, 0.9, $D$26 = Texts!B526, 1.2),-1)']
         ];
         //WHEN
-        let result = clearAll(this.calorieOutputCalculatorRng.getFormulas());
+        let result = this.calorieOutputCalculatorRng.getFormulas();
         //THEN
-        assertEquals(result, expected);
+        assertEquals(result[1], expectedAge);
+        assertEquals(result[7], expectedCal[0]);
+        assertEquals(result[8], expectedCal[1]);
+        assertEquals(result[10], expectedCal[2]);
+        assertEquals(result[11], expectedCal[3]);
     }
 
     shouldProfileSheetWeightHistoryHaveCorrectFormat(){
@@ -238,13 +242,13 @@ class ProfileTest extends TestBase {
 
     shouldProfileSheetCopyCalorieOuputCalculatorDropBoxesAcceptCorrectValues(){
         // GIVEN
-        let expectedSex = ['Woman', 'Man'];
+        let expectedSex = ['Man', 'Woman'];
         let expectedLevel = ['Sedentary', 'Lightly active', 'Moderately active', 'Very active', 'Extra active'];
         let expectedGoal = ['Weight maintain', 'Weight loss', 'Weight gain'];
         // WHEN
-        let resultSex = this.calorieOutputCalculatorRng.getValidationCriteriaValues(3);
-        let resultLevel = this.calorieOutputCalculatorRng.getValidationCriteriaValues(5);  
-        let resultGoal = this.calorieOutputCalculatorRng.getValidationCriteriaValues(10);
+        let resultSex = this.calorieOutputCalculatorRng.getValidationCriteriaRangeValues(3);
+        let resultLevel = this.calorieOutputCalculatorRng.getValidationCriteriaRangeValues(5);  
+        let resultGoal = this.calorieOutputCalculatorRng.getValidationCriteriaRangeValues(10);
         // THEN
         assertEquals(resultSex, expectedSex);
         assertEquals(resultLevel, expectedLevel);

@@ -13,7 +13,7 @@ class TestBaseDay extends TestBase  {
     }
 
     clearData(){
-        this.daySht.clear(`C15:E104`);
+        this.daySht.clear(`C17:E106`);
     }
 
     // UTILITIES
@@ -22,11 +22,11 @@ class TestBaseDay extends TestBase  {
         return [name, '', amount];
     }
 
-    addItemDaySheet(items, startRow = 15){
+    addItemDaySheet(items, startRow = 17){
         this.daySht.setAreaValue(startRow, 3, 1, 3, [items]);
     }
 
-    addItemsDaySheet(items, startRow = 15){
+    addItemsDaySheet(items, startRow = 17){
         this.daySht.setAreaValue(startRow, 3, items.length, 3, items);
     }
 }

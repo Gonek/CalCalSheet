@@ -382,10 +382,9 @@ class DayServiceTest extends TestBase {
 
     shouldClearMealsRemoveAllItemsFromSelectedMeals(){
         // GIVEN
-        let input = mock(BtnF);
-        when(input).getData().thenReturn('1,4');
+        when(this.selectedMealIdsRng).getValue().thenReturn('1,4');
         // WHEN
-        this.dayService.clearMeals(input.mockObj);
+        this.dayService.clearMeals();
         // THEN
         verify(this.meal1Rng).clear().calledOnce();
         verify(this.meal2Rng).clear().neverCalled();
@@ -397,10 +396,9 @@ class DayServiceTest extends TestBase {
 
     shouldClearMealsDoNothingIfNoMealsSelected(){
         // GIVEN
-        let input = mock(BtnF);
-        when(input).getData().thenReturn('');
+        when(this.selectedMealIdsRng).getValue().thenReturn('');
         // WHEN
-        this.dayService.clearMeals(input.mockObj);
+        this.dayService.clearMeals();
         // THEN
         verify(this.meal1Rng).clear().neverCalled();
         verify(this.meal2Rng).clear().neverCalled();

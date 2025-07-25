@@ -10,6 +10,7 @@ class RecipeCalculatorTest extends TestBase {
         this.recipeServingRng = getRng(RNG.RECIPE_SERVING);
         this.recipeNoomColourRng = getRng(RNG.RECIPE_NOOM_COLOUR);
         this.selectedRecipeItemsRng = getRng(RNG.SELECTED_RECIPE_ITEMS);
+        this.deleteRecipesBtnf = getRng(BTNF.DELETE_RECIPES);
         testData.addTestItems();
     }
 
@@ -95,8 +96,8 @@ class RecipeCalculatorTest extends TestBase {
         let expectedRecipeNames = '=ARRAYFORMULA({B3;UNIQUE(Recipes!B4:B)})';
         //WHEN
         let resultNutriCals = this.sht.getFormulas('A29:A30');
-        let resultSelRecipe = this.sht.getFormula('R4');
-        let resultRecipeNames = this.sht.getFormula('T3');
+        let resultSelRecipe = this.sht.getFormula('S4');
+        let resultRecipeNames = this.sht.getFormula('U3');
         //THEN
         assertEquals(resultNutriCals, expectedNutriCalc);
         assertEquals(resultSelRecipe, expectedSelRecipe);
@@ -105,11 +106,14 @@ class RecipeCalculatorTest extends TestBase {
 
     shouldRecipeCalculatorSheetHaveCorrectFormulaForNoom(){
         //GIVEN
-        let expected = '=IFS(RecipeNoomCategory="Solid", IFS(G29= "", "", G29<=100, "Green", G29<=240, "Yellow", G29>240, "Red"), RecipeNoomCategory="Liquid", IFS(G29= "", "", G29<=40, "Green", G29<=50, "Yellow", G29>50, "Red"), RecipeNoomCategory = "Soup", IFS(G29= "", "", G29<=50, "Green", G29<=100, "Yellow", G29>100, "Red"))';
+        let expectedColour = '=IFS(RecipeNoomCategory=Texts!B529, IFS(G29= "", "", G29<=100, Texts!B82, G29<=240, Texts!B83, G29>240, Texts!B84), RecipeNoomCategory=Texts!B530, IFS(G29= "", "", G29<=40, Texts!B82, G29<=50, Texts!B83, G29>50, Texts!B84), RecipeNoomCategory = Texts!B531, IFS(G29= "", "", G29<=50, Texts!B82, G29<=100, Texts!B83, G29>100, Texts!B84))';
+        let expectedMatch = '=MATCH(C34, Texts!B82:B84, 0)';
         //WHEN
-        let result = this.recipeNoomColourRng.getFormula();
+        let resultColour = this.recipeNoomColourRng.getFormula();
+        let resultMatch = this.sht.getFormula('F34');
         //THEN
-        assertEquals(result, expected);
+        assertEquals(resultColour, expectedColour);
+        assertEquals(resultMatch, expectedMatch);
     }
 
     shouldRecipeCalculatorSheetHaveCorrectFormatForItems(){
@@ -264,7 +268,7 @@ class RecipeCalculatorTest extends TestBase {
         assertEquals(result, 'Red');
     }
 
-    shouldRecipeCalculatorSheetLoadAllSavedRecepiesInTheRecipeNameField(){
+    shouldRecipeCalculatorSheetLoadAllSavedRecipesInTheRecipeNameField(){
         //GIVEN
         testData.addTestRecipes();
         let expected = ['Recipe1', 'Recipe2', 'Recipe3'];
@@ -275,13 +279,24 @@ class RecipeCalculatorTest extends TestBase {
         testData.clearRecipes();
     }
 
-    shouldRecipeCalculatorSheetLoadAllSavedRecepiesAndTheGivenNameInTheRecipeNameField(){
+    shouldRecipeCalculatorSheetLoadAllSavedRecipesAndTheGivenNameInTheRecipeNameField(){
         //GIVEN
         testData.addTestRecipes();
         let expected = ['New Recipe', 'Recipe1', 'Recipe2', 'Recipe3'];
         //WHEN
         this.recipeNameRng.setValue('New Recipe');
         let result = this.recipeNameRng.getValidationCriteriaRangeValues();
+        //THEN
+        assertEquals(result, expected);
+        testData.clearRecipes();
+    }
+
+    shouldRecipeCalculatorSheetLoadAllSavedRecipesInTheDeleteRecipesField(){
+        //GIVEN
+        testData.addTestRecipes();
+        let expected = ['Recipe1', 'Recipe2', 'Recipe3'];
+        //WHEN
+        let result = this.deleteRecipesBtnf.getValidationCriteriaRangeValues();
         //THEN
         assertEquals(result, expected);
         testData.clearRecipes();

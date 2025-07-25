@@ -14,6 +14,7 @@ var runAllAcceptance = () =>{
 var runAllTest = () => {
   testSheet = new TestSheet();
   new TestBase().runAllTestClass(unitTests(), sheetTests(), acceptanceTests());
+  testData.makeSheetReleaseReady();
 }
 
 var unitTests = () => [
@@ -34,8 +35,7 @@ var unitTests = () => [
 var sheetTests = () => [
     DayItemsTest,
     DayHeaderTest,
-    DayMealTest,
-    DaySelectorTest,
+    DayToolsTest,
     DaysTest,
     NewItemTest,
     RecipeCalculatorTest,

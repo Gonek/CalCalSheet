@@ -6,24 +6,25 @@ class SettingsTest extends TestBase {
         this.generalRng = getRng(RNG.GENERAL_SETTINGS);
         this.mealsRng = getRng(RNG.MEALS);
         this.importRng = getRng(RNG.IMPORT); 
+        this.localisationRng = getRng(RNG.LOCALISATION); 
     }
 
-    shouldSettingsSheetGeneralDropBoxesAcceptValidValues(){
+    shouldSettingsSheetGeneralAcceptValidValues(){
         //GIVEN
         let expectedDefaultCalorieOutputs = ['BMR', 'Active baseline', 'Calorie Min', 'Calorie Max', 'Calorie Min [Profile]', 'Calorie Max [Profile]'];
         //WHEN
-        let resultDefaultCalorieOutputs = this.generalRng.getValidationCriteriaValues(3);
+        let resultDefaultCalorieOutputs = this.generalRng.getValidationCriteriaRangeValues(4);
         //THEN
         assertEquals(resultDefaultCalorieOutputs, expectedDefaultCalorieOutputs);
     }
 
-    shouldSettingsSheetImportDropBoxesAcceptValidValues(){
+    shouldSettingsSheetImportAcceptValidValues(){
         // GIVEN
         let expected = ['Clear', 'Merge'];
         // WHEN
-        let result1 = this.importRng.getValidationCriteriaValues(2, 2);
-        let result2 = this.importRng.getValidationCriteriaValues(3, 2);
-        let result3 = this.importRng.getValidationCriteriaValues(4, 2);
+        let result1 = this.importRng.getValidationCriteriaRangeValues(2, 2);
+        let result2 = this.importRng.getValidationCriteriaRangeValues(3, 2);
+        let result3 = this.importRng.getValidationCriteriaRangeValues(4, 2);
         // THEN
         assertEquals(result1, expected);
         assertEquals(result2, expected);
@@ -47,6 +48,27 @@ class SettingsTest extends TestBase {
         assertEquals(result4, expected);
         assertEquals(result5, expected);
         assertEquals(result6, expected);
+    }
+
+    shouldSettingsSheetLocalisationAcceptValidValues(){
+        //GIVEN
+        let expectedLanguage = ['English', 'Español', 'Français', 'हिन्दी', 'Italiano', 'Magyar', 'Polski', 'Português', 'Română', 'Türkçe', 'Українська', '日本語'];
+        let expectedTimeZone = ['-11', '-10', '-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0', '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14'];
+        let expectedDateFormat = ['DD/MM/YYYY', 'DD-MM-YYYY', 'YYYY.MM.DD', 'YYYY-MM-DD', 'MM-DD-YYYY', 'MM/DD/YYYY'];
+        let expectedMeasurement = ['Metric', 'Imperial'];
+        let expectedCurrency = ['£', '$', '€', '₹', 'Ft', 'zł', 'lei', '₺', '₴', '¥', '_'];
+        //WHEN
+        let resultLanguage = this.localisationRng.getValidationCriteriaRangeValues(1);
+        let resultTimeZone = this.localisationRng.getValidationCriteriaValues(2);
+        let resultDateFormat = this.localisationRng.getValidationCriteriaValues(3);
+        let resultMeasurement = this.localisationRng.getValidationCriteriaRangeValues(4);
+        let resultCurrency = this.localisationRng.getValidationCriteriaValues(5);
+        //THEN
+        assertEquals(resultLanguage, expectedLanguage);
+        assertEquals(resultTimeZone, expectedTimeZone);
+        assertEquals(resultDateFormat, expectedDateFormat);
+        assertEquals(resultMeasurement, expectedMeasurement);
+        assertEquals(resultCurrency, expectedCurrency);
     }
 }
 

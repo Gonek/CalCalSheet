@@ -5,7 +5,8 @@ class BaseDayGivenSteps extends Steps{
     }
 
     test_days_available(generateFrom = -2){
-        testData.addTestDays(generateFrom);
+        testData.clearDays();
+        testData.addTestCalendarDays(generateFrom);
     }
 
     test_profiles_available(){

@@ -144,8 +144,8 @@ class DayService{
     }
   }
 
-  clearMeals(input){
-    let indexes = input.getData();
+  clearMeals(){
+    let indexes = getRng(RNG.SELECTED_MEAL_IDS).getValue();
     if(!indexes || indexes == '') return;
     indexes.split(",").forEach(id => 
       getRng(`Meal${id}`).clear()

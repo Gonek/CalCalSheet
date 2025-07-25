@@ -8,36 +8,36 @@ class TestData {
 
   addTestItems() {
       this.clearItems();
-      var data = [    // Name         Amounth   Unit    Gramm Cal         TotFat    SatFat    TrFat     Carb      Fiber     Sugar     SugarAlk  Protein   Salt      Noom      Cal/Gramm  Auto Delete at
-                      ['1 First',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         getRelativeDay(+1)],
-                      ['2 Second',        100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         ''],
-                      ['3 Third',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         ''],
-                      ['All 100',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         ''],
-                      ['All 1',           1,    'g',      1,  1,    1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,    'Green',  1,         getRelativeDay(+10)],
-                      ['All Green',       1500, 'g',      1,  1485, 0.99, 18, 0.012,18, 0.012,18, 0.012,36, 0.024,18, 0.012,18, 0.012,18, 0.012,48, 0.032,18, 0.012,'Green',  0.99,      getRelativeDay(-10)],
-                      ['Green',           100,  'g',      1,  100,  1,    10, 0.1,  11, 0.11, 12, 0.12, 13, 0.13, 14, 0.14, 15, 0.15, 16, 0.16, 17, 0.17, 18, 0.18, 'Green',  1,         ''],
-                      ['Max cal',         100,  'g',      1,  900,  9,    100,1,    50, 0.5,  50, 0.5,  0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    'Red',    9,         getToday()],
-                      ['Red',             100,  'g',      1,  500,  5,    50, 0.5,  51, 0.51, 52, 0.52, 53, 0.53, 54, 0.54, 55, 0.55, 56, 0.56, 57, 0.57, 58, 0.58, 'Red',    5,         ''],
-                      ['Test 100g',       100,  'g',      1,  370,  3.7,  10, 0.1,  5,  0.05, 5,  0.05, 30, 0.3,  40, 0.4,  5,  0.05, 1,  0.01, 20, 0.2,  100,1,    'Green',  3.7,       ''],
-                      ['Test 1 serving',  1,    'Serving',50, 250,  250,  25, 25,   2,  2,    0,  0,    45, 45,   1,  1,    21, 21,   0,  0,    4,  4,    12, 12,   'Red',    5,         ''],
-                      ['Yellow',          100,  'g',      1,  200,  2,    20, 0.2,  21, 0.21, 22, 0.22, 23, 0.23, 24, 0.24, 25, 0.25, 26, 0.26, 27, 0.27, 28, 0.28, 'Yellow', 2,         ''],
-                      ['Zero cal',        100,  'g',      1,  0,    0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    'Green',  0,         getYesterday()],
-                      ['ZZ Last',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    'Green',  1,         '']
+      var data = [    // Name         Amounth   Unit    Gramm Cal         TotFat    SatFat    TrFat     Carb      Fiber     Sugar     SugarAlk  Protein   Salt       Price     Noom      Cal/Gramm  Auto Delete at
+                      ['1 First',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,     100, 1,   'Green',  1,         getRelativeDay(+1)],
+                      ['2 Second',        100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,     100, 1,   'Green',  1,         ''],
+                      ['3 Third',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,     100, 1,   'Green',  1,         ''],
+                      ['All 100',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,     100, 1,   'Green',  1,         ''],
+                      ['All 1',           1,    'g',      1,  1,    1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,    1,  1,     1, 1,     'Green',  1,         getRelativeDay(+10)],
+                      ['All Green',       1500, 'g',      1,  1485, 0.99, 18, 0.012,18, 0.012,18, 0.012,36, 0.024,18, 0.012,18, 0.012,18, 0.012,48, 0.032,18, 0.012, 13, 0.013,'Green',  0.99,      getRelativeDay(-10)],
+                      ['Green',           100,  'g',      1,  100,  1,    10, 0.1,  11, 0.11, 12, 0.12, 13, 0.13, 14, 0.14, 15, 0.15, 16, 0.16, 17, 0.17, 18, 0.18,  1, 0.01,  'Green',  1,         ''],
+                      ['Max cal',         100,  'g',      1,  900,  9,    100,1,    50, 0.5,  50, 0.5,  0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,     99, 9.9,  'Red',    9,         getToday()],
+                      ['Red',             100,  'g',      1,  500,  5,    50, 0.5,  51, 0.51, 52, 0.52, 53, 0.53, 54, 0.54, 55, 0.55, 56, 0.56, 57, 0.57, 58, 0.58,  10, 0.1,  'Red',    5,         ''],
+                      ['Test 100g',       100,  'g',      1,  370,  3.7,  10, 0.1,  5,  0.05, 5,  0.05, 30, 0.3,  40, 0.4,  5,  0.05, 1,  0.01, 20, 0.2,  100,1,     10, 0.1,  'Green',  3.7,       ''],
+                      ['Test 1 serving',  1,    'Serving',50, 250,  250,  25, 25,   2,  2,    0,  0,    45, 45,   1,  1,    21, 21,   0,  0,    4,  4,    12, 12,    2, 0.2,   'Red',    5,         ''],
+                      ['Yellow',          100,  'g',      1,  200,  2,    20, 0.2,  21, 0.21, 22, 0.22, 23, 0.23, 24, 0.24, 25, 0.25, 26, 0.26, 27, 0.27, 28, 0.28,  10, 0.1,  'Yellow', 2,         ''],
+                      ['Zero cal',        100,  'g',      1,  0,    0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,     0, 0.0,   'Green',  0,         getYesterday()],
+                      ['ZZ Last',         100,  'g',      1,  100,  1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,    100,1,     90, 0.9,  'Green',  1,         '']
                   ];
       getSht(SHT.ITEMS).putDataAtEnd(data);
   }
 
   clearItems() {
-      getSht(SHT.ITEMS).clear('B4:AB');
+      getSht(SHT.ITEMS).clear('B4:AD');
   }
 
   // TEST DAYS 
 
-  addTestDays(generateFrom = -2){
+
+  addTestTemplateDays(){
     let sht = getSht(SHT.DAYS);
-    this.clearDays();
     var data = [    // Breakfast      Snack             Lunch            Snack          Dinner            Supper          Additional data
-                    // Default
+                    // PROTOTYPE
                     ['1 First', 100,  '2 Second', 200,  '3 Third', 300, '1 First', 400, '2 Second', 500,  '3 Third', 600, '2500'],
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         'Test 1'],
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
@@ -53,6 +53,48 @@ class TestData {
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
+                    // All 1 Day
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     '3500'],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     'Test 6'],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     ''],
+                    // Boring Day
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     '9500'],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     'Test 4'],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+                    ['Green', 10,      'Yellow', 20,    'Red', 30,      'Green', 40,    'Yellow', 50,      'Red', 60,     ''],
+    ];
+    sht.setAreaValueAtPos(6, 17, data);
+    sht.setValue('P6', 'PROTOTYPE');
+    sht.setValue('P21', 'All 1 Day');
+    sht.setValue('P36', 'Boring Day');
+  }
+
+  addTestCalendarDays(generateFrom = -2){
+    let sht = getSht(SHT.DAYS);
+    var data = [    // Breakfast      Snack             Lunch            Snack          Dinner            Supper          Additional data
                     // 2 Days Ago
                     ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     '2600'],
                     ['All 1', 1,      'All 1', 1,       'All 1', 1,     'All 1', 1,     'All 1', 1,       'All 1', 1,     'Test 2'],
@@ -134,30 +176,33 @@ class TestData {
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
                     ['', '',          '', '',           '', '',         '', '',         '', '',           '', '',         ''],
     ];
-    sht.setAreaValueAtPos(4, 2, data);
-    let date = getToday(); 
-    date.setDate(date.getDate() + generateFrom)
-    sht.setValue('A4', 'Default');
-    let i;
-    for(i = 0; i < 5; i++){
-      sht.setValue(`A${19+(i*15)}`, new Date(date));
+    sht.setAreaValueAtPos(6, 2, data);
+    let date = getToday();
+    date.setDate(date.getDate() + generateFrom);
+    for(let i = 0; i < 5; i++){
+      sht.setValue(`A${6+(i*15)}`, new Date(date));
       date.setDate(date.getDate() + 1);
     }
   }
 
   clearDays(){
     let sht = getSht(SHT.DAYS);
-    sht.clear('B4:N');
+    sht.clear('B6:N');
+    sht.clear('Q6:AC');
     let numDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
-    for(var i = 0; i<=numDays; i++){
-      sht.setPosValue(4 + (i * 15), 14, '2330');
-      sht.setPosValue(5 + (i * 15), 14, 'Default');
+    for(var i = 0; i<numDays; i++){
+      sht.setPosValue(6 + (i * 15), 14, '2330');
+      sht.setPosValue(7 + (i * 15), 14, 'Default');
     }
+    sht.setPosValue(6, 29, '2330');
+    sht.setPosValue(7, 29, 'Default');
   }
 
   clearDay(){
     getRng(RNG.MEAL_NAMES).clear();
     getRng(RNG.DAY_ITEMS).clear();
+    getRng(RNG.SELECTED_PROFILE).setValue('Default');
+    getRng(RNG.CALORIE_OUTPUT).setValue(2330);
   }
 
   // TEST PROFILES
@@ -176,7 +221,8 @@ class TestData {
       [15, 25,        25, 35,       35, 45,       45, 55,       55, 65,       65, 75,       75, 85],       // Sugar
       [16, 26,        26, 36,       36, 46,       46, 56,       56, 66,       66, 76,       76, 86],       // Sugar alcohol
       [17, 27,        27, 37,       37, 47,       47, 57,       57, 67,       67, 77,       77, 87],       // Protein
-      [18, 28,        28, 38,       38, 48,       48, 58,       58, 68,       68, 78,       78, 88]        // Salt / Sodium 
+      [18, 28,        28, 38,       38, 48,       48, 58,       58, 68,       68, 78,       78, 88],       // Salt / Sodium 
+      [19, 29,        29, 39,       39, 49,       49, 59,       59, 69,       69, 79,       79, 89]        // Budget
     ]
     rng.setValues(profile);
   }
@@ -195,7 +241,8 @@ class TestData {
       [0, 15],          // Sugar
       [0, 19],          // Sugar alcohol
       [10, 35],         // Protein
-      [0, 10]           // Salt / Sodium 
+      [0, 10],          // Salt / Sodium 
+      [0, 0]            // Budget
     ]
     rng.setValuesWithResize(profile);
     getRng(RNG.COPY_CALORIES_SELECTED_PROFILE).setValue('Default');
@@ -306,13 +353,20 @@ class TestData {
     let generalSettings = getRng(RNG.GENERAL_SETTINGS);
     generalSettings.setValue(2, 1);
     generalSettings.setValue(2, 2);
-    generalSettings.setValue('Active baseline', 3);
-    generalSettings.setValue(true, 4);
+    generalSettings.setValue(false, 3);
+    generalSettings.setValue('Active baseline', 4);
     generalSettings.setValue(true, 5);
     generalSettings.setValue(true, 6);
     generalSettings.setValue(true, 7);
+    generalSettings.setValue(true, 8);
     getRng(RNG.NUTRITION_FIELDS).setValues([[true], [false], [false], [true], [false], [false], [false], [true], [false]]);
     getRng(RNG.MEALS).setValues([['Breakfast', 12], ['Snack', 5], ['Lunch', 15], ['Snack', 5], ['Dinner', 13], ['Supper', 5]]);
+    let localisation = getRng(RNG.LOCALISATION);
+    localisation.setValue('English', 1);
+    localisation.setValue('0', 2);
+    localisation.setValue('DD/MM/YYYY', 3);
+    localisation.setValue('Metric', 4);
+    localisation.setValue('£', 5);
   }
 
   clearImports(){
@@ -336,7 +390,7 @@ class TestData {
     let sht = getSht(SHT.HISTORY);
     sht.clear('B10:S');
     let days = Array.from({length:100},(v,row)=> 
-      Array.from({length:14},(v,col)=> row + col)
+      Array.from({length:15},(v,col)=> row + col)
     );
     sht.putDataAtEnd(days);
   }
@@ -347,6 +401,11 @@ class TestData {
 
   incCol(startChar, i){
     return String.fromCharCode(startChar.charCodeAt() + i);
+  }
+
+  // RESET FULL SHEET
+  makeSheetReleaseReady(){
+    console.info('Setting sheet to release ready state');
   }
 }
 
