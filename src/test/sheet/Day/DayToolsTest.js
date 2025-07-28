@@ -123,8 +123,8 @@ class DayToolsTest extends TestBaseDay {
         let expectedLoadDays = ['PROTOTYPE', 'All 1 Day', 'Boring Day'];
         let expectedDeleteDays = ['All 1 Day', 'Boring Day'];
         let expcetedSelectMeals = ['1. Breakfast', '2. Snack', '3. Lunch', '4. Snack', '5. Dinner', '6. Supper'];
-        let expcetedAllDays = ['PROTOTYPE', 'All 1 Day', 'Boring Day', this.getFormatedDay(-2), this.getFormatedDay(-1), 
-                              this.getFormatedDay(0), this.getFormatedDay(+1), this.getFormatedDay(+2)];
+        let expcetedAllDays = ['PROTOTYPE', 'All 1 Day', 'Boring Day', getFormatedDay(-2), getFormatedDay(-1), 
+                              getFormatedDay(0), getFormatedDay(+1), getFormatedDay(+2)];
         let expcetedDeleteMeals = ['🥣 Meal0', '🥣 Meal1', '🥣 Meal2'];
         // WHEN
         let resultDayName = this.dayNameCbox.getValidationCriteriaRangeValues();
@@ -448,14 +448,14 @@ class DayToolsTest extends TestBaseDay {
         // GIVEN
         let expectedIndex = 16;
         let expectedPreviewHeader = 'Copy meals from day';
-        let expectedPreviewDate = this.getFormatedDay(-1);
+        let expectedPreviewDate = getFormatedDay(-1);
         let expectedPreviewMealNames = ['', '', '', '', '', ''];
         let expectedPreviewItems = Array.from({length:90},(v,i)=> ['All 1', i+1, 'g']);
         let expectedPreviewDirection = ['','','','','','⬆  ⬆  ⬆  ⬆  ⬆  ⬆'];
 
         // WHEN
         this.selectedMealsCbox.setValue('6. Supper');
-        this.copyMealFromBtnF.setValue(this.getFormatedDay(-1));
+        this.copyMealFromBtnF.setValue(getFormatedDay(-1));
         let resultIndex = this.copyMealFromBtnF.getValue(1,5);
 
         // THEN
@@ -492,14 +492,14 @@ class DayToolsTest extends TestBaseDay {
         // GIVEN
         let expectedIndex = 1;
         let expectedPreviewHeader = 'Copy meals to days';
-        let expectedPreviewDate = this.getFormatedDay(-2);
+        let expectedPreviewDate = getFormatedDay(-2);
         let expectedPreviewMealNames = ['', '', '', '', '', ''];
         let expectedPreviewItems = Array(90).fill(['All 1', 1, 'g']);
         let expectedPreviewDirection = ['⬇  ⬇  ⬇  ⬇  ⬇  ⬇','','','','',''];
 
         // WHEN
         this.selectedMealsCbox.setValue('1. Breakfast');
-        this.copyMealToBtnF.setValue(this.getFormatedDay(-2));
+        this.copyMealToBtnF.setValue(getFormatedDay(-2));
         let resultIndex = this.copyMealToBtnF.getValue(1,5);
 
         // THEN
@@ -514,14 +514,14 @@ class DayToolsTest extends TestBaseDay {
         // GIVEN
         let expectedIndexes = "-16,1";
         let expectedPreviewHeader = 'Copy meals to days';
-        let expectedPreviewDate = `All 1 Day, ${this.getFormatedDay(-2)}`;
+        let expectedPreviewDate = `All 1 Day, ${getFormatedDay(-2)}`;
         let expectedPreviewMealNames = ['', '', '', '', '', ''];
         let expectedPreviewItems = Array(6).fill('.... Multiple days selected ....');
         let expectedPreviewDirection = ['','⬇  ⬇  ⬇  ⬇  ⬇  ⬇','⬇  ⬇  ⬇  ⬇  ⬇  ⬇','⬇  ⬇  ⬇  ⬇  ⬇  ⬇','',''];
 
         // WHEN
         this.selectedMealsCbox.setValue('2. Snack, 3. Lunch, 4. Snack');
-        this.copyMealToBtnF.setValue(`All 1 Day, ${this.getFormatedDay(-2)}`);
+        this.copyMealToBtnF.setValue(`All 1 Day, ${getFormatedDay(-2)}`);
         let resultIndexes = this.copyMealToBtnF.getValue(1,5);
 
         // THEN
@@ -550,10 +550,6 @@ class DayToolsTest extends TestBaseDay {
     }
 
     // OTHER
-
-    getFormatedDay(position){
-        return `${position < 0 ? '🗃️' : (position > 0 ? '📅' : '🚩')} ${getRelativeDay(position, 'en-GB')}`;
-    }
 
     assertPreview(expectedPreviewHeader, expectedPreviewDate, expectedPreviewMealNames, expectedPreviewDirection, expectedPreviewItems){
         let resultPreviewHeader = this.daySht.getValue('AA14');

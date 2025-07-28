@@ -58,7 +58,7 @@ class DayService{
     getRng(RNG.CALORIE_OUTPUT).setValue(day.outputCalories);
     getRng(RNG.SELECTED_PROFILE).setValue(day.macroProfile);
     getRng(RNG.DAY_PREV_DAY_INDEX).setValue(index);
-    getRng(RNG.MEAL_NAMES).clear();
+    getRng(RNG.MEAL_NAMES).clearContent();
   }
 
   loadDayFrom(input){
@@ -68,7 +68,7 @@ class DayService{
     getRng(RNG.DAY_ITEMS).setValues(this.toDay(day.items));
     getRng(RNG.CALORIE_OUTPUT).setValue(day.outputCalories);
     getRng(RNG.SELECTED_PROFILE).setValue(day.macroProfile);
-    getRng(RNG.MEAL_NAMES).clear();
+    getRng(RNG.MEAL_NAMES).clearContent();
   }
 
   saveDayAs(input){
@@ -88,13 +88,13 @@ class DayService{
   deleteDays(input){
     let indexes = input.getData();
     if(!indexes || indexes == '') return;
-    indexes.split(",").map(Number).sort((a,b) => b - a).forEach(
+    indexes.split(",").map(Number).sort((a,b) => a - b).forEach(
       index => this.dayRepository.delete(index)
     );
   }
 
   clearDay(){
-    getRng(RNG.DAY_ITEMS).clear();
+    getRng(RNG.DAY_ITEMS).clearContent();
   }
 
   // MEAL FUNCTIONS
@@ -105,7 +105,7 @@ class DayService{
       let startrow = cbox.getRng().getRow();
       getSht(SHT.DAY).setValue(`W${startrow}`, mealName.substring(3));
       let sourceData = this.toDay(getRng(`${RNG.SELECTED_MEAL_ITEMS}`).getValues());
-      getRng(`Meal${(startrow / 15)}`).setValues(sourceData);
+      getRng(`Meal${((startrow-2) / 15)}`).setValues(sourceData);
     }
   }
 
@@ -148,7 +148,7 @@ class DayService{
     let indexes = getRng(RNG.SELECTED_MEAL_IDS).getValue();
     if(!indexes || indexes == '') return;
     indexes.split(",").forEach(id => 
-      getRng(`Meal${id}`).clear()
+      getRng(`Meal${id}`).clearContent()
     );
   }
 

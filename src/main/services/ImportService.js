@@ -59,7 +59,7 @@ class ImportService{
       data = fromSht.getValues('B4:AA');
     }
     if(this.importRng.getValue(2, 2) == IMPORT_OPTIONS.CLEAR_CONTENT) {
-      toSht.clear('B4:AB');
+      toSht.clearContent('B4:AB');
     }
     toSht.putDataAtEnd(data);
     toSht.sort(2);
@@ -68,7 +68,7 @@ class ImportService{
   importRecipes(fromSht, toSht){
     var data = fromSht.getClearValues('B4:D');
     if(this.importRng.getValue(3, 2) == IMPORT_OPTIONS.CLEAR_CONTENT) {
-      toSht.clear('B4:D');
+      toSht.clearContent('B4:D');
     }
     toSht.putDataAtEnd(data);
     toSht.sort(2);
@@ -77,7 +77,7 @@ class ImportService{
   importMeals(fromSht, toSht){
     var data = fromSht.getClearValues('B4:D');
     if(this.importRng.getValue(4, 2) == IMPORT_OPTIONS.CLEAR_CONTENT) {
-      toSht.clear('B4:D');
+      toSht.clearContent('B4:D');
     }
     toSht.putDataAtEnd(data);
     toSht.sort(2);
@@ -128,7 +128,7 @@ class ImportService{
 
   importHistory(fromSht, toSht){
     var data = fromSht.getValues('B10:R');
-    toSht.clear('B10:R');
+    toSht.clearContent('B10:R');
     toSht.putDataAtEnd(data);
     toSht.sort(2);
   }

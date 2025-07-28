@@ -15,12 +15,12 @@ class EventService extends AbstractEventService{
     super([
       [SHT.DAY, [                
         new CBox(CBOX.DAY_NAME, DayService, 'changeDay', 'G1'),
-        new CBox(CBOX.MEAL_1_START, DayService, 'loadMeal', 'C15'),
-        new CBox(CBOX.MEAL_2_START, DayService, 'loadMeal', 'C30'),
-        new CBox(CBOX.MEAL_3_START, DayService, 'loadMeal', 'C45'),
-        new CBox(CBOX.MEAL_4_START, DayService, 'loadMeal', 'C60'),
-        new CBox(CBOX.MEAL_5_START, DayService, 'loadMeal', 'C75'),
-        new CBox(CBOX.MEAL_6_START, DayService, 'loadMeal', 'C90'),
+        new CBox(CBOX.MEAL_1_START, DayService, 'loadMeal', 'C17'),
+        new CBox(CBOX.MEAL_2_START, DayService, 'loadMeal', 'C32'),
+        new CBox(CBOX.MEAL_3_START, DayService, 'loadMeal', 'C47'),
+        new CBox(CBOX.MEAL_4_START, DayService, 'loadMeal', 'C62'),
+        new CBox(CBOX.MEAL_5_START, DayService, 'loadMeal', 'C77'),
+        new CBox(CBOX.MEAL_6_START, DayService, 'loadMeal', 'C92'),
         new Fld('ItemAmounts', DayService, 'inLineCalculation', 'E17:E106'),
         new Btn(BTN.SHOW_TOOLS, DayService, 'showHideTools', 'X6', 2),
         new BtnF(BTNF.SAVE_DAY_AS, DayService, 'saveDayAs', 'AE2', 1, 4, 5),

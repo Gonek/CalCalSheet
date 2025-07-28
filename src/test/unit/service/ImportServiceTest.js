@@ -101,7 +101,7 @@ class ImportServiceTest extends TestBase {
         // WHEN
         this.importService.startImport();  
         // THEN
-        verify(this.toItemsSht).clear('B4:AB').neverCalled();
+        verify(this.toItemsSht).clearContent('B4:AB').neverCalled();
         verify(this.toItemsSht).putDataAtEnd(itemsData).calledOnce();
         verify(this.toItemsSht).sort(2).calledOnce();
     }
@@ -114,7 +114,7 @@ class ImportServiceTest extends TestBase {
         // WHEN
         this.importService.startImport();  
         // THEN
-        verify(this.toRecipesSht).clear('B4:D').neverCalled();
+        verify(this.toRecipesSht).clearContent('B4:D').neverCalled();
         verify(this.toRecipesSht).putDataAtEnd(recipeData).calledOnce();
         verify(this.toRecipesSht).sort(2).calledOnce();
     }
@@ -127,7 +127,7 @@ class ImportServiceTest extends TestBase {
         // WHEN
         this.importService.startImport();  
         // THEN
-        verify(this.toMealsSht).clear('B4:D').neverCalled();
+        verify(this.toMealsSht).clearContent('B4:D').neverCalled();
         verify(this.toMealsSht).putDataAtEnd(mealData).calledOnce();
         verify(this.toMealsSht).sort(2).calledOnce();
     }
@@ -196,7 +196,7 @@ class ImportServiceTest extends TestBase {
     }
 
     verifyDataImport(sprMock, a1Area, data, times = 1){
-        verify(sprMock).clear(a1Area).called(times);
+        verify(sprMock).clearContent(a1Area).called(times);
         verify(sprMock).putDataAtEnd(data).called(times);
         verify(sprMock).sort(2).called(times);
     }

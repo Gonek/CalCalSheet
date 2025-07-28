@@ -63,7 +63,7 @@ class DayServiceTest extends TestBase {
         verify(this.prevDayIndexRng).setValue(15).calledOnce();
         verify(this.calorieOutputRng).setValue(2510).calledOnce();
         verify(this.selecetedProfileRng).setValue('Default');
-        verify(this.mealNamesRng).clear().calledOnce();
+        verify(this.mealNamesRng).clearContent().calledOnce();
         verify(this.app).flush().called(2);
     }
 
@@ -88,7 +88,7 @@ class DayServiceTest extends TestBase {
         verify(this.prevDayIndexRng).setValue(15).calledOnce();
         verify(this.calorieOutputRng).setValue(2510).calledOnce();
         verify(this.selecetedProfileRng).setValue('Default').calledOnce();
-        verify(this.mealNamesRng).clear().calledOnce();
+        verify(this.mealNamesRng).clearContent().calledOnce();
         verify(this.app).flush().calledOnce();
     }
 
@@ -103,7 +103,7 @@ class DayServiceTest extends TestBase {
         verify(this.dayItemsRng).setValues([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]]).calledOnce();
         verify(this.calorieOutputRng).setValue(2510).calledOnce();
         verify(this.selecetedProfileRng).setValue('Default').calledOnce();
-        verify(this.mealNamesRng).clear().calledOnce();
+        verify(this.mealNamesRng).clearContent().calledOnce();
     }
 
     shouldLoadDayFromDoNothingWhenNoDaySelected(){
@@ -116,7 +116,7 @@ class DayServiceTest extends TestBase {
         verify(this.dayItemsRng).setValues(any()).neverCalled();
         verify(this.calorieOutputRng).setValue(any()).neverCalled();
         verify(this.selecetedProfileRng).setValue(any()).neverCalled();
-        verify(this.mealNamesRng).clear().neverCalled();
+        verify(this.mealNamesRng).clearContent().neverCalled();
     }
 
     shouldSaveDayAsSaveCurrentDayWithGivenNameIfNoIndexProvided(){
@@ -187,7 +187,7 @@ class DayServiceTest extends TestBase {
         // WHEN
         this.dayService.clearDay();
         // THEN
-        verify(this.dayItemsRng).clear().calledOnce();
+        verify(this.dayItemsRng).clearContent().calledOnce();
     }
 
     shouldLoadMealLoadTheSelectedMealToTheSelectedMealPlace(){
@@ -386,12 +386,12 @@ class DayServiceTest extends TestBase {
         // WHEN
         this.dayService.clearMeals();
         // THEN
-        verify(this.meal1Rng).clear().calledOnce();
-        verify(this.meal2Rng).clear().neverCalled();
-        verify(this.meal3Rng).clear().neverCalled();
-        verify(this.meal4Rng).clear().calledOnce();
-        verify(this.meal5Rng).clear().neverCalled();
-        verify(this.meal6Rng).clear().neverCalled();
+        verify(this.meal1Rng).clearContent().calledOnce();
+        verify(this.meal2Rng).clearContent().neverCalled();
+        verify(this.meal3Rng).clearContent().neverCalled();
+        verify(this.meal4Rng).clearContent().calledOnce();
+        verify(this.meal5Rng).clearContent().neverCalled();
+        verify(this.meal6Rng).clearContent().neverCalled();
     }
 
     shouldClearMealsDoNothingIfNoMealsSelected(){
@@ -400,12 +400,12 @@ class DayServiceTest extends TestBase {
         // WHEN
         this.dayService.clearMeals();
         // THEN
-        verify(this.meal1Rng).clear().neverCalled();
-        verify(this.meal2Rng).clear().neverCalled();
-        verify(this.meal3Rng).clear().neverCalled();
-        verify(this.meal4Rng).clear().neverCalled();
-        verify(this.meal5Rng).clear().neverCalled();
-        verify(this.meal6Rng).clear().neverCalled();
+        verify(this.meal1Rng).clearContent().neverCalled();
+        verify(this.meal2Rng).clearContent().neverCalled();
+        verify(this.meal3Rng).clearContent().neverCalled();
+        verify(this.meal4Rng).clearContent().neverCalled();
+        verify(this.meal5Rng).clearContent().neverCalled();
+        verify(this.meal6Rng).clearContent().neverCalled();
     }
 
     shouldDeleteMealsRemoveAllSelectedMeals(){

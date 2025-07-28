@@ -43,6 +43,10 @@ class RecipeCalculatorGivenSteps extends Steps{
         let autoDeleteRng = getRng(RNG.RECIPE_AUTO_DELETE);
         autoDeleteRng.setValue(value);
     }
+
+    delete_recipes_as(names){
+        getRng(BTNF.DELETE_RECIPES).setValue(names);
+    }
 }
 
 class RecipeCalculatorWhenSteps extends Steps{
@@ -52,6 +56,10 @@ class RecipeCalculatorWhenSteps extends Steps{
 
     recipe_name_set_to(name){
         this.changeCbox(SHT.RECIPE_CALCULATOR, CBOX.RECIPE_NAME, name);
+    }
+
+    delete_recipes_clicked(){
+        this.clickButtonWithField(SHT.RECIPE_CALCULATOR, BTNF.DELETE_RECIPES, 'E42', 4);
     }
 }
 
@@ -63,7 +71,7 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
         assertTrue(recipeFind);
     }
 
-    no_recipe_saved_with_name(name){
+    no_recipe_exist_with_name(name){
         let recipeFind = getSht(SHT.RECIPES).getValues('B4:D').find(r => r[0] == name);
         assertFalse(recipeFind);
     }
@@ -82,6 +90,11 @@ class RecipeCalculatorThenSteps extends ItemThenSteps{
     recipe_have_items(items){
         let filtered = getSht(SHT.RECIPES).getValues('B4:D').filter(i => i[0] === this.name);
         assertEqualsArray(filtered, items.map(i => [this.name, i[0], i[1]]));
+    }
+
+    number_of_recipes_are(count){
+        let countSaved = [...new Set(getSht(SHT.RECIPES).getRng('B4:B').getColAsArray())].length;
+        assertEquals(countSaved-1, count);
     }
 
     form_have_recipe_name_loaded(name){

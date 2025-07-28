@@ -60,6 +60,8 @@ class SettingsService{
     this.recipeCalculatorSht.switchCols(price, 17);
     this.profileSht.switchRows(price, 14);
     this.historySht.switchCols(price, 16);
+    this.itemsSht.switchCols(price, 26);    
+    this.itemsSht.switchCols(price, 27);
   }
 
   changeCheckBox(generalSettings){
@@ -136,9 +138,9 @@ class SettingsService{
   }
 
   changeDateFormat(dateFormat){
-    getSht(SHT.DAYS).getRng('A19:A').setNumberFormat(dateFormat);
-    getSht(SHT.PROFILE).getRng('I16:J').setNumberFormat(dateFormat);
-    getSht(SHT.ITEMS).getRng('AB4:AB').setNumberFormat(dateFormat);
+    getSht(SHT.DAYS).getRng('A6:A').setNumberFormat(dateFormat);
+    getSht(SHT.PROFILE).getRng('I17:J').setNumberFormat(dateFormat);
+    getSht(SHT.ITEMS).getRng('AD4:AD').setNumberFormat(dateFormat);
     getSht(SHT.HISTORY).getRng('B10:B').setNumberFormat(dateFormat);
   }
 
@@ -147,9 +149,9 @@ class SettingsService{
     let isMeasurementMetric = isMeasurementMetricRng.getValue();
 
     if(isNewMeasurementMetric != isMeasurementMetric){
-      let calcHeightRng = getSht(SHT.PROFILE).getRng('D19:F19');
-      let calcWeightRng = getSht(SHT.PROFILE).getRng('D21');
-      let weigthRng = getSht(SHT.PROFILE).getRng('K16:K');
+      let calcHeightRng = getSht(SHT.PROFILE).getRng('D20:F20');
+      let calcWeightRng = getSht(SHT.PROFILE).getRng('D22');
+      let weigthRng = getSht(SHT.PROFILE).getRng('K17:K');
 
       let newWeightFormat = isNewMeasurementMetric ? '0.00" kg"' : '0.00" lb"';
       let newWeights = weigthRng.getColAsArray().map(w => [this.convertKgAndLb(isNewMeasurementMetric, w)]);

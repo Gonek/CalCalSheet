@@ -12,7 +12,7 @@ class History{
       this.sugarAlcohol = summary[7];
       this.protein = summary[8];
       this.salt = summary[9];
-      this.price = summary[10];
+      this.price = summary[10].toFixed(2);
       this.calorieDensity = calorieDensity;
       this.checkCalorie = checklist[0];
       this.checkMacro = checklist[1];

@@ -47,7 +47,7 @@ class ItemRepository{
 
   autoDeleteItems(){
     let today = getToday();
-    let indexes = this.sht.getValues('AB4:AB')
+    let indexes = this.sht.getValues('AD4:AD')
             .flat()
             .map((v, i) => [i, v])
             .filter(e => (e[1] && e[1] <= today))

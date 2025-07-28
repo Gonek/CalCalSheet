@@ -57,7 +57,6 @@ class DayRepository{
     let createDays = getRng(RNG.CREATE_DAYS).getValue();
     let newDayRow = getRng(RNG.FIRST_EMPTY_DAY_INDEX).getValue();
     if(createDays > 0){
-      this.sht.insertRows(newDayRow, 15 * createDays);
       for(let i = 0; i < createDays; i++){
         let row = newDayRow + 15 * i;
         let newDayA1 = `A${row}:N${row + 15}`;

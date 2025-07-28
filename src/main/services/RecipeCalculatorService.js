@@ -34,13 +34,13 @@ class RecipeCalculatorService {
     let noomColour = getRng(RNG.RECIPE_NOOM_COLOUR).getValue();
     let autoDelete = getRng(RNG.RECIPE_AUTO_DELETE).getValue();
     
-    getObj(ItemRepository).addOrUpdate(new Item(itemName, fields, fields[13], fields[13] / fields[2], noomColour, autoDelete), oldPos);
+    getObj(ItemRepository).addOrUpdate(new Item(itemName, fields, fields[13], (fields[13] / fields[2]).toFixed(2), noomColour, autoDelete), oldPos);
   }
 
   clearCalculator(){
-    this.nameRng.clear();
-    this.itemsRng.clear();
-    getRng(RNG.RECIPE_SERVING).clear();
+    this.nameRng.clearContent();
+    this.itemsRng.clearContent();
+    getRng(RNG.RECIPE_SERVING).clearContent();
     getRng(RNG.RECIPE_NOOM_CATEGORY).setValue('Solid');
     getRng(RNG.RECIPE_SAVE_AS_RECIPE).setValue('True');
     getRng(RNG.RECIPE_AUTO_DELETE).setValue('Never');

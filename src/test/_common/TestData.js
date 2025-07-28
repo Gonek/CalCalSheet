@@ -28,7 +28,7 @@ class TestData {
   }
 
   clearItems() {
-      getSht(SHT.ITEMS).clear('B4:AD');
+      getSht(SHT.ITEMS).clearContent('B4:AD');
   }
 
   // TEST DAYS 
@@ -187,8 +187,8 @@ class TestData {
 
   clearDays(){
     let sht = getSht(SHT.DAYS);
-    sht.clear('B6:N');
-    sht.clear('Q6:AC');
+    sht.clearContent('B6:N');
+    sht.deleteCells('P21:AC200');
     let numDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
     for(var i = 0; i<numDays; i++){
       sht.setPosValue(6 + (i * 15), 14, '2330');
@@ -199,8 +199,8 @@ class TestData {
   }
 
   clearDay(){
-    getRng(RNG.MEAL_NAMES).clear();
-    getRng(RNG.DAY_ITEMS).clear();
+    getRng(RNG.MEAL_NAMES).clearContent();
+    getRng(RNG.DAY_ITEMS).clearContent();
     getRng(RNG.SELECTED_PROFILE).setValue('Default');
     getRng(RNG.CALORIE_OUTPUT).setValue(2330);
   }
@@ -209,7 +209,7 @@ class TestData {
 
   addTestProfiles(){
     let rng = getRng(RNG.MACRO_PROFILES);
-    rng.clear();
+    rng.clearContent();
     let profile = [
       ['Test 1', '',  'Test 2', '', 'Test 3', '', 'Test 4', '', 'Test 5', '', 'Test 6', '', 'Test 7', ''], // Name
       [1000, 2000,    2000, 3000,   3000, 4000,   4000, 5000,   5000, 6000,   6000, 7000,   7000, 8000],   // Calorie
@@ -229,7 +229,7 @@ class TestData {
 
   addDefaultProfile(){
     let rng = getRng(RNG.MACRO_PROFILES);
-    rng.clear();
+    rng.clearContent();
     let profile = [
       ['Default', ''],  // Name
       [2330, 2480],     // Calorie
@@ -279,7 +279,7 @@ class TestData {
   }
 
   clearMeals(){
-    getSht(SHT.MEALS).clear('B4:D');
+    getSht(SHT.MEALS).clearContent('B4:D');
   }
 
   // RECIPES
@@ -320,18 +320,18 @@ class TestData {
   }
 
   clearRecipes(){
-    getSht(SHT.RECIPES).clear('B4:D');
+    getSht(SHT.RECIPES).clearContent('B4:D');
   }
 
   clearRecipeCalculator(){
-    getRng(RNG.RECIPE_NAME).clear();
-    getRng(RNG.RECIPE_ITEMS).clear();
+    getRng(RNG.RECIPE_NAME).clearContent();
+    getRng(RNG.RECIPE_ITEMS).clearContent();
   }
 
   // WEIGHT
   resetWeight(){
     let weightsRng = getRng(RNG.WEIGHTS);
-    weightsRng.clear();
+    weightsRng.clearContent();
     weightsRng.setValue('01/01/2024', 1, 1);
     weightsRng.setValue('80', 1, 3);
   }
@@ -354,7 +354,7 @@ class TestData {
     generalSettings.setValue(2, 1);
     generalSettings.setValue(2, 2);
     generalSettings.setValue(false, 3);
-    generalSettings.setValue('Active baseline', 4);
+    generalSettings.setValue(generalSettings.getValidationCriteriaRangeValues(4)[1], 4);
     generalSettings.setValue(true, 5);
     generalSettings.setValue(true, 6);
     generalSettings.setValue(true, 7);
@@ -362,10 +362,10 @@ class TestData {
     getRng(RNG.NUTRITION_FIELDS).setValues([[true], [false], [false], [true], [false], [false], [false], [true], [false]]);
     getRng(RNG.MEALS).setValues([['Breakfast', 12], ['Snack', 5], ['Lunch', 15], ['Snack', 5], ['Dinner', 13], ['Supper', 5]]);
     let localisation = getRng(RNG.LOCALISATION);
-    localisation.setValue('English', 1);
+    localisation.setValue(localisation.getValidationCriteriaRangeValues(1)[1], 1);
     localisation.setValue('0', 2);
     localisation.setValue('DD/MM/YYYY', 3);
-    localisation.setValue('Metric', 4);
+    localisation.setValue(localisation.getValidationCriteriaRangeValues(4)[0], 4);
     localisation.setValue('£', 5);
   }
 
@@ -388,7 +388,7 @@ class TestData {
 
   addTestHistory(){
     let sht = getSht(SHT.HISTORY);
-    sht.clear('B10:S');
+    sht.clearContent('B10:S');
     let days = Array.from({length:100},(v,row)=> 
       Array.from({length:15},(v,col)=> row + col)
     );
@@ -396,7 +396,7 @@ class TestData {
   }
 
   clearHistory(){
-    getSht(SHT.HISTORY).clear('B10:S');
+    getSht(SHT.HISTORY).clearContent('B10:S');
   }
 
   incCol(startChar, i){

@@ -20,9 +20,9 @@ class RecipeCalculatorTest extends TestBase {
     }
 
     clearData(){
-        this.recipeNameRng.clear();
-        this.recipeItemsRng.clear();
-        this.recipeServingRng.clear();
+        this.recipeNameRng.clearContent();
+        this.recipeItemsRng.clearContent();
+        this.recipeServingRng.clearContent();
     }
 
     shouldRecipeCalculatorSheetHaveCorrectFormulaForItems(){
@@ -198,7 +198,7 @@ class RecipeCalculatorTest extends TestBase {
         let expected = ['g', 100, 225, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5];
         //WHEN
         this.recipeItemsRng.setValuesWithResize(items);
-        this.recipeServingRng.clear();
+        this.recipeServingRng.clearContent();
         let result100g = this.sht.getValues('E29:P29');
         let resultSave = this.sht.getValues('E30:P30');
         //THEN
@@ -338,13 +338,13 @@ class RecipeCalculatorTest extends TestBase {
         //THEN
         assertEquals(result, expected);
         //RESET
-        this.recipeNameRng.clear();
+        this.recipeNameRng.clearContent();
         testData.clearRecipes();
     }
 
     shouldRecipeCalculatorSheetLeaveSelectedRecipeItemsEmptyIfNoRecipeSelected(){
         //GIVEN WHEN
-        this.recipeNameRng.clear();
+        this.recipeNameRng.clearContent();
         let result = this.selectedRecipeItemsRng.getValues();
         //THEN
         assertArrayEmpty(result);

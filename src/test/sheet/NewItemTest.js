@@ -6,7 +6,7 @@ class NewItemTest extends TestBase {
     }
 
     clearData(){
-        this.sht.clear('C3:C22');
+        this.sht.clearContent('C3:C22');
         this.sht.setValue('C24', '=F24');
         this.sht.setValue('C23', 'Solid');
         this.sht.setValue('C19', 'Never');

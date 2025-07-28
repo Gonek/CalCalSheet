@@ -13,7 +13,7 @@ class TestBaseDay extends TestBase  {
     }
 
     clearData(){
-        this.daySht.clear(`C17:E106`);
+        this.daySht.clearContent(`C17:E106`);
     }
 
     // UTILITIES

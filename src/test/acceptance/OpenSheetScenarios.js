@@ -5,11 +5,11 @@
     }
 
     clearData(){
+        testData.addDefaultProfile();
         testData.clearItems();
         testData.clearDays();
         testData.clearDay();
         testData.clearHistory();
-        testData.addDefaultProfile();
     }
 
     scenario_finish_day_after_one_day_with_auto_cycle_and_active_baseline(){
@@ -42,6 +42,7 @@
                 .history_have_calories_burned_as(3200).and()
                 .history_have_calories_difference_as(-2506).and()
                 .history_have_macros_as([975.1, 928.1, 938.1, 1099.1, 1033.1, 1017.2, 981.2, 1061.2, 1231]).and()
+                .history_have_price_as(99.22).and()
                 .history_have_calories_check_as('❌').and()
                 .history_have_macro_check_as('❌').and()
                 .history_have_calorie_density_check_as('✔️').and()
@@ -93,16 +94,16 @@
                 .day_changed_to(3).and()
                 .future_available_days_as_expected(2).and()
                 .archive_available_days_as_expected(2).and()
-                .new_day_calorie_output_set_to(1, 3000).and()
-                .new_day_calorie_output_set_to(2, 4000).and()
-                .new_day_calorie_output_set_to(3, 5000).and()
-                .new_day_calorie_output_set_to(4, 6000).and()
-                .new_day_calorie_output_set_to(5, 7000).and()
-                .new_day_profile_set_to(1, 'Test 2').and()
-                .new_day_profile_set_to(2, 'Test 3').and()
-                .new_day_profile_set_to(3, 'Test 4').and()
-                .new_day_profile_set_to(4, 'Test 5').and()
-                .new_day_profile_set_to(5, 'Test 6').and()
+                .new_day_calorie_output_set_to(1, 2000).and()
+                .new_day_calorie_output_set_to(2, 3000).and()
+                .new_day_calorie_output_set_to(3, 4000).and()
+                .new_day_calorie_output_set_to(4, 5000).and()
+                .new_day_calorie_output_set_to(5, 6000).and()
+                .new_day_profile_set_to(1, 'Test 1').and()
+                .new_day_profile_set_to(2, 'Test 2').and()
+                .new_day_profile_set_to(3, 'Test 3').and()
+                .new_day_profile_set_to(4, 'Test 4').and()
+                .new_day_profile_set_to(5, 'Test 5').and()
                 .history_saved_for_prevous_day(getRelativeDay(-6)).and()
                 .history_have_calories_intake_as(5706).and()
                 .history_have_calories_burned_as(3200).and()

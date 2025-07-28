@@ -5,12 +5,11 @@
     }
 
     clearData(){
+      testData.addDefaultProfile();
       testData.clearItems();
       testData.clearDays();
-      testData.clearMeals();
       testData.clearDay();
       testData.clearHistory();
-      testData.addDefaultProfile();
     }
 
     scenario_change_day_to_yesterday(){
@@ -21,7 +20,7 @@
           .test_profiles_available().and()
           .previous_day_set_to(3)
         .when()
-          .day_changed(2)
+          .day_changed(getFormatedDay(-1))
         .then()
           .items_of_day_loaded(Array.from({length:90},(v,k)=>['All 1', '', k+1])).and()
           .output_calories_loaded(2700).and()
@@ -37,7 +36,7 @@
           .test_profiles_available().and()
           .previous_day_set_to(3)
         .when()
-          .day_changed(4)
+          .day_changed(getFormatedDay(+1))
         .then()
           .items_of_day_loaded(Array(90).fill(['', '', ''])).and()
           .output_calories_loaded(2900).and()
@@ -45,15 +44,15 @@
           .history_saved_for_prevous_day(getToday());
     }
 
-    scenario_change_day_to_default(){
-      this.scenario('Scenario Change day to Default and check items, output calories, profile')
+    scenario_change_day_to_prototype(){
+      this.scenario('Scenario Change day to PROTOTYPE and check items, output calories, profile')
         .given()
           .test_items_available().and()
           .test_days_available().and()
           .test_profiles_available().and()
           .previous_day_set_to(3)
         .when()
-          .day_changed(0)
+          .day_changed('PROTOTYPE')
         .then()
           .items_of_day_loaded([... [['1 First', '', 100]], ... Array(14).fill(['', '', '']),
                                 ... [['2 Second', '', 200]], ... Array(14).fill(['', '', '']),
@@ -67,7 +66,7 @@
     }
 
     scenario_modify_day_change_to_other(){
-      this.scenario('Scenario modify day then change to an other and check it changes saved ands history saved')
+      this.scenario('Scenario modify day then change to an other and check it changes saved and history saved')
         .given()
           .test_items_available().and()
           .test_days_available().and()
@@ -77,7 +76,7 @@
           .profile_set_to('Test 5').and()
           .previous_day_set_to(2)
         .when()
-          .day_changed(3)
+          .day_changed(getRelativeDay(+1))
         .then()
           .previous_day_saved(2).and()
           .saved_with_test_items().and()
@@ -93,293 +92,93 @@
           .history_have_calorie_density_check_as('✔️');
     }
 
-    scenario_select_meal_for_meal_1(){
-      this.scenario('Scenario Select meal for meal 1 load items')
+    scenario_inline_calculaton_calories(){
+      this.scenario('Scenario calculate item weight using the inline calulator to achieve desired calories')
         .given()
           .test_items_available().and()
-          .test_meals_available()
+          .item_name_at_row_as(7, 'Test 100g')
         .when()
-          .meal_selected_in_meal_no_(1, '🥣 Meal1')
+          .item_amouth_field_changed(7, 'c=100')
         .then()
-          .meal_loaded_to_meal_no_(1, [['1 First', '', 10],
-                                       ['2 Second', '', 20],
-                                       ['3 Third', '', 30],
-                                       ['ZZ Last', '', 99],
-                                       ['1 First', '', 110],
-                                       ['2 Second', '', 120],
-                                       ['3 Third', '', 130],
-                                       ['ZZ Last', '', 199],
-                                       ['1 First', '', 210],
-                                       ['2 Second', '', 220],
-                                       ['3 Third', '', 230],
-                                       ['ZZ Last', '', 299],
-                                       ['1 First', '', 310],
-                                       ['2 Second', '', 320],
-                                       ['3 Third', '', 330]])
-    }
+          .item_amount_at_row_changed_to(7, 27);
+    } 
 
-    scenario_select_meal_for_meal_2(){
-      this.scenario('Scenario Select meal for meal 2 load items')
+    scenario_inline_calculaton_serving_calories(){
+      this.scenario('Scenario calculate item weight using the inline calulator to achieve desired calories for and item using servings')
         .given()
           .test_items_available().and()
-          .test_meals_available()
+          .item_name_at_row_as(15, 'Test 1 serving')
         .when()
-          .meal_selected_in_meal_no_(2, '🥣 Meal1')
+          .item_amouth_field_changed(15, 'c=125')
         .then()
-          .meal_loaded_to_meal_no_(2, [['1 First', '', 10],
-                                       ['2 Second', '', 20],
-                                       ['3 Third', '', 30],
-                                       ['ZZ Last', '', 99],
-                                       ['1 First', '', 110],
-                                       ['2 Second', '', 120],
-                                       ['3 Third', '', 130],
-                                       ['ZZ Last', '', 199],
-                                       ['1 First', '', 210],
-                                       ['2 Second', '', 220],
-                                       ['3 Third', '', 230],
-                                       ['ZZ Last', '', 299],
-                                       ['1 First', '', 310],
-                                       ['2 Second', '', 320],
-                                       ['3 Third', '', 330]])
-    }
+          .item_amount_at_row_changed_to(15, 0.5);
+    } 
 
-    scenario_select_meal_for_meal_3(){
-      this.scenario('Scenario Select meal for meal 3 load items')
+    scenario_inline_calculaton_fat(){
+      this.scenario('Scenario calculate item weight using the inline calulator to achieve desired total fat')
         .given()
           .test_items_available().and()
-          .test_meals_available()
+          .item_name_at_row_as(45, 'Test 100g')
         .when()
-          .meal_selected_in_meal_no_(3, '🥣 Meal1')
+          .item_amouth_field_changed(45, 'fat=25')
         .then()
-          .meal_loaded_to_meal_no_(3, [['1 First', '', 10],
-                                       ['2 Second', '', 20],
-                                       ['3 Third', '', 30],
-                                       ['ZZ Last', '', 99],
-                                       ['1 First', '', 110],
-                                       ['2 Second', '', 120],
-                                       ['3 Third', '', 130],
-                                       ['ZZ Last', '', 199],
-                                       ['1 First', '', 210],
-                                       ['2 Second', '', 220],
-                                       ['3 Third', '', 230],
-                                       ['ZZ Last', '', 299],
-                                       ['1 First', '', 310],
-                                       ['2 Second', '', 320],
-                                       ['3 Third', '', 330]])
-    }
+          .item_amount_at_row_changed_to(45, 250);
+    } 
 
-    scenario_select_meal_for_meal_4(){
-      this.scenario('Scenario Select meal for meal 4 load items')
+    scenario_inline_calculaton_carbohyrate(){
+      this.scenario('Scenario calculate item weight using the inline calulator to achieve desired carbohydrate')
         .given()
           .test_items_available().and()
-          .test_meals_available()
+          .item_name_at_row_as(90, 'Test 100g')
         .when()
-          .meal_selected_in_meal_no_(4, '🥣 Meal1')
+          .item_amouth_field_changed(90, 'car=55')
         .then()
-          .meal_loaded_to_meal_no_(4, [['1 First', '', 10],
-                                       ['2 Second', '', 20],
-                                       ['3 Third', '', 30],
-                                       ['ZZ Last', '', 99],
-                                       ['1 First', '', 110],
-                                       ['2 Second', '', 120],
-                                       ['3 Third', '', 130],
-                                       ['ZZ Last', '', 199],
-                                       ['1 First', '', 210],
-                                       ['2 Second', '', 220],
-                                       ['3 Third', '', 230],
-                                       ['ZZ Last', '', 299],
-                                       ['1 First', '', 310],
-                                       ['2 Second', '', 320],
-                                       ['3 Third', '', 330]])
-    }
+          .item_amount_at_row_changed_to(90, 183.3);
+    } 
 
-    scenario_select_meal_for_meal_5(){
-      this.scenario('Scenario Select meal for meal 5 load items')
+    scenario_inline_calculaton_fiber(){
+      this.scenario('Scenario calculate item weight using the inline calulator to achieve desired fiber')
         .given()
           .test_items_available().and()
-          .test_meals_available()
+          .item_name_at_row_as(28, 'Test 100g')
         .when()
-          .meal_selected_in_meal_no_(5, '🥣 Meal1')
+          .item_amouth_field_changed(28, 'fib=10')
         .then()
-          .meal_loaded_to_meal_no_(5, [['1 First', '', 10],
-                                       ['2 Second', '', 20],
-                                       ['3 Third', '', 30],
-                                       ['ZZ Last', '', 99],
-                                       ['1 First', '', 110],
-                                       ['2 Second', '', 120],
-                                       ['3 Third', '', 130],
-                                       ['ZZ Last', '', 199],
-                                       ['1 First', '', 210],
-                                       ['2 Second', '', 220],
-                                       ['3 Third', '', 230],
-                                       ['ZZ Last', '', 299],
-                                       ['1 First', '', 310],
-                                       ['2 Second', '', 320],
-                                       ['3 Third', '', 330]])
-    }
+          .item_amount_at_row_changed_to(28, 25);
+    } 
 
-    scenario_select_meal_for_meal_6(){
-      this.scenario('Scenario Select meal for meal 6 load items')
+    scenario_inline_calculaton_protein(){
+      this.scenario('Scenario calculate item weight using the inline calulator to achieve desired protein')
         .given()
           .test_items_available().and()
-          .test_meals_available()
+          .item_name_at_row_as(1, 'Test 100g')
         .when()
-          .meal_selected_in_meal_no_(6, '🥣 Meal1')
+          .item_amouth_field_changed(1, 'pro=35')
         .then()
-          .meal_loaded_to_meal_no_(6, [['1 First', '', 10],
-                                       ['2 Second', '', 20],
-                                       ['3 Third', '', 30],
-                                       ['ZZ Last', '', 99],
-                                       ['1 First', '', 110],
-                                       ['2 Second', '', 120],
-                                       ['3 Third', '', 130],
-                                       ['ZZ Last', '', 199],
-                                       ['1 First', '', 210],
-                                       ['2 Second', '', 220],
-                                       ['3 Third', '', 230],
-                                       ['ZZ Last', '', 299],
-                                       ['1 First', '', 310],
-                                       ['2 Second', '', 320],
-                                       ['3 Third', '', 330]])
-    }
+          .item_amount_at_row_changed_to(1, 175);
+    } 
 
-    scenario_copy_all_meals_to_tomorrow(){
-      this.scenario('Scenario Copy all meals to Tomorrow and the day after tomorrow')
+    scenario_inline_calculaton_incorret(){
+      this.scenario('Scenario Try to calculate item weight using the inline calulator while the formula incorret')
         .given()
-          .test_days_available().and()
           .test_items_available().and()
-          .day_filled_with_items().and()
-          .copy_from_as([1,2,3,4,5,6]).and()
-          .copy_to_as(4)
+          .item_name_at_row_as(1, 'Test 100g')
         .when()
-          .copy_meal_clicked()
+          .item_amouth_field_changed(1, 'xxx=231')
         .then()
-          .meal_copied(4, 1, [['1 First', 50], ['All 100', 100], ['All Green', 1000], ['', ''], ['', ''], ['Yellow', 50]]).and()
-          .meal_copied(4, 2, [['2 Second', 85], ['All 1', 25], ['Test 1 serving', 2], ['Test 100g', 200]]).and()
-          .meal_copied(4, 3, [['3 Third', 100], ['Yellow', 110], ['Zero cal',  2500], ['Green', 10], 
-                              ['Green', 11], ['Green', 12], ['Green', 13], ['Green', 14], 
-                              ['Green', 15], ['Green', 16], ['Green', 17], ['Green', 18], 
-                              ['Green', 19], ['Green', 20], ['Green', 21]]).and()
-          .meal_copied(4, 4, [['1 First', 20], ['Yellow', 1000]]).and()
-          .meal_copied(4, 5, []).and()
-          .meal_copied(4, 6, [['ZZ Last', 225], ['Max cal', 10], ['Red', 55]])
-    }
+          .item_amount_at_row_changed_to(1, '');
+    } 
 
-    scenario_copy_one_meals_to_yesterday(){
-      this.scenario('Scenario Copy one meal to Yesterday ( replacing the existing one )')
-        .given()
-          .test_days_available().and()
-          .test_items_available().and()
-          .day_filled_with_items().and()
-          .copy_from_as([3]).and()
-          .copy_to_as(2)
-        .when()
-          .copy_meal_clicked()
-        .then()
-          .meal_copied(2, 3, [['3 Third', 100], ['Yellow', 110], ['Zero cal',  2500], ['Green', 10], 
-                              ['Green', 11], ['Green', 12], ['Green', 13], ['Green', 14], 
-                              ['Green', 15], ['Green', 16], ['Green', 17], ['Green', 18], 
-                              ['Green', 19], ['Green', 20], ['Green', 21]])
-    }
-
-    scenario_copy_meals_to_default_day(){
-      this.scenario('Scenario Copy meals to Default day')
-        .given()
-          .test_days_available().and()
-          .test_items_available().and()
-          .day_filled_with_items().and()
-          .copy_from_as([2,4]).and()
-          .copy_to_as(0)
-        .when()
-          .copy_meal_clicked()
-        .then()
-          .meal_copied(0, 2, [['2 Second', 85], ['All 1', 25], ['Test 1 serving', 2], ['Test 100g', 200]]).and()
-          .meal_copied(0, 4, [['1 First', 20], ['Yellow', 1000]])
-    }
-
-    scenario_save_meal3_to_meals(){
-      this.scenario('Scenario Save Meal3 to meals')
+    scenario_no_inline_calculaton(){
+      this.scenario('Scenario not doing inline calculation when no formula given')
         .given()
           .test_items_available().and()
-          .day_filled_with_items().and()
-          .save_from_as_meal_no_(3).and()
-          .save_as_as('New meal')
+          .item_name_at_row_as(1, 'Test 100g')
         .when()
-          .save_meal_clicked()
+          .item_amouth_field_changed(1, 851)
         .then()
-          .meal_saved_with_name('🥣 New meal').and()
-          .meal_have_items([['3 Third', 100], ['Yellow', 110], ['Zero cal',  2500], 
-                            ['Green', 10], ['Green', 11], ['Green', 12], ['Green', 13], 
-                            ['Green', 14], ['Green', 15], ['Green', 16], ['Green', 17], 
-                            ['Green', 18], ['Green', 19], ['Green', 20], ['Green', 21]])
-    }
-
-    scenario_save_meal1_to_meals(){
-      this.scenario('Scenario Save Meal with holes to meals')
-        .given()
-          .test_items_available().and()
-          .day_filled_with_items().and()
-          .save_from_as_meal_no_(1).and()
-          .save_as_as('Hole meal')
-        .when()
-          .save_meal_clicked()
-        .then()
-          .meal_saved_with_name('🥣 Hole meal').and()
-          .meal_have_items([['1 First', 50], ['All 100', 100], ['All Green', 1000], ['Yellow', 50]])
-    }
-
-    scenario_save_meal_replace_existing_meal_with_same_name(){
-      this.scenario('Scenario Save meal replace existing meal with same name')
-        .given()
-          .test_items_available().and()
-          .day_filled_with_items().and()
-          .save_from_as_meal_no_(6).and()
-          .save_as_as('Meal2')
-        .when()
-          .save_meal_clicked()
-        .then()
-          .meal_saved_with_name('🥣 Meal2').and()
-          .meal_have_items([['ZZ Last', 225], ['Max cal', 10], ['Red', 55]])
-    }
-
-    scenario_save_meal_save_as_load_meal_name_at_meal_no(){
-      this.scenario('Scenario Save meal load name to save as field')
-        .given()
-          .test_items_available().and()
-          .test_meals_available()
-        .when()
-          .meal_selected_in_meal_no_(1, '🥣 Meal1')
-        .given()
-          .save_from_as_meal_no_(1)
-        .then()
-          .meal_save_as_filled_with_name('Meal1')
-    }
-
-    scenario_save_meal_without_items(){
-      this.scenario('Scenario Save meal without items')
-        .given()
-          .test_items_available().and()
-          .day_filled_with_items().and()
-          .save_from_as_meal_no_(5).and()
-          .save_as_as('No items meal')
-        .when()
-          .save_meal_clicked()
-        .then()
-          .no_meal_saved_with_name('🥣 No items meal')
-    }
-
-    scenario_save_meal_without_name(){
-      this.scenario('Scenario Save meal without name')
-        .given()
-          .test_items_available().and()
-          .day_filled_with_items().and()
-          .save_from_as_meal_no_(2).and()
-          .save_as_as('')
-        .when()
-          .save_meal_clicked()
-        .then()
-          .no_meal_saved_with_name('🥣 ')
-    }
+          .item_amount_at_row_changed_to(1, 851);
+    } 
 }
 
 var runDayScenarios = () => new DayScenarios().runAllTests();

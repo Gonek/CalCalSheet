@@ -1,15 +1,15 @@
-class OpenSheetGivenSteps extends BaseDayGivenSteps{
+class OpenSheetGivenSteps extends DayGivenSteps{
     last_finished_day_set_to(date){
         getRng(RNG.LAST_FINISHED_DAY).setValue(date);
         getObj(App).flush();
     }
 
     default_calorie_output_set_to(value){
-        getRng(RNG.GENERAL_SETTINGS).setValue(value, 3);
+        getRng(RNG.GENERAL_SETTINGS).setValue(value, 4);
     }
 
     automatic_macro_cycle_set_to(value){
-        getRng(RNG.GENERAL_SETTINGS).setValue(value, 6);
+        getRng(RNG.GENERAL_SETTINGS).setValue(value, 7);
     }
 }
 
@@ -19,32 +19,32 @@ class OpenSheetWhenSteps extends Steps{
     }  
 }
 
-class OpenSheetThenSteps extends BaseDayThenSteps{
+class OpenSheetThenSteps extends DayThenSteps{
 
     day_changed_to(to){
         let r = getRng(CBOX.DAY_NAME);
         let values = r.getValidationCriteriaRangeValues();
-        assertEquals(r.getValue(), values[to]);
+        assertEquals(r.getValue(), values[to + 2]);
     }
 
     future_available_days_as_expected(futureDays){
-        let daysDates = getSht(SHT.DAYS).getRng('A4:A').getColAsArray();
+        let daysDates = getSht(SHT.DAYS).getRng('A6:A').getColAsArray();
         let result = daysDates.filter(d => d > getToday()).length;
         assertEquals(result, futureDays);
     }
 
     archive_available_days_as_expected(pastDays){
-        let daysDates = getSht(SHT.DAYS).getRng('A4:A').getColAsArray();
+        let daysDates = getSht(SHT.DAYS).getRng('A6:A').getColAsArray();
         let result = daysDates.filter(d => (d!='') && (d < getToday())).length;
         assertEquals(result, pastDays);
     }
 
     new_day_calorie_output_set_to(day, expected){
-        assertEquals(getSht(SHT.DAYS).getValue(`N${day*15 + 4}`), expected);
+        assertEquals(getSht(SHT.DAYS).getValue(`N${(day-1)*15 + 6}`), expected);
     }
 
     new_day_profile_set_to(day, expected){
-        assertEquals(getSht(SHT.DAYS).getValue(`N${day*15 + 5}`), expected);
+        assertEquals(getSht(SHT.DAYS).getValue(`N${(day-1)*15 + 7}`), expected);
     }
 
     expired_auto_delete_days_were_deleted(){

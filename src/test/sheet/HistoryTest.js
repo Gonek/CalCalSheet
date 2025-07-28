@@ -7,7 +7,7 @@ class HistoryTest extends TestBase {
     }
 
     clearData(){
-        this.sht.clear('B10:S');
+        this.sht.clearContent('B10:S');
     }
 
     afterAll(){

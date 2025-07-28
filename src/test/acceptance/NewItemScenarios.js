@@ -161,9 +161,18 @@ class NewItemScenarios extends AcceptanceTestBase{
             .save_as_item_clicked()
           .then()
             .item_saved_with_name("100g + 400g water item").and()
-            .have_serving_as(100, 'g', 5).and()
-            .have_calories_as(100).and()
-            .have_basic_macros().and()
+            .have_serving_as(100, 'g', 1).and()
+            .have_calories_as(20).and()
+            .have_total_fat_as(2).and()
+            .have_saturated_fat_as(2.2).and()
+            .have_trans_fat_as(2.4).and()
+            .have_carbohydrate_as(2.6).and()
+            .have_fiber_as(2.8).and()
+            .have_sugar_as(3.0).and()
+            .have_sugar_alcohol_as(3.2).and()
+            .have_protein_as(3.4).and()
+            .have_sodium_as(4).and()
+            .have_price_as(19, 0.05).and()
             .have_noom_colour_of('Green').and()
             .have_auto_delete_at_empty().and()
             .form_is_clear();
@@ -356,7 +365,7 @@ class NewItemScenarios extends AcceptanceTestBase{
           .when()
             .item_name_set_to("Test 100g")
           .then()
-            .item_loaded_to_form_as(['Test 100g', 100, 'g', 100, 370, 10, 5, 5, 30, 40, 5, 1, 20, 100])
+            .item_loaded_to_form_as(['Test 100g', 100, 'g', 100, 370, 10, 5, 5, 30, 40, 5, 1, 20, 100, 10, 100])
           .given()
             .serving_as_100g().and()
             .calories_as(95).and()
@@ -372,6 +381,41 @@ class NewItemScenarios extends AcceptanceTestBase{
             .have_noom_colour_of('Green').and()
             .form_is_clear();
         }
+
+    scenario_delete_one_item(){
+      this.scenario('Delete Items on "New item form" to delete one selected item')
+        .given()
+          .test_items_available().and()
+          .delete_items_as('Green')
+        .when()
+          .delete_items_clicked()
+        .then()
+          .no_items_exist_with_name('Green');
+    }
+
+    scenario_delete_multiple_items(){
+      this.scenario('Delete Items on "New item form" to delete multiple selected items')
+        .given()
+          .test_items_available().and()
+          .delete_items_as('Green, Red, Yellow')
+        .when()
+          .delete_items_clicked()
+        .then()
+          .no_items_exist_with_name('Green').and()
+          .no_items_exist_with_name('Red').and()
+          .no_items_exist_with_name('Yellow');
+    }
+
+    scenario_delete_items_when_no_item_selected(){
+      this.scenario('Try to delete Items on "New item form" but no item is selected')
+        .given()
+          .test_items_available().and()
+          .delete_items_as('')
+        .when()
+          .delete_items_clicked()
+        .then()
+          .number_of_items_are(14);
+    }
 }
 
 var runNewItemScenarios = () => new NewItemScenarios().runAllTests();

@@ -31,6 +31,7 @@
             .have_sugar_alcohol_as(60.5).and()
             .have_protein_as(64.2).and()
             .have_sodium_as(78.8).and()
+            .have_price_as(48.88, 0.49).and()
             .have_noom_colour_of('Red').and()
             .have_auto_delete_at_empty().and()
             .recipe_saved_with_name('Basic recipe item').and()
@@ -60,6 +61,7 @@
           .have_sugar_alcohol_as(511.23).and()
           .have_protein_as(542.49).and()
           .have_sodium_as(665.86).and()
+          .have_price_as(413.04, 0.49).and()
           .have_noom_colour_of('Red').and()
           .have_auto_delete_at_empty().and()
           .form_is_clear();
@@ -75,7 +77,7 @@
       .when()
         .save_as_item_clicked()
       .then()
-        .no_recipe_saved_with_name('No recipe item').and()
+        .no_recipe_exist_with_name('No recipe item').and()
         .form_is_clear();
   }
 
@@ -102,6 +104,7 @@
         .have_sugar_alcohol_as(60.5).and()
         .have_protein_as(64.2).and()
         .have_sodium_as(78.8).and()
+        .have_price_as(48.88, 0.49).and()
         .have_noom_colour_of('Red').and()
         .have_auto_delete_at_empty().and()
         .form_is_clear();
@@ -167,6 +170,40 @@
           .recipe_saved_with_name('Recipe1').and()
           .recipe_have_basic_items().and()
           .form_is_clear();
+  }
+
+  scenario_delete_one_recipe(){
+    this.scenario('Delete recipes on "Recipe Calculator" delete one recipe')
+      .given()
+        .test_recipes_available().and()
+        .delete_recipes_as('Recipe1')
+      .when()
+        .delete_recipes_clicked()
+      .then()
+        .no_recipe_exist_with_name('Recipe1');
+  }
+
+  scenario_delete_multiple_recipes(){
+    this.scenario('Delete recipes on "Recipe Calculator" delete multiple selected recipes')
+      .given()
+        .test_recipes_available().and()
+        .delete_recipes_as('Recipe1, Recipe3')
+      .when()
+        .delete_recipes_clicked()
+      .then()
+        .no_recipe_exist_with_name('Recipe1').and()
+        .no_recipe_exist_with_name('Recipe3');
+  }
+
+  scenario_delete_recipes_when_no_recipe_selected(){
+    this.scenario('Try to delete recipes on "Recipe Calculator" when no recipes selected')
+      .given()
+        .test_recipes_available().and()
+        .delete_recipes_as('')
+      .when()
+        .delete_recipes_clicked()
+      .then()
+        .number_of_recipes_are(3);
   }
 }
 

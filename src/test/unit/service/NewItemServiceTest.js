@@ -25,7 +25,7 @@ class NewItemServiceTest extends TestBase {
         this.newItemService.addNewItem();
         // THEN
         verify(this.itemRepository).addOrUpdate(new Item('Name', [100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11, 0.11, 'Red', '1 Week'),1).calledOnce();
-        verify(this.newItemFieldsRng).clear().calledOnce();
+        verify(this.newItemFieldsRng).clearContent().calledOnce();
         verify(this.newItemNoomCategoryRng).setValue('Solid').calledOnce();
         verify(this.newItemNoomColourRng).setValue('=F24').calledOnce();
     }

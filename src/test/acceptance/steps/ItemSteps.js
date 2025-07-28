@@ -2,13 +2,23 @@ class ItemThenSteps extends Steps{
 
     item_saved_with_name(name){
         this.name = name;
-        this.itemRow = getSht(SHT.ITEMS).getValues('B4:AB').find(r => r[0] == name);
+        this.itemRow = getSht(SHT.ITEMS).getValues('B4:AD').find(r => r[0] == name);
         assertTrue(this.itemRow);
     }
 
+    no_items_exist_with_name(name){
+        let itemFind = getSht(SHT.ITEMS).getValues('B4:D').find(r => r[0] == name);
+        assertFalse(itemFind);
+    }
+
     there_is_only_one_item_saved_with_this_name(){
-       let itemRows = getSht(SHT.ITEMS).getValues('B4:AB').filter(r => r[0] == this.name);
+       let itemRows = getSht(SHT.ITEMS).getValues('B4:AD').filter(r => r[0] == this.name);
        assertEquals(itemRows.length, 1);
+    }
+
+    number_of_items_are(count){
+        let countSaved = clear(getSht(SHT.ITEMS).getValues('B4:B')).length;
+        assertEquals(countSaved, count);
     }
 
     have_serving_as(amounth, unit, weight){
@@ -41,6 +51,8 @@ class ItemThenSteps extends Steps{
         assertEquals(this.itemRow[21], 17 / this.itemRow[1]);
         assertEquals(this.itemRow[22], 18);
         assertEquals(this.itemRow[23], 18 / this.itemRow[1]);
+        assertEquals(this.itemRow[24], 19);
+        assertEquals(this.itemRow[25], 0.95);
     }
 
     have_total_fat_as(value){
@@ -88,15 +100,20 @@ class ItemThenSteps extends Steps{
         assertEquals(this.itemRow[23], value / this.itemRow[1]);
     }
 
+    have_price_as(value, valuePerUnit){
+        assertEquals(this.itemRow[24], value);
+        assertEquals(this.itemRow[25], valuePerUnit);
+    }
+
     have_noom_colour_of(colour){
-        assertEquals(this.itemRow[24], colour);
+        assertEquals(this.itemRow[26], colour);
     }
 
     have_auto_delete_at_as(autoDelete){
-        assertEquals(this.itemRow[26], autoDelete);
+        assertEquals(this.itemRow[28], autoDelete);
     }
 
     have_auto_delete_at_empty(){
-        assertEmpty(this.itemRow[26]);
+        assertEmpty(this.itemRow[28]);
     }
 }

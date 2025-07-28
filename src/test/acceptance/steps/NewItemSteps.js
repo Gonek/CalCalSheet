@@ -44,6 +44,8 @@ class NewItemGivenSteps extends Steps{
         itemsRng.setValue(16, 12);
         itemsRng.setValue(17, 13);
         itemsRng.setValue(18, 14);
+        itemsRng.setValue(19, 15);
+        itemsRng.setValue(20, 16);
     }
 
     auto_delete_at_as(value){
@@ -53,18 +55,18 @@ class NewItemGivenSteps extends Steps{
 
     new_serving_as_1g(){
         let itemsRng = getRng(RNG.NEW_ITEM_FIELDS);
-        itemsRng.setValue(1, 16);
-        itemsRng.setValue('g', 17);
+        itemsRng.setValue(1, 18);
+        itemsRng.setValue('g', 19);
     }
 
     new_serving_as_1_bowl(){
         let itemsRng = getRng(RNG.NEW_ITEM_FIELDS);
-        itemsRng.setValue(150, 16);
-        itemsRng.setValue('bowl', 17);
+        itemsRng.setValue(150, 18);
+        itemsRng.setValue('bowl', 19);
     }
 
     additinal_water_of(water){
-        getRng(RNG.NEW_ITEM_FIELDS).setValue(water, 18);
+        getRng(RNG.NEW_ITEM_FIELDS).setValue(water, 20);
     }
 
     noom_category_as(noomCategory){
@@ -73,6 +75,10 @@ class NewItemGivenSteps extends Steps{
 
     noom_colour_as(noomColour){
         getRng(RNG.NEW_ITEM_NOOM_COLOUR).setValue(noomColour);
+    }
+
+    delete_items_as(names){
+        getRng(BTNF.DELETE_ITEMS).setValue(names);
     }
 }
 
@@ -84,6 +90,10 @@ class NewItemWhenSteps extends Steps{
 
     item_name_set_to(name){
         this.changeCbox(SHT.NEW_ITEM, CBOX.NEW_ITEM_NAME, name);
+    }
+
+    delete_items_clicked(){
+        this.clickButtonWithField(SHT.NEW_ITEM, BTNF.DELETE_ITEMS, 'E33', 4);
     }
 }
 
@@ -110,11 +120,13 @@ class NewItemThenSteps extends ItemThenSteps{
         assertEmpty(itemsForm[11]);
         assertEmpty(itemsForm[12]);
         assertEmpty(itemsForm[13]);
+        assertEmpty(itemsForm[14]);
         assertEmpty(itemsForm[15]);
-        assertEmpty(itemsForm[16]);
         assertEmpty(itemsForm[17]);
-        assertEquals(itemsForm[14], "Never");
+        assertEmpty(itemsForm[18]);
+        assertEmpty(itemsForm[19]);
+        assertEquals(itemsForm[16], "Never");
         assertEquals(getRng(RNG.NEW_ITEM_NOOM_CATEGORY).getValue(), "Solid");
-        assertEquals(getRng(RNG.NEW_ITEM_NOOM_COLOUR).getFormula(), "=F22");
+        assertEquals(getRng(RNG.NEW_ITEM_NOOM_COLOUR).getFormula(), "=F24");
     }
 }
