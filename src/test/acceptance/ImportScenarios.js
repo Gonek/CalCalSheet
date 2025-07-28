@@ -5,6 +5,7 @@
     }
 
     clearData(){
+        testData.addDefaultProfile();
         testData.resetSettings();
         testData.clearImports();
         testData.clearDay();
@@ -13,37 +14,8 @@
         testData.clearItems();
         testData.clearMeals();
         testData.clearRecipes();
-        testData.addDefaultProfile();
         testData.resetWeight();
         testData.resetCalorieCalculatorValues();
-    }
-
-    afterAll(){
-        super.afterAll();
-        getObj(SettingsService).applySettings();
-    }
-
-    scenario_import_all_data_from_1_4(){
-        this.scenario('Scenario import all data from a v1.4 sheet')
-            .given()
-                .import_sheet_id_as('1RJPEGmVEPcdhZqTTtnBbnxtEd1m-7MLASZCXLAp3sSI').and()
-                .import_items_set_to('Clear', true).and()
-                .import_recipes_set_to('Clear', true).and()
-                .import_meals_set_to('Clear', true).and()
-                .import_profile_set_to(true).and()
-                .import_settings_set_to(true).and()
-                .import_history_set_to(true).and()
-                .import_days_set_to(true)
-            .when()
-                .import_clicked()
-            .then()
-                .items_imported().and()
-                .recipes_imported().and()
-                .meals_imported().and()
-                .profile_imported().and()
-                .settings_imported().and()
-                .history_imported().and()
-                .days_not_imported();
     }
 
     scenario_import_all_data_from_1_5(){
@@ -72,7 +44,7 @@
     scenario_import_all_data_from_1_6(){
         this.scenario('Scenario import all data from a v1.6 sheet')
             .given()
-                .import_sheet_id_as('1yKM166Mfi1g-frjuX-kPEuFg3hSuLziCZUpB-3CDKCs').and()
+                .import_sheet_id_as('16ETrmX2uEp6W06SV5HpPcU5qgqAknILCFsFxfh3wrNE').and()
                 .import_items_set_to('Clear', true).and()
                 .import_recipes_set_to('Clear', true).and()
                 .import_meals_set_to('Clear', true).and()
@@ -88,6 +60,7 @@
                 .meals_imported().and()
                 .profile_imported().and()
                 .settings_imported().and()
+                .localisation_imported().and()
                 .history_imported().and()
                 .days_imported();
     }
@@ -95,7 +68,7 @@
     scenario_import_just_items_with_merge(){
         this.scenario('Scenario import just items with merge ')
             .given()
-                .import_sheet_id_as('1yKM166Mfi1g-frjuX-kPEuFg3hSuLziCZUpB-3CDKCs').and()
+                .import_sheet_id_as('16ETrmX2uEp6W06SV5HpPcU5qgqAknILCFsFxfh3wrNE').and()
                 .import_items_set_to('Merge', true).and()
                 .import_recipes_set_to('Clear', false).and()
                 .import_meals_set_to('Clear', false).and()
@@ -118,7 +91,7 @@
     scenario_import_just_recipes_with_merge(){
         this.scenario('Scenario import just recipes with merge ')
             .given()
-                .import_sheet_id_as('1yKM166Mfi1g-frjuX-kPEuFg3hSuLziCZUpB-3CDKCs').and()
+                .import_sheet_id_as('16ETrmX2uEp6W06SV5HpPcU5qgqAknILCFsFxfh3wrNE').and()
                 .import_items_set_to('Clear', false).and()
                 .import_recipes_set_to('Merge', true).and()
                 .import_meals_set_to('Clear', false).and()
@@ -141,7 +114,7 @@
     scenario_import_just_meals_with_merge(){
         this.scenario('Scenario import just meals with merge ')
             .given()
-                .import_sheet_id_as('1yKM166Mfi1g-frjuX-kPEuFg3hSuLziCZUpB-3CDKCs').and()
+                .import_sheet_id_as('16ETrmX2uEp6W06SV5HpPcU5qgqAknILCFsFxfh3wrNE').and()
                 .import_items_set_to('Clear', false).and()
                 .import_recipes_set_to('Clear', false).and()
                 .import_meals_set_to('Merge', true).and()

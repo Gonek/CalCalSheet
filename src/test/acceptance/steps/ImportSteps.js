@@ -55,11 +55,11 @@ class ImportWhenSteps extends Steps{
 
 class ImportThenSteps extends Steps{
     items_imported(){
-        let items = getSht(SHT.ITEMS).getValues('B4:AA49');
-        let expected_row_1 = ['Almond',	100, 'g', 1, 576, 5.76, 49.00, 0.49, 3.7, 0.04, 0.0, 0.00, 22.0, 0.22, 12.0, 0.12, 3.9, 0.04, 0, 0.00, 21.0, 0.21, 1, 0.01, 'Red', 5.76];
-        let expected_row_12 = ['Carrot', 100, 'g', 1, 41, 0.41, 0.2, 0.0, 0.0, 0.00, 0.0, 0.00, 10.0, 0.1, 3.0, 0.03, 3.5, 0.04, 0, 0.00, 0.9, 0.1, 58, 0.58, 'Green', 0.41];
-        let expected_row_27 = ['Leek', 100, 'g', 1, 61, 0.61, 0.30, 0.0, 0.0, 0.00, 0.0, 0.00, 14.0, 0.14, 1.8, 0.02, 3.9, 0.04, 0, 0.00, 1.5, 0.02, 20, 0.20, 'Green', 0.61];
-        let expected_row_46 = ['Water',	1, 'g', 1, 0, 0.00, 0.00, 0.00,	0.0, 0.00, 0.0, 0.00, 0.0, 0.00, 0.0, 0.00, 0.0, 0.00, 0, 0.00, 0.0, 0.00, 0, 0.00,	'Green', 0.00];
+        let items = getSht(SHT.ITEMS).getValues('B4:AD49');
+        let expected_row_1 = ['Almond',	100, 'g', 1, 576, 5.76, 49.00, 0.49, 3.7, 0.04, 0.0, 0.00, 22.0, 0.22, 12.0, 0.12, 3.9, 0.04, 0, 0.00, 21.0, 0.21, 1, 0.01, '', '', 'Red', 5.76, ''];
+        let expected_row_12 = ['Carrot', 100, 'g', 1, 41, 0.41, 0.2, 0.0, 0.0, 0.00, 0.0, 0.00, 10.0, 0.1, 3.0, 0.03, 3.5, 0.04, 0, 0.00, 0.9, 0.1, 58, 0.58, '', '', 'Green', 0.41, ''];
+        let expected_row_27 = ['Leek', 100, 'g', 1, 61, 0.61, 0.30, 0.0, 0.0, 0.00, 0.0, 0.00, 14.0, 0.14, 1.8, 0.02, 3.9, 0.04, 0, 0.00, 1.5, 0.02, 20, 0.20, '', '', 'Green', 0.61, ''];
+        let expected_row_46 = ['Water',	1, 'g', 1, 0, 0.00, 0.00, 0.00,	0.0, 0.00, 0.0, 0.00, 0.0, 0.00, 0.0, 0.00, 0.0, 0.00, 0, 0.00, 0.0, 0.00, 0, 0.00, '', '',	'Green', 0.00, ''];
 
         assertEqualsArray(items[0], expected_row_1);
         assertEqualsArray(items[11], expected_row_12);
@@ -68,11 +68,11 @@ class ImportThenSteps extends Steps{
     }
 
     items_imported_with_merge(){
-        let items = getSht(SHT.ITEMS).getValues('B4:AA63');
-        let expected_row_1 = ['1 First', 100, 'g', 1, 100, 1.00, 100.00, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0,	1.00, 100.0, 1.00, 100.0, 1.00, 100, 1.00, 100.0, 1.00, 100, 1.00, 'Green', 1.00];
-        let expected_row_27 = ['Fig', 100, 'g', 1, 74, 0.74, 0.30, 0.00, 0.1, 0.00, 0.0, 0.00, 19.0, 0.19, 2.9, 0.03, 16.0, 0.16, 0, 0.00, 0.8, 0.01, 1, 0.01, 'Green', 0.74];
-        let expected_row_54 = ['Test 1 serving', 1, 'Serving',50, 250, 250.00, 25.00, 25.00, 2.0, 2.00,	0.0, 0.00, 45.0, 45.00, 1.0, 1.00, 21.0, 21.00, 0, 0.00, 4.0, 4.00, 12, 12.00, 'Red', 5.00];
-        let expected_row_60 = ['ZZ Last', 100, 'g', 1, 100, 1.00, 100.00, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0, 1.00, 100, 1.00, 100.0, 1.00, 100, 1.00,	'Green', 1.00];
+        let items = getSht(SHT.ITEMS).getValues('B4:AD63');
+        let expected_row_1 = ['1 First', 100, 'g', 1, 100, 1.00, 100.00, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0,	1.00, 100.0, 1.00, 100.0, 1.00, 100, 1.00, 100.0, 1.00, 100, 1.00, 100, 1, 'Green', 1.00, getRelativeDay(+1)];
+        let expected_row_27 = ['Fig', 100, 'g', 1, 74, 0.74, 0.3, 0.003, 0.1, 0.001, 0, 0, 19, 0.19, 2.9, 0.028999999999999998, 16, 0.16, 0, 0, 0.8, 0.008, 1, 0.01, '', '', 'Green', 0.74, ''];
+        let expected_row_54 = ['Test 1 serving', 1, 'Serving',50, 250, 250.00, 25.00, 25.00, 2.0, 2.00,	0.0, 0.00, 45.0, 45.00, 1.0, 1.00, 21.0, 21.00, 0, 0.00, 4.0, 4.00, 12, 12.00, 2, 0.2, 'Red', 5.00, ''];
+        let expected_row_60 = ['ZZ Last', 100, 'g', 1, 100, 1.00, 100.00, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0, 1.00, 100.0, 1.00, 100, 1.00, 100.0, 1.00, 100, 1.00, 90,0.9,	'Green', 1.00, ''];
 
         assertEqualsArray(items[0], expected_row_1);
         assertEqualsArray(items[26], expected_row_27);
@@ -211,7 +211,8 @@ class ImportThenSteps extends Steps{
                         [0, 15,	             0, 15,	             0, 15, 	          0, 15, 	             0, 15, 	         0, 15,             '', ''],
                         [0,19,               0,19,               0,19,                0,19,                  0,19,               0,19,              '', ''],
                         [10, 35,	         10, 35,	         10, 35, 	          10, 35, 	             10, 35, 	         10, 35,            '', ''],
-                        [0,2000,             0,2000,             0,2000,              0,2000,                0,2000,             0,2000,            '', '']]
+                        [0,2000,             0,2000,             0,2000,              0,2000,                0,2000,             0,2000,            '', ''],
+                        ['', '',             '', '',             '', '',              '','',                 '','',              '','',             '', '']]
         assertEqualsArray(profiles, expected);
     }
 
@@ -227,7 +228,8 @@ class ImportThenSteps extends Steps{
                         [0, 15, '', '','', '', '', '', '', '', '', '', '', ''],
                         [0, 19, '', '','', '', '', '', '', '', '', '', '', ''],
                         [10, 35, '', '','', '', '', '', '', '', '', '', '', ''],
-                        [0, 10, '', '','', '', '', '', '', '', '', '', '', '']]
+                        [0, 10, '', '','', '', '', '', '', '', '', '', '', ''],
+                        [0, 0, '', '','', '', '', '', '', '', '', '', '', '']]
         assertEqualsArray(profiles, expected);
     }
 
@@ -236,7 +238,7 @@ class ImportThenSteps extends Steps{
         let nutritionFields = getRng(RNG.NUTRITION_FIELDS).getColAsArray();
         let meals = getRng(RNG.MEALS).getValues();
 
-        assertEqualsArray(generalSettings, [2, 2, 'Calorie Max', false, false, true, false]);
+        assertEqualsArray(generalSettings, [2, 2, false, 'Calorie Max', false, false, true, false]);
         assertEqualsArray(nutritionFields, [true, true, false, true, false, true, false, true, true]);
         assertEqualsArray(meals,           [['Morning food', 10],
                                                       ['Secound brekfast', 8],
@@ -246,42 +248,53 @@ class ImportThenSteps extends Steps{
                                                       ['After dinner', 12]]);
     }
 
+    localisation_imported(){
+        let localisation = getRng(RNG.LOCALISATION).getColAsArray();
+        assertEquals(localisation, ['Deutsch', '.+2', 'YYYY.MM.DD', 'Metric', '€'])
+    }
+
     history_imported(){
-        let history = getSht(SHT.HISTORY).getValues('B10:R18');
-        let expected = Array.from({length:9},(v,k)=>[new Date(2025, 0, 10 + k), 2000 + k, 2400 + k, 400, 10 + k, 20 + k, 30 + k, 40 + k, 50 + k, 60 + k, 70 + k, 80 + k, 90 + k, 100.00 + k, '✔️', '❌', '✔️']);
+        let history = getSht(SHT.HISTORY).getValues('B10:S18');
+        let expected = Array.from({length:9},(v,k)=>[new Date(2025, 0, 10 + k), 2000 + k, 2400 + k, 400, 10 + k, 20 + k, 30 + k, 40 + k, 50 + k, 60 + k, 70 + k, 80 + k, 90 + k, 100.00 + k, '', '✔️', '❌', '✔️']);
     
         assertEqualsArray(history, expected);
     }
 
     history_not_imported(){
-        let history = getSht(SHT.HISTORY).getValues('B10:R18');
+        let history = getSht(SHT.HISTORY).getValues('B10:S18');
         assertArrayEmpty(history);
     }
 
     days_imported(){
         let daysSht = getSht(SHT.DAYS);
-        let expected = Array(90).fill(Array(12).fill(''));
-        expected[15] = ['Carrot', 750, 'Cashew', 210, '', '', 'Blueberry', 850, '', '', 'Potato', 500];
-        expected[30] = ['Banana', 500, '', '', 'Blueberry', 1000, '', '', 'Apple', 250, '', ''];
-        expected[45] = ['Apple', 120, 'Banana', 50, 'Bell pepper', 50, '', '', 'Parmesan', 25, 'Orange', 500];
-        expected[46] = ['Banana', 120, '', '', 'Blueberry', 100, '', '', 'Pistacio', 20, '', ''];
-        expected[47] = ['Strawberry', 50, '', '', '', '', '', '', 'Cashew',	20, '', ''];
-        expected[48] = ['Orange', 75, '', '', '', '', '', '', 'Sugar', 35, '', ''];
-        expected[49] = ['Kiwi',	45, '', '', '', '', '', '', '', '', '', ''];
-        expected[50] = ['Garlic', 50, '', '', '', '', '', '', '', '', '', ''];
+        let expected = Array(75).fill(Array(12).fill(''));
+        expected[0] = ['Carrot', 750, 'Cashew', 210, '', '', 'Blueberry', 850, '', '', 'Potato', 500];
+        expected[15] = ['Banana', 500, '', '', 'Blueberry', 1000, '', '', 'Apple', 250, '', ''];
+        expected[30] = ['Apple', 120, 'Banana', 50, 'Bell pepper', 50, '', '', 'Parmesan', 25, 'Orange', 500];
+        expected[31] = ['Banana', 120, '', '', 'Blueberry', 100, '', '', 'Pistacio', 20, '', ''];
+        expected[32] = ['Strawberry', 50, '', '', '', '', '', '', 'Cashew',	20, '', ''];
+        expected[33] = ['Orange', 75, '', '', '', '', '', '', 'Sugar', 35, '', ''];
+        expected[34] = ['Kiwi',	45, '', '', '', '', '', '', '', '', '', ''];
+        expected[35] = ['Garlic', 50, '', '', '', '', '', '', '', '', '', ''];
         let expectedAdditionalInfo = [[3000], ['Borring day']];
+        let expectedPrototype = Array(15).fill(Array(12).fill(''));
+        expectedPrototype[0] = ['Banana', 125, 'Banana', 200, 'Banana', 100, 'Banana', 652, 'Banana', 100, 'Banana', 250];
 
-        assertEqualsArray(daysSht.getValues('B4:M93'), expected);
-        assertEqualsArray(daysSht.getValues('N4:N5'), expectedAdditionalInfo);
-        assertEqualsArray(daysSht.getValues('N19:N20'), expectedAdditionalInfo);
-        assertEqualsArray(daysSht.getValues('N34:N35'), expectedAdditionalInfo);
-        assertEqualsArray(daysSht.getValues('N49:N50'), expectedAdditionalInfo);
-        assertEqualsArray(daysSht.getValues('N64:N65'), expectedAdditionalInfo);
-        assertEqualsArray(daysSht.getValues('N79:N80'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('B6:M80'), expected);
+        assertEqualsArray(daysSht.getValues('N6:N7'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('N21:N22'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('N36:N37'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('N51:N52'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('N66:N67'), expectedAdditionalInfo);
+
+        assertEqualsArray(daysSht.getValues('AC6:AC7'), expectedAdditionalInfo);
+        assertEqualsArray(daysSht.getValues('Q6:AB20'), expectedPrototype);
     }
 
     days_not_imported(){
-        let days = getSht(SHT.DAYS).getValues('B4:M');
-        assertArrayEmpty(days);
+        let cdays = getSht(SHT.DAYS).getValues('B6:M');
+        let tdays = getSht(SHT.DAYS).getValues('Q6:AB');
+        assertArrayEmpty(cdays);
+        assertArrayEmpty(tdays);
     }
 }

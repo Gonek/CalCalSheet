@@ -30,8 +30,8 @@ class ImportService{
       throw new Error("Loading import sheet failed! Please check the sheet Id");
     } 
     this.baseVersion = getSht(`${this.importId}.${SHT.SUPPORT}`).getValue(VERSION_POSITION);
-    if (this.baseVersion !== V1_4 && this.baseVersion !== V1_5 && this.baseVersion !== V1_6){
-      throw new Error("Sorry, you can only import version 1.4, 1.5, 1.6 sheets");
+    if (this.baseVersion !== V1_5 && this.baseVersion !== V1_6){
+      throw new Error("Sorry, you can only import version 1.5, 1.6 sheets");
     } 
   }
 
@@ -54,12 +54,14 @@ class ImportService{
   importItems(fromSht, toSht){
     var data;
     if(this.baseVersion == V1_6){
-      data = fromSht.getValues('B4:AB');
+      data = fromSht.getValues('B4:AD');
     } else {
-      data = fromSht.getValues('B4:AA');
+      data = fromSht.getValues('B4:AA').map(i => [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8], i[9], 
+                                                  i[10], i[11], i[12], i[13], i[14], i[15], i[16], i[17], i[18], i[19],
+                                                  i[20], i[21], i[22], i[23], '', '', i[24], i[25], i[26], '']);
     }
     if(this.importRng.getValue(2, 2) == IMPORT_OPTIONS.CLEAR_CONTENT) {
-      toSht.clearContent('B4:AB');
+      toSht.clearContent('B4:AD');
     }
     toSht.putDataAtEnd(data);
     toSht.sort(2);
@@ -84,41 +86,47 @@ class ImportService{
   }
 
   importProfile(fromSht, toSht){
-    var fromWeightHistory = fromSht.getValues('I16:L112');
+    var fromWeightHistory;
+    var fromMacro;
     var fromDetails;
-    var fromMacro = fromSht.getValues('C3:P13');
-    var toWeightHistoryRng = toSht.getRng('I16:L112');
-    var toDetailsRng = toSht.getRng('D16:D21');
-    var toMacroRng = toSht.getRng('C3:P13');
-    if(this.baseVersion == V1_4){
-      fromDetails = fromSht.getValues('D19:D24'); 
+    if(this.baseVersion == V1_6){
+      fromWeightHistory = fromSht.getValues('I17:L113');
+      fromMacro = fromSht.getValues('C3:P14');
+      fromDetails = fromSht.getValues('D17:D22');
     } else {
+      fromWeightHistory = fromSht.getValues('I16:L112');
+      fromMacro = fromSht.getValues('C3:P13');
       fromDetails = fromSht.getValues('D16:D21');
     }
-    fromDetails[1] = ['=DATEDIF(D16, NOW(), "Y")'];
+
+    var toWeightHistoryRng = toSht.getRng('I17:L113');
+    var toMacroRng = toSht.getRng('C3:P14');
+    var toDetailsRng = toSht.getRng('D17:D22');
+    
+    fromDetails[1] = ['=DATEDIF(D17, NOW(), "Y")'];
     toWeightHistoryRng.clearAndSetValues(fromWeightHistory);
     toDetailsRng.clearAndSetValues(fromDetails);
-    toMacroRng.clearAndSetValues(fromMacro);
+    toMacroRng.setValuesWithResize(fromMacro);
   }
 
   importSettings(fromSht, toSht){
     var fromGeneral;
     var fromNutrition;
     var fromMeals;
-    var toGeneralRng;
-    if(this.baseVersion == V1_4){
-      fromGeneral = fromSht.getValues('E4:G8');
-      fromNutrition = fromSht.getValues('D10:D18');
-      fromMeals = fromSht.getValues('F11:G16');
-      toGeneralRng = toSht.getRng('E6:G10');
+    if(this.baseVersion == V1_6){
+      fromGeneral = fromSht.getValues('E4:E11');
+      fromNutrition = fromSht.getValues('D13:D21');
+      fromMeals = fromSht.getValues('F14:G19');
+      toSht.setValues('E23:E27', fromSht.getValues('E23:E27'));
     } else {
-      fromGeneral = fromSht.getValues('E4:G10');
+      fromGeneral = fromSht.getValues('E4:E10');
+      fromGeneral.splice(2, 0, ['FALSE']);
       fromNutrition = fromSht.getValues('D12:D20');
       fromMeals = fromSht.getValues('F13:G18');
-      toGeneralRng = toSht.getRng('E4:G10');
-    } 
-    var toNutritionRng = toSht.getRng('D12:D20');
-    var toMealsRng = toSht.getRng('F13:G18');
+    }
+    var toGeneralRng = toSht.getRng('E4:E11');
+    var toNutritionRng = toSht.getRng('D13:D21');
+    var toMealsRng = toSht.getRng('F14:G19');
     toGeneralRng.clearAndSetValues(fromGeneral);
     toNutritionRng.clearAndSetValues(fromNutrition);
     toMealsRng.clearAndSetValues(fromMeals);
@@ -127,23 +135,39 @@ class ImportService{
   }
 
   importHistory(fromSht, toSht){
-    var data = fromSht.getValues('B10:R');
-    toSht.clearContent('B10:R');
+    var data;
+    if(this.baseVersion == V1_6){
+      data = fromSht.getValues('B10:S');
+    } else {
+      data = fromSht.getValues('B10:R').map(h => [h[0], h[1], h[2], h[3], h[4], h[5], h[6], h[7], h[8], h[9], 
+                                                  h[10], h[11], h[12], h[13], '', h[14], h[15], h[16], h[17]]);
+    }
+    toSht.clearContent('B10:S');
     toSht.putDataAtEnd(data);
     toSht.sort(2);
   }
 
   importDays(fromSht, toSht){
-    var fromDays = fromSht.getRng('A4:N');
-    var toDays = toSht.getRng('A4:N');
-    toDays.setValuesWithResize(fromDays.getValues());
+    var fromDays;
+    var defaultCalorieOutput = getRng(RNG.DEFAULT_CALORIE_OUTPUT).getValue();
+    var nextProfile = getRng(RNG.NEXT_PROFILE).getValue();
+    getRng(RNG.SELECTED_PROFILE).setValue(nextProfile);
+    if(this.baseVersion == V1_6){
+      fromDays = fromSht.getRng('A6:N456');
+      toSht.getRng('P6:AC').setValuesWithResize(fromSht.getValues('P6:AC'));
+    } else {
+      fromDays = fromSht.getRng('A19:N469');
+      toSht.setValues('Q6:AB20', fromSht.getValues('B4:M18'));
+      toSht.setValue('AC6', defaultCalorieOutput);
+      toSht.setValue('AC7', nextProfile);
+    }
+    toSht.getRng('A6:N456').setValues(fromDays.getValues());
     if(this.baseVersion == V1_5){
-      let numberOfDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
-      let defaultCalorieOutput = getRng(RNG.DEFAULT_CALORIE_OUTPUT).getValue();
-      let nextProfile = getRng(RNG.NEXT_PROFILE).getValue();
-      for(var i=0; i<=numberOfDays; i++){
-        toSht.setPosValue(4 + (i*15), 14, defaultCalorieOutput);
-        toSht.setPosValue(5 + (i*15), 14, nextProfile);
+      var numberOfDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
+
+      for(var i=0; i<numberOfDays; i++){
+        toSht.setPosValue(6 + (i*15), 14, defaultCalorieOutput);
+        toSht.setPosValue(7 + (i*15), 14, nextProfile);
       }
     }
   }

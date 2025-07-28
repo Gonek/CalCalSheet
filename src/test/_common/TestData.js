@@ -188,6 +188,7 @@ class TestData {
   clearDays(){
     let sht = getSht(SHT.DAYS);
     sht.clearContent('B6:N');
+    sht.clearContent('Q6:AC20');
     sht.deleteCells('P21:AC200');
     let numDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
     for(var i = 0; i<numDays; i++){
@@ -363,18 +364,19 @@ class TestData {
     getRng(RNG.MEALS).setValues([['Breakfast', 12], ['Snack', 5], ['Lunch', 15], ['Snack', 5], ['Dinner', 13], ['Supper', 5]]);
     let localisation = getRng(RNG.LOCALISATION);
     localisation.setValue(localisation.getValidationCriteriaRangeValues(1)[1], 1);
-    localisation.setValue('0', 2);
+    localisation.setValue('.0', 2);
     localisation.setValue('DD/MM/YYYY', 3);
     localisation.setValue(localisation.getValidationCriteriaRangeValues(4)[0], 4);
     localisation.setValue('£', 5);
+    getObj(SettingsService).applySettings();
   }
 
   clearImports(){
     let importRng = getRng(RNG.IMPORT);
     importRng.setValue('', 1, 2);
-    importRng.setValue('Clear', 2, 2);
-    importRng.setValue('Clear', 3, 2);
-    importRng.setValue('Clear', 4, 2);
+    importRng.setValue(importRng.getValidationCriteriaRangeValues(2,2)[0], 2, 2);
+    importRng.setValue(importRng.getValidationCriteriaRangeValues(3,2)[0], 3, 2);
+    importRng.setValue(importRng.getValidationCriteriaRangeValues(4,2)[0], 4, 2);
     importRng.setValue(true, 2, 3);
     importRng.setValue(true, 3, 3);
     importRng.setValue(true, 4, 3);
