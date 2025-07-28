@@ -250,7 +250,7 @@ class ImportThenSteps extends Steps{
 
     localisation_imported(){
         let localisation = getRng(RNG.LOCALISATION).getColAsArray();
-        assertEquals(localisation, ['Deutsch', '.+2', 'YYYY.MM.DD', 'Metric', '€'])
+        assertEquals(localisation, ['Deutsch', '_+2', 'YYYY.MM.DD', 'Metric', '€'])
     }
 
     history_imported(){

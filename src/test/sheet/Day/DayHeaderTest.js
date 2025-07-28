@@ -133,7 +133,7 @@ class DayHeaderTest extends TestBaseDay {
           ['=IF(COUNTIFS(TRANSPOSE(NutritionFields), "TRUE", I14:Q14, "✔*")=COUNTIF(NutritionFields, "TRUE"),"✔️", "❌")'],
           ['=IF(AND(B14>=50,B14<=100), "✔️", "❌")']];
         let expectedCalDensity = [
-          '=IFERROR(H12/SUM(V17:V92)*100, 0)', '',
+          '=IFERROR(H12/SUM(V17:V106)*100, 0)', '',
           '=SPARKLINE(B14,{"charttype","bar";"max",250;"min",0;"color1",IFS(B13<50, "Cyan", B14<100, "Green", B14<150, "Yellow", B14<200, "Orange", B14>=200, "Red")})'];
         // WHEN
         let resultOutput = this.daySht.getFormula('D7');

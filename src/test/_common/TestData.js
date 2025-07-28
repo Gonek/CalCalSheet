@@ -189,7 +189,7 @@ class TestData {
     let sht = getSht(SHT.DAYS);
     sht.clearContent('B6:N');
     sht.clearContent('Q6:AC20');
-    sht.deleteCells('P21:AC200');
+    sht.clearContent('P21:AC200');
     let numDays = getRng(RNG.NUMBER_OF_DAYS).getValue();
     for(var i = 0; i<numDays; i++){
       sht.setPosValue(6 + (i * 15), 14, '2330');

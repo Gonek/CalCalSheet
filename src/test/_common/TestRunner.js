@@ -46,6 +46,7 @@ var sheetTests = () => [
 
 var acceptanceTests = () => [
     DayScenarios,
+    DayToolsScenarios,
     OpenSheetScenarios,
     ImportScenarios,
     NewItemScenarios,

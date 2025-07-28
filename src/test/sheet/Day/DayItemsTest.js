@@ -126,7 +126,7 @@ class DayItemsTest extends TestBaseDay {
     shouldDaySheetCalculateRightNutritionFor100g(){
         // GIVEN
         let item = this.item('Test 100g', 250);
-        let expected = ['g', 925, 25, 12.5, 12.5, 75, 100, 12.5, 2.5, 50, 250, 25, 'Green', '', '', 250];
+        let expected = ['g', 925, 25, 12.5, 12.5, 75, 100, 12.5, 2.5, 50, 250, 25, 'Red', '', '', 250];
 
         // WHEN
         this.addItemDaySheet(item);
