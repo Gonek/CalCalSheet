@@ -76,7 +76,7 @@
           .profile_set_to('Test 5').and()
           .previous_day_set_to(2)
         .when()
-          .day_changed(getRelativeDay(+1))
+          .day_changed(getFormatedDay(+1))
         .then()
           .previous_day_saved(2).and()
           .saved_with_test_items().and()

@@ -42,7 +42,7 @@ class SettingsServiceTest extends TestBase {
         when(this.nutritionFieldsRng).getColAsArray().thenReturn([true, false, false, true, false, false, false, true, false]);
         when(this.generalSettingsRng).getColAsArray().thenReturn([2, 2, false, 'Active baseline', true, true, true, true]);
         when(this.mealsRng).getValues().thenReturn([['Breakfast', 12], ['Snack', 5], ['Lunch', 15], ['Snack', 5], ['Dinner', 13], ['Supper', 5]]);
-        when(this.localisationRng).getColAsArray().thenReturn(['English', '0', 'DD/MM/YYYY', 'Metric', '£']);
+        when(this.localisationRng).getColAsArray().thenReturn(['English', '.0', 'DD/MM/YYYY', 'Metric', '£']);
         when(this.profileSht).getRngList(['C5:P5', 'C8:P8', 'C12:P12']).thenReturn(this.rngList);
         when(this.dayIndexRng).getValue().thenReturn(10);
 
@@ -50,14 +50,14 @@ class SettingsServiceTest extends TestBase {
         when(this.languageRng).getValue().thenReturn('English');
         when(this.previousLanguageRng).getValue().thenReturn('English');
         when(this.textsSht).getRng('B29').thenReturn(this.unitRng);
-        when(this.daysSht).getRng('A19:A').thenReturn(this.dateFormatRng);
-        when(this.profileSht).getRng('I16:J').thenReturn(this.dateFormatRng);
-        when(this.itemsSht).getRng('AB4:AB').thenReturn(this.dateFormatRng);
+        when(this.daysSht).getRng('A6:A').thenReturn(this.dateFormatRng);
+        when(this.profileSht).getRng('I17:J').thenReturn(this.dateFormatRng);
+        when(this.itemsSht).getRng('AD4:AD').thenReturn(this.dateFormatRng);
         when(this.historySht).getRng('B10:B').thenReturn(this.dateFormatRng);
         when(this.isMeasurementMetricRng).getValue().thenReturn(true);
-        when(this.profileSht).getRng('D19:F19').thenReturn(this.messurementHRng);
-        when(this.profileSht).getRng('D21').thenReturn(this.messurementWRng);
-        when(this.profileSht).getRng('K16:K').thenReturn(this.messurementWRng);
+        when(this.profileSht).getRng('D20:F20').thenReturn(this.messurementHRng);
+        when(this.profileSht).getRng('D22').thenReturn(this.messurementWRng);
+        when(this.profileSht).getRng('K17:K').thenReturn(this.messurementWRng);
         when(this.unitRng).getValue().thenReturn('unit');
         when(this.daySht).getRng('R6:R12').thenReturn(this.currencyRng);
         when(this.daySht).getRng('R17:R106').thenReturn(this.currencyRng);

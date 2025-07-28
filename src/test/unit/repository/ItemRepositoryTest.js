@@ -133,7 +133,7 @@ class ItemRepositoryTest extends TestBase {
 
     shouldAutoDeleteItemsDeleteAllExpiredItems(){
         // GIVEN
-        when(this.itemsSht).getValues('AB4:AB').thenReturn(['', getRelativeDay(+5), getToday(), getYesterday(), getRelativeDay(-10)]);
+        when(this.itemsSht).getValues('AD4:AD').thenReturn(['', getRelativeDay(+5), getToday(), getYesterday(), getRelativeDay(-10)]);
         // WHEN
         this.itemRepository.autoDeleteItems();
         // THEN

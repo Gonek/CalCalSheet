@@ -52,8 +52,8 @@ class SettingsTest extends TestBase {
 
     shouldSettingsSheetLocalisationAcceptValidValues(){
         //GIVEN
-        let expectedLanguage = ['English', 'Español', 'Français', 'हिन्दी', 'Italiano', 'Magyar', 'Polski', 'Português', 'Română', 'Türkçe', 'Українська', '日本語'];
-        let expectedTimeZone = ['-11', '-10', '-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0', '+1', '+2', '+3', '+4', '+5', '+6', '+7', '+8', '+9', '+10', '+11', '+12', '+13', '+14'];
+        let expectedLanguage = ['Deutsch', 'English', 'Español', 'Français', 'हिन्दी', 'Italiano', 'Magyar', 'Polski', 'Português', 'Română', 'Türkçe', 'Українська', '日本語'];
+        let expectedTimeZone = ['_-11', '_-10', '_-9', '_-8', '_-7', '_-6', '_-5', '_-4', '_-3', '_-2', '_-1', '_0', '_+1', '_+2', '_+3', '_+4', '_+5', '_+6', '_+7', '_+8', '_+9', '_+10', '_+11', '_+12', '_+13', '_+14'];
         let expectedDateFormat = ['DD/MM/YYYY', 'DD-MM-YYYY', 'YYYY.MM.DD', 'YYYY-MM-DD', 'MM-DD-YYYY', 'MM/DD/YYYY'];
         let expectedMeasurement = ['Metric', 'Imperial'];
         let expectedCurrency = ['£', '$', '€', '₹', 'Ft', 'zł', 'lei', '₺', '₴', '¥', '_'];

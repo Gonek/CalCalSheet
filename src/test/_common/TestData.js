@@ -18,7 +18,7 @@ class TestData {
                       ['Green',           100,  'g',      1,  100,  1,    10, 0.1,  11, 0.11, 12, 0.12, 13, 0.13, 14, 0.14, 15, 0.15, 16, 0.16, 17, 0.17, 18, 0.18,  1, 0.01,  'Green',  1,         ''],
                       ['Max cal',         100,  'g',      1,  900,  9,    100,1,    50, 0.5,  50, 0.5,  0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,     99, 9.9,  'Red',    9,         getToday()],
                       ['Red',             100,  'g',      1,  500,  5,    50, 0.5,  51, 0.51, 52, 0.52, 53, 0.53, 54, 0.54, 55, 0.55, 56, 0.56, 57, 0.57, 58, 0.58,  10, 0.1,  'Red',    5,         ''],
-                      ['Test 100g',       100,  'g',      1,  370,  3.7,  10, 0.1,  5,  0.05, 5,  0.05, 30, 0.3,  40, 0.4,  5,  0.05, 1,  0.01, 20, 0.2,  100,1,     10, 0.1,  'Green',  3.7,       ''],
+                      ['Test 100g',       100,  'g',      1,  370,  3.7,  10, 0.1,  5,  0.05, 5,  0.05, 30, 0.3,  40, 0.4,  5,  0.05, 1,  0.01, 20, 0.2,  100,1,     10, 0.1,  'Red',    3.7,       ''],
                       ['Test 1 serving',  1,    'Serving',50, 250,  250,  25, 25,   2,  2,    0,  0,    45, 45,   1,  1,    21, 21,   0,  0,    4,  4,    12, 12,    2, 0.2,   'Red',    5,         ''],
                       ['Yellow',          100,  'g',      1,  200,  2,    20, 0.2,  21, 0.21, 22, 0.22, 23, 0.23, 24, 0.24, 25, 0.25, 26, 0.26, 27, 0.27, 28, 0.28,  10, 0.1,  'Yellow', 2,         ''],
                       ['Zero cal',        100,  'g',      1,  0,    0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,    0,  0,     0, 0.0,   'Green',  0,         getYesterday()],
@@ -364,11 +364,12 @@ class TestData {
     getRng(RNG.MEALS).setValues([['Breakfast', 12], ['Snack', 5], ['Lunch', 15], ['Snack', 5], ['Dinner', 13], ['Supper', 5]]);
     let localisation = getRng(RNG.LOCALISATION);
     localisation.setValue(localisation.getValidationCriteriaRangeValues(1)[1], 1);
-    localisation.setValue('.0', 2);
+    localisation.setValue('_0', 2);
     localisation.setValue('DD/MM/YYYY', 3);
     localisation.setValue(localisation.getValidationCriteriaRangeValues(4)[0], 4);
     localisation.setValue('£', 5);
     getObj(SettingsService).applySettings();
+    localisation.setValue('Metric', 4);
   }
 
   clearImports(){

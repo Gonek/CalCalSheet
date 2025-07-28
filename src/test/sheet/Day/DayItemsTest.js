@@ -36,7 +36,8 @@ class DayItemsTest extends TestBaseDay {
         // GIVEN
         let expected = Array.from({length:90},(v,k)=>[
           `=MATCH(C${k + 17}, Items!B$4:B, 0)`,
-          `=IF(E${k + 17} = $AH$30, Texts!$B$37, IFERROR(INDEX(Items!D$4:D, $F${k + 17}, 0)))`,
+          k%15 == 0? `=IF(OR(E${k + 17} = $AH$30, C${k + 17} = SelectedMealName), Texts!$B$37, IFERROR(INDEX(Items!D$4:D, $F${k + 17}, 0)))`:
+                     `=IF(E${k + 17} = $AH$30, Texts!$B$37, IFERROR(INDEX(Items!D$4:D, $F${k + 17}, 0)))`,
           `=IFERROR(INDEX(Items!G$4:G, $F${k + 17}, 0)*$E${k + 17})`,
           `=IFERROR(INDEX(Items!I$4:I, $F${k + 17}, 0)*$E${k + 17})`,
           `=IFERROR(INDEX(Items!K$4:K, $F${k + 17}, 0)*$E${k + 17})`,

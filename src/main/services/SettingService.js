@@ -102,8 +102,8 @@ class SettingsService{
     let localisationRng = getRng(RNG.LOCALISATION);
     let localisationData = localisationRng.getColAsArray();
     let language = localisationData[0];
-    let timeZone = localisationData[1];
-    let dateFormat = localisationData[2].substring(1);
+    let timeZone = localisationData[1].substring(1);
+    let dateFormat = localisationData[2];
     let measurement = localisationData[3];
     let measurements = localisationRng.getValidationCriteriaRangeValues(4);
     let currency = localisationData[4];

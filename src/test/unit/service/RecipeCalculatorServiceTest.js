@@ -32,7 +32,7 @@ class RecipeCalculatorServiceTest extends TestBase {
         this.recipeCalculatorService.addRecipeToItemAndRecipes();
         // THEN
         verify(this.recipeRepository).saveRecipe(new Recipe('Test', [['A', 100], ['B', 200], ['C', 300], ['D', 400], ['E', 500]])).calledOnce();
-        verify(this.itemRepository).addOrUpdate(new Item('Test', [100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11, 0.11, 'Yellow', 'Never'), 1).calledOnce();
+        verify(this.itemRepository).addOrUpdate(new Item('Test', [100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11, '0.11', 'Yellow', 'Never'), 1).calledOnce();
         verify(this.recipeNameRng).clearContent().calledOnce();
         verify(this.recipeItemsRng).clearContent().calledOnce();
         verify(this.recipeServingRng).clearContent().calledOnce();
@@ -53,7 +53,7 @@ class RecipeCalculatorServiceTest extends TestBase {
         this.recipeCalculatorService.addRecipeToItemAndRecipes();
         // THEN
         verify(this.recipeRepository).saveRecipe(new Recipe('Test', [['A', 100], ['B', 200], ['C', 300], ['D', 400], ['E', 500]])).neverCalled();
-        verify(this.itemRepository).addOrUpdate(new Item('Test', [100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11, 0.11, 'Yellow', '1 Day'), 1).calledOnce();
+        verify(this.itemRepository).addOrUpdate(new Item('Test', [100, 'g', 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 11, '0.11', 'Yellow', '1 Day'), 1).calledOnce();
         verify(this.recipeNameRng).clearContent().calledOnce();
         verify(this.recipeItemsRng).clearContent().calledOnce();
         verify(this.recipeServingRng).clearContent().calledOnce();

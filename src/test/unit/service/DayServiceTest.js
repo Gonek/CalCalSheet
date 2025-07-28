@@ -42,7 +42,7 @@ class DayServiceTest extends TestBase {
         when(this.lastFinishedDayRng).getDisplayValue().thenReturn('09/01/2025');
         when(this.dayItemsRng).getValues().thenReturn([['Item', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]]);
         when(this.dayPrevDateRng).getValue().thenReturn('10/01/2025');
-        when(this.summaryRng).getRowAsArray().thenReturn([1800, 10, 11, 12, 13, 14, 15, 16, 17, 18]);
+        when(this.summaryRng).getRowAsArray().thenReturn([1800, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
         when(this.calorieDensityRng).getValue().thenReturn(90.5);
         when(this.checklistRng).getColAsArray().thenReturn(['✔️', '✔️', '✔️']);
         when(this.calorieOutputRng).getValue().thenReturn(2510);
@@ -54,7 +54,7 @@ class DayServiceTest extends TestBase {
         this.dayService.finishDay();
         // THEN
         verify(this.dayRepository).update(14, this.generateDay()).calledOnce();
-        verify(this.historyRepository).addOrUpdate(new History('10/01/2025', [1800, 10, 11, 12, 13, 14, 15, 16, 17, 18], 2510, 90.5, ['✔️', '✔️', '✔️'])).calledOnce();
+        verify(this.historyRepository).addOrUpdate(new History('10/01/2025', [1800, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 2510, 90.5, ['✔️', '✔️', '✔️'])).calledOnce();
         verify(this.dayRepository).deletePastDays().calledOnce();
         verify(this.dayRepository).copyDefaultForFutureDays().calledOnce();
         verify(this.lastFinishedDayRng).setValue('10/01/2025').calledOnce();
@@ -163,14 +163,14 @@ class DayServiceTest extends TestBase {
     shouldDeleteDaysRemoveSelectedDays(){
         // GIVEN
         var input = mock(BtnF);
-        when(input).getData().thenReturn('10,2,12,4');
+        when(input).getData().thenReturn('-10,-2,-12,-4');
         // WHEN
         this.dayService.deleteDays(input.mockObj);
         // THEN
-        verify(this.dayRepository).delete(12).calledInOrder(2);
-        verify(this.dayRepository).delete(10).calledInOrder(3);
-        verify(this.dayRepository).delete(4).calledInOrder(4);
-        verify(this.dayRepository).delete(2).calledInOrder(5);
+        verify(this.dayRepository).delete(-12).calledInOrder(2);
+        verify(this.dayRepository).delete(-10).calledInOrder(3);
+        verify(this.dayRepository).delete(-4).calledInOrder(4);
+        verify(this.dayRepository).delete(-2).calledInOrder(5);
     }
 
     shouldDeleteDaysDoNothingIfNoDaySelected(){
@@ -195,13 +195,13 @@ class DayServiceTest extends TestBase {
         var inputBtn = mock(Btn);
         var mealStart = mock(Rng);
         when(inputBtn).getRng().thenReturn(mealStart);
-        when(mealStart).getRow().thenReturn(15);
+        when(mealStart).getRow().thenReturn(17);
         when(inputBtn).getValue().thenReturn('🥣 Meal');
         when(this.selectedMealItemsRng).getValues().thenReturn([['Item 1', 10], ['Item 2', 20], ['Item 3', 30], ['Item 4', 40]]);
         // WHEN
         this.dayService.loadMeal(inputBtn.mockObj);
         // THEN
-        verify(this.daySht).setValue('W15', 'Meal').calledOnce();
+        verify(this.daySht).setValue('W17', 'Meal').calledOnce();
         verify(this.meal1Rng).setValues([['Item 1', '', 10], ['Item 2', '', 20], ['Item 3', '', 30], ['Item 4', '', 40]]).calledOnce();
     }
 

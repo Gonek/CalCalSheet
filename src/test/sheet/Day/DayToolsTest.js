@@ -45,7 +45,7 @@ class DayToolsTest extends TestBaseDay {
         let expectedSelectedFunctionData = '=IFERROR(CHOOSE(SelectedFunction+1, 0, AF2, AF3, VALUE(AF4), "m", AF9, VALUE(AF10), "", "m"), "x")';
         let expectedSelectedMealIds = '=IFERROR(JOIN(",", MAP(SPLIT(SelectedMeals, ", ", FALSE), LAMBDA(meal, LEFT(Meal, 1)))), "")';
         let expectedSelectedFunctionMeals = '=IF(AB8<>"", IFERROR(JOIN(",", MAP(SPLIT(AB8, ", ", FALSE), LAMBDA(name, CONCAT("🥣 ", name))))), SUBSTITUTE(AB13, ", ", ","))';
-        let expectedSelectedMealName = '=IFERROR(INDEX(ItemNames, MATCH("🥣*",ItemNames,0)))';
+        let expectedSelectedMealName = '=IFERROR(INDEX(ItemNames, MATCH("🥣*",ItemNames,0)), " ")';
         let expectedMealIngredients = '=IFERROR(FILTER(Meals!$C$4:$D, SelectedMealName=Meals!$B$4:$B))';
 
         // WHEN

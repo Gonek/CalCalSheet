@@ -22,9 +22,7 @@ class OpenSheetWhenSteps extends Steps{
 class OpenSheetThenSteps extends DayThenSteps{
 
     day_changed_to(to){
-        let r = getRng(CBOX.DAY_NAME);
-        let values = r.getValidationCriteriaRangeValues();
-        assertEquals(r.getValue(), values[to + 2]);
+        assertEquals(getRng(CBOX.DAY_NAME).getValue(), to);
     }
 
     future_available_days_as_expected(futureDays){

@@ -30,12 +30,12 @@ class EventServiceTest extends TestBase {
     shouldOnEditCallEventLinkedToButton(){
         let data = [
             [SHT.DAY, CBOX.DAY_NAME, this.dayService, 'changeDay', 'G1'],
-            [SHT.DAY, CBOX.MEAL_1_START, this.dayService, 'loadMeal', 'C15'],
-            [SHT.DAY, CBOX.MEAL_2_START, this.dayService, 'loadMeal', 'C30'],
-            [SHT.DAY, CBOX.MEAL_3_START, this.dayService, 'loadMeal', 'C45'],
-            [SHT.DAY, CBOX.MEAL_4_START, this.dayService, 'loadMeal', 'C60'],
-            [SHT.DAY, CBOX.MEAL_5_START, this.dayService, 'loadMeal', 'C75'],
-            [SHT.DAY, CBOX.MEAL_6_START, this.dayService, 'loadMeal', 'C90'],
+            [SHT.DAY, CBOX.MEAL_1_START, this.dayService, 'loadMeal', 'C17'],
+            [SHT.DAY, CBOX.MEAL_2_START, this.dayService, 'loadMeal', 'C32'],
+            [SHT.DAY, CBOX.MEAL_3_START, this.dayService, 'loadMeal', 'C47'],
+            [SHT.DAY, CBOX.MEAL_4_START, this.dayService, 'loadMeal', 'C62'],
+            [SHT.DAY, CBOX.MEAL_5_START, this.dayService, 'loadMeal', 'C77'],
+            [SHT.DAY, CBOX.MEAL_6_START, this.dayService, 'loadMeal', 'C92'],
             [SHT.DAY, 'ItemAmounts', this.dayService, 'inLineCalculation', 'E17:E106'],
             [SHT.DAY, BTN.SHOW_TOOLS, this.dayService, 'showHideTools', 'X6'],
             [SHT.DAY, BTNF.SAVE_DAY_AS, this.dayService, 'saveDayAs', 'AE2'],
