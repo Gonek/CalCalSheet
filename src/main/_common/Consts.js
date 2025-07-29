@@ -102,8 +102,6 @@ const RNG = {
   MEAL5 : 'Meal5',
   MEAL6 : 'Meal6',
   // DAYS
-  DATES: 'Dates',
-  DAY_TEMPLATE_NAMES : 'DayTemplateNames',
   NUMBER_OF_DAYS : 'NumberOfDays',
   NUMBER_OF_TEMPLATES : 'NumberOfTemplates',
   TODAY : 'Today',

@@ -13,8 +13,14 @@ var runAllAcceptance = () =>{
 
 var runAllTest = () => {
   testSheet = new TestSheet();
-  new TestBase().runAllTestClass(unitTests(), sheetTests(), acceptanceTests());
+  if(new TestBase().runAllTestClass(unitTests(), sheetTests(), acceptanceTests())){
+    makeSheetReleaseReady();
+  }
+}
+
+var makeSheetReleaseReady = () => {
   testData.makeSheetReleaseReady();
+  getObj(App).flush();
 }
 
 var unitTests = () => [

@@ -295,7 +295,7 @@ class SettingsThenSteps extends Steps{
     }
 
     date_format_changed_in_days_to_(expected){
-        let value = getRng(RNG.DATES).getNumberFormat();
+        let value = getSht(SHT.DAYS).getRng('A6').getNumberFormat();
         assertEquals(value, expected);
     }
 

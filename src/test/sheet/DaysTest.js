@@ -27,7 +27,7 @@ class DaysTest extends TestBase {
         let expectedNextProfileIndex = '=IFERROR(IF(OR(NOT(Settings!E10), LastProfileIndex >= NumberOfProfiles*2-1), 1, LastProfileIndex + 2),1)';
         let expectedNextProfile = '=INDEX(Profile!C3:P3, 1, NextProfileIndex)';
         let expectedMinMaxCalForProfile = [['=INDEX(Profile!$C$4:$P$13, 1, NextProfileIndex)'], ['=INDEX(Profile!$C$4:$P$13, 1, NextProfileIndex  +1)']];
-        let expectedDays = '=FLATTEN(UNIQUE(FILTER(DayTemplateNames, DayTemplateNames > "")), FILTER(ARRAYFORMULA(IFS(A6:A = TODAY(), CONCAT("🚩 ",TEXT(A6:A, "dd/mm/yyyy")), A6:A < TODAY(), CONCAT("🗃️ ",TEXT(A6:A, "dd/mm/yyyy")), A6:A > TODAY(), CONCAT("📅 ",TEXT(A6:A, "dd/mm/yyyy")))), A6:A * NOT(ISBLANK(A6:A))))';
+        let expectedDays = '=FLATTEN(UNIQUE(FILTER(P6:P, P6:P > "")), FILTER(ARRAYFORMULA(IFS(A6:A = TODAY(), CONCAT("🚩 ",TEXT(A6:A, "dd/mm/yyyy")), A6:A < TODAY(), CONCAT("🗃️ ",TEXT(A6:A, "dd/mm/yyyy")), A6:A > TODAY(), CONCAT("📅 ",TEXT(A6:A, "dd/mm/yyyy")))), A6:A * NOT(ISBLANK(A6:A))))';
 
         // WHEN
         let numberOfDays = getRng(RNG.NUMBER_OF_DAYS).getFormula();
