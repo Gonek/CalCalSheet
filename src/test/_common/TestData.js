@@ -416,6 +416,12 @@ class TestData {
     daySht.setValue('A62','=texts!B396');
     daySht.setValue('A77','=texts!B397');
     daySht.setValue('A92','=texts!B398');
+    daySht.setValue('G6','=texts!B393');
+    daySht.setValue('G7','=texts!B394');
+    daySht.setValue('G8','=texts!B395');
+    daySht.setValue('G9','=texts!B396');
+    daySht.setValue('G10','=texts!B397');
+    daySht.setValue('G11','=texts!B398');
     daySht.setValue('D5','=texts!B25');
     let newItemSht = getSht(SHT.NEW_ITEM);
     newItemSht.setValue('C19','=texts!B532');
@@ -429,6 +435,7 @@ class TestData {
     profileSht.setValue('D26','=texts!B524');
     profileSht.setValue('D30','=texts!B25');
     profileSht.setValue('C3','=texts!B25');
+    profileSht.setValue('C30','=texts!B25');
     let daysSht = getSht(SHT.DAYS);
     daysSht.setValue('B5','=texts!B393');
     daysSht.setValue('D5','=texts!B394');

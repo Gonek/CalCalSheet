@@ -119,7 +119,8 @@ class SettingsService{
 
   changeLanguage(languageRng){
     let prevLangRng = getRng(RNG.PREVIOUS_LANGUAGE);
-    if(prevLangRng.getValue() == languageRng.getValue()) return;
+    let currentLanguage = languageRng.getValue()
+    if(prevLangRng.getValue() == currentLanguage) return;
 
     let sheets = getRng(RNG.SHEETS).getValues();
     let notes = getRng(RNG.NOTES).getValues();
@@ -134,7 +135,8 @@ class SettingsService{
       tutorialSht.getRng(n[0]).setNote(n[1]);
     });
 
-    prevLangRng.setValue(languageRng.getValue());
+    prevLangRng.setValue(currentLanguage);
+    getRng(RNG.LOCALISATION).setValue(currentLanguage);
   }
 
   changeDateFormat(dateFormat){
