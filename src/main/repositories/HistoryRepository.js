@@ -39,8 +39,8 @@ class HistoryRepository{
       history.sugarAlcohol,
       history.protein,
       history.salt,
-      history.price,
       history.calorieDensity,
+      history.price,
       history.checkCalorie,
       history.checkMacro,
       history.checkDensity

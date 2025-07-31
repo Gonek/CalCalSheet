@@ -106,7 +106,7 @@ class RecipeCalculatorTest extends TestBase {
 
     shouldRecipeCalculatorSheetHaveCorrectFormulaForNoom(){
         //GIVEN
-        let expectedColour = '=IFS(RecipeNoomCategory=Texts!B529, IFS(G29= "", "", G29<=100, Texts!B82, G29<=240, Texts!B83, G29>240, Texts!B84), RecipeNoomCategory=Texts!B530, IFS(G29= "", "", G29<=40, Texts!B82, G29<=50, Texts!B83, G29>50, Texts!B84), RecipeNoomCategory = Texts!B531, IFS(G29= "", "", G29<=50, Texts!B82, G29<=100, Texts!B83, G29>100, Texts!B84))';
+        let expectedColour = '=IFS(RecipeNoomCategory=Texts!B539, IFS(G29= "", "", G29<=100, Texts!B82, G29<=240, Texts!B83, G29>240, Texts!B84), RecipeNoomCategory=Texts!B540, IFS(G29= "", "", G29<=40, Texts!B82, G29<=50, Texts!B83, G29>50, Texts!B84), RecipeNoomCategory = Texts!B541, IFS(G29= "", "", G29<=50, Texts!B82, G29<=100, Texts!B83, G29>100, Texts!B84))';
         let expectedMatch = '=MATCH(C34, Texts!B82:B84, 0)';
         //WHEN
         let resultColour = this.recipeNoomColourRng.getFormula();

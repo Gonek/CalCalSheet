@@ -42,7 +42,7 @@
                 .history_have_calories_burned_as(3200).and()
                 .history_have_calories_difference_as(-2506).and()
                 .history_have_macros_as([975.1, 928.1, 938.1, 1099.1, 1033.1, 1017.2, 981.2, 1061.2, 1231]).and()
-                .history_have_price_as(98.11).and()
+                .history_have_price_as(838.26).and()
                 .history_have_calories_check_as('❌').and()
                 .history_have_macro_check_as('❌').and()
                 .history_have_calorie_density_check_as('✔️').and()
@@ -128,8 +128,7 @@
             .when()
                 .sheet_opened()
             .then()
-                .day_changed_to(getFormatedDay(0)).and()
-                .expired_auto_delete_days_were_deleted();
+                .day_changed_to(getFormatedDay(0));
     }
 
 }

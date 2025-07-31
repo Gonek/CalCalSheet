@@ -48,7 +48,7 @@ class HistoryTest extends TestBase {
 
     shouldHistorySheetBackgroundCalculationsHaveCorrectFormula(){
         //GIVEN 
-        let expected = '=IFS(B3=Texts!B543, 7, B3=Texts!B544, 30, B3=Texts!B545, 90, B3=Texts!B546, 99999)';
+        let expected = '=IFS(B3=Texts!B553, 7, B3=Texts!B554, 30, B3=Texts!B555, 90, B3=Texts!B556, 99999)';
         //WHEN
         let result = this.sht.getFormula('A3');
         //THEN

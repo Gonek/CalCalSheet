@@ -30,7 +30,7 @@ class NewItemTest extends TestBase {
           ['=IFERROR(($H$5*C16/$H$4)/$H$6)'],
           ['=IFERROR((C17/(C18+C22)))']
         ]
-        let expectedNoomFormula = '=IFS(C23=Texts!B529, IFS(H7= "", "", H7<=1, Texts!B82, H7<=2.4, Texts!B83, H7>2.4, Texts!B84), C23=Texts!B530, IFS(H7= "", "", H7<=0.4, Texts!B82, H7<=0.5, Texts!B83, H7>0.5, Texts!B84), C23 = Texts!B531, IFS(H7= "", "", H7<=0.5, Texts!B82, H7<=1, Texts!B83, H7>1, Texts!B84))';
+        let expectedNoomFormula = '=IFS(C23=Texts!B539, IFS(H7= "", "", H7<=1, Texts!B82, H7<=2.4, Texts!B83, H7>2.4, Texts!B84), C23=Texts!B540, IFS(H7= "", "", H7<=0.4, Texts!B82, H7<=0.5, Texts!B83, H7>0.5, Texts!B84), C23 = Texts!B541, IFS(H7= "", "", H7<=0.5, Texts!B82, H7<=1, Texts!B83, H7>1, Texts!B84))';
         let expectedItemNamesFormula = '=ARRAYFORMULA({C3;Items!B4:B})'; 
         //WHEN
         let resultFormula = this.sht.getFormulas('H4:H17');

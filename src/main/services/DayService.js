@@ -19,6 +19,7 @@ class DayService{
       getRng(CBOX.DAY_NAME).setValueAndFlush("🚩 " + today);
       this.loadDay();
       this.app.flush();
+      getObj(ItemRepository).autoDeleteItems();
     }
   }
 
@@ -56,7 +57,7 @@ class DayService{
     let day = this.dayRepository.load(index);
     getRng(RNG.DAY_ITEMS).setValues(this.toDay(day.items));
     getRng(RNG.CALORIE_OUTPUT).setValue(day.outputCalories);
-    getRng(RNG.SELECTED_PROFILE).setValue(day.macroProfile);
+    getRng(RNG.SELECTED_PROFILE).setValue(day.macroProfile == 'Default' ? '=Texts!B25' : day.macroProfile);
     getRng(RNG.DAY_PREV_DAY_INDEX).setValue(index);
     getRng(RNG.MEAL_NAMES).clearContent();
   }

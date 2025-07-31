@@ -21,6 +21,16 @@ class SettingsService{
     this.changeLocalisation();
   }
 
+  addTrigger(){
+    let trigger = ScriptApp.getProjectTriggers().find(t => t.getHandlerFunction() == 'onOpen');
+    if(!trigger){
+      ScriptApp.newTrigger('onOpen')
+        .timeBased()
+        .everyHours(1)
+        .create();
+    }
+  }
+
   applyGeneralSettings(generalSettings){
     let profileRngList = this.profileSht.getRngList(['C5:P5', 'C8:P8', 'C12:P12']);
     if(generalSettings[7]){

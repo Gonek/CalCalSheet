@@ -285,7 +285,7 @@ class SettingsThenSteps extends Steps{
 
     notes_are_changed_to_selected_language(){
         let note = getSht(SHT.TUTORIAL).getRng('E62').getNote();
-        let expectedNote = getSht(SHT.TEXTS).getPosValue(446, this.langageIndex + 2);
+        let expectedNote = getSht(SHT.TEXTS).getPosValue(456, this.langageIndex + 2);
         assertEquals(note, expectedNote);
     }
 

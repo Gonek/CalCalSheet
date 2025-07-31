@@ -27,10 +27,10 @@ class ProfileTest extends TestBase {
         //GIVEN
         let expectedAge = ['=DATEDIF(D17, NOW(), "Y")'];
         let expectedCal = [
-          ['=ROUND(IF(IsMeasurementMetric, IF(D19 = Texts!B512, 655.1+(9.563*D22)+(1.85*D20)-(4.676*D18), 66.5+(13.75*D22)+(5.003*D20)-(6.75*D18)), IF(D19 = Texts!B512, 655.1+(4.338*D22)+(4.698*D20)-(4.676*D18), 66.5+(6.238*D22)+(12.708*D20)-(6.75*D18))))'],
-          ['=ROUND(D24*IFS(D21=Texts!B513,1.2, D21=Texts!B514,1.375, D21=Texts!B515,1.55, D21=Texts!B516, 1.725, D21=Texts!B517, 1.9))'],
-          ['=ROUND($D$25*IFS($D$26=Texts!B524, 0.97, $D$26 =Texts!B525, 0.8, $D$26 = Texts!B526, 1.1),-1)'],
-          ['=ROUND($D$25*IFS($D$26=Texts!B524, 1.03, $D$26 =Texts!B525, 0.9, $D$26 = Texts!B526, 1.2),-1)']
+          ['=ROUND(IF(IsMeasurementMetric, IF(D19 = Texts!B522, 655.1+(9.563*D22)+(1.85*D20)-(4.676*D18), 66.5+(13.75*D22)+(5.003*D20)-(6.75*D18)), IF(D19 = Texts!B522, 655.1+(4.338*D22)+(4.698*D20)-(4.676*D18), 66.5+(6.238*D22)+(12.708*D20)-(6.75*D18))))'],
+          ['=ROUND(D24*IFS(D21=Texts!B523,1.2, D21=Texts!B524,1.375, D21=Texts!B525,1.55, D21=Texts!B526, 1.725, D21=Texts!B527, 1.9))'],
+          ['=ROUND($D$25*IFS($D$26=Texts!B534, 0.97, $D$26 =Texts!B535, 0.8, $D$26 = Texts!B536, 1.1),-1)'],
+          ['=ROUND($D$25*IFS($D$26=Texts!B534, 1.03, $D$26 =Texts!B535, 0.9, $D$26 = Texts!B536, 1.2),-1)']
         ];
         //WHEN
         let result = this.calorieOutputCalculatorRng.getFormulas();

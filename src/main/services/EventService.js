@@ -2,10 +2,11 @@
 
 var onEdit = (e) => getObj(EventService).onEdit(e);
 var onOpen = (e) => getObj(EventService).onOpen(e);
-var testButton = () => getObj(EventService).testButton(SHT.DAY, BTN.SHOW_TOOLS, 'X6');
+var testButton = () => getObj(EventService).clickButton(SHT.DAY, BTN.SHOW_TOOLS, 'X5');
 
 // OTHER FUNCTIONS
-var startImport = () => getObj(ImportService).startImport();
+var startImport = () => getObj(EventService).clickButton(SHT.SETTINGS, BTN.IMPORT);
+var addTrigger = () => getObj(EventService).clickButton(SHT.SETTINGS, BTN.ADD_TRIGGER);
 
 // CLASS
 
@@ -22,7 +23,7 @@ class EventService extends AbstractEventService{
         new CBox(CBOX.MEAL_5_START, DayService, 'loadMeal', 'C77'),
         new CBox(CBOX.MEAL_6_START, DayService, 'loadMeal', 'C92'),
         new Fld('ItemAmounts', DayService, 'inLineCalculation', 'E17:E106'),
-        new Btn(BTN.SHOW_TOOLS, DayService, 'showHideTools', 'X6', 2),
+        new Btn(BTN.SHOW_TOOLS, DayService, 'showHideTools', 'X5', 2),
         new BtnF(BTNF.SAVE_DAY_AS, DayService, 'saveDayAs', 'AE2', 1, 4, 5),
         new BtnF(BTNF.LOAD_DAY, DayService, 'loadDayFrom', 'AE3', 1, 4, 5),
         new BtnF(BTNF.DELETE_DAYS, DayService, 'deleteDays', 'AE4', 1, 4, 5),
@@ -51,14 +52,16 @@ class EventService extends AbstractEventService{
       ],
       [SHT.SETTINGS, [           
         new Btn(BTN.APPLY_SETTINGS, SettingsService, 'applySettings', 'G29'),
-        new Btn(BTN.IMPORT, ImportService, 'startImport', 'L13')
+        new Btn(BTN.IMPORT, ImportService, 'startImport', 'M13'),
+        new Btn(BTN.ADD_TRIGGER, SettingsService, 'addTrigger', 'M18'),
+        new Btn(BTN.EXECUTE_DAILY_ROUTINE, EventService, 'onOpen', 'M22'),
         ]
       ],
       [SHT.TUTORIAL, [
         new CBox(CBOX.LANGUAGE, SettingsService, 'changeLanguage', 'J14'),
         new Btn(BTN.TUTORIAL_TEST, TutorialService, 'tutorialTestButton', 'H39'),
-        new Btn(BTN.SKIP_TUTORIAL, TutorialService, 'resetTutorial', 'E619'),
-        new Btn(BTN.TUTORIAL_NEXT, TutorialService, 'tutorialNext', 'K619')
+        new Btn(BTN.SKIP_TUTORIAL, TutorialService, 'resetTutorial', 'E629'),
+        new Btn(BTN.TUTORIAL_NEXT, TutorialService, 'tutorialNext', 'K629')
         ]
       ]
     ]);
@@ -67,7 +70,6 @@ class EventService extends AbstractEventService{
   onOpen(e){
     super.onOpen(() => {
       getObj(DayService).finishDay();
-      getObj(ItemRepository).autoDeleteItems();
     });
   }
 }

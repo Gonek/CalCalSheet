@@ -22,7 +22,7 @@ class DaysTest extends TestBase {
         let expectedCreateDaysFrom = '=(IF(MAX(A6:A) > 0, MAX(A6:A) + 1, DaysFrom))';
         let expectedCreateDays = '=DaysUntil-CreateDaysFrom+1';
         let expectedDeleteDaysFrom = '=IF(CreateDays<0, FirstEmptyDayIndex +(CreateDays*15), 0)';
-        let expectedDefaultCalorieOutput = '=IFS(Settings!E7=Texts!B518, Profile!D24, Settings!E7=Texts!B519, Profile!D25, Settings!E7=Texts!B520, Profile!D27, Settings!E7=Texts!B521, Profile!D28, Settings!E7=Texts!B522, AF17, Settings!E7=Texts!B523, AF18)';
+        let expectedDefaultCalorieOutput = '=IFS(Settings!E7=Texts!B528, Profile!D24, Settings!E7=Texts!B529, Profile!D25, Settings!E7=Texts!B530, Profile!D27, Settings!E7=Texts!B531, Profile!D28, Settings!E7=Texts!B532, AF17, Settings!E7=Texts!B533, AF18)';
         let expectedLastProfileIndex = '=MATCH(INDEX(FILTER(N6:N, MOD(ROW(N6:N)-7,15)=0), NumberOfDays), Profile!C3:P3, 0)';
         let expectedNextProfileIndex = '=IFERROR(IF(OR(NOT(Settings!E10), LastProfileIndex >= NumberOfProfiles*2-1), 1, LastProfileIndex + 2),1)';
         let expectedNextProfile = '=INDEX(Profile!C3:P3, 1, NextProfileIndex)';

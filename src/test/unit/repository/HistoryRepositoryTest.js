@@ -14,7 +14,7 @@ class HistoryRepositoryTest extends TestBase {
         // WHEN
         this.historyRepository.addOrUpdate(history);
         // THEN
-        verify(this.historySht).appendRow(['', '01/01/2025', 2000, 2500, '=IFERROR(D10-C10)', 10, 11, 12, 13, 14, 15, 16, 17, 18, '19.00', 85.5, '✔️', '❌', '✔️']).calledOnce();
+        verify(this.historySht).appendRow(['', '01/01/2025', 2000, 2500, '=IFERROR(D10-C10)', 10, 11, 12, 13, 14, 15, 16, 17, 18, 85.5, '19.00', '✔️', '❌', '✔️']).calledOnce();
         verify(this.historySht).sort(2).calledOnce();
     }
 
@@ -25,7 +25,7 @@ class HistoryRepositoryTest extends TestBase {
         // WHEN
         this.historyRepository.addOrUpdate(history);
         // THEN
-        verify(this.historySht).setAreaValue(19, 1, 1, 19, [['', '01/01/2025', 2000, 2500, '=IFERROR(D19-C19)', 10, 11, 12, 13, 14, 15, 16, 17, 18, '19.00', 85.5, '✔️', '❌', '✔️']]).calledOnce();
+        verify(this.historySht).setAreaValue(19, 1, 1, 19, [['', '01/01/2025', 2000, 2500, '=IFERROR(D19-C19)', 10, 11, 12, 13, 14, 15, 16, 17, 18, 85.5, '19.00', '✔️', '❌', '✔️']]).calledOnce();
     }
 
     shouldAddAddHistoryToTheEndOfTheHistorySheet(){
@@ -35,7 +35,7 @@ class HistoryRepositoryTest extends TestBase {
         // WHEN
         this.historyRepository.add(history);
         // THEN
-        verify(this.historySht).appendRow(['', '01/01/2025', 2000, 2500, '=IFERROR(D10-C10)', 10, 11, 12, 13, 14, 15, 16, 17, 18, '19.00', 85.5, '✔️', '❌', '✔️']).calledOnce();
+        verify(this.historySht).appendRow(['', '01/01/2025', 2000, 2500, '=IFERROR(D10-C10)', 10, 11, 12, 13, 14, 15, 16, 17, 18, 85.5, '19.00', '✔️', '❌', '✔️']).calledOnce();
         verify(this.historySht).sort(2).calledOnce();
     }
 
@@ -45,7 +45,7 @@ class HistoryRepositoryTest extends TestBase {
         // WHEN
         this.historyRepository.update(history, 10);
         // THEN
-        verify(this.historySht).setAreaValue(19, 1, 1, 19, [['', '01/01/2025', 2000, 2500, '=IFERROR(D19-C19)', 10, 11, 12, 13, 14, 15, 16, 17, 18, '19.00', 85.5, '✔️', '❌', '✔️']]).calledOnce();
+        verify(this.historySht).setAreaValue(19, 1, 1, 19, [['', '01/01/2025', 2000, 2500, '=IFERROR(D19-C19)', 10, 11, 12, 13, 14, 15, 16, 17, 18,  85.5, '19.00', '✔️', '❌', '✔️']]).calledOnce();
     }
 }
 

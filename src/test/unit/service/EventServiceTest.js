@@ -24,7 +24,6 @@ class EventServiceTest extends TestBase {
         onOpen();
         // THEN
         verify(this.dayService).finishDay().calledOnce();
-        verify(this.itemRepository).autoDeleteItems().calledOnce();
     }
 
     shouldOnEditCallEventLinkedToButton(){
@@ -37,7 +36,7 @@ class EventServiceTest extends TestBase {
             [SHT.DAY, CBOX.MEAL_5_START, this.dayService, 'loadMeal', 'C77'],
             [SHT.DAY, CBOX.MEAL_6_START, this.dayService, 'loadMeal', 'C92'],
             [SHT.DAY, 'ItemAmounts', this.dayService, 'inLineCalculation', 'E17:E106'],
-            [SHT.DAY, BTN.SHOW_TOOLS, this.dayService, 'showHideTools', 'X6'],
+            [SHT.DAY, BTN.SHOW_TOOLS, this.dayService, 'showHideTools', 'X5'],
             [SHT.DAY, BTNF.SAVE_DAY_AS, this.dayService, 'saveDayAs', 'AE2'],
             [SHT.DAY, BTNF.LOAD_DAY, this.dayService, 'loadDayFrom', 'AE3'],
             [SHT.DAY, BTNF.DELETE_DAYS, this.dayService, 'deleteDays', 'AE4'],
@@ -55,11 +54,13 @@ class EventServiceTest extends TestBase {
             [SHT.RECIPE_CALCULATOR, BTNF.DELETE_RECIPES, this.recipeCalculatorService, 'deleteRecipes', 'E42'],
             [SHT.PROFILE, BTN.COPY_CALORIES, this.profileService, 'copyCalories', 'F31'],
             [SHT.SETTINGS, BTN.APPLY_SETTINGS, this.settingsService, 'applySettings', 'G29'],
-            [SHT.SETTINGS, BTN.IMPORT, this.importService, 'startImport', 'L13'],
+            [SHT.SETTINGS, BTN.IMPORT, this.importService, 'startImport', 'M13'],
+            [SHT.SETTINGS, BTN.ADD_TRIGGER, this.settingsService, 'addTrigger', 'M18'],
+          //  [SHT.SETTINGS, BTN.EXECUTE_DAILY_ROUTINE, this.eventService, 'onOpen', 'M22'],
             [SHT.TUTORIAL, CBOX.LANGUAGE, this.settingsService, 'changeLanguage', 'J14'],
             [SHT.TUTORIAL, BTN.TUTORIAL_TEST, this.tutorialService, 'tutorialTestButton', 'H39'],
-            [SHT.TUTORIAL, BTN.SKIP_TUTORIAL, this.tutorialService, 'resetTutorial', 'E619'],
-            [SHT.TUTORIAL, BTN.TUTORIAL_NEXT, this.tutorialService, 'tutorialNext', 'K619']
+            [SHT.TUTORIAL, BTN.SKIP_TUTORIAL, this.tutorialService, 'resetTutorial', 'E629'],
+            [SHT.TUTORIAL, BTN.TUTORIAL_NEXT, this.tutorialService, 'tutorialNext', 'K629']
         ];
         let base = this;
         data.forEach(d => {

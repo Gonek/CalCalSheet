@@ -31,6 +31,7 @@ class DayServiceTest extends TestBase {
         this.dayRepository = mock(DayRepository);
         this.historyRepository = mock(HistoryRepository);
         this.mealRepository = mock(MealRepository);
+        this.itemRepository = mock(ItemRepository);
         this.app = mock(App);
 
         this.dayService = new DayService();
@@ -64,6 +65,7 @@ class DayServiceTest extends TestBase {
         verify(this.calorieOutputRng).setValue(2510).calledOnce();
         verify(this.selecetedProfileRng).setValue('Default');
         verify(this.mealNamesRng).clearContent().calledOnce();
+        verify(this.itemRepository).autoDeleteItems().calledOnce();
         verify(this.app).flush().called(2);
     }
 
@@ -87,7 +89,7 @@ class DayServiceTest extends TestBase {
         verify(this.dayItemsRng).setValues([['New', '', 1], ['New 2', '', 2], ['New 3', '', 3], ['New 4', '', 4]]).calledOnce();
         verify(this.prevDayIndexRng).setValue(15).calledOnce();
         verify(this.calorieOutputRng).setValue(2510).calledOnce();
-        verify(this.selecetedProfileRng).setValue('Default').calledOnce();
+        verify(this.selecetedProfileRng).setValue('=Texts!B25').calledOnce();
         verify(this.mealNamesRng).clearContent().calledOnce();
         verify(this.app).flush().calledOnce();
     }

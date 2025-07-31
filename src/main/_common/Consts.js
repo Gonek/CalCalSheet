@@ -33,7 +33,9 @@ const BTN = {
   SAVE_RECIPE : 'ButtonSaveRecipe',
   COPY_CALORIES : 'ButtonCopyCalories',
   APPLY_SETTINGS : 'ButtonApplySettings',
-  IMPORT : 'ButtonImport'
+  IMPORT : 'ButtonImport',
+  ADD_TRIGGER : 'ButtonAddTrigger',
+  EXECUTE_DAILY_ROUTINE : 'ButtonExecuteDailyRoutine'
 }
 
 const CBOX = {
