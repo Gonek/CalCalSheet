@@ -13,7 +13,7 @@ class NewItemService {
     let noomColourRng = getRng(RNG.NEW_ITEM_NOOM_COLOUR);
     let autoDeleteRng = getRng(RNG.NEW_ITEM_AUTO_DELETE);
     this.itemRepository.addOrUpdate(new Item(itemName, fields,
-                                             prices[0], prices[1].toFixed(2),
+                                             prices[0], prices[1],
                                              noomColourRng.getDisplayValue(), 
                                              autoDeleteRng.getValue()), oldPos);
 
@@ -34,7 +34,7 @@ class NewItemService {
       let priceRng = getRng(RNG.NEW_ITEM_PRICE);
       if(item.price && item.pricePerUnit){
         priceRng.setValue(item.price, 1, 1);
-        priceRng.setValue((item.price / item.pricePerUnit).toFixed(2), 2, 1);
+        priceRng.setValue((item.price / item.pricePerUnit), 2, 1);
       }
       getRng(RNG.NEW_ITEM_AUTO_DELETE).setValue('Never');
     }
