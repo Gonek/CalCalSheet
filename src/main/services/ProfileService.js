@@ -1,3 +1,9 @@
+// INTERFACE
+
+var copyCalories = () => profileService().copyCalories();
+
+// CLASS
+
 class ProfileService {
 
   generateDays(){

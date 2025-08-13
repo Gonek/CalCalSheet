@@ -11,19 +11,6 @@ function newItemPopUp(rng) {
   }
 }
 
-function mealNamePopup() {
-  let ui = SpreadsheetApp.getUi();
-  var result = ui.prompt('Save meal','Please enter a name for your meal', ui.ButtonSet.OK_CANCEL);
-
-  var button = result.getSelectedButton();
-  
-  if (button === ui.Button.OK) {
-    return result.getResponseText()
-  } else if (button === ui.Button.CLOSE) {
-    return null;
-  }
-}
-
 function alert(message){
   SpreadsheetApp.getUi().alert(message);
 }

@@ -1,93 +1,120 @@
+// INTERFACE
+
+var finishDay = () => dayService().finishDay();
+var saveMeal = () => dayService().saveMeal();
+var copyMeals = () => dayService().copyMeals();
+var loadMeal1 = (cbox) => dayService().loadMeal(cbox, MEAL1, 15);
+var loadMeal2 = (cbox) => dayService().loadMeal(cbox, MEAL2, 30);
+var loadMeal3 = (cbox) => dayService().loadMeal(cbox, MEAL3, 45);
+var loadMeal4 = (cbox) => dayService().loadMeal(cbox, MEAL4, 60);
+var loadMeal5 = (cbox) => dayService().loadMeal(cbox, MEAL5, 75);
+var loadMeal6 = (cbox) => dayService().loadMeal(cbox, MEAL6, 90);
+var changeDay = () => dayService().changeDay();
+
+// CLASS
+
 class DayService{
 
+  constructor(){
+    this.spr = new Spr(DAY);
+    this.dayRepository = dayRepository();
+  }
+
   finishDay(){
-    this.deleteYesterday();
-    this.saveToHistory();
-    this.renameTodayToYesterday();
-    this.nextDay();
-    this.showSaveButtons();
+    let lastFinishedDayRng = new Rng(RNG_LAST_FINISHED_DAY);
+    let today = new Rng(RNG_TODAY).getDisplayValue();
+    if(lastFinishedDayRng.getDisplayValue() != today){
+      this.saveDay();
+      this.dayRepository.deletePastDays();
+      this.dayRepository.copyDefaultForFutureDays();
+      lastFinishedDayRng.setValue(today);
+      new Rng(RNG_DAY_NAME).setValueAndFlush("🚩 " + today);
+      var preDayIndexRng = new Rng(RNG_DAY_PREV_DAY_INDEX);
+      var dayIndexRng = new Rng(RNG_DAY_INDEX);
+      this.loadDay(preDayIndexRng, dayIndexRng);
+    }
   }
 
-  copyMeal(name){
-    let yRng = new Rng(`${YESTERDAY}!${name}`);
-    let tRng = new Rng(`${TODAY}!${name}`);
-    tRng.setValues(yRng.getValues());
+  changeDay(){
+    var preDayIndexRng = new Rng(RNG_DAY_PREV_DAY_INDEX);
+    var dayIndexRng = new Rng(RNG_DAY_INDEX);
+    if(preDayIndexRng.getValue() != dayIndexRng.getValue()){
+      this.saveDay();
+      this.loadDay(preDayIndexRng, dayIndexRng);
+      SpreadsheetApp.flush();
+    }
   }
 
-  loadMeal(sheetName, meal, startrow){
-    let spr = new Spr(sheetName);
-    let targetRng = new Rng(`${sheetName}!${meal}`);
-    spr.setValue(`V${startrow + 2}`, targetRng.getValue().substring(2));
-    let sourceData = new Rng(`${sheetName}!${RNG_SELECTED_MEAL_ITEMS}`)
+  loadDay(preDayIndexRng, dayIndexRng){
+    let dayItems = new Rng(RNG_SELECTED_DAY_ITEMS)
                         .getValues()
                         .map(row => [row[0], '', row[1]]);
-    targetRng.setValues(sourceData);
+    new Rng(RNG_DAY_ITEMS).setValues(dayItems);
+    preDayIndexRng.setValue(dayIndexRng.getValue());
+    new Rng(RNG_MEAL_NAMES).clear();
   }
 
-  saveMeal(dayMeal){
-    var name = mealNamePopup();
-    var items = new Rng(`${getActiveSheetName()}!${dayMeal}`)
-                      .getValues()
-                      .filter(row => row[0] != '');
-    if(name != null){
-      let meal = new Meal(name, items);
-      mealRepository().saveMeal(meal);
+  saveDay(){
+    let dayItems = new Rng(RNG_DAY_ITEMS).getValues();
+    if(this.dayRepository.save(new Day(dayItems))){
+      this.saveToHistory();
     }
   }
 
   saveToHistory(){
-    let summary = new Rng(`${TODAY}!${RNG_SUMMARY}`).getRowAsArray();
-    let calDensity = new Rng(`${TODAY}!${RNG_CALORIE_DENSITY}`).getValue();
-    let checklist = new Rng(`${TODAY}!${RNG_CHECKLIST}`).getColAsArray();
-    let calorieOutput = new Rng(`${TODAY}!${RNG_CALORIE_OUTPUT}`).getValue();
+    let date = new Rng(RNG_DAY_PREV_DATE).getValue();
+    let summary = new Rng(RNG_SUMMARY).getRowAsArray();
+    let calDensity = new Rng(RNG_CALORIE_DENSITY).getValue();
+    let checklist = new Rng(RNG_CHECKLIST).getColAsArray();
+    let calorieOutput = new Rng(RNG_CALORIE_OUTPUT).getValue();
     
-    let history = new History(summary, calorieOutput, calDensity, checklist);
+    let history = new History(date, summary, calorieOutput, calDensity, checklist);
 
-    historyRepository().add(history);
+    historyRepository().addOrUpdate(history);
   }
 
-  deleteYesterday(){
-    var yesterdaySpr = new Spr(YESTERDAY);
-    if(yesterdaySpr.spr) yesterdaySpr.deleteSpr();
-  }
-
-  renameTodayToYesterday(){
-    let todaySpr = new Spr(TODAY);
-    todaySpr.setValue(DAY_TITLE_POSITION, YESTERDAY);
-    todaySpr.setName(YESTERDAY);
-    this.hideFinishDayButton(todaySpr);
-  }
-
-  nextDay(){
-    var generatedDaysRng = new Rng(RNG_GENERATED_DAYS); 
-    if(generatedDaysRng.isBlank()){
-      this.copyDayBaseToToday();
-    } else {
-      this.renameGeneratedDayToToday(generatedDaysRng);
+  loadMeal(cbox, meal, startrow){
+    if(String(cbox.getRng().getValue()).indexOf(MEAL_ICON) == 0){
+      let spr = new Spr(DAY);
+      let targetRng = new Rng(`${meal}`);
+      spr.setValue(`V${startrow + 2}`, targetRng.getValue().substring(2));
+      let sourceData = new Rng(`${RNG_SELECTED_MEAL_ITEMS}`)
+                          .getValues()
+                          .map(row => [row[0], '', row[1]]);
+      targetRng.setValues(sourceData);
     }
   }
 
-  copyDayBaseToToday(){
-    ACTIVE.getSheetByName(DAY_BASE).copyTo(ACTIVE).setName(TODAY);
-    let spr = new Spr(TODAY);
-    spr.activate();
-    this.showFinishDayButton(spr);
-    ACTIVE.moveActiveSheet(2);
-    new Rng(`${TODAY}!${RNG_CALORIE_OUTPUT}`).setFormulaToValue();
-    this.profileAutoCycle();
-    spr.setActiveSelection('C15');
+  saveMeal(){
+    var nameRng = new Rng(RNG_SAVE_MEAL_AS);
+    var name = nameRng.getValue();
+    if(name){
+      var dayMeal = 'Meal' + new Rng(RNG_SAVE_MEAL_FROM_MEAL_ID).getValue();
+      var items = new Rng(dayMeal)
+                  .getValues()
+                  .filter(row => row[0] != '')
+                  .map(row => [row[0], row[2]]);
+      let meal = new Meal(name, items);
+      mealRepository().saveMeal(meal);
+      nameRng.clear();
+      new Rng(RNG_SAVE_MEAL_FROM).clear();
+    }
   }
 
-  renameGeneratedDayToToday(generatedDaysRng){
-    let spr = new Spr(generatedDaysRng.getValue());
-    spr.setName(TODAY);
-    spr.activate();
-    spr.setValue(DAY_TITLE_POSITION, TODAY);
-    this.showFinishDayButton(spr);
-    new Rng(`${TODAY}!${RNG_CALORIE_OUTPUT}`).setFormulaToValue();
-    this.profileAutoCycle();
-    spr.setActiveSelection('C15');
-    new Spr(PROFILE).deleteCells('N4');
+  copyMeals(){
+    let copyMealIds = new Rng(RNG_COPY_MEAL_FROM_MEAL_IDS).getValue();
+    let copyMealToRows = new Rng(RNG_COPY_MEAL_TO_ROWS).getValue();
+    if(copyMealIds && copyMealToRows){
+      var mealMap = new Map();
+      copyMealIds.split(",").forEach(
+        id => mealMap.set(id, new Rng(`Meal${id}`)
+                          .getValues()
+                          .map(row => [row[0], row[2]]))
+      );
+      this.dayRepository.copyMeals(mealMap, copyMealToRows.split(",").map(Number));
+      new Rng(RNG_COPY_MEAL_FROM).clear();
+      new Rng(RNG_COPY_MEAL_TO).clear();
+    }
   }
 
   profileAutoCycle(){
@@ -104,14 +131,6 @@ class DayService{
         new Rng(`${TODAY}!${RNG_SELECTED_PROFILE}`).setValue(nextProfile);
       }
     }
-  }
-
-  showFinishDayButton(spr){
-    spr.moveButton(FINISH_BUTTON_INDEX, 1, 2, -2, 10);
-  }
-
-  hideFinishDayButton(spr){ 
-    spr.hideButton(FINISH_BUTTON_INDEX); 
   }
 
   showSaveButtons(){

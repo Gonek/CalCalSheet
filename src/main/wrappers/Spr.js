@@ -83,8 +83,14 @@ class Spr{
     this.spr.getRange(row, col, numRows, numCols).setValues(values);
   }
 
+  setAreaValueAtPos(row, col, values){
+    if(Array.isArray(values) && values.length){
+      this.setAreaValue(row, col, values.length, values[0].length, values);
+    }
+  }
+
   putDataAtEnd(data){
-    this.setAreaValue(this.getLastRow()+1, 2, data.length, data[0].length, data);
+    this.setAreaValueAtPos(this.getLastRow()+1, 2, data);
   }
 
   setName(name){
@@ -139,18 +145,6 @@ class Spr{
     this.spr.setActiveSelection(range);
   }
 
-  getButton(index){
-    return this.spr.getDrawings()[index];
-  }
-
-  moveButton(index, rowPos, colPos, offsetX = -2, offsetY = -2){
-    this.getButton(index).setPosition(rowPos, colPos, offsetX, offsetY);
-  }
-
-  hideButton(index){
-    this.moveButton(index, 1, 1, 0, -150);
-  }
-
   find(text){
     return this.spr.createTextFinder(text).findNext();
   }
@@ -168,7 +162,7 @@ class Spr{
   }
 
   deleteRows(deleteFrom, deleteTo){
-    this.spr.deleteRows(deleteFrom, deleteTo);
+    this.spr.deleteRows(deleteFrom, deleteTo - deleteFrom);
   }
 
   deleteSpr(){

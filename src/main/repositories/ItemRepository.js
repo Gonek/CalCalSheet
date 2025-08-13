@@ -15,7 +15,7 @@ class Item{
     this.sugar = fields[9];
     this.sugarAlcohol = fields[10];
     this.protein = fields[11];
-    this.salt = fields[10];
+    this.salt = fields[12];
     this.noomColour = noomColour;
   }
 }

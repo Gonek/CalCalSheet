@@ -1,8 +1,8 @@
 // DATA MODEL
 
 class History{
-  constructor(summary, calorieOutput, calorieDensity, checklist){
-    this.date = getToday();
+  constructor(date, summary, calorieOutput, calorieDensity, checklist){
+    this.date = date;
     this.calorieInput = summary[0];
     this.calorieOutput = calorieOutput;
     this.totalFat = summary[1];
@@ -30,10 +30,24 @@ class HistoryRepository{
      this.spr = new Spr(HISTORY);
   }
 
+  addOrUpdate(history){
+    let originalPos = new Rng(RNG_SELECETED_HISTORY_DAY).getValue();
+    if(originalPos != 0){
+      this.update(history, originalPos + 9);
+    } else {
+      this.add(history);
+    }
+  }
+
   add(history){
     let row = this.spr.getLastRow()+1;
     let rowData = this.fieldsToRow(history, row);
     this.spr.appendRow(rowData);
+    this.spr.sort(2);
+  }
+  
+  update(history, originalPos){
+    this.spr.setAreaValue(originalPos, 1, 1, 19, [this.fieldsToRow(history, originalPos)]);
   }
 
   fieldsToRow(history, row){

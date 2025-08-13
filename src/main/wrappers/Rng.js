@@ -4,6 +4,10 @@ class Rng{
     this.rng = range ? range : ACTIVE_SPREADSHEET.getRangeByName(name);
   }
 
+  copyTo(rng){
+    this.rng.copyTo(rng.rng);
+  }
+
   getValue(row = 1, col = 1){
     return this.rng.getCell(row, col).getValue();
   }
@@ -73,6 +77,14 @@ class Rng{
     return this.rng.getValues().map(row => row[col -1]);
   }
 
+  getRow(){
+    return this.rng.getRow();
+  }
+
+  getColumn(){
+    return this.rng.getColumn();
+  }
+
   getHeight(){
     return this.rng.getHeight();
   }
@@ -80,7 +92,6 @@ class Rng{
   getWidth(){
     return this.rng.getWidth();
   }
-
 
   getValidationCriteriaValues(row = 1, col = 1){
     let dataValidation = this.rng.getCell(row, col).getDataValidation();
@@ -94,6 +105,10 @@ class Rng{
 
   getValidationCriteriaRangeValues(row = 1, col = 1){
     return uniq(clearAll(this.getValidationCriteriaValues(row, col)[0].getValues()));
+  }
+
+  getA1Pos(){
+    return this.rng.getA1Notation();
   }
 
   isBlank(){

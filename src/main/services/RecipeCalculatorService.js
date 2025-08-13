@@ -1,3 +1,10 @@
+// INTERFACE
+
+var addRecipeToItemAndRecipes = () => recipeCalculatorService().addRecipeToItemAndRecipes();
+var loadRecipeToRecipeCalculator = () => recipeCalculatorService().loadRecipe();
+
+// CLASS
+
 class RecipeCalculatorService { 
 
   addRecipeToItemAndRecipes(){

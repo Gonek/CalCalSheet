@@ -1,3 +1,11 @@
+// INTERFACE
+
+var tutorialTestButton = () => tutorialService().tutorialTestButton();
+var tutorialNext = () => tutorialService().tutorialNext();
+var skipTutorial = () => tutorialService().resetTutorial();
+
+//CLASS
+
 class TutorialService{
 
   constructor(){
@@ -5,16 +13,12 @@ class TutorialService{
     this.stepRng = new Rng(RNG_TUTORIAL_STEP);
   }
 
-  tutorialAllow(){
+  tutorialTestButton(){
     SpreadsheetApp.getActiveSpreadsheet().rename(SHEET_DEFAULT_NAME);
-    let statusField = new Rng(RNG_TUTORIAL_STATUS);
-    statusField.setValue('Success!');
-    this.spr.setActiveSelectionRng(statusField);
   }
 
   tutorialNext(){
     var step = this.stepRng.getValue();
-    if(step == 0) this.spr.hideButton(TUTORIAL_ALLOW_BUTTON_INDEX);
     if(step < TUTORIAL_PAGES){
       this.tutorialStep(step+1); 
     }else{
@@ -25,9 +29,6 @@ class TutorialService{
   tutorialStep(nextStep){
     let showFrom = this.spr.find(`${nextStep}${TUTORIAL_BLOCK_START_MARKER}`).getRow();
     let showTo = this.spr.find(`${nextStep}${TUTORIAL_BLOCK_END_MARKER}`).getRow();
-
-    this.spr.moveButton(TUTORIAL_NEXT_BUTTON_INDEX, showTo, 10, 0, 0);
-    this.spr.moveButton(TUTORIAL_SKIP_BUTTON_INDEX, showTo, 2, 0, 0); 
     this.spr.hideRows(2, showFrom-1);
     this.spr.showRows(showFrom, showTo - showFrom);
     this.stepRng.setValue(nextStep);
@@ -37,13 +38,11 @@ class TutorialService{
   resetTutorial(){
     this.spr.setActiveSelectionRng(this.stepRng);
     this.spr.hideSheet();
-    this.spr.moveButton(TUTORIAL_ALLOW_BUTTON_INDEX, 26, 7, -40, 0);
     let showFrom = this.spr.find(`0${TUTORIAL_BLOCK_START_MARKER}`).getRow();
     let showTo = this.spr.find(`0${TUTORIAL_BLOCK_END_MARKER}`).getRow();
+    let lastTo = this.spr.find(`${TUTORIAL_PAGES}${TUTORIAL_BLOCK_END_MARKER}`).getRow();
     this.spr.showRows(showFrom, showTo - showFrom);
-    this.spr.hideRows(showTo +1, 513);
-    this.spr.moveButton(TUTORIAL_NEXT_BUTTON_INDEX, showTo, 10, 0, 0);
-    this.spr.moveButton(TUTORIAL_SKIP_BUTTON_INDEX, showTo, 2, 0, 0); 
+    this.spr.hideRows(showTo + 1, lastTo - (showTo + 1));
     this.stepRng.setValue(0);
   }
 }

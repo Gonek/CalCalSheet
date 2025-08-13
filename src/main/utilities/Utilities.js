@@ -9,9 +9,12 @@ var isCellInRangeInSheet = (e, rngName, name) => {
       row <= rng.getLastRow();
 }
 
-var isCellInPositionInSheet = (e, sheet, pos) => (e.source.getSheetName() == sheet) && (e.range.getA1Notation() == pos);
-
-var isCellInPositionsInDaySheets = (e, pos) => !NOT_DAY_SHEETS.includes(e.source.getSheetName()) && pos.includes(e.range.getA1Notation());
+var isCellIsRangeCell = (e, rngName) => {
+  var rng = new Rng(rngName);
+  var row = e.range.getRow();
+  var col = e.range.getColumn();
+  return col == rng.getColumn() && row == rng.getRow();
+}
 
 var getToday = () => {
   var date = new Date();

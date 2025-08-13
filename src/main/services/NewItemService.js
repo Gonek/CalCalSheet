@@ -1,3 +1,10 @@
+// INTERFACE
+
+var addNewItem = () => newItemService().addNewItem();
+var addNewItemReturn = () => newItemService().addNewItemReturn();
+
+//CLASS
+
 class NewItemService {
 
   addNewItem(){
@@ -20,7 +27,7 @@ class NewItemService {
   clearNewItem() {
     new Rng(RNG_NEW_ITEM_FIELDS).clear();
     new Rng(RNG_NEW_ITEM_NOOM_CATEGORY).setValue('Solid');
-    new Rng(RNG_NEW_ITEM_NOOM_COLOUR).setValue('=E21');
+    new Rng(RNG_NEW_ITEM_NOOM_COLOUR).setValue('=F21');
   }
 }
 
