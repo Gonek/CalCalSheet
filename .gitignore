@@ -1,0 +1,4 @@
+# Google Script libs
+node_modules/
+# Clasp config
+.clasp.json
