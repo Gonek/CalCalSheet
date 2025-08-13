@@ -1,12 +1,12 @@
-function addMealToItemAndRecipe(){
+function addRecipeToItemAndRecipes(){
   var calcSpr = SpreadsheetApp.getActiveSheet();
   if(getValueS(calcSpr, 'B36')){
-    saveRecipeFromMealCalculator(calcSpr);
+    saveRecipeFromRecipeCalculator(calcSpr);
   }
-  addMealAsItem();
+  addRecipeAsItem();
 }
 
-function addMealAsItem(){
+function addRecipeAsItem(){
   var calcSpr = SpreadsheetApp.getActiveSheet();
   var itemName = getValueS(calcSpr,'C5');
   var calories = getValueS(calcSpr,'G32');

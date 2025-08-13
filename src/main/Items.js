@@ -6,6 +6,10 @@ function addToOrUpdateList(itemName, amounth, unit, weight, calories, protein, f
   }
 }
 
+function isItemExist(name){
+  var spr = getSprByName("Items");
+  return spr.createTextFinder(name).findNext() != null;
+}
 
 function addToList(itemName, amounth, unit, weight, calories, protein, fat, carb, noomCat){
   var itemSpr = getSprByName("Items");

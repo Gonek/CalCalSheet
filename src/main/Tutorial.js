@@ -1,12 +1,12 @@
-const TUTORIAL_PAGES=9;
-const VERSION="v1.2"
+const TUTORIAL_PAGES=10;
+const VERSION="v1.3.1"
  
  // TUTORIAL FUNCTIONS
 
 function tutorialAllow(){
   SpreadsheetApp.getActiveSpreadsheet().rename("Calorie Calculator Sheet "+VERSION);
   var spr = getActiveSpr();
-  var statusField = spr.getRange('B75');
+  var statusField = spr.getRange('B82');
   statusField.setValue("Success!")
   spr.setCurrentCell(statusField);
 }
@@ -44,7 +44,7 @@ function tutorialStep(spr, nextStep, topCell){
 function resetTutorial(spr, topCell){
   spr.setCurrentCell(topCell);
   spr.hideSheet();
-  spr.getDrawings()[0].setPosition(20,7,-40,0);
+  spr.getDrawings()[0].setPosition(26,7,-40,0);
   var showFrom = spr.createTextFinder("0S").findNext().getRow();
   var showTo = spr.createTextFinder("0E").findNext().getRow();
   spr.showRows(showFrom, showTo - showFrom);

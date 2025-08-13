@@ -1,35 +1,30 @@
-function loadRecipeToMealCalculator() {
-  var selectedRecipeNamesRng = getRangeByName('SelectedRecipeItems');
-  var selectedRecipeAmountsRng = getRangeByName('SelectedRecipeAmounts');
-  var mealItemNamesRng = getRangeByName('MealItemNames');
-  var mealItemAmountsRng = getRangeByName('MealItemAmounts');
-  var mealCalcSpr = getSprByName('Meal calculator');
-  setValueS(mealCalcSpr, 'C5', getValueS(mealCalcSpr, 'D3'))
-  mealItemNamesRng.setValues(selectedRecipeNamesRng.getValues());
-  mealItemAmountsRng.setValues(selectedRecipeAmountsRng.getValues());
+function loadRecipeToRecipeCalculator() {
+  var selectedRecipeItems = getRangeByName('SelectedRecipeItems').getValues()
+                                                                    .map(row => [row[0], "",  "", row[1]]);
+  var recipeItemsRng = getRangeByName('RecipeItems');
+  var recipeCalcSpr = getSprByName('Recipe calculator');
+  setValueS(recipeCalcSpr, 'C5', getValueS(recipeCalcSpr, 'D3'));
+  recipeItemsRng.setValues(selectedRecipeItems);
 }
 
-function saveRecipeFromMealCalculator(mealCalcSpr) {
+function saveRecipeFromRecipeCalculator() {
   var recipesSpr = getSprByName('Recipes');
-  deleteRecipe(recipesSpr, mealCalcSpr);
-
-  var mealItemNamesRng = getRangeByName('MealItemNames');
-  var mealItemAmountsRng = getRangeByName('MealItemAmounts');
-  var lenght = mealItemNamesRng.getNumRows();
-
+  var recipeName = getValueS(getSprByName('Recipe calculator'), 'C5');
+  deleteRecipe(recipesSpr, recipeName);
+  var recipeItems = getRangeByName('RecipeItems').getValues()
+                                                    .filter(row => row[0] != "")
+                                                    .map(row => [recipeName, row[0], row[3]]);
+  var lenght = recipeItems.length;
   const lr = recipesSpr.getLastRow()+1;
-  
-  recipesSpr.getRange(lr, 3, lenght, 1).setValues(mealItemNamesRng.getValues());
-  recipesSpr.getRange(lr, 4, lenght, 1).setValues(mealItemAmountsRng.getValues());
-
-  const nlr = recipesSpr.getLastRow()+1;
-  recipesSpr.getRange(lr, 2, nlr - lr, 1).setValue(getValueS(getSprByName('Meal calculator'), 'C5'));
+  recipesSpr.getRange(lr, 2, lenght, 3).setValues(recipeItems);
+  recipesSpr.getFilter().sort(2, true);
 }
 
-function deleteRecipe(recipesSpr, mealCalcSpr){
-  var row = getValueS(mealCalcSpr, 'K3');
-  while(row != 0){
-    recipesSpr.deleteRow(row + 3);
-    row = getValueS(mealCalcSpr, 'K3');
+function deleteRecipe(recipesSpr, recipeName){
+  var recipes = recipesSpr.getRange("B4:B").getValues().flat();
+  var deleteFrom = recipes.findIndex(name => name === recipeName);
+  if (deleteFrom > -1) { 
+    var deleteTo = recipes.findLastIndex(name => name === recipeName);
+    recipesSpr.deleteRows(deleteFrom + 4, deleteTo - deleteFrom + 1);
   }
 }

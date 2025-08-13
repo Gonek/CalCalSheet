@@ -1,3 +1,5 @@
+const NOT_DAY_SHEETS = ["Tutorial", "New Item", "Recipe calculator", "Profile", "Items", "Recepies", "Meals", "History"]
+
 function getSprByName(name) {
   return SpreadsheetApp.getActive().getSheetByName(name);
 }
@@ -26,6 +28,14 @@ function setValueS(spr, range, value){
   return spr.getRange(range).setValue(value);
 }
 
+function setValue(rng, row, col, value){
+  return rng.getCell(row, col).setValue(value);
+}
+
+function setFormulaToValue(rng){
+  rng.setValue(rng.getValue());
+}
+
 function getRangeByName(name){
   return SpreadsheetApp.getActiveSpreadsheet().getRangeByName(name);
 }
@@ -43,13 +53,14 @@ function isCellInRangeInSheet(e, rngName, name){
       row <= rng.getLastRow();
 }
 
-function isCellInCellInSheet(e, trow, tcol, name){
-  var row = e.range.getRow();
-  var col = e.range.getColumn();
+function isCellInPositionInSheet(e, sheet, pos){
+  return e.source.getSheetName() == sheet && 
+      e.range.getA1Notation() == pos;
+}
 
-  return e.source.getSheetName() == name && 
-      col == tcol && 
-      row == trow;
+function isCellInPositionsInDaySheets(e, pos){
+  return !NOT_DAY_SHEETS.includes(e.source.getSheetName()) && 
+      pos.includes(e.range.getA1Notation());
 }
 
 function getToday(){
