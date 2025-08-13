@@ -86,7 +86,7 @@ function importProfile(fromSpr, toSpr, baseVersion){
   var toWeightHistoryRng = toSpr.getRange("I4:J100");
   var toDetailsRng = toSpr.getRange("D7:D12");
   var toMacroRng = toSpr.getRange("D20:E22");
-  if(baseVersion == "v1.3" || baseVersion == "v1.3.1"){
+  if(baseVersion == "v1.3" || baseVersion == "v1.3.1" || baseVersion == "v1.3.2"){
     fromWeightHistory = fromSpr.getRange("I4:J100").getValues();
     fromDetails = fromSpr.getRange("D7:D12").getValues();
     fromMacro = fromSpr.getRange("D20:E22").getValues();
@@ -105,7 +105,7 @@ function importProfile(fromSpr, toSpr, baseVersion){
 
 function importHistory(fromSpr, toSpr, baseVersion){
   var fromHistory; 
-  if(baseVersion == "v1.3" || baseVersion == "v1.3.1"){
+  if(baseVersion == "v1.3" || baseVersion == "v1.3.1" || baseVersion == "v1.3.2"){
     fromHistory = fromSpr.getRange("B10:M").getValues();
   } else {
     fromHistory = fromSpr.getRange("B7:K").getValues()

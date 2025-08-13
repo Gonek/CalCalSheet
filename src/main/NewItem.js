@@ -3,7 +3,7 @@ function addNewItem(){
   var itemName = getValue(rng, 1, 1);
   var amounth = getValue(rng, 2, 2);
   var unit = getValue(rng, 3, 2);
-  var weight = getValue(rng, 4, 2);
+  var weight = getValue(rng, 4, 2) / amounth;
   var calories = getValue(rng, 5, 2);
   var fat = getValue(rng, 6, 2);
   var carb = getValue(rng, 7, 2);
