@@ -22,8 +22,34 @@ function getDValue(rng, row, col){
   return rng.getCell(row, col).getDisplayValue();
 }
 
+function setValueS(spr, range, value){
+  return spr.getRange(range).setValue(value);
+}
+
 function getRangeByName(name){
   return SpreadsheetApp.getActiveSpreadsheet().getRangeByName(name);
+}
+
+function isCellInRangeInSheet(e, rngName, name){
+  var rng = getRangeByName(rngName);
+
+  var row = e.range.getRow();
+  var col = e.range.getColumn();
+
+  return e.source.getSheetName() == name && 
+      col >= rng.getColumn() && 
+      col <= rng.getLastColumn() && 
+      row >= rng.getRow() && 
+      row <= rng.getLastRow();
+}
+
+function isCellInCellInSheet(e, trow, tcol, name){
+  var row = e.range.getRow();
+  var col = e.range.getColumn();
+
+  return e.source.getSheetName() == name && 
+      col == tcol && 
+      row == trow;
 }
 
 function getToday(){

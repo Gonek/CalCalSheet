@@ -1,5 +1,5 @@
 const TUTORIAL_PAGES=9;
-const VERSION="v1.1"
+const VERSION="v1.2"
  
  // TUTORIAL FUNCTIONS
 
@@ -23,11 +23,18 @@ function tutorialNext(){
   }
 }
 
+function skipTutorial(){
+  var spr = getActiveSpr();
+  var topCell = spr.getRange('A1');
+  resetTutorial(spr, topCell);
+}
+
 function tutorialStep(spr, nextStep, topCell){
   var showFrom = spr.createTextFinder(nextStep + "S").findNext().getRow();
   var showTo = spr.createTextFinder(nextStep + "E").findNext().getRow();
 
   spr.getDrawings()[1].setPosition(showTo,10,0,0);
+  spr.getDrawings()[2].setPosition(showTo,2,0,0); 
   spr.hideRows(2, showFrom-1);
   spr.showRows(showFrom, showTo - showFrom);
   topCell.setValue(nextStep);
@@ -43,5 +50,6 @@ function resetTutorial(spr, topCell){
   spr.showRows(showFrom, showTo - showFrom);
   spr.hideRows(showTo +1,500);
   spr.getDrawings()[1].setPosition(showTo,10,0,0);
+  spr.getDrawings()[2].setPosition(showTo,2,0,0); 
   topCell.setValue(0);
 }

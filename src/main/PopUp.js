@@ -2,26 +2,13 @@ function onEdit(e) {
   if (isCellInRangeInSheet(e, "Today!ItemNames", "Today") || 
       isCellInRangeInSheet(e, "MealItemNames", "Meal calculator")) {
     var name = e.range.getValue();
-    if(!isItemExit(name)) {
+    if(!isItemExist(name)) {
       newItemPopUp(e.range);
     }
   }
 }
 
-function isCellInRangeInSheet(e, rngName, name){
-  var rng = getRangeByName(rngName);
-
-  var row = e.range.getRow();
-  var col = e.range.getColumn();
-
-  return e.source.getSheetName() == name && 
-      col >= rng.getColumn() && 
-      col <= rng.getLastColumn() && 
-      row >= rng.getRow() && 
-      row <= rng.getLastRow();
-}
-
-function isItemExit(name){
+function isItemExist(name){
   var spr = getSprByName("Items");
   return spr.createTextFinder(name).findNext() != null;
 }
@@ -36,5 +23,11 @@ function newItemPopUp(rng) {
     spr.getDrawings()[0].setOnAction("addNewItemReturn");
   }else{
     rng.setValue("");
+  }
+}
+
+function newStructureChangePopUp(e) {
+  if(e.changeType != 'EDIT' && e.changeType != 'OTHER'){
+    SpreadsheetApp.getUi().alert("Changeing the structure of the spreadsheet can make it broken. Please undo your changes!");
   }
 }

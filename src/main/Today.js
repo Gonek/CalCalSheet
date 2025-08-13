@@ -29,7 +29,7 @@ function saveToHistory(){
 
 function renameTodayToYesterday(){
   var todaySpr = getSprByName("Today");
-  todaySpr.getRange("B1").setValue("Yesterday");
+  todaySpr.getRange("C1").setValue("Yesterday");
   todaySpr.setName("Yesterday");
   todaySpr.getDrawings()[0].remove();
 }
@@ -45,7 +45,7 @@ function copyDayBaseToToday(){
 function showSaveButtons(){
   var spr = getSprByName("Yesterday");
   for (var i = 0; i <= 4; i++) {
-    spr.getDrawings()[i].setPosition(4+i,10,-2,-2);
+    spr.getDrawings()[i].setPosition(4+i,11,-2,-2);
   }
 }
 

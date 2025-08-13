@@ -1,3 +1,12 @@
+function addToOrUpdateList(itemName, amounth, unit, weight, calories, protein, fat, carb, noomCat, originalPos){
+  if(originalPos != 0){
+    updateItemInList(amounth, unit, weight, calories, protein, fat, carb, noomCat, originalPos + 3);
+  } else {
+    addToList(itemName, amounth, unit, weight, calories, protein, fat, carb, noomCat);
+  }
+}
+
+
 function addToList(itemName, amounth, unit, weight, calories, protein, fat, carb, noomCat){
   var itemSpr = getSprByName("Items");
   const lr = itemSpr.getLastRow()+1;
@@ -10,3 +19,13 @@ function addToList(itemName, amounth, unit, weight, calories, protein, fat, carb
 
   itemSpr.getFilter().sort(2, true);
 }
+
+function updateItemInList(amounth, unit, weight, calories, protein, fat, carb, noomCat, originalPos){
+  var itemSpr = getSprByName("Items");
+  itemSpr.getRange(originalPos, 3, 1, 13).setValues([[amounth, unit, weight, 
+    calories,`=IFERROR(F${originalPos}/C${originalPos})`, 
+    protein, `=IFERROR(H${originalPos}/C${originalPos})`, 
+    fat, `=IFERROR(J${originalPos}/C${originalPos})`,
+    carb, `=IFERROR(L${originalPos}/C${originalPos})`,
+    noomCat, `=IFERROR(F${originalPos}/(E${originalPos}*C${originalPos}))`]]);
+  }

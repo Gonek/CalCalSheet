@@ -9,8 +9,9 @@ function addNewItem(){
   var carb = getValue(rng, 7, 2);
   var protein = getValue(rng, 8, 2);
   var noomCat = getDValue(rng, 13, 1);
+  var originalPos = getValue(rng, 1, 3);
 
-  addToList(itemName, amounth, unit, weight, calories, protein, fat, carb, noomCat);
+  addToOrUpdateList(itemName, amounth, unit, weight, calories, protein, fat, carb, noomCat, originalPos);
   clearNewItem();
 }
 
