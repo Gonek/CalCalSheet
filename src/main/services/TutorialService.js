@@ -1,57 +1,40 @@
-// INTERFACE
-
-var tutorialTestButton = () => tutorialService().tutorialTestButton();
-var tutorialNext = () => tutorialService().tutorialNext();
-var skipTutorial = () => tutorialService().resetTutorial();
-
-//CLASS
-
 class TutorialService{
 
-  constructor(){
-    this.spr = new Spr(TUTORIAL);
-    this.stepRng = new Rng(RNG_TUTORIAL_STEP);
-  }
-
   tutorialTestButton(){
-    SpreadsheetApp.getActiveSpreadsheet().rename(SHEET_DEFAULT_NAME);
+    getSpSh(SPSH.ACTIVE).rename(`Calorie Calculator Sheet ${VERSION}`);
   }
 
   tutorialNext(){
-    var step = this.stepRng.getValue();
-    if(step < TUTORIAL_PAGES){
-      this.tutorialStep(step+1); 
+    if(getRng(RNG.TUTORIAL_STEP).getValue() < 10){
+      this.tutorialStep(); 
     }else{
       this.resetTutorial();
     }
   }
 
-  tutorialStep(nextStep){
-    let showFrom = this.spr.find(`${nextStep}${TUTORIAL_BLOCK_START_MARKER}`).getRow();
-    let showTo = this.spr.find(`${nextStep}${TUTORIAL_BLOCK_END_MARKER}`).getRow();
-    this.spr.hideRows(2, showFrom-1);
-    this.spr.showRows(showFrom, showTo - showFrom);
-    this.stepRng.setValue(nextStep);
-    this.spr.setActiveSelectionRng(this.stepRng);
+  resetTutorial(){
+    let stepRng = getRng(RNG.TUTORIAL_STEP);
+    let sht = getSht(SHT.TUTORIAL);
+    sht.setActiveSelectionRng(stepRng);
+    sht.hideSheet();
+    let positions = getRng(RNG.TUTORIAL_RESET_POS).getRowAsArray();
+    let showFrom = positions[0];
+    let showTo = positions[1];
+    let lastTo = positions[2];
+    sht.showRows(showFrom, showTo - showFrom);
+    sht.hideRows(showTo + 1, lastTo - (showTo + 1));
+    stepRng.setValue(0);
   }
 
-  resetTutorial(){
-    this.spr.setActiveSelectionRng(this.stepRng);
-    this.spr.hideSheet();
-    let showFrom = this.spr.find(`0${TUTORIAL_BLOCK_START_MARKER}`).getRow();
-    let showTo = this.spr.find(`0${TUTORIAL_BLOCK_END_MARKER}`).getRow();
-    let lastTo = this.spr.find(`${TUTORIAL_PAGES}${TUTORIAL_BLOCK_END_MARKER}`).getRow();
-    this.spr.showRows(showFrom, showTo - showFrom);
-    this.spr.hideRows(showTo + 1, lastTo - (showTo + 1));
-    this.stepRng.setValue(0);
+  tutorialStep(){
+    let stepRng = getRng(RNG.TUTORIAL_STEP);
+    let sht = getSht(SHT.TUTORIAL);
+    let positions = getRng(RNG.TUTORIAL_NEXT_POS).getRowAsArray();
+    let showFrom = positions[0];
+    let showTo = positions[1];
+    sht.hideRows(2, showFrom-1);
+    sht.showRows(showFrom, showTo - showFrom);
+    stepRng.setValue(stepRng.getValue() + 1);
+    sht.setActiveSelectionRng(stepRng);
   }
 }
-
-// SERVICE SINGLETON
-var tutorialServiceSingelton;
-
-/** 
- * Returns the tutorial service
- * @returns {TutorialService} tutorial service singleton
- */
-var tutorialService = () => tutorialServiceSingelton = tutorialServiceSingelton || new TutorialService();

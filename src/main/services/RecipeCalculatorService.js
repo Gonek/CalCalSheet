@@ -1,61 +1,55 @@
-// INTERFACE
-
-var addRecipeToItemAndRecipes = () => recipeCalculatorService().addRecipeToItemAndRecipes();
-var loadRecipeToRecipeCalculator = () => recipeCalculatorService().loadRecipe();
-
-// CLASS
-
 class RecipeCalculatorService { 
 
+  constructor(){
+    this.nameRng = getRng(RNG.RECIPE_NAME);
+    this.itemsRng = getRng(RNG.RECIPE_ITEMS);
+  }
+
   addRecipeToItemAndRecipes(){
-    if(new Rng(RNG_RECIPE_SAVE_AS_RECIPE).getValue()){
+    if(getRng(RNG.RECIPE_SAVE_AS_RECIPE).getValue()){
       this.addToRecipes();
     }
     this.addToItems();
-  }
-
-  addToRecipes(){
-    let recipeName = new Rng(RNG_RECIPE_NAME).getValue();
-    let recipeItems = new Rng(RNG_RECIPE_ITEMS).getValues()
-                                               .filter(row => row[0] != "");
-    recipeRepository().saveRecipe(new Recipe(recipeName, recipeItems));
-  }
-
-  addToItems(){
-    let nameAndPosRng = new Rng(RNG_RECIPE_NAME_OLD_POS);
-    let itemName = nameAndPosRng.getValue(1, 2);
-    let oldPos = nameAndPosRng.getValue(1, 1);
-    let fields = new Rng(RNG_RECIPE_FIELDS_TO_SAVE).getRowAsArray();
-    fields.splice(1, 1);
-    let noomColour = new Rng(RNG_RECIPE_NOOM_COLOUR).getValue();
-    
-    itemRepository().addOrUpdate(new Item(itemName, fields, noomColour), oldPos);
-    this.clearCalculator();
+  this.clearCalculator();
   }
 
   loadRecipe() {
-    let selectedRecipeName = new Rng(RNG_LOAD_RECIPE_NAME).getValue();
-    let selectedRecipeItems = new Rng(RNG_SELECTED_RECIPE_ITEMS).getValues();
-    let recipeItemsRng = new Rng(RNG_RECIPE_ITEMS);
-    let recipeNameRng = new Rng(RNG_RECIPE_NAME); 
-    recipeNameRng.setValue(selectedRecipeName);
-    recipeItemsRng.setValues(selectedRecipeItems);
+    let selectedRecipeItemsRng = getRng(RNG.SELECTED_RECIPE_ITEMS);
+    if(!selectedRecipeItemsRng.isBlank()){
+      this.itemsRng.setValues(selectedRecipeItemsRng.getValues());
+    }
   }
 
-  clearCalculator() {
-    new Rng(RNG_RECIPE_NAME).clear();
-    new Rng(RNG_RECIPE_ITEMS).clear();
-    new Rng(RNG_RECIPE_SERVING).clear();
-    new Rng(RNG_RECIPE_NOOM_CATEGORY).setValue('Solid');
-    new Rng(RNG_RECIPE_SAVE_AS_RECIPE).setValue('True');
+  addToRecipes(){
+    let recipeName = this.nameRng.getValue();
+    let recipeItems = this.itemsRng.getValues().filter(row => row[0] != "");
+    getObj(RecipeRepository).saveRecipe(new Recipe(recipeName, recipeItems));
+  }
+
+  addToItems(){
+    let itemName = this.nameRng.getValue();
+    let oldPos = getRng(RNG.RECIPE_OLD_POS).getValue();
+    let fields = getRng(RNG.RECIPE_FIELDS_TO_SAVE).getRowAsArray();
+    fields.splice(1, 1);
+    let noomColour = getRng(RNG.RECIPE_NOOM_COLOUR).getValue();
+    let autoDelete = getRng(RNG.RECIPE_AUTO_DELETE).getValue();
+    
+    getObj(ItemRepository).addOrUpdate(new Item(itemName, fields, fields[13], (fields[13] / fields[2]), noomColour, autoDelete), oldPos);
+  }
+
+  clearCalculator(){
+    this.nameRng.clearContent();
+    this.itemsRng.clearContent();
+    getRng(RNG.RECIPE_SERVING).clearContent();
+    getRng(RNG.RECIPE_NOOM_CATEGORY).setValue('Solid');
+    getRng(RNG.RECIPE_SAVE_AS_RECIPE).setValue('True');
+    getRng(RNG.RECIPE_AUTO_DELETE).setValue('Never');
+  }
+
+  deleteRecipes(input){
+    let names = input.getValue();
+    if(names && names != ''){
+      getObj(RecipeRepository).delete(names.split(", "));
+    }
   }
 }
-
-// SERVICE SINGLETON
-var recipeCalculatorServiceSingleton;
-
-/** 
- * Returns the recipe calculator service
- * @returns {RecipeCalculatorService} recipe calculator service singleton
- */
-var recipeCalculatorService = () => recipeCalculatorServiceSingleton = recipeCalculatorServiceSingleton || new RecipeCalculatorService();

@@ -1,106 +1,75 @@
 // INTERFACE
 
-var onEdit = (e) => eventService().onEdit(e);
-var onOpen = (e) => eventService().onOpen(e);
-var testButton = () => eventService().testButton(PROFILE, "C29");
+var onEdit = (e) => getObj(EventService).onEdit(e);
+var onOpen = (e) => getObj(EventService).onOpen(e);
+var testButton = () => getObj(EventService).clickButton(SHT.DAY, BTN.SHOW_TOOLS, 'X5');
+
+// OTHER FUNCTIONS
+var startImport = () => getObj(EventService).clickButton(SHT.SETTINGS, BTN.IMPORT);
+var addTrigger = () => getObj(EventService).clickButton(SHT.SETTINGS, BTN.ADD_TRIGGER);
 
 // CLASS
 
-class EventService {
+class EventService extends AbstractEventService{
 
   constructor(){
-    this.btns = [
-      [DAY,[                
-        new CBox(RNG_DAY_NAME, changeDay),
-        new CBox(RNG_MEAL_1_START, loadMeal1),
-        new CBox(RNG_MEAL_2_START, loadMeal2),
-        new CBox(RNG_MEAL_3_START, loadMeal3),
-        new CBox(RNG_MEAL_4_START, loadMeal4),
-        new CBox(RNG_MEAL_5_START, loadMeal5),
-        new CBox(RNG_MEAL_6_START, loadMeal6),
-        new Btn(BTN_SAVE_MEAL, saveMeal),
-        new Btn(BTN_COPY_MEALS, copyMeals)
+    super([
+      [SHT.DAY, [                
+        new CBox(CBOX.DAY_NAME, DayService, 'changeDay', 'G1'),
+        new CBox(CBOX.MEAL_1_START, DayService, 'loadMeal', 'C17'),
+        new CBox(CBOX.MEAL_2_START, DayService, 'loadMeal', 'C32'),
+        new CBox(CBOX.MEAL_3_START, DayService, 'loadMeal', 'C47'),
+        new CBox(CBOX.MEAL_4_START, DayService, 'loadMeal', 'C62'),
+        new CBox(CBOX.MEAL_5_START, DayService, 'loadMeal', 'C77'),
+        new CBox(CBOX.MEAL_6_START, DayService, 'loadMeal', 'C92'),
+        new Fld('ItemAmounts', DayService, 'inLineCalculation', 'E17:E106'),
+        new Btn(BTN.SHOW_TOOLS, DayService, 'showHideTools', 'X5', 2),
+        new BtnF(BTNF.SAVE_DAY_AS, DayService, 'saveDayAs', 'AE2', 1, 4, 5),
+        new BtnF(BTNF.LOAD_DAY, DayService, 'loadDayFrom', 'AE3', 1, 4, 5),
+        new BtnF(BTNF.DELETE_DAYS, DayService, 'deleteDays', 'AE4', 1, 4, 5),
+        new Btn(BTN.CLEAR_DAY, DayService, 'clearDay', 'AE5'),
+        new BtnF(BTNF.SAVE_AS_MEAL, DayService, 'saveAsMeal', 'AE8', 1, 4, 5),
+        new BtnF(BTNF.COPY_MEAL_FROM, DayService, 'copyMealsFrom', 'AE9', 1, 4, 5),
+        new BtnF(BTNF.COPY_MEAL_TO, DayService, 'copyMealsTo', 'AE10', 1, 4, 5),
+        new Btn(BTN.CLEAR_MEAL, DayService, 'clearMeals', 'AE11', 2),
+        new BtnF(BTNF.DELETE_MEALS, DayService, 'deleteMeals', 'AE13', 1, 4)
         ]
       ],
-      [NEW_ITEM,[
-        new Btn(BTN_SAVE_ITEM, addNewItem)]
+      [SHT.NEW_ITEM, [
+        new CBox(CBOX.NEW_ITEM_NAME, NewItemService, 'loadItem', 'C3'),
+        new Btn(BTN.SAVE_ITEM, NewItemService, 'addNewItem', 'E27'),
+        new BtnF(BTNF.DELETE_ITEMS, NewItemService, 'deleteItems', 'E33', 1, 4, 5)
+      ]
       ],
-      [RECIPE_CALCULATOR,[  
-        new Btn(BTN_LOAD_RECIPE, loadRecipeToRecipeCalculator),
-        new Btn(BTN_SAVE_RECIPE, addRecipeToItemAndRecipes)
+      [SHT.RECIPE_CALCULATOR, [  
+        new CBox(CBOX.RECIPE_NAME, RecipeCalculatorService, 'loadRecipe', 'B3'),
+        new Btn(BTN.SAVE_RECIPE, RecipeCalculatorService, 'addRecipeToItemAndRecipes', 'E38'),
+        new BtnF(BTNF.DELETE_RECIPES, RecipeCalculatorService, 'deleteRecipes', 'E42', 1, 4, 5)
         ]
       ],
-      [PROFILE,[
-        new Btn(BTN_COPY_CALORIES, copyCalories)]
+      [SHT.PROFILE, [
+        new Btn(BTN.COPY_CALORIES, ProfileService, 'copyCalories', 'F31')]
       ],
-      [SETTINGS,[           
-        new Btn(BTN_APPLY_SETTINGS, applySettings)
+      [SHT.SETTINGS, [           
+        new Btn(BTN.APPLY_SETTINGS, SettingsService, 'applySettings', 'G29'),
+        new Btn(BTN.IMPORT, ImportService, 'startImport', 'M13'),
+        new Btn(BTN.ADD_TRIGGER, SettingsService, 'addTrigger', 'M18'),
+        new Btn(BTN.EXECUTE_DAILY_ROUTINE, EventService, 'onOpen', 'M22'),
         ]
       ],
-      [TUTORIAL, [
-        new Btn(BTN_TUTORIAL_TEST, tutorialTestButton),
-        new Btn(BTN_SKIP_TUTORIAL, skipTutorial),
-        new Btn(BTN_TUTORIAL_NEXT, tutorialNext)
+      [SHT.TUTORIAL, [
+        new CBox(CBOX.LANGUAGE, SettingsService, 'changeLanguage', 'J14'),
+        new Btn(BTN.TUTORIAL_TEST, TutorialService, 'tutorialTestButton', 'H39'),
+        new Btn(BTN.SKIP_TUTORIAL, TutorialService, 'resetTutorial', 'E629'),
+        new Btn(BTN.TUTORIAL_NEXT, TutorialService, 'tutorialNext', 'K629')
         ]
       ]
-    ];
-  }
-
-  onEdit(e){
-    try{
-      let sheetName = e.source.getSheetName();
-      let a1Pos = e.range.getA1Notation();
-      this.checkButtons(sheetName, a1Pos);
-    } catch(error){
-      alert(error + " " + error.stack);
-    }
+    ]);
   }
 
   onOpen(e){
-    try{
-      finishDay();
-    }catch(error){
-      alert(error + " " + error.stack);
-    }
-  }
-
-  testButton(sheetName, a1Pos){
-    this.checkButtons(sheetName, a1Pos);
-  }
-
-  checkButtons(sheetName, a1Pos){
-    let sheetBtns = this.btns.find(s => s[0] == sheetName);
-    if(sheetBtns){
-      let btn = sheetBtns[1].find(btn => btn.isSamePos(a1Pos, btn));
-      if(btn){
-        btn.run();
-      }
-    }             
-  }
-
-  isCellIsRangeCell(e, range){
-    return e.range.getA1Notation() == new Rng(range).getA1Pos();
-  }
-
-  isCellInPositionInSheet(e, sheet, pos) {
-    return (e.source.getSheetName() == sheet) && (e.range.getA1Notation() == pos);
-  }
-
-  isCellInPositions(e, pos) {
-    return pos.includes(e.range.getA1Notation());
-  }
-
-  mealLoaderFieldChanged(e) {
-    if(String(e.range.getValue()).indexOf(MEAL_ICON) == 0){
-    }
+    super.onOpen(() => {
+      getObj(DayService).finishDay();
+    });
   }
 }
-
-// SERVICE SINGLETON
-var eventServiceSingleton;
-
-/** 
- * Returns the event service
- * @returns {EventService} event service singleton
- */
-var eventService = () => eventServiceSingleton = eventServiceSingleton || new EventService();
